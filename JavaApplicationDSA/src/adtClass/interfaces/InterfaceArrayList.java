@@ -13,17 +13,23 @@ import adtClass.*;
  */
 public interface InterfaceArrayList<T> {
     
-    void add(T e);
-    void add(int index, T element);
-    void addAll(T[] c);
-    void addAll(int index, T[] c) throws IndexOutOfBoundsException;
-    T get(int index) throws IndexOutOfBoundsException;
-    T remove(int index) throws IndexOutOfBoundsException;
+    // add new
+    abstract void add(T e);
+    abstract void add(int index, T element);
+    abstract void addAll(T[] c);
+    abstract void addAll(int index, T[] c) throws IndexOutOfBoundsException;
+    
+    // get
+    abstract T get(int index) throws IndexOutOfBoundsException;
+    
+    // remove
+    abstract T remove(int index) throws IndexOutOfBoundsException;
 
-    void set(int index, T element);
+    // modify
+    abstract void set(int index, T element);
 
-    int indexOf(T o);
-
-    int size();
-    T[] toArray();
+    // Others
+    abstract int indexOf(T o);
+    abstract int size();
+    abstract T[] toArray();
 }

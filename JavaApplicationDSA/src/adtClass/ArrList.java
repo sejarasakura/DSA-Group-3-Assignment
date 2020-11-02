@@ -32,13 +32,13 @@ public class ArrList<T> implements InterfaceArrayList<T>, Cloneable, java.io.Ser
 
     @Override
     public void add(int _index, T element) {
-        CheckRangeForAdd(_index); // 数组越界检查
-        // 如果数组的容量等于size，即数组被填满，则需要扩容
+        CheckRangeForAdd(_index); 
+        
         if (data.length == index) {
-            ensureCapacity(index + 1); // 扩容一个元素的空间
+            ensureCapacity(index + 1); 
         }
         for (int i = index; i > _index; i--) {
-            data[i] = data[i - 1]; // index及其后面的元素后移
+            data[i] = data[i - 1]; 
         }
         data[_index] = element;
         index++;

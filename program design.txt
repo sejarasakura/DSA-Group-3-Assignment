@@ -1,17 +1,26 @@
 entity class
 	Customer, Driver, Taxi, Car
 
-Admin Function ?
-	All entity class
-Register Function ?
+Admin Function ? [Slotlist]
+	All entity class ( can view by different slot
+Register Function ? [Array list]
 	Customer ? 
 	Driver ?
 	Car/Taxi ?
-Booking Function ? 
+Booking Function ? [Quene/Circular list]
 	Booking, 
 	Cancelation,
 	Modify in range,
-Payment function ?
+Payment function ? [Quene/Circular list]
+	Payment Method： Cash, Ewallate, Creditcard
+	Pay, 
+	view receipt, 
+	issues email maybe?,
+	feedback ?
+Location Trick ? [Stack]
+	Allow to choose from and to location.
+	On the go update location status
+	Allow payment function access to cont payment
 
 enum
 	CarType : Taxi, 6SeatTaxi, Normal, Premium

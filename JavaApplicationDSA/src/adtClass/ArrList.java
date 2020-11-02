@@ -14,7 +14,7 @@ import java.util.function.Consumer;
  * @author ITSUKA KOTORI
  * @param <T>
  */
-public class ArrList<T> implements InterfaceArrayList<T>, Cloneable, java.io.Serializable{
+public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable{
 
     final private static int INITIAL_CAPACITY = 1;
     private T[] data;

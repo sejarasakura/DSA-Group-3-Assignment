@@ -16,13 +16,99 @@ import java.util.function.Consumer;
  */
 public class ArrList<T> implements InterfaceArrayList<T>, Cloneable, java.io.Serializable{
 
-    final private static int INITIAL_CAPACITY = 50;
+    final private static int INITIAL_CAPACITY = 1;
     private T[] data;
     private int index = -1;
     
     
     public Iterator<T> iterator() {
         return new ListIterator();
+    }
+
+    @Override
+    public void add(T e) {
+        add(index, e);
+    }
+
+    @Override
+    public void add(int _index, T element) {
+        CheckRangeForAdd(_index); // 数组越界检查
+        // 如果数组的容量等于size，即数组被填满，则需要扩容
+        if (data.length == index) {
+            ensureCapacity(index + 1); // 扩容一个元素的空间
+        }
+        for (int i = index; i > _index; i--) {
+            data[i] = data[i - 1]; // index及其后面的元素后移
+        }
+        data[_index] = element;
+        index++;
+    }
+
+    @Override
+    public void addAll(T[] c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addAll(int index, T[] c) throws IndexOutOfBoundsException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public T get(int index) throws IndexOutOfBoundsException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public T remove(int index) throws IndexOutOfBoundsException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void set(int index, T element) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int indexOf(T o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int size() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public T[] toArray() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void ensureCapacity(int minCapacity) {
+        if (index >= minCapacity) {
+            return;
+        }
+
+        T[] old = data; 
+        data = (T[]) new Object[minCapacity];
+
+        for (int i = 0; i < index; i++) {
+            data[i] = old[i];
+        }
+
+    }
+
+    private void CheckRange(int _index) {
+        if (_index < 0 || _index >= index) 
+            throw new IndexOutOfBoundsException();
+        
+    }
+
+    private void CheckRangeForAdd(int _index) {
+        if (_index < 0 || _index > index) 
+            throw new IndexOutOfBoundsException();
+        
     }
     
     private class ListIterator implements Iterator<T> {

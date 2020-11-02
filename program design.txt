@@ -5,11 +5,12 @@ entity class
 	Taxi, 
 	Car,
 	Payment,
-	Bookingk,
+	Booking,
 	LocationTrick
 
 Admin Function ? [Slotlist]
 	All entity class ( can view by different slot
+	
 Register Function ? [Array list]
 	Customer ? 
 	Driver ?

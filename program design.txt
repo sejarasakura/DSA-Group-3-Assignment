@@ -1,5 +1,12 @@
 entity class
-	Customer, Driver, Taxi, Car
+	User,
+	Customer, 
+	Driver, 
+	Taxi, 
+	Car,
+	Payment,
+	Bookingk,
+	LocationTrick
 
 Admin Function ? [Slotlist]
 	All entity class ( can view by different slot

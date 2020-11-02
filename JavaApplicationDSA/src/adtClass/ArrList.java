@@ -46,42 +46,59 @@ public class ArrList<T> implements InterfaceArrayList<T>, Cloneable, java.io.Ser
 
     @Override
     public void addAll(T[] c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(T x: c){
+            add(index, x);
+        }
     }
 
     @Override
-    public void addAll(int index, T[] c) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addAll(int _index, T[] c) {
+        int count = 0;
+        for(T x: c){
+            add(_index + count, x);
+            count ++;
+        }
     }
 
     @Override
-    public T get(int index) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public T get(int _index) throws IndexOutOfBoundsException {
+        return data[_index];
     }
 
     @Override
-    public T remove(int index) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public T remove(int _index) throws IndexOutOfBoundsException {
+        CheckRange(_index); 
+        Object x = data[_index];
+        for (int i = _index; i < index - 1; i++) {
+            data[i] = data[i + 1]; 
+        }
+        index--;
+        return (T)x;
     }
 
     @Override
-    public void set(int index, T element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void set(int _index, T element) {
+        CheckRange(_index); 
+        data[_index] = element;
     }
 
     @Override
     public int indexOf(T o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(int i = 0; i < index; i ++){
+            if(data[i].equals(o))
+                return i;
+        }
+        return -1;
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return index;
     }
 
     @Override
     public T[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return data.clone();
     }
     
     @SuppressWarnings("unchecked")
@@ -93,9 +110,7 @@ public class ArrList<T> implements InterfaceArrayList<T>, Cloneable, java.io.Ser
         T[] old = data; 
         data = (T[]) new Object[minCapacity];
 
-        for (int i = 0; i < index; i++) {
-            data[i] = old[i];
-        }
+        System.arraycopy(old, 0, data, 0, index);
 
     }
 

@@ -5,10 +5,14 @@
  */
 package entityClass;
 
+import adtClass.ArrList;
+
 /**
  *
  * @author ITSUKA KOTORI
  */
 public class Driver extends User{
+    
+    private ArrList<Car> cars;
     
 }

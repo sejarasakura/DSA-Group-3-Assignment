@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
  *
  * @author ITSUKA KOTORI
  */
-public class Stack<T> implements InterfaceStack<T>, Cloneable, java.io.Serializable{
+public class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java.io.Serializable{
 
     private int n;          // size of the stack
     private Node first;     // top of stack
@@ -22,8 +22,6 @@ public class Stack<T> implements InterfaceStack<T>, Cloneable, java.io.Serializa
         first = null;
         n = 0;
     }
-    
-    
     
     @Override
     public void push(T item) {
@@ -63,6 +61,7 @@ public class Stack<T> implements InterfaceStack<T>, Cloneable, java.io.Serializa
         return first == null;
     }
     
+    @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
         for (T item : this) {
@@ -71,7 +70,6 @@ public class Stack<T> implements InterfaceStack<T>, Cloneable, java.io.Serializa
         }
         return s.toString();
     }
-    
     
     public Iterator<T> iterator() {
         return new StackIterator(); 
@@ -99,7 +97,6 @@ public class Stack<T> implements InterfaceStack<T>, Cloneable, java.io.Serializa
             return item;
         }
     }
-
     
     private class Node {
         private T item;

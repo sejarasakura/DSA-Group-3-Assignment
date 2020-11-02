@@ -2,7 +2,7 @@
 Year 2 sem 1 B's in software enginneer DSA project 
 
 # ERD Class diagram link
--
+https://lucid.app/invitations/accept/576aa193-487e-4b6a-bdb0-86fcf6e924c4
 
 # Google Docs Report Link
 -

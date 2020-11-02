@@ -9,6 +9,9 @@ package entityClass;
  *
  * @author ITSUKA KOTORI
  */
-public class Taxi {
+public class Taxi extends Car{
+    
+    private String taxiLicense;
+    private String taxiComapany;
     
 }

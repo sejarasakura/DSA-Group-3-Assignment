@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adtClass;
+package adtClass.node;
 
 /**
  *
  * @author ITSUKA KOTORI
+ * @param <T>
  */
-public class Quene {
+public class SingleNode<T> {
+    
+    public T item;
+    public SingleNode next;
     
 }

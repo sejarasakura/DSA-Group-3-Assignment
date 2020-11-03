@@ -6,17 +6,19 @@
 package adtClass;
 
 import adtClass.interfaces.InterfaceStack;
+import adtClass.node.SingleNode;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
  *
  * @author ITSUKA KOTORI
+ * @param <T>
  */
 public class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java.io.Serializable{
 
     private int n;          // size of the stack
-    private Node first;     // top of stack
+    private SingleNode<T> first;     // top of stack
 
     public Stack() {
         first = null;
@@ -25,8 +27,8 @@ public class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java
     
     @Override
     public void push(T item) {
-        Node oldfirst = first;
-        first = new Node();
+        SingleNode oldfirst = first;
+        first = new SingleNode();
         first.item = item;
         first.next = oldfirst;
         n++;
@@ -71,6 +73,7 @@ public class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java
         return s.toString();
     }
     
+    @Override
     public Iterator<T> iterator() {
         return new StackIterator(); 
     }
@@ -78,7 +81,7 @@ public class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java
     // an iterator, doesn't implement remove() since it's optional
     private class StackIterator implements Iterator<T> {
         
-        private Node current = first;
+        private SingleNode<T> current = first;
         
         @Override
         public boolean hasNext() { 
@@ -98,8 +101,4 @@ public class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java
         }
     }
     
-    private class Node {
-        private T item;
-        private Node next;
-    }
 }

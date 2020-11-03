@@ -61,12 +61,12 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     }
 
     @Override
-    public T get(int _index) throws IndexOutOfBoundsException {
+    public T get(int _index) {
         return data[_index];
     }
 
     @Override
-    public T remove(int _index) throws IndexOutOfBoundsException {
+    public T remove(int _index) {
         CheckRange(_index); 
         Object x = data[_index];
         for (int i = _index; i < index - 1; i++) {
@@ -123,7 +123,6 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     private void CheckRangeForAdd(int _index) {
         if (_index < 0 || _index > index) 
             throw new IndexOutOfBoundsException();
-        
     }
     
     private class ListIterator implements Iterator<T> {

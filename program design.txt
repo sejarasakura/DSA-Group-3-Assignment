@@ -16,16 +16,22 @@ Register Function ? [Array list]
 	Customer ? 
 	Driver ?
 	Car/Taxi ?
+	
+
 Booking Function ? [Quene/Circular list]
 	Booking, 
 	Cancelation,
 	Modify in range,
+	
+[Sai Keat]
 Payment function ? [Quene/Circular list]
 	Payment Method： Cash, Ewallate, Creditcard
 	Pay, 
 	view receipt, 
 	issues email maybe?,
 	feedback ?
+
+[Extra module]	
 Location Trick ? [Stack]
 	Allow to choose from and to location.
 	On the go update location status

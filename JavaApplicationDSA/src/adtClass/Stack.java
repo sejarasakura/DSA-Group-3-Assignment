@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  * @author ITSUKA KOTORI
  * @param <T>
  */
-public class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java.io.Serializable{
+public final class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java.io.Serializable{
 
     private int n;          // size of the stack
     private SingleNode<T> first;     // top of stack
@@ -23,6 +23,21 @@ public class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java
     public Stack() {
         first = null;
         n = 0;
+    }
+
+    public Stack(Iterable<T> ib) {
+        this(ib.iterator());
+    }
+    
+    public Stack(Iterator<T> is) {
+        this();
+        while(is.hasNext()){
+            try{
+                this.push(is.next());
+            }catch(Exception ex){
+                
+            }
+        }
     }
     
     @Override

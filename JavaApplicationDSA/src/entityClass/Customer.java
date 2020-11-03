@@ -15,9 +15,14 @@ import enumClass.*;
 public class Customer extends User{
 
     /*
-    * Customer booking
+    * Customer all booking
     */
-    private ArrList<Booking> booking;
+    private ArrList<Booking> Allbooking;
+    
+    /*
+    * Customer current booking
+    */
+    private Booking current_booking;
 
     /*
     * Membership of customer Basic, Premium, and Normal

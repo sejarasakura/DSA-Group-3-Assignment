@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author ITSUKA KOTORI
  */
-public class Car {
+public class Car implements Comparable{
     
     /*
     * Car pplate alphablate
@@ -73,6 +73,11 @@ public class Car {
 
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
+    }
+
+    @Override
+    public int compareTo(Object t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

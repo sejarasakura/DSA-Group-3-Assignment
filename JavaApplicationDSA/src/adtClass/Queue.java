@@ -28,6 +28,25 @@ public class Queue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, jav
         tail.prev = head;
         size = 0;
     }
+    
+    public Queue(Iterable<T> ib) {
+        this(ib.iterator());
+    }
+    
+    public Queue(Iterator<T> is) {
+        this();
+        Stack s = new Stack();
+        while(is.hasNext()){
+            try{
+                s.push(is.next());
+            }catch(Exception ex){
+                
+            }
+        }
+        while(!s.isEmpty()){
+            this.enqueue((T) s.pop());
+        }
+    }
         
     @Override
     public boolean isEmpty() {
@@ -40,7 +59,7 @@ public class Queue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, jav
     }
 
     @Override
-    public void enqueue(T item) {
+    public final void enqueue(T item) {
         
         DoubleNode<T> newNode = new DoubleNode<>(item);
 
@@ -54,7 +73,7 @@ public class Queue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, jav
     }
 
     @Override
-    public T dequeue() {
+    public final T dequeue() {
 
         if(tail.prev == null) {
                 return null;
@@ -94,7 +113,7 @@ public class Queue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, jav
         
         @Override
         public boolean hasNext() { 
-            return current != null;                     
+            return current.next != tail;                     
         }
         @Override
         public void remove() {

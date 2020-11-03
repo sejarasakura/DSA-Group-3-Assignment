@@ -10,6 +10,7 @@ import adtClass.*;
 /**
  *
  * @author ITSUKA KOTORI
+ * @param <T>
  */
 public interface InterfaceArrayList<T> {
     

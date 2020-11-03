@@ -10,7 +10,14 @@ import adtClass.*;
 /**
  *
  * @author ITSUKA KOTORI
+ * @param <T>
  */
-public interface InterfaceArraySlotList<T> {
+public interface InterfaceSlotingElements<T> {
+    
+    /*
+    *  The Sloting Methood Only If need Array method pls implement ArrayList
+    *  Tecknic using quick slot https://www.geeksforgeeks.org/quick-sort/
+    */
+    public void sort();
     
 }

@@ -1,7 +1,10 @@
 package main;
 
+import adtClass.ArrList;
+import adtClass.ArraySlotList;
 import adtClass.Queue;
 import adtClass.Stack;
+import java.util.Iterator;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,11 +23,25 @@ public class JavaApplicationDSA {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        ArraySlotList<String> list = new ArraySlotList<String>();
+        list.add("A");
+        list.add("Z");
+        list.add("H");
+        list.add("k");
+        list.add("n");
+        ArrList<Integer> list2 = new ArrList<Integer>();
+        list2.add(99);
+        list2.add(5);
+        list2.add(9);
+        list2.add(10);
+        list2.add(2);
+        System.out.print(list.toString()+"\n");
+        System.out.print(list2.toString()+"\n");
+        ArraySlotList<Integer> list3 = new ArraySlotList<Integer>(new Integer[4]);
+        for(Integer x: list3){
+            System.out.println(x);
+        }
         // TODO code application logic here
-        System.out.print(isPalindrome("haah"));
-        System.out.print(isPalindrome("Harah"));
-        System.out.print(isPalindrome("race a car"));
-        System.out.print(isPalindrome("A man, a plan, a canal: Panama"));
     }
     
     public static boolean isPalindrome(String args){

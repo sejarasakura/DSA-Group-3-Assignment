@@ -17,16 +17,40 @@ import java.util.function.Consumer;
 public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable{
 
     final private static int INITIAL_CAPACITY = 1;
-    private T[] data;
-    private int index = -1;
+    protected T[] data;
+    protected int index = -1;
     
+    public ArrList(){
+        this(1);
+    }
     
+    public ArrList(int inicap){
+        index = 0;
+        data = (T[]) new Object[inicap];
+    }
+    
+    public ArrList(Iterable<T> ib){
+        this(ib.iterator());
+    }
+    
+    public ArrList(Iterator<T> is){
+        this();
+        while(is.hasNext()){
+            try{
+                this.add(is.next());
+            }catch(Exception ex){
+                
+            }
+        }
+    }
+    
+    @Override
     public Iterator<T> iterator() {
         return new ListIterator();
     }
 
     @Override
-    public void add(T e) {
+    public final void add(T e) {
         add(index, e);
     }
 
@@ -121,8 +145,6 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     }
 
     private void CheckRangeForAdd(int _index) {
-        if (_index < 0 || _index > index) 
-            throw new IndexOutOfBoundsException();
     }
     
     private class ListIterator implements Iterator<T> {
@@ -130,15 +152,15 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         private int iteratorIndex = -1;
         @Override
         public boolean hasNext() {
-            return iteratorIndex < index;
+            return iteratorIndex < index - 1;
         }
 
         @Override
         public T next() {
             if (!hasNext()) 
                 throw new NoSuchElementException();
-
-            return data[iteratorIndex++];
+            iteratorIndex++;
+            return data[iteratorIndex];
         }
 
         @Override
@@ -153,4 +175,12 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
 
     }
     
+    @Override
+    public String toString(){
+        String r = "";
+        for(T d: (data)){
+            r +="{ "+  d + " }, ";
+        }
+        return r;
+    }
 }

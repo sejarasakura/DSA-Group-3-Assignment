@@ -5,10 +5,23 @@
  */
 package entityClass;
 
+import adtClass.ArrList;
+import enumClass.*;
+
 /**
  *
  * @author ITSUKA KOTORI
  */
 public class Customer extends User{
+
+    /*
+    * Customer booking
+    */
+    private ArrList<Booking> booking;
+
+    /*
+    * Membership of customer Basic, Premium, and Normal
+    */
+    private MemberShip memberType;
     
 }

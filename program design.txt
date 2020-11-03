@@ -53,3 +53,5 @@ enum
 		Voided: This authorization has been voided.
 	Booking Status:
 		 ACCEPTED_BOOKING, PROGRESS_RENTING_CUSTOMER, PROGRESS_PENDING_RENTING, COMPLETED, EXPIRED 
+	Membership of customer
+		PREMIUM, BASIC, NORMAL

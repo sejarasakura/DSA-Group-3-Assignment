@@ -67,4 +67,11 @@ public abstract class User {
         this.phoneNumber = phoneNumber;
     }
     
+    public void login(){
+        
+    }
+    
+    public void register(){
+        
+    }
 }

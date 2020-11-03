@@ -32,4 +32,47 @@ public class Car {
     * To calculate the year using the car?
     */
     private Date regDate;
+
+    public Car() {
+    }
+
+    public Car(String plateAlpha, String plateNumber, Object license, Date regDate) {
+        this.plateAlpha = plateAlpha;
+        this.plateNumber = plateNumber;
+        this.license = license;
+        this.regDate = regDate;
+    }
+
+    public String getPlateAlpha() {
+        return plateAlpha;
+    }
+
+    public void setPlateAlpha(String plateAlpha) {
+        this.plateAlpha = plateAlpha;
+    }
+
+    public String getPlateNumber() {
+        return plateNumber;
+    }
+
+    public void setPlateNumber(String plateNumber) {
+        this.plateNumber = plateNumber;
+    }
+
+    public Object getLicense() {
+        return license;
+    }
+
+    public void setLicense(Object license) {
+        this.license = license;
+    }
+
+    public Date getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
+    }
+    
 }

@@ -209,7 +209,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         System.out.println(System.getProperty("user.dir"));
-        browser.loadURL(System.getProperty("user.dir") + "\\src\\html_plug\\location_route.html");
+        browser.loadURL(System.getProperty("user.dir") + "\\src\\html_plug\\location_route.html?start=kualalumpur&end=ipoh");
     }
 
 }

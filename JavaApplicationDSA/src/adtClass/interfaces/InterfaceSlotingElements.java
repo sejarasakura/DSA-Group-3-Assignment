@@ -20,4 +20,10 @@ public interface InterfaceSlotingElements<T> {
     */
     public void sort();
     
+    /*
+    *  The Sloting Methood Only If need Array method pls implement ArrayList
+    *  Tecknic using quick slot https://www.geeksforgeeks.org/quick-sort/
+    */
+    public void sortDesc();
+    
 }

@@ -105,6 +105,16 @@ public class Queue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, jav
     public Iterator<T> iterator() {
         return new QueueIterator();
     }
+        
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (T item : this) {
+            s.append(item);
+            s.append(", ");
+        }
+        return s.toString();
+    }
     
     // an iterator, doesn't implement remove() since it's optional
     private class QueueIterator implements Iterator<T> {

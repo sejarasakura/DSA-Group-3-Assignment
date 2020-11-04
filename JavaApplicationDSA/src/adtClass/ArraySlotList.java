@@ -221,13 +221,24 @@ public class ArraySlotList <T extends Comparable<T>> implements InterfaceSloting
     @Override
     public void sort(){
         this.sort(data, 0, this.index - 1);
+        Stack s = new Stack(this);
+        int i = this.index;
+        while(!s.isEmpty()){
+            i--;
+            data[i] = (T) s.pop();
+        }
+    }
+    
+    @Override
+    public void sortDesc(){
+        this.sort(data, 0, this.index - 1);
     }
     
     @Override
     public String toString(){
         String r = "";
         for(T d: (data)){
-            r +="{ "+  d + " }, ";
+            r +=""+  d + ", ";
         }
         return r;
     }

@@ -29,6 +29,12 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         data = (T[]) new Object[inicap];
     }
     
+    
+    public ArrList(T[] arr){
+        index = arr.length;
+        data = (T[]) arr;
+    }
+    
     public ArrList(Iterable<T> ib){
         this(ib.iterator());
     }
@@ -179,7 +185,7 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     public String toString(){
         String r = "";
         for(T d: (data)){
-            r +="{ "+  d + " }, ";
+            r += ""+  d + ", ";
         }
         return r;
     }

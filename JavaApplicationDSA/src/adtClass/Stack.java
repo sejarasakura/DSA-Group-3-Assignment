@@ -31,12 +31,16 @@ public final class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable
     
     public Stack(Iterator<T> is) {
         this();
+        Stack s = new Stack();
         while(is.hasNext()){
             try{
-                this.push(is.next());
+                s.push(is.next());
             }catch(Exception ex){
                 
             }
+        }
+        while(!s.isEmpty()){
+            this.push((T) s.pop());
         }
     }
     
@@ -83,7 +87,7 @@ public final class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable
         StringBuilder s = new StringBuilder();
         for (T item : this) {
             s.append(item);
-            s.append(' ');
+            s.append(", ");
         }
         return s.toString();
     }

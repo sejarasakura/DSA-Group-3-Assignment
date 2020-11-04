@@ -2,9 +2,12 @@ package main;
 
 import adtClass.ArrList;
 import adtClass.ArraySlotList;
+import adtClass.HashedDictionary;
 import adtClass.Queue;
 import adtClass.Stack;
-import java.util.Iterator;
+import java.awt.Font;
+import javax.swing.*;
+import uiClass.ShowMapRoute;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,10 +22,17 @@ import java.util.Iterator;
  */
 public class JavaApplicationDSA {
 
+    public static HashedDictionary<String, Object> setting;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        setting = new HashedDictionary<String, Object>(300);
+        setting.add("MAP_API_KEY", "AIzaSyCG24EIIq1K0uhrWm2_LUTF3W3KeVcDqWw");
+        setting.add("DEFUALT_FRAME_W", 1200);
+        setting.add("DEFUALT_FRAME_H", 800);
+        setting.add("FONT_STYLE", new Font(Font.SERIF, Font.PLAIN,  10));
+        
         ArraySlotList<String> list = new ArraySlotList<String>();
         list.add("A");
         list.add("Z");
@@ -37,7 +47,8 @@ public class JavaApplicationDSA {
         list2.add(2);
         System.out.print(list.toString()+"\n");
         System.out.print(list2.toString()+"\n");
-        ArraySlotList<Integer> list3 = new ArraySlotList<Integer>(new Integer[4]);
+        System.out.print(setting+"\n");
+        ArraySlotList<Integer> list3 = new ArraySlotList<Integer>(list2);
         for(Integer x: list3){
             System.out.println(x);
         }

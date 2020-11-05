@@ -7,10 +7,14 @@ package entityClass;
 
 import adtClass.ArrList;
 import enumClass.PaymentStatus;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -134,7 +138,7 @@ public class Withdraw extends AbstractEntity {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Withdraw{" + "withdraw_id=" + withdraw_id + ", user_id=" + user_id + ", amout=" + amout + ", date=" + date + ", status=" + status + ", note=" + note + '}';
     }
 
     @Override
@@ -143,6 +147,7 @@ public class Withdraw extends AbstractEntity {
     }
 
     public static void main(String[] args) {
+        
         Withdraw x = new Withdraw("W12334", "ASC1222", 7.80, new Date(), PaymentStatus.Completed, "Note");
         
         ArrList<Withdraw> employees = new ArrList<>();
@@ -152,15 +157,17 @@ public class Withdraw extends AbstractEntity {
  
         try
         {
-            FileOutputStream fos = new FileOutputStream("employeeData");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(employees);
-            oos.close();
-            fos.close();
+            System.out.println(x.getStorageDir());
+            try (FileOutputStream fos = new FileOutputStream(x.getStorageDir()); 
+                    ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                oos.writeObject(employees);
+            }
+            for(Withdraw w:employees){
+                System.out.println(w);
+            }
         } 
-        catch (IOException ioe) 
-        {
-            ioe.printStackTrace();
+        catch (IOException ex) {
+            Logger.getLogger(Withdraw.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

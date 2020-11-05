@@ -16,12 +16,13 @@ public abstract class AbstractEntity implements Comparable, Serializable {
     /**
      * Data storing directory
      */
-    public static String STORING_DIR = System.getProperty("user.dir") + "\\Data";
+    public static final String STORING_DIR = System.getProperty("user.dir") + "\\data";
     
     /**
      * 
      */
     public AbstractEntity() {
+        
     }
     
     /**
@@ -64,7 +65,8 @@ public abstract class AbstractEntity implements Comparable, Serializable {
     @Override
     public abstract int compareTo(Object t);
     
-    
-    
+    public String getStorageDir(){
+        return STORING_DIR + "\\" + this.getClass().getSimpleName() + ".dat";
+    }
     
 }

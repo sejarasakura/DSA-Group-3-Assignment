@@ -6,8 +6,6 @@ import adtClass.HashedDictionary;
 import adtClass.Queue;
 import adtClass.Stack;
 import java.awt.Font;
-import javax.swing.*;
-import uiClass.ShowMapRoute;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

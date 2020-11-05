@@ -5,85 +5,63 @@
  */
 package entityClass;
 
-import enumClass.CarType;
+import enumClass.PaymentStatus;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 /**
  *
  * @author ITSUKA KOTORI
  */
-public class Car extends AbstractEntity{
+public class Payment extends AbstractEntity {
     
-    /*
-    * Car pplate alphablate
-    */
-    private String plateAlpha;
+    DecimalFormat df = new DecimalFormat("###.##");
+    private String payment_id;
+    private PaymentStatus payment_status;
+    private Date payment_date;
+    private double payment_amount;
     
-    /*
-    * Car plate number
-    */
-    private String plateNumber;
+    public Payment(String payment_id, PaymentStatus payment_status, Date payment_date, double payment_amount) {
+        this.payment_id = payment_id;
+        this.payment_status = payment_status;
+        this.payment_date = payment_date;
+        this.payment_amount = payment_amount;
+    }
     
-    /*
-    * Car License
-    */
-    private Object license;
+    public Payment() {
+        this("", PaymentStatus.Voided, null, 0.00);
+    }
     
-    /*
-    * To calculate the year using the car?
-    */
-    private Date regDate;
+    public String getPayment_id() {
+        return payment_id;
+    }
     
-    /*
-    * To calculate the year using the car?
-    */
-    private CarType carType;
+    public void setPayment_id(String payment_id) {
+        this.payment_id = payment_id;
+    }
     
-    /*
-    * To calculate the year using the car?
-    */
-    private Driver driver;
+    public PaymentStatus getPayment_status() {
+        return payment_status;
+    }
     
-    public Car() {
+    public void setPayment_status(PaymentStatus payment_status) {
+        this.payment_status = payment_status;
     }
-
-    public Car(String plateAlpha, String plateNumber, Object license, Date regDate) {
-        this.plateAlpha = plateAlpha;
-        this.plateNumber = plateNumber;
-        this.license = license;
-        this.regDate = regDate;
+    
+    public Date getPayment_date() {
+        return payment_date;
     }
-
-    public String getPlateAlpha() {
-        return plateAlpha;
+    
+    public void setPayment_date(Date payment_date) {
+        this.payment_date = payment_date;
     }
-
-    public void setPlateAlpha(String plateAlpha) {
-        this.plateAlpha = plateAlpha;
+    
+    public double getPayment_amount() {
+        return payment_amount;
     }
-
-    public String getPlateNumber() {
-        return plateNumber;
-    }
-
-    public void setPlateNumber(String plateNumber) {
-        this.plateNumber = plateNumber;
-    }
-
-    public Object getLicense() {
-        return license;
-    }
-
-    public void setLicense(Object license) {
-        this.license = license;
-    }
-
-    public Date getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(Date regDate) {
-        this.regDate = regDate;
+    
+    public void setPayment_amount(double payment_amount) {
+        this.payment_amount = payment_amount;
     }
 
     @Override

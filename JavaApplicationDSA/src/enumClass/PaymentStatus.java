@@ -10,6 +10,7 @@ package enumClass;
  * @author ITSUKA KOTORI
  */
 public enum PaymentStatus {
+    
     Canceled_Reversal(0, "Canceled Reversal", "A reversal has been canceled. For example, you won a dispute with the customer, and the funds for the transaction that was reversed have been returned to you."), 
     Completed(1, "Complate Payment", "The payment has been completed, and the funds have been added successfully to your account balance."), 
     Created(2, "Payment Created", "A German ELV payment is made using Express Checkout."), 

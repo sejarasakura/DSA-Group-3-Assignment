@@ -9,7 +9,7 @@ package entityClass;
  *
  * @author ITSUKA KOTORI
  */
-public abstract class User {
+public abstract class User extends AbstractEntity{
     private String id;
     private String ic;
     private String name;
@@ -74,4 +74,10 @@ public abstract class User {
     public void register(){
         
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", ic=" + ic + ", name=" + name + ", email=" + email + ", phoneNumber=" + phoneNumber + '}';
+    }
+    
 }

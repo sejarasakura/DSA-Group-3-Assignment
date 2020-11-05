@@ -28,8 +28,12 @@ public class ShowMapRoute extends javax.swing.JPanel {
 
     /**
      * Creates new form ShowMapRoute
+     * @param browser
+     * @param view
      */
-    public ShowMapRoute() {
+    public ShowMapRoute(Browser browser, BrowserView view) {
+        this.browser = browser;
+        this.view = view;
         initComponents();
         open_site();
     }
@@ -59,16 +63,13 @@ public class ShowMapRoute extends javax.swing.JPanel {
     BrowserView view;
 
     private void open_site() {
+        
         BrowserUtil.setVersion(Version.V6_22);
 
         browser = new Browser();
         view = new BrowserView(browser);
 
         this.add(view, BorderLayout.CENTER);
-
-    //    browser.addTitleListener((TitleEvent evt) -> {
-    //        jLabel1.setText("   " + evt.getTitle());
-    //    });
 
         browser.addConsoleListener((ConsoleEvent evt) -> {
             System.out.println("LOG: " + evt.getMessage());
@@ -80,8 +81,8 @@ public class ShowMapRoute extends javax.swing.JPanel {
                 evt.getBrowser().setZoomLevel(-2);
             }
         });
-
-        browser.loadURL("html_plug/location_route.html");
+        System.out.println(System.getProperty("user.dir"));
+        browser.loadURL(System.getProperty("user.dir") + "\\src\\html_plug\\location_route.html?start=kualalumpur&end=ipoh");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

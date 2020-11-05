@@ -5,22 +5,35 @@
  */
 package main;
 
+import com.kingaspx.util.BrowserUtil;
+import com.kingaspx.version.Version;
+import com.teamdev.jxbrowser.chromium.Browser;
+import com.teamdev.jxbrowser.chromium.events.ConsoleEvent;
+import com.teamdev.jxbrowser.chromium.events.FinishLoadingEvent;
+import com.teamdev.jxbrowser.chromium.events.LoadAdapter;
+import com.teamdev.jxbrowser.chromium.swing.BrowserView;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import javax.swing.JPanel;
 import uiClass.ShowMapRoute;
 
 /**
  *
  * @author ITSUKA KOTORI
  */
-public class NewFrame extends java.awt.Frame {
+public class NewFrame extends javax.swing.JFrame {
 
-    ShowMapRoute jp;
+    Browser browser;
+    BrowserView view;
+    JPanel jp;
     /**
      * Creates new form NewFrame
      */
     public NewFrame() {
         initComponents();
-        jp = new ShowMapRoute();
+        jp = new ShowMapRoute(browser, view);
+        jp.setSize(new Dimension(800, 800));
+        jp.setVisible(true);
         this.add(jp, BorderLayout.CENTER);
         this.setSize(800, 800);
     }

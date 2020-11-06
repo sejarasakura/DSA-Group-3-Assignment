@@ -14,3 +14,11 @@
 0:0:0:0:0:0:0:1 - - [06/Nov/2020:14:46:37 +0800] "GET /WebApplication HTTP/1.1" 302 -
 0:0:0:0:0:0:0:1 - - [06/Nov/2020:14:46:37 +0800] "GET /WebApplication/ HTTP/1.1" 200 215
 0:0:0:0:0:0:0:1 - - [06/Nov/2020:14:46:38 +0800] "GET /favicon.ico HTTP/1.1" 200 21630
+127.0.0.1 - - [06/Nov/2020:17:18:27 +0800] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - admin [06/Nov/2020:17:18:27 +0800] "GET /manager/text/ HTTP/1.1" 200 39
+127.0.0.1 - - [06/Nov/2020:17:18:27 +0800] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - admin [06/Nov/2020:17:18:27 +0800] "GET /manager/text/ HTTP/1.1" 200 39
+127.0.0.1 - - [06/Nov/2020:17:18:27 +0800] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - admin [06/Nov/2020:17:18:27 +0800] "GET /manager/text/ HTTP/1.1" 200 39
+127.0.0.1 - - [06/Nov/2020:17:18:28 +0800] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - admin [06/Nov/2020:17:18:28 +0800] "GET /manager/text/ HTTP/1.1" 200 39

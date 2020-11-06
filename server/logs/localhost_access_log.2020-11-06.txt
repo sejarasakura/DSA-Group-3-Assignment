@@ -1,0 +1,16 @@
+127.0.0.1 - - [06/Nov/2020:14:46:17 +0800] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - - [06/Nov/2020:14:46:17 +0800] "GET /manager/text/ HTTP/1.1" 401 2562
+127.0.0.1 - admin [06/Nov/2020:14:46:35 +0800] "GET /manager/text/ HTTP/1.1" 200 39
+127.0.0.1 - - [06/Nov/2020:14:46:35 +0800] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - admin [06/Nov/2020:14:46:35 +0800] "GET /manager/text/ HTTP/1.1" 200 39
+127.0.0.1 - - [06/Nov/2020:14:46:35 +0800] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - admin [06/Nov/2020:14:46:35 +0800] "GET /manager/text/ HTTP/1.1" 200 39
+127.0.0.1 - - [06/Nov/2020:14:46:35 +0800] "HEAD /netbeans-tomcat-status-test HTTP/1.1" 404 -
+127.0.0.1 - admin [06/Nov/2020:14:46:35 +0800] "GET /manager/text/ HTTP/1.1" 200 39
+127.0.0.1 - admin [06/Nov/2020:14:46:35 +0800] "GET /manager/text/list HTTP/1.1" 200 202
+127.0.0.1 - admin [06/Nov/2020:14:46:35 +0800] "GET /manager/text/list HTTP/1.1" 200 202
+127.0.0.1 - admin [06/Nov/2020:14:46:36 +0800] "GET /manager/text/deploy?config=file%3A%2FC%3A%2FUsers%2FITSUKA%7E1%2FAppData%2FLocal%2FTemp%2Fcontext6407113225218719469.xml&path=/WebApplication HTTP/1.1" 200 72
+127.0.0.1 - admin [06/Nov/2020:14:46:36 +0800] "GET /manager/text/start?path=/WebApplication HTTP/1.1" 200 71
+0:0:0:0:0:0:0:1 - - [06/Nov/2020:14:46:37 +0800] "GET /WebApplication HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [06/Nov/2020:14:46:37 +0800] "GET /WebApplication/ HTTP/1.1" 200 215
+0:0:0:0:0:0:0:1 - - [06/Nov/2020:14:46:38 +0800] "GET /favicon.ico HTTP/1.1" 200 21630

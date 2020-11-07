@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
+    <%main.JavaApplicationDSA.ShowDirectory(request);%>
     <footer style="padding-top: 40px; padding-bottom: 40px; margin-top: 50px; background-color: #555">
 
         <div class="container" style="color: #fff">
@@ -59,21 +60,7 @@
                     </div>
                     <br />
                     <div class="row">
-                        <div class="col-sm-4">
-                            <a href="PayPalAccountConfigure.aspx" class="btn btn-danger form-control text-center">
-                                Paypal Config
-                            </a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a href="BankAccountConfigure.aspx" class="btn btn-danger form-control text-center">
-                                Bank Account Config
-                            </a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a href="CardConfigure.aspx" class="btn btn-danger form-control text-center">
-                                Credit Card Config
-                            </a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

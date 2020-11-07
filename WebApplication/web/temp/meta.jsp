@@ -8,3 +8,5 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><%= "Rent Car" + (request.getParameter("title") == null?"":request.getParameter("title"))%></title>

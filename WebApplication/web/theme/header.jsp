@@ -19,6 +19,7 @@
         </div>
         <ul class="nav navbar-nav">
             <%
+                request.
                 User user = null;
             %>
 

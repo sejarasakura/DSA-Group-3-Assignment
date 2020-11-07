@@ -5,6 +5,9 @@
  */
 package pages_;
 import adtClass.*;
+import entityClass.User;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -12,6 +15,26 @@ import adtClass.*;
  */
 public class Header {
     
+    private User user;
     
+    public Header(HttpServletRequest request){
+        Cookie[] cs = request.getCookies();
+        for(Cookie c: cs){
+            if(c.getName().equals("user"))
+                get_user_data(c.getValue());
+        }
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    private void get_user_data(String uid) {
+        
+    }
     
 }

@@ -8,11 +8,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@ include file="temp/meta.jsp" %>  
+        <%@ include file="theme/meta.jsp" %>  
     </head>
     <body>
-        <%@ include file="temp/header.jsp" %>  
+        <%@ include file="theme/header.jsp" %>  
         <h1>Hello World!</h1>
-        <%@ include file="temp/footer.jsp" %>  
+        <%@ include file="theme/footer.jsp" %>  
     </body>
 </html>

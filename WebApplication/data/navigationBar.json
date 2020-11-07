@@ -5,6 +5,10 @@
             {
                 "text": "Home",
                 "url": "#"
+            },
+            {
+                "text": "Help",
+                "url": "#"
             }
         ],
         "driver": [
@@ -114,7 +118,7 @@
                     },
                     {
                         "text": "Logout",
-                        "url": "#"
+                        "url": ""
                     }
                 ]
             }

@@ -50,4 +50,11 @@ public class Datas {
      */
     public static Queue<Booking> currentBooking;
     
+    /**
+     *
+     * @author ITSUKA KOTORI 
+     * doing start up
+     */
+    public static int stsrtUp = main.Functions.startUpInitialData();
+    
 }

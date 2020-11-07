@@ -54,9 +54,10 @@ public class Header {
         Gson gson = new Gson();
         Map map = gson.fromJson(reader, Map.class);
         map = (Map) map.get("nav");
+        boolean author_user = true;
         // all user
-        Stack all_user = new Stack((Iterable) map.get("admin"));
-        while(!all_user.isEmpty()){
+        Stack all_user = new Stack((Iterable) map.get("all_user"));
+        while (!all_user.isEmpty()) {
             result.add(build_html((Map) all_user.pop()));
         }
 
@@ -65,17 +66,44 @@ public class Header {
         if (user != null) {
 
             String role = user.getRole();
-            if (!role.equals("A")) {
 
+            switch (role) {
+                case "A":
+                    all_user = new Stack((Iterable) map.get("admin"));
+                    while (!all_user.isEmpty()) {
+                        result.add(build_html((Map) all_user.pop()));
+                    }
+                    break;
+                // all authorise end
+                case "C":
+                    all_user = new Stack((Iterable) map.get("customer"));
+                    while (!all_user.isEmpty()) {
+                        result.add(build_html((Map) all_user.pop()));
+                    }
+                    break;
+                case "D":
+                    all_user = new Stack((Iterable) map.get("driver"));
+                    while (!all_user.isEmpty()) {
+                        result.add(build_html((Map) all_user.pop()));
+                    }
+                    break;
+                default:
+                    author_user = false;
+                    break;
             }
-            if (role.equals("C") || role.equals("B")) {
-
-            } else if (role.equals("A") || role.equals("B")) {
-
-            }
-            // all authorise end
         } else {
-
+            author_user = false;
+        }
+        if (author_user) {
+            all_user = new Stack((Iterable) map.get("author_user"));
+            while (!all_user.isEmpty()) {
+                result.add(build_html((Map) all_user.pop()));
+            }
+        }else{
+            all_user = new Stack((Iterable) map.get("unauthor_user"));
+            while (!all_user.isEmpty()) {
+                result.add(build_html((Map) all_user.pop()));
+            }
         }
         return result;
     }
@@ -85,7 +113,7 @@ public class Header {
             return getlist(data);
         }
 
-        Stack childQueue = new Stack((Iterable)data.get("child"));
+        Stack childQueue = new Stack((Iterable) data.get("child"));
         StringBuilder sb = new StringBuilder();
         sb.append("<li class=\"dropdown\">");
         sb.append("<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"")
@@ -96,14 +124,15 @@ public class Header {
                 .append(" <span class=\"caret\"></span>")
                 .append("</a>");
         sb.append("<ul class=\"dropdown-menu\">");
-        while(!childQueue.isEmpty())
-            sb.append(getlist((Map)childQueue.pop()));
+        while (!childQueue.isEmpty()) {
+            sb.append(getlist((Map) childQueue.pop()));
+        }
         sb.append("</ul>");
         sb.append("</li>");
         return sb.toString();
     }
-    
-    private String getlist(Map data){
+
+    private String getlist(Map data) {
         return "<li class=\"art-list\"><a href=\""
                 + main.WebConfig.WEB_URL
                 + data.get("url")

@@ -21,12 +21,12 @@
             </a>
         </div>
         <ul class="nav navbar-nav">
-            <%ArrList lists = new Header(request).get_menu();%>
+            <%ArrList<String> lists = new Header(request).get_menu();%>
             <%--All user--%>
             <li class="art-list"><a href="<%= getServletContext().getInitParameter("DomainName")%>/pages/Home.aspx">Home</a></li>
-            <% for(Object list: lists){%>
-            <%= list%>
-            <% }%>
+            <% for(String list: lists){
+                out.write(list);
+            }%>
         </ul>
 
         <div class="navbar-header pull-right">

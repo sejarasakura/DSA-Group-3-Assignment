@@ -15,6 +15,7 @@ public abstract class User extends AbstractEntity{
     private String name;
     private String email;
     private String phoneNumber;
+    private String role;
 
     public User() {
     }
@@ -27,6 +28,14 @@ public abstract class User extends AbstractEntity{
         this.phoneNumber = phoneNumber;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
     public String getId() {
         return id;
     }

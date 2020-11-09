@@ -10,12 +10,14 @@
 <html>
     <head>
         <jsp:include page="<%= main.WebConfig.META_URL%>">
-            <jsp:param name="title" value="Amin" />
+            <jsp:param name="title" value="Admin" />
         </jsp:include>    
     </head>
     <body>
         <jsp:include page="<%= main.WebConfig.HEADER_URL%>" />
-        <h1>Haha</h1>
+        
+        
+        
         <jsp:include page="<%= main.WebConfig.FOOTER_URL%>" />
     </body>
 </html>

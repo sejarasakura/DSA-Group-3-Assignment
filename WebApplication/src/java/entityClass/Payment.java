@@ -19,6 +19,7 @@ public class Payment extends AbstractEntity {
     private String payment_id;
     private PaymentStatus payment_status;
     private Date payment_date;
+    private Date payment_due_date;
     private double payment_amount;
     
     public Payment(String payment_id, PaymentStatus payment_status, Date payment_date, double payment_amount) {
@@ -76,7 +77,7 @@ public class Payment extends AbstractEntity {
 
     @Override
     public boolean equals(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.payment_id == ((Payment)obj).payment_id;
     }
 
     @Override

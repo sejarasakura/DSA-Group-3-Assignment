@@ -49,7 +49,7 @@ public class Header {
     public ArrList get_menu() throws FileNotFoundException {
 
         ArrList<String> result = new ArrList<String>();
-        String x = main.WebConfig.PROJECT_URL + "/data/navigationBar.json";
+        String x = System.getProperty("user.dir") + "/data/navigationBar.json";
         JsonReader reader = new JsonReader(new FileReader(x));
         Gson gson = new Gson();
         Map map = gson.fromJson(reader, Map.class);
@@ -99,7 +99,7 @@ public class Header {
             while (!all_user.isEmpty()) {
                 result.add(build_html((Map) all_user.pop()));
             }
-        }else{
+        } else {
             all_user = new Stack((Iterable) map.get("unauthor_user"));
             while (!all_user.isEmpty()) {
                 result.add(build_html((Map) all_user.pop()));

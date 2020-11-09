@@ -29,6 +29,43 @@ public class Customer extends User{
     */
     private MemberShip memberType;
 
+    public Customer(ArrList<Booking> Allbooking, Booking current_booking, MemberShip memberType) {
+        this.Allbooking = Allbooking;
+        this.current_booking = current_booking;
+        this.memberType = memberType;
+    }
+
+    public Customer(ArrList<Booking> Allbooking, Booking current_booking, MemberShip memberType, String id, String ic, String name, String email, String phoneNumber) {
+        super(id, ic, name, email, phoneNumber);
+        this.Allbooking = Allbooking;
+        this.current_booking = current_booking;
+        this.memberType = memberType;
+    }
+
+    public ArrList<Booking> getAllbooking() {
+        return Allbooking;
+    }
+
+    public void setAllbooking(ArrList<Booking> Allbooking) {
+        this.Allbooking = Allbooking;
+    }
+
+    public Booking getCurrent_booking() {
+        return current_booking;
+    }
+
+    public void setCurrent_booking(Booking current_booking) {
+        this.current_booking = current_booking;
+    }
+
+    public MemberShip getMemberType() {
+        return memberType;
+    }
+
+    public void setMemberType(MemberShip memberType) {
+        this.memberType = memberType;
+    }
+    
     @Override
     public boolean isNotNull() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

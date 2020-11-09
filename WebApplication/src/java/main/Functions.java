@@ -21,6 +21,7 @@ public class Functions {
         Datas.settings = new HashedDictionary<String, Object>(256);
         Datas.settings.add("image/logo", WebConfig.WEB_URL + "img/logo.png");
         Datas.settings.add("image/user", WebConfig.WEB_URL + "img/user.png");
+        Datas.settings.add("text/title", "Rentcars.com");
         
         return 1;
     }

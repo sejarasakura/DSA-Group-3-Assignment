@@ -5,6 +5,7 @@
  */
 package entityClass;
 
+import enumClass.CarType;
 import java.util.Date;
 
 /**
@@ -24,8 +25,8 @@ public class Taxi extends Car{
         this.taxiComapany = taxiComapany;
     }
 
-    public Taxi(String taxiLicense, String taxiComapany, String plateAlpha, String plateNumber, Object license, Date regDate) {
-        super(plateAlpha, plateNumber, license, regDate);
+    public Taxi(String taxiLicense, String taxiComapany, String plateAlpha, String plateNumber, Object license, Date regDate, CarType carType, Driver driver) {
+        super(plateAlpha, plateNumber, license, regDate, carType, driver);
         this.taxiLicense = taxiLicense;
         this.taxiComapany = taxiComapany;
     }

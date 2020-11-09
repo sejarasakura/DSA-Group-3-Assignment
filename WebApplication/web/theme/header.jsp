@@ -19,7 +19,8 @@
             <a class="" href="<%= getServletContext().getInitParameter("DomainName")%>">
                 <img class="pull-left" src="<%= Datas.settings.getValue("image/logo")%>" alt="Rent Car" width="64" height="50">
             </a>
-            <a class="navbar-brand" href="<%= getServletContext().getInitParameter("DomainName")%>" style="padding-left: 30px">Rentcars.com
+            <a class="navbar-brand" href="<%= getServletContext().getInitParameter("DomainName")%>" style="padding-left: 30px">
+                <%= Datas.settings.getValue("text/title")%>
             </a>
         </div>
         <ul class="nav navbar-nav">

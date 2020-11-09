@@ -47,11 +47,13 @@ public class Car extends AbstractEntity{
     public Car() {
     }
 
-    public Car(String plateAlpha, String plateNumber, Object license, Date regDate) {
+    public Car(String plateAlpha, String plateNumber, Object license, Date regDate, CarType carType, Driver driver) {
         this.plateAlpha = plateAlpha;
         this.plateNumber = plateNumber;
         this.license = license;
         this.regDate = regDate;
+        this.carType = carType;
+        this.driver = driver;
     }
 
     public String getPlateAlpha() {
@@ -60,6 +62,22 @@ public class Car extends AbstractEntity{
 
     public void setPlateAlpha(String plateAlpha) {
         this.plateAlpha = plateAlpha;
+    }
+
+    public CarType getCarType() {
+        return carType;
+    }
+
+    public void setCarType(CarType carType) {
+        this.carType = carType;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
     public String getPlateNumber() {
@@ -108,7 +126,7 @@ public class Car extends AbstractEntity{
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Car{" + "plateAlpha=" + plateAlpha + ", plateNumber=" + plateNumber + ", license=" + license + ", regDate=" + regDate + ", carType=" + carType + ", driver=" + driver + '}';
     }
 
     @Override

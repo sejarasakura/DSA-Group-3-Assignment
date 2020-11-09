@@ -67,7 +67,7 @@ public class Payment extends AbstractEntity {
 
     @Override
     public boolean isNotNull() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.payment_id != null;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class Payment extends AbstractEntity {
 
     @Override
     public boolean equals(Object obj) {
-        return this.payment_id == ((Payment)obj).payment_id;
+        return (this.payment_id == null ? ((Payment)obj).payment_id == null : this.payment_id.equals(((Payment)obj).payment_id));
     }
 
     @Override

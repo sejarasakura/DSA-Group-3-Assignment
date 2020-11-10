@@ -5,12 +5,51 @@
  */
 package entityClass;
 
+import com.opencsv.bean.CsvBindByName;
+
 /**
  *
  * @author ITSUKA KOTORI
  */
 public class Plate extends AbstractEntity{
 
+    /*
+    * Car pplate alphablate
+    */
+    @CsvBindByName
+    private String plateAlpha;
+    
+    /*
+    * Car plate number
+    */
+    @CsvBindByName
+    private String plateNumber;
+
+    public Plate(String plateAlpha, String plateNumber) {
+        this.plateAlpha = plateAlpha;
+        this.plateNumber = plateNumber;
+    }
+
+    public String getPlateAlpha() {
+        return plateAlpha;
+    }
+
+    public void setPlateAlpha(String plateAlpha) {
+        this.plateAlpha = plateAlpha;
+    }
+
+    public String getPlateNumber() {
+        return plateNumber;
+    }
+
+    public void setPlateNumber(String plateNumber) {
+        this.plateNumber = plateNumber;
+    }
+    
+    public String getFullPlateNumber(){
+        return this.plateAlpha + " " + this.plateNumber;
+    }
+    
     @Override
     public boolean isNotNull() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

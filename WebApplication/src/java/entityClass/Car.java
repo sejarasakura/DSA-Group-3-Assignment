@@ -5,6 +5,8 @@
  */
 package entityClass;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvRecurse;
 import enumClass.CarType;
 import java.util.Date;
 
@@ -14,54 +16,47 @@ import java.util.Date;
  */
 public class Car extends AbstractEntity{
     
-    /*
-    * Car pplate alphablate
-    */
-    private String plateAlpha;
-    
-    /*
-    * Car plate number
-    */
-    private String plateNumber;
     
     /*
     * Car License
     */
-    private Object license;
+    @CsvRecurse
+    private Plate plate;
+    
+    /*
+    * Car License
+    */
+    @CsvBindByName
+    private String license;
     
     /*
     * To calculate the year using the car?
     */
+    @CsvBindByName
     private Date regDate;
     
     /*
-    * To calculate the year using the car?
+    * CarType
     */
+    @CsvRecurse
     private CarType carType;
     
     /*
     * To calculate the year using the car?
     */
-    private Driver driver;
+    @CsvRecurse
+    private String driver_id;
     
     public Car() {
     }
 
-    public Car(String plateAlpha, String plateNumber, Object license, Date regDate, CarType carType, Driver driver) {
-        this.plateAlpha = plateAlpha;
-        this.plateNumber = plateNumber;
+    public Car(String plateAlpha, String plateNumber, String license, Date regDate, CarType carType, String driver_id) {
+        this.plate.setPlateAlpha(plateAlpha);
+        this.plate.setPlateNumber(plateNumber);
         this.license = license;
         this.regDate = regDate;
         this.carType = carType;
-        this.driver = driver;
-    }
-
-    public String getPlateAlpha() {
-        return plateAlpha;
-    }
-
-    public void setPlateAlpha(String plateAlpha) {
-        this.plateAlpha = plateAlpha;
+        this.driver_id = driver_id;
     }
 
     public CarType getCarType() {
@@ -72,27 +67,27 @@ public class Car extends AbstractEntity{
         this.carType = carType;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public String getString() {
+        return driver_id;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setString(String driver_id) {
+        this.driver_id = driver_id;
     }
 
-    public String getPlateNumber() {
-        return plateNumber;
+    public Plate getPlate() {
+        return plate;
     }
 
-    public void setPlateNumber(String plateNumber) {
-        this.plateNumber = plateNumber;
+    public void setPlate(Plate plate) {
+        this.plate = plate;
     }
 
     public Object getLicense() {
         return license;
     }
 
-    public void setLicense(Object license) {
+    public void setLicense(String license) {
         this.license = license;
     }
 
@@ -104,6 +99,14 @@ public class Car extends AbstractEntity{
         this.regDate = regDate;
     }
 
+    public String getDriver_id() {
+        return driver_id;
+    }
+
+    public void setDriver_id(String driver_id) {
+        this.driver_id = driver_id;
+    }
+    
     @Override
     public boolean isNotNull() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -126,7 +129,7 @@ public class Car extends AbstractEntity{
 
     @Override
     public String toString() {
-        return "Car{" + "plateAlpha=" + plateAlpha + ", plateNumber=" + plateNumber + ", license=" + license + ", regDate=" + regDate + ", carType=" + carType + ", driver=" + driver + '}';
+        return "Car{" + "plate" + this.plate.getFullPlateNumber() + ", license=" + license + ", regDate=" + regDate + ", carType=" + carType + ", driver_id=" + driver_id + '}';
     }
 
     @Override

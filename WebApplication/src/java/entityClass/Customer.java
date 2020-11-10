@@ -7,7 +7,21 @@
 package entityClass;
 
 import adtClass.ArrList;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.CsvBindAndSplitByName;
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import enumClass.*;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,39 +30,45 @@ import enumClass.*;
 public class Customer extends User{
 
     /*
-    * Customer all booking
+    * particular ustomer all booking
     */
-    private ArrList<Booking> Allbooking;
+    @CsvBindByName
+     private ArrList<String> add_booking_id;
     
     /*
     * Customer current booking
     */
+    @CsvBindByName
     private Booking current_booking;
 
     /*
     * Membership of customer Basic, Premium, and Normal
     */
+    @CsvBindByName
     private MemberShip memberType;
 
-    public Customer(ArrList<Booking> Allbooking, Booking current_booking, MemberShip memberType) {
-        this.Allbooking = Allbooking;
+    public Customer() {
+    }
+
+    public Customer(ArrList<String> Allbooking, Booking current_booking, MemberShip memberType) {
+        this.add_booking_id = Allbooking;
         this.current_booking = current_booking;
         this.memberType = memberType;
     }
 
-    public Customer(ArrList<Booking> Allbooking, Booking current_booking, MemberShip memberType, String id, String ic, String name, String email, String phoneNumber) {
+    public Customer(ArrList<String> Allbooking, Booking current_booking, MemberShip memberType, String id, String ic, String name, String email, String phoneNumber) {
         super(id, ic, name, email, phoneNumber);
-        this.Allbooking = Allbooking;
+        this.add_booking_id = Allbooking;
         this.current_booking = current_booking;
         this.memberType = memberType;
     }
 
-    public ArrList<Booking> getAllbooking() {
-        return Allbooking;
+    public ArrList<String> getAdd_booking_id() {
+        return add_booking_id;
     }
 
-    public void setAllbooking(ArrList<Booking> Allbooking) {
-        this.Allbooking = Allbooking;
+    public void setAdd_booking_id(ArrList<String> add_booking_id) {
+        this.add_booking_id = add_booking_id;
     }
 
     public Booking getCurrent_booking() {
@@ -79,7 +99,7 @@ public class Customer extends User{
 
     @Override
     public String toString() {
-        return "Customer{" + "Allbooking=" + Allbooking + ", current_booking=" + current_booking + ", memberType=" + memberType + ", " + '}';
+        return "Customer{" + "Allbooking=" + add_booking_id + ", current_booking=" + current_booking + ", memberType=" + memberType + ", " + '}';
     }
 
     @Override
@@ -97,4 +117,35 @@ public class Customer extends User{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public static void main(String[] args) {
+        try {
+            main2();
+        } catch (IOException ex) {
+            Logger.getLogger(Withdraw.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public static void main2() throws IOException {
+
+        try {
+            // name of generated csv
+            Customer x = new Customer();
+            
+            
+            ArrList<Customer> employees = new ArrList<>();
+            employees.add(x);
+            
+            Writer writer = Files.newBufferedWriter(Paths.get(x.getStorageDir()));
+            StatefulBeanToCsv<Customer> csvWriter = new StatefulBeanToCsvBuilder<Customer>(writer)
+                    .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+                    .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                    .withEscapechar(CSVWriter.DEFAULT_ESCAPE_CHARACTER)
+                    .withLineEnd(CSVWriter.DEFAULT_LINE_END)
+                    .withOrderedResults(false)
+                    .build();
+            csvWriter.write(employees.iterator());
+            writer.close();
+        } catch (CsvDataTypeMismatchException | CsvRequiredFieldEmptyException ex) {
+            Logger.getLogger(Withdraw.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
 }

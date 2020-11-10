@@ -5,6 +5,7 @@
  */
 package adtClass;
 import adtClass.interfaces.*;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;

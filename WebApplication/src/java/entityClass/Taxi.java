@@ -25,7 +25,7 @@ public class Taxi extends Car{
         this.taxiComapany = taxiComapany;
     }
 
-    public Taxi(String taxiLicense, String taxiComapany, String plateAlpha, String plateNumber, Object license, Date regDate, CarType carType, Driver driver) {
+    public Taxi(String taxiLicense, String taxiComapany, String plateAlpha, String plateNumber, String license, Date regDate, CarType carType, String driver) {
         super(plateAlpha, plateNumber, license, regDate, carType, driver);
         this.taxiLicense = taxiLicense;
         this.taxiComapany = taxiComapany;

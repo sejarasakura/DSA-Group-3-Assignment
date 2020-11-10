@@ -11,7 +11,7 @@ import java.util.Arrays;
  *
  * @author ITSUKA KOTORI
  */
-public enum BookingStatus {
+public enum BookingStatus implements AbstractEnum{
     
     WATING_ACCEPTED("B1", "Pairing", "We are finding driver for you"), 
     PENDING_RENTING("B2", "Waiting Driver", "Waiting a while, the driver is comming"), 
@@ -56,5 +56,10 @@ public enum BookingStatus {
             return null;
         }
      }
+
+    @Override
+    public String getStringCode() {
+        return this.getCode();
+    }
     
 }

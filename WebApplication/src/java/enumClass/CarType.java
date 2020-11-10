@@ -11,7 +11,7 @@ import java.util.Arrays;
  *
  * @author ITSUKA KOTORI
  */
-public enum CarType {
+public enum CarType  implements AbstractEnum{
     JUSTRENT("JQ", "Just Rent", 4, 2.0F, 5.0F, 0.95F, 0.3f,"Find a nerest QuicKar now !!"),
     TAXI_rent("TR", "Taxi Rent", 4, 3.0F, 10.0F, 1.45F, 0.45f,"FInd a nearest taxi now !!"),
     PREMRENT("PQ", "Premium Rent", 4, 4.0F, 15.0F, 1.95F, 0.55f,"Premium car drivers all are top rate driver !!"),
@@ -80,6 +80,10 @@ public enum CarType {
             return null;
         }
      }
+    @Override
+    public String getStringCode() {
+        return this.getCode();
+    }
     public static void main(String []args){
         System.out.println(CarType.getValue("Find a nerest QuicKar now !!"));
         System.out.println(CarType.getValue("Find a nerest QuicKar "));

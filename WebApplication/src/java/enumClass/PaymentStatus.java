@@ -5,11 +5,14 @@
  */
 package enumClass;
 
+import com.opencsv.bean.CsvBindAndSplitByName;
+import com.opencsv.bean.CsvBindByName;
+
 /**
  *
  * @author ITSUKA KOTORI
  */
-public enum PaymentStatus {
+public enum PaymentStatus  implements AbstractEnum{
     
     Canceled_Reversal(0, "Canceled Reversal", "A reversal has been canceled. For example, you won a dispute with the customer, and the funds for the transaction that was reversed have been returned to you."), 
     Completed(1, "Complate Payment", "The payment has been completed, and the funds have been added successfully to your account balance."), 
@@ -23,13 +26,14 @@ public enum PaymentStatus {
     Processed(9, "Payment Processed", "A payment has been accepted."), 
     Voided(10, "Payment Voided", "This authorization has been voided.");
     
-    private final int value;
-    private final String disc;    
+    @CsvBindByName
+    private final int code;
+    private final String disc;        
     private final String title;    
     private final static PaymentStatus[] vs = PaymentStatus.values();;
 
     private PaymentStatus(int value, String title, String disc) {
-        this.value = value;
+        this.code = value;
         this.disc = disc;
         this.title = title;
     }
@@ -38,8 +42,8 @@ public enum PaymentStatus {
         return this.title;
     }
 
-    public int getValue() {
-        return this.value;
+    public int getCode() {
+        return this.code;
     }
     public String getDiscription(){
         return this.disc;
@@ -50,5 +54,9 @@ public enum PaymentStatus {
         }catch(Exception ex){
             return null;
         }
+    }
+    @Override
+    public String getStringCode() {
+        return this.getCode() + "";
     }
 }

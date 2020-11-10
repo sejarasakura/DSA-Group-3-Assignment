@@ -66,7 +66,7 @@ public abstract class AbstractEntity implements Comparable, Serializable {
     public abstract int compareTo(Object t);
     
     public String getStorageDir(){
-        return STORING_DIR + "\\" + this.getClass().getSimpleName() + ".dat";
+        return STORING_DIR + "\\" + this.getClass().getSimpleName() + ".csv";
     }
     
 }

@@ -11,13 +11,11 @@ import java.util.Arrays;
  *
  * @author ITSUKA KOTORI
  */
-public enum MemberShip {
-    //<editor-fold defaultstate="collapsed" desc="Enumerator(MembershipLevel) list">
+public enum MemberShip  implements AbstractEnum{
     /*Example  (code, seq_code/power, name, decription)*/
     NORMAL      ("NO", 0, "Normals", "Normal membership is all the defualt registered customer.", 0),
     PREMIUM        ("PE", 1, "Premium",  "Premium membershiip is all the normal paid member", 0.08),
     GOLD          ("AU", 2, "Gold",  "Gold membership is the paid member with VIP class", 0.20);
-    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Enumerator(MembershipLevel) properties">
     private final String code;
     private final int seq_code;
@@ -79,4 +77,8 @@ public enum MemberShip {
      public static void main(String[] args){
          System.out.println(MemberShip.getValue("AU"));
      }
+    @Override
+    public String getStringCode() {
+        return this.getDatabaseCode();
+    }
 }

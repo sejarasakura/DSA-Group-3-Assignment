@@ -5,6 +5,7 @@
  */
 package entityClass;
 
+import com.opencsv.bean.*;
 import enumClass.BookingStatus;
 import java.util.Date;
 
@@ -12,11 +13,18 @@ import java.util.Date;
  *
  * @author ITSUKA KOTORI
  */
-public class Booking extends AbstractEntity{
-    
+public class Booking extends AbstractEntity {
+
+    @CsvBindByPosition(position = 0)
     private String booking_id;
+    
+    @CsvBindByPosition(position = 1)
     private Date booking_date;
+    
+    @CsvBindByPosition(position = 2)
     private Date fetch_date;
+    
+    @CsvBindByPosition(position = 3)
     private BookingStatus bookingStatus;
 
     @Override

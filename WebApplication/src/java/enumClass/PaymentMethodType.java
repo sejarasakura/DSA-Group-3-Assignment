@@ -3,7 +3,7 @@ package enumClass;
 import java.util.Arrays;
 
 //</editor-fold>
-public enum PaymentMethodType {
+public enum PaymentMethodType  implements AbstractEnum{
     
     EWALLET("EW", 0, "Ewallet"),
     CASH("CH", 0.01, "Cash"),
@@ -64,4 +64,8 @@ public enum PaymentMethodType {
         }
      }
     //</editor-fold>
+    @Override
+    public String getStringCode() {
+        return this.getCode();
+    }
 }

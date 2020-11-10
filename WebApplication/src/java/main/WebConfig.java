@@ -5,6 +5,8 @@
  */
 package main;
 
+import com.univocity.parsers.csv.CsvWriterSettings;
+
 /**
  *
  * @author ITSUKA KOTORI
@@ -37,4 +39,8 @@ public class WebConfig {
      */
     public static String META_URL =  "../theme/meta.jsp";  
     
+    /**
+     *  CSV BASIC SETTING
+     */
+    public static CsvWriterSettings CSV_SETTING = Functions.basic_setting();
 }

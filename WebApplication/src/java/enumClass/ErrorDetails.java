@@ -9,7 +9,7 @@ package enumClass;
  *
  * @author ITSUKA KOTORI
  */
-public enum ErrorDetails {
+public enum ErrorDetails  implements AbstractEnum{
     E000(0, "Unknow Error", "The error is not define, unknow error found."),
     E001(1, "Not admin user error", "Please login as admin before using this following page nor function before login, please login as a admin. Thank you"), 
     E002(2, "Login account and password not match error", "Please check back your account id or password nither one is not valid, please try to login agian. Thank you"), 
@@ -59,5 +59,9 @@ public enum ErrorDetails {
     }
     public String getUrl() {
         return "code=" +code;
+    }
+    @Override
+    public String getStringCode() {
+        return this.getCode() + "";
     }
 }

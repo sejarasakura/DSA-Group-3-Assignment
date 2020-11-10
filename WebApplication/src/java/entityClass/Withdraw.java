@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  *
  * @author ITSUKA KOTORI
  */
-public class Withdraw extends AbstractEntity {
+public class Withdraw extends AbstractEntity<Withdraw> {
 
     /**
      * withdraw id
@@ -60,8 +60,8 @@ public class Withdraw extends AbstractEntity {
     /**
      * status
      */
-    @CsvRecurse
-    private PaymentStatus status;
+    @CsvBindByName(column = "payment_status_code")
+    private int status;
 
     /**
      * note
@@ -76,7 +76,7 @@ public class Withdraw extends AbstractEntity {
         this.withdraw_id = withdraw_id;
     }
 
-    public Withdraw(String withdraw_id, String user_id, double amout, Date date, PaymentStatus status, String note) {
+    public Withdraw(String withdraw_id, String user_id, double amout, Date date, int status, String note) {
         this.withdraw_id = withdraw_id;
         this.user_id = user_id;
         this.amout = amout;
@@ -117,11 +117,11 @@ public class Withdraw extends AbstractEntity {
         this.date = date;
     }
 
-    public PaymentStatus getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(PaymentStatus status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -173,7 +173,7 @@ public class Withdraw extends AbstractEntity {
 
     private static void testing_one() {
 
-        Withdraw x = new Withdraw("W12334", "ASC1222", 7.80, new Date(), PaymentStatus.Completed, "Note");
+        Withdraw x = new Withdraw("W12334", "ASC1222", 7.80, new Date(), PaymentStatus.Completed.getCode(), "Note");
 
         ArrList<Withdraw> employees = new ArrList<>();
 
@@ -196,25 +196,15 @@ public class Withdraw extends AbstractEntity {
 
     public static void main2() throws IOException {
 
-        try {
-            // name of generated csv
-            Withdraw x = new Withdraw("W12334", "ASC1222", 7.80, new Date(), PaymentStatus.Completed, "Note");
+        // name of generated csv
+        Withdraw x = new Withdraw("WINISBEST", "ASC1222", 7.80, new Date(), PaymentStatus.Completed.getCode(), "Note");
+        Withdraw x2 = new Withdraw("HAHAAAA", "ASC1222", 7.80, new Date(), PaymentStatus.Completed.getCode(), "Note");
+        
+        ArrList<Withdraw> employees = new ArrList<>();
+        employees.add(x);
+        employees.add(x2);
+
+        AbstractEntity.addDataToCsv(employees);
             
-            ArrList<Withdraw> employees = new ArrList<>();
-            employees.add(x);
-            
-            Writer writer = Files.newBufferedWriter(Paths.get(x.getStorageDir()));
-            StatefulBeanToCsv<Withdraw> csvWriter = new StatefulBeanToCsvBuilder<Withdraw>(writer)
-                    .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
-                    .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
-                    .withEscapechar(CSVWriter.DEFAULT_ESCAPE_CHARACTER)
-                    .withLineEnd(CSVWriter.DEFAULT_LINE_END)
-                    .withOrderedResults(false)
-                    .build();
-            csvWriter.write(employees.iterator());
-            writer.close();
-        } catch (CsvDataTypeMismatchException | CsvRequiredFieldEmptyException ex) {
-            Logger.getLogger(Withdraw.class.getName()).log(Level.SEVERE, null, ex);
-        }
     } 
 }

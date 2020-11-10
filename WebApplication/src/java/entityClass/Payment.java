@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author ITSUKA KOTORI
  */
-public class Payment extends AbstractEntity {
+public class Payment extends AbstractEntity<Payment> {
     
     DecimalFormat df = new DecimalFormat("###.##");
     private String payment_id;

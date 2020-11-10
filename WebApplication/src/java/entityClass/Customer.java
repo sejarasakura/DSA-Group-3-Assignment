@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  *
  * @author ITSUKA KOTORI
  */
-public class Customer extends User{
+public class Customer extends User<Customer>{
 
     /*
     * particular ustomer all booking
@@ -129,7 +129,13 @@ public class Customer extends User{
         try {
             // name of generated csv
             Customer x = new Customer();
-            
+            x.setId("C0011");
+            x.setId("C0011");
+            ArrList<String> d = new ArrList<String>();
+            d.add("Haha");
+            d.add("gG.COM");
+            d.add("I CAN FLY");
+            x.setAdd_booking_id(d); 
             
             ArrList<Customer> employees = new ArrList<>();
             employees.add(x);

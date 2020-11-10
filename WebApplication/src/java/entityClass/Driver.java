@@ -11,7 +11,7 @@ import adtClass.*;
  *
  * @author ITSUKA KOTORI
  */
-public class Driver extends User{
+public class Driver extends User<Driver>{
     
     /*
     * Driver car

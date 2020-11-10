@@ -11,7 +11,7 @@ import com.opencsv.bean.CsvBindByName;
  *
  * @author ITSUKA KOTORI
  */
-public class Plate extends AbstractEntity{
+public class Plate extends AbstractEntity<Plate>{
 
     /*
     * Car pplate alphablate

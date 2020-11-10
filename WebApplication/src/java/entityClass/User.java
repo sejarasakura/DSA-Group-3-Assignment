@@ -5,16 +5,50 @@
  */
 package entityClass;
 
+import com.opencsv.bean.CsvBindByName;
+
 /**
  *
  * @author ITSUKA KOTORI
+ * @param <T>
  */
-public abstract class User extends AbstractEntity{
+public abstract class User<T> extends AbstractEntity<User>{
+    
+    /**
+     * User Id primary key 
+     */
+    @CsvBindByName
     private String id;
+    
+    /**
+     * User IC if have
+     */
+    @CsvBindByName
     private String ic;
+    
+    /**
+     * User Registered name
+     */
+    @CsvBindByName
     private String name;
+    
+    /**
+     * User register email
+     */
+    @CsvBindByName
     private String email;
+    
+    /**
+     * User phone number 
+     */
+    @CsvBindByName
     private String phoneNumber;
+    
+    
+    /**
+     * User role
+     */
+    @CsvBindByName
     private String role;
 
     public User() {

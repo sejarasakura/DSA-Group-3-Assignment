@@ -16,13 +16,13 @@ public interface InterfaceSlotingElements<T> {
     
     /*
     *  The Sloting Methood Only If need Array method pls implement ArrayList
-    *  Tecknic using quick slot https://www.geeksforgeeks.org/quick-sort/
+    *  Tecknic using quick slot 
     */
     public void sort();
     
     /*
     *  The Sloting Methood Only If need Array method pls implement ArrayList
-    *  Tecknic using quick slot https://www.geeksforgeeks.org/quick-sort/
+    *  Tecknic using quick slot 
     */
     public void sortDesc();
     

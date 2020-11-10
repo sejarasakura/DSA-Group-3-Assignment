@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author ITSUKA KOTORI
  */
-public class Booking extends AbstractEntity {
+public class Booking extends AbstractEntity<Booking> {
 
     @CsvBindByName
     private String booking_id;

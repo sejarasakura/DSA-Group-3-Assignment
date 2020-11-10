@@ -14,7 +14,7 @@ import java.util.Date;
  *
  * @author ITSUKA KOTORI
  */
-public class Car extends AbstractEntity{
+public class Car extends AbstractEntity<Car>{
     
     
     /*

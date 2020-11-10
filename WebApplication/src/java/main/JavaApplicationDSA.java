@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class JavaApplicationDSA {
 
     /**
-     * Teacher is golden > _ > !! web page view la 
+     * Teacher is golden > _ > !! web page view
      */
     
 }

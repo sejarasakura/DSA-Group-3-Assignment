@@ -162,40 +162,4 @@ public class Withdraw extends AbstractEntity<Withdraw> {
     public boolean id_equals(Object obj) {
         return this.withdraw_id.equals(((Withdraw)obj).withdraw_id);
     }
-
-    public static void main(String[] args) {
-        try {
-            main2();
-        } catch (IOException ex) {
-            Logger.getLogger(Withdraw.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        testing_one();
-    }
-
-    private static void READ_testing_one() {
-        
-    }
-
-    private static void testing_one() {
-
-        Withdraw x = new Withdraw("W12334", "ASC1222", 7.80, new Date(), PaymentStatus.Completed.getCode(), "Note");
-
-        ArrList<Withdraw> employees = new ArrList(AbstractEntity.readDataFormCsv(x));
-        
-        
-    }
-
-    public static void main2() throws IOException {
-
-        // name of generated csv
-        Withdraw x = new Withdraw("WINISBEST", "HAII PEI", 7.88, new Date(), PaymentStatus.Completed.getCode(), "Note");
-        Withdraw x2 = new Withdraw("HAHAAAA", "HAHA GG", 9.99, new Date(), PaymentStatus.Completed.getCode(), "Note");
-        
-        ArrList<Withdraw> employees = new ArrList<>();
-        employees.add(x);
-        employees.add(x2);
-
-        AbstractEntity.addDataToCsv(employees);
-            
-    } 
 }

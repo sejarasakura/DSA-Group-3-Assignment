@@ -23,7 +23,7 @@ public enum CarType  implements AbstractEnum{
     /**
      * Car Type Saving ID
      */
-    @CsvBindByName
+    @CsvBindByName(column = "car_type_code")
     private final String code;
     /**
      * Car Type Name

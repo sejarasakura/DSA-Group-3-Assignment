@@ -1,5 +1,6 @@
 package enumClass;
 //<editor-fold defaultstate="collapsed" desc="Imported documents.">
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvRecurse;
 import java.util.Arrays;
 
@@ -14,7 +15,7 @@ public enum PaymentMethodType  implements AbstractEnum{
     /**
      *  Payment ID to save
      */
-    @CsvRecurse
+    @CsvBindByName(column = "payment_method_code")
     private final String code;
     
     /**

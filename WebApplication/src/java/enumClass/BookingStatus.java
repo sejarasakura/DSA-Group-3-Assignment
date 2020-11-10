@@ -28,7 +28,7 @@ public enum BookingStatus implements AbstractEnum{
     /**
      * Booking Status Saving ID
      */
-    @CsvBindByName
+    @CsvBindByName(column = "booking_status_code")
     private final String code;
     
     /**

@@ -40,7 +40,7 @@ public enum ErrorDetails  implements AbstractEnum{
     /**
      * Error Saving ID
      */
-    @CsvBindByName
+    @CsvBindByName(column = "error_code")
     private final int code;
     
     /**

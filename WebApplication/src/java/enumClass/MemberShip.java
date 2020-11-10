@@ -22,7 +22,7 @@ public enum MemberShip  implements AbstractEnum{
     /**
      * MemberShip code
      */
-    @CsvBindByName
+    @CsvBindByName(column = "member_code")
     private final String code;
     /**
      * Seq Code for array

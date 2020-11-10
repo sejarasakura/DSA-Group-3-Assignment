@@ -85,7 +85,6 @@ public class Withdraw extends AbstractEntity {
         this.note = note;
     }
 
-    @Parsed
     public String getWithdraw_id() {
         return withdraw_id;
     }
@@ -94,17 +93,14 @@ public class Withdraw extends AbstractEntity {
         this.withdraw_id = withdraw_id;
     }
 
-    @Parsed
     public String getUser_id() {
         return user_id;
     }
 
-    @Parsed
     public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 
-    @Parsed
     public double getAmout() {
         return amout;
     }
@@ -205,15 +201,8 @@ public class Withdraw extends AbstractEntity {
             Withdraw x = new Withdraw("W12334", "ASC1222", 7.80, new Date(), PaymentStatus.Completed, "Note");
             
             ArrList<Withdraw> employees = new ArrList<>();
-            String[] items1 = {"book", "coin", "pencil"};
-            String[] items2 = {"pen", "chair", "lamp"};
-            String[] items3 = {"ball", "bowl", "spectacles"};
-            
-            ArrList<String[]> entries = new ArrList<>();
-            entries.add(items1);
-            entries.add(items2);
-            entries.add(items3);
             employees.add(x);
+            
             Writer writer = Files.newBufferedWriter(Paths.get(x.getStorageDir()));
             StatefulBeanToCsv<Withdraw> csvWriter = new StatefulBeanToCsvBuilder<Withdraw>(writer)
                     .withSeparator(CSVWriter.DEFAULT_SEPARATOR)

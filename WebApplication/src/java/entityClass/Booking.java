@@ -15,16 +15,17 @@ import java.util.Date;
  */
 public class Booking extends AbstractEntity {
 
-    @CsvBindByPosition(position = 0)
+    @CsvBindByName
     private String booking_id;
     
-    @CsvBindByPosition(position = 1)
+    @CsvBindByName
     private Date booking_date;
     
-    @CsvBindByPosition(position = 2)
+    @CsvBindByName
+    @CsvDate("dd.MM.yyyy.hh.mm.ss")
     private Date fetch_date;
     
-    @CsvBindByPosition(position = 3)
+    @CsvRecurse
     private BookingStatus bookingStatus;
 
     @Override

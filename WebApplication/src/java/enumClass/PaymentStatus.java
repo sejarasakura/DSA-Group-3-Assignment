@@ -29,7 +29,7 @@ public enum PaymentStatus  implements AbstractEnum{
     /**
      *  Payment Status code
      */
-    @CsvBindByName
+    @CsvBindByName(column = "payment_status_code")
     private final int code;
      
     /**

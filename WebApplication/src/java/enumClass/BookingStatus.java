@@ -5,6 +5,8 @@
  */
 package enumClass;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvIgnore;
 import java.util.Arrays;
 
 /**
@@ -22,9 +24,23 @@ public enum BookingStatus implements AbstractEnum{
     COMPLETED("B7", "Booking Completed", "Thank for your bookihn and payment");
     
     private final static BookingStatus[] vs = BookingStatus.values();;
+
+    /**
+     * Booking Status Saving ID
+     */
+    @CsvBindByName
     private final String code;
+    
+    /**
+     * Booking Status Name / Title
+     */
     private final String name;
+    
+    /**
+     * Booking Status Description or output
+     */
     private final String decription;
+    
     private BookingStatus(String code, String name, String des){
         this.code = code;
         this.name = name;

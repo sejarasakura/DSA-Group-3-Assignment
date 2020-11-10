@@ -224,10 +224,8 @@ public class Withdraw extends AbstractEntity {
                     .build();
             csvWriter.write(employees.iterator());
             writer.close();
-        } catch (CsvDataTypeMismatchException ex) {
-            Logger.getLogger(Withdraw.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (CsvRequiredFieldEmptyException ex) {
+        } catch (CsvDataTypeMismatchException | CsvRequiredFieldEmptyException ex) {
             Logger.getLogger(Withdraw.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    } 
 }

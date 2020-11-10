@@ -5,6 +5,7 @@
  */
 package enumClass;
 
+import com.opencsv.bean.CsvBindByName;
 import java.util.Arrays;
 
 /**
@@ -17,11 +18,31 @@ public enum MemberShip  implements AbstractEnum{
     PREMIUM        ("PE", 1, "Premium",  "Premium membershiip is all the normal paid member", 0.08),
     GOLD          ("AU", 2, "Gold",  "Gold membership is the paid member with VIP class", 0.20);
     //<editor-fold defaultstate="collapsed" desc="Enumerator(MembershipLevel) properties">
+    
+    /**
+     * MemberShip code
+     */
+    @CsvBindByName
     private final String code;
+    /**
+     * Seq Code for array
+     */
     private final int seq_code;
+    /**
+     * MemberShip title
+     */
     private final String name;
+    /**
+     * MemberShip Description
+     */
     private final String description;
+    /**
+     * MemberShip Discount Amount
+     */
     private final double discount;    
+    /**
+     * MemberShip Values
+     */
     private final static MemberShip[] vs = MemberShip.values();
     private MemberShip(String code, int seq_code, String name, String description, double discount) {
         this.code = code;

@@ -1,5 +1,6 @@
 package enumClass;
 //<editor-fold defaultstate="collapsed" desc="Imported documents.">
+import com.opencsv.bean.CsvRecurse;
 import java.util.Arrays;
 
 //</editor-fold>
@@ -10,8 +11,20 @@ public enum PaymentMethodType  implements AbstractEnum{
     CARD("CD", 0.03, "Credit / Debitcard"),
     GPAY("MP",0, "Mobile Pay");
     //<editor-fold defaultstate="collapsed" desc="Enumerator(PaymentMethodType) properties">
+    /**
+     *  Payment ID to save
+     */
+    @CsvRecurse
     private final String code;
+    
+    /**
+     *  Payment charge
+     */
     private final double charge;
+    
+    /**
+     *  Payment name
+     */
     private final String name;
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Enumerator(PaymentMethodType) constructor">

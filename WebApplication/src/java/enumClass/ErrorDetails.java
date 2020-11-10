@@ -5,6 +5,8 @@
  */
 package enumClass;
 
+import com.opencsv.bean.CsvBindByName;
+
 /**
  *
  * @author ITSUKA KOTORI
@@ -34,8 +36,21 @@ public enum ErrorDetails  implements AbstractEnum{
     E021(21, "", ""),
     E022(22, "", ""),
     E023(23, "", "");
+    
+    /**
+     * Error Saving ID
+     */
+    @CsvBindByName
     private final int code;
+    
+    /**
+     * Error Name
+     */
     private final String name;
+    
+    /**
+     * Error Description
+     */
     private final String decription;
     private ErrorDetails(int code, String name, String des){
         this.code = code;

@@ -26,9 +26,20 @@ public enum PaymentStatus  implements AbstractEnum{
     Processed(9, "Payment Processed", "A payment has been accepted."), 
     Voided(10, "Payment Voided", "This authorization has been voided.");
     
+    /**
+     *  Payment Status code
+     */
     @CsvBindByName
     private final int code;
-    private final String disc;        
+     
+    /**
+     *  Payment Description
+     */
+    private final String disc;
+    
+    /**
+     *  Payment Title
+     */        
     private final String title;    
     private final static PaymentStatus[] vs = PaymentStatus.values();;
 

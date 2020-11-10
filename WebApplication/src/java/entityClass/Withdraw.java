@@ -12,9 +12,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.beanutils.BeanUtils;
 
 /**
  *
@@ -149,20 +152,21 @@ public class Withdraw extends AbstractEntity {
     public static void main(String[] args) {
         
         Withdraw x = new Withdraw("W12334", "ASC1222", 7.80, new Date(), PaymentStatus.Completed, "Note");
-        
+
         ArrList<Withdraw> employees = new ArrList<>();
          
         employees.add(x);
         employees.add(x);
  
         try
-        {
+        {        
             System.out.println(x.getStorageDir());
             try (FileOutputStream fos = new FileOutputStream(x.getStorageDir()); 
                     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(employees);
             }
-            for(Withdraw w:employees){
+            for(String w:employees){
+                //System.out.println(w);
                 System.out.println(w);
             }
         } 

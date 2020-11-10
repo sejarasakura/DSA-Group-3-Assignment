@@ -1,8 +1,5 @@
 package main;
 
-import adtClass.ArrList;
-import adtClass.ArraySlotList;
-import javax.servlet.http.HttpServletRequest;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,7 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 public class JavaApplicationDSA {
 
     /**
-     * Teacher is golden > _ > !! web page view
+     * @param args the command line arguments
      */
+    public static void main(String[] args) {
+        /**
+         * Teacher is golden > _ > !!
+         */
+    }
     
+    public static void ShowDirectory(Object args){
+        
+    }
 }

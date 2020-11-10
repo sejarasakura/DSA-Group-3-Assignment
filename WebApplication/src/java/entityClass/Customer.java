@@ -27,64 +27,64 @@ import java.util.logging.Logger;
  *
  * @author ITSUKA KOTORI
  */
-public class Customer extends User<Customer>{
+public class Customer extends User <Customer>{
 
     /*
     * particular ustomer all booking
     */
     @CsvBindByName
-     private ArrList<String> add_booking_id;
+     private ArrList<String> all_booking_id;
     
     /*
     * Customer current booking
     */
     @CsvBindByName
-    private Booking current_booking;
+    private String current_booking_id;
 
     /*
     * Membership of customer Basic, Premium, and Normal
     */
     @CsvBindByName
-    private MemberShip memberType;
+    private String memberType_id;
 
     public Customer() {
     }
 
-    public Customer(ArrList<String> Allbooking, Booking current_booking, MemberShip memberType) {
-        this.add_booking_id = Allbooking;
-        this.current_booking = current_booking;
-        this.memberType = memberType;
+    public Customer(ArrList<String> Allbooking, String current_booking, String memberType) {
+        this.all_booking_id = Allbooking;
+        this.current_booking_id = current_booking;
+        this.memberType_id = memberType;
     }
 
-    public Customer(ArrList<String> Allbooking, Booking current_booking, MemberShip memberType, String id, String ic, String name, String email, String phoneNumber) {
+    public Customer(ArrList<String> Allbooking, String current_booking, String memberType, String id, String ic, String name, String email, String phoneNumber) {
         super(id, ic, name, email, phoneNumber);
-        this.add_booking_id = Allbooking;
-        this.current_booking = current_booking;
-        this.memberType = memberType;
+        this.all_booking_id = Allbooking;
+        this.current_booking_id = current_booking;
+        this.memberType_id = memberType;
     }
 
-    public ArrList<String> getAdd_booking_id() {
-        return add_booking_id;
+    public ArrList<String> getAll_booking_id() {
+        return all_booking_id;
     }
 
-    public void setAdd_booking_id(ArrList<String> add_booking_id) {
-        this.add_booking_id = add_booking_id;
+    public void setAll_booking_id(ArrList<String> all_booking_id) {
+        this.all_booking_id = all_booking_id;
     }
 
-    public Booking getCurrent_booking() {
-        return current_booking;
+    public String getCurrent_booking_id() {
+        return current_booking_id;
     }
 
-    public void setCurrent_booking(Booking current_booking) {
-        this.current_booking = current_booking;
+    public void setCurrent_booking_id(String current_booking_id) {
+        this.current_booking_id = current_booking_id;
     }
 
-    public MemberShip getMemberType() {
-        return memberType;
+    public String getMemberType_id() {
+        return memberType_id;
     }
 
-    public void setMemberType(MemberShip memberType) {
-        this.memberType = memberType;
+    public void setMemberType_id(String memberType_id) {
+        this.memberType_id = memberType_id;
     }
     
     @Override
@@ -93,13 +93,8 @@ public class Customer extends User<Customer>{
     }
 
     @Override
-    public boolean split(String rowData) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public String toString() {
-        return "Customer{" + "Allbooking=" + add_booking_id + ", current_booking=" + current_booking + ", memberType=" + memberType + ", " + '}';
+        return "Customer{" + "Allbooking=" + all_booking_id + ", current_booking=" + current_booking_id + ", memberType=" + memberType_id + ", " + '}';
     }
 
     @Override
@@ -113,8 +108,8 @@ public class Customer extends User<Customer>{
     }
 
     @Override
-    public int hashCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean id_equals(Object obj) {
+        return this.getId().equals(((Customer)obj).getId());
     }
     
     public static void main(String[] args) {
@@ -135,12 +130,12 @@ public class Customer extends User<Customer>{
             d.add("Haha");
             d.add("gG.COM");
             d.add("I CAN FLY");
-            x.setAdd_booking_id(d); 
+            x.setAll_booking_id(d); 
             
             ArrList<Customer> employees = new ArrList<>();
             employees.add(x);
             
-            Writer writer = Files.newBufferedWriter(Paths.get(x.getStorageDir()));
+            Writer writer = Files.newBufferedWriter(Paths.get(x.getStorageFile()));
             StatefulBeanToCsv<Customer> csvWriter = new StatefulBeanToCsvBuilder<Customer>(writer)
                     .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
                     .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)

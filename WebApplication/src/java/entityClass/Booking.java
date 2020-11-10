@@ -25,8 +25,8 @@ public class Booking extends AbstractEntity<Booking> {
     @CsvDate("dd.MM.yyyy.hh.mm.ss")
     private Date fetch_date;
     
-    @CsvRecurse
-    private BookingStatus bookingStatus;
+    @CsvBindByName(column = "booking_status_code")
+    private String bookingStatus;
 
     @Override
     public boolean isNotNull() {
@@ -34,17 +34,7 @@ public class Booking extends AbstractEntity<Booking> {
     }
 
     @Override
-    public boolean split(String rowData) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean equals(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int hashCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -56,6 +46,11 @@ public class Booking extends AbstractEntity<Booking> {
     @Override
     public int compareTo(Object t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public boolean id_equals(Object obj) {
+        return this.booking_id.equals(((Booking)obj).booking_id);
     }
 
 }

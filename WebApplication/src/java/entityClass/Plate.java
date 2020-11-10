@@ -5,6 +5,7 @@
  */
 package entityClass;
 
+import adtClass.ArrList;
 import com.opencsv.bean.CsvBindByName;
 
 /**
@@ -14,7 +15,13 @@ import com.opencsv.bean.CsvBindByName;
 public class Plate extends AbstractEntity<Plate>{
 
     /*
-    * Car pplate alphablate
+    * Car plate id
+    */
+    @CsvBindByName
+    private String plate_id;
+    
+    /*
+    * Car plate alphablate
     */
     @CsvBindByName
     private String plateAlpha;
@@ -50,23 +57,28 @@ public class Plate extends AbstractEntity<Plate>{
         return this.plateAlpha + " " + this.plateNumber;
     }
     
+    public static Plate getPlate(String full_plate, String seperator){
+        
+        ArrList<String> split = new ArrList(full_plate.split(seperator));
+        if(split.size() < 2)
+            return null;
+        
+        return new Plate(split.get(0), split.get(1));
+        
+    }
+    
     @Override
     public boolean isNotNull() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean split(String rowData) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean id_equals(Object obj) {
+        return this.plate_id.equals(((Plate)obj).plate_id);
     }
 
     @Override
     public boolean equals(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int hashCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -79,5 +91,6 @@ public class Plate extends AbstractEntity<Plate>{
     public int compareTo(Object t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     
 }

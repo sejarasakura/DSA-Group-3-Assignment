@@ -127,21 +127,21 @@ public class AbstractEntityTest {
     }
 
     /**
-     * Test of getStorageDir method, of class AbstractEntity.
+     * Test of getStorageFile method, of class AbstractEntity.
      */
     @Test
     public void testGetStorageDir() {
         System.out.println("getStorageDir");
         AbstractEntity instance = new AbstractEntityImpl();
         String expResult = "";
-        String result = instance.getStorageDir();
+        String result = instance.getStorageFile();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of readDataToCsv method, of class AbstractEntity.
+     * Test of readDataFormCsv method, of class AbstractEntity.
      */
     @Test
     public void testReadDataToCsv() {

@@ -43,4 +43,9 @@ public class WebConfig {
      *  CSV BASIC SETTING
      */
     public static CsvWriterSettings CSV_SETTING = Functions.basic_setting();
+    
+    /**
+     *  GOOGLE Map API Key
+     */
+    public static String api_key = Functions.getApiKey();
 }

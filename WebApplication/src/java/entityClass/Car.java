@@ -20,8 +20,8 @@ public class Car extends AbstractEntity<Car>{
     /*
     * Car License
     */
-    @CsvRecurse
-    private Plate plate;
+    @CsvBindByName
+    private String plate_id;
     
     /*
     * Car License
@@ -38,8 +38,8 @@ public class Car extends AbstractEntity<Car>{
     /*
     * CarType
     */
-    @CsvRecurse
-    private CarType carType;
+    @CsvBindByName(column = "car_type_code")
+    private String carType;
     
     /*
     * To calculate the year using the car?
@@ -50,20 +50,19 @@ public class Car extends AbstractEntity<Car>{
     public Car() {
     }
 
-    public Car(String plateAlpha, String plateNumber, String license, Date regDate, CarType carType, String driver_id) {
-        this.plate.setPlateAlpha(plateAlpha);
-        this.plate.setPlateNumber(plateNumber);
+    public Car(String plate_id, String license, Date regDate, String carType, String driver_id) {
+        this.plate_id = plate_id;
         this.license = license;
         this.regDate = regDate;
         this.carType = carType;
         this.driver_id = driver_id;
     }
 
-    public CarType getCarType() {
+    public String getCarType() {
         return carType;
     }
 
-    public void setCarType(CarType carType) {
+    public void setCarType(String carType) {
         this.carType = carType;
     }
 
@@ -75,12 +74,12 @@ public class Car extends AbstractEntity<Car>{
         this.driver_id = driver_id;
     }
 
-    public Plate getPlate() {
-        return plate;
+    public String getPlate_id() {
+        return plate_id;
     }
 
-    public void setPlate(Plate plate) {
-        this.plate = plate;
+    public void setPlate_id(String plate_id) {
+        this.plate_id = plate_id;
     }
 
     public Object getLicense() {
@@ -113,23 +112,18 @@ public class Car extends AbstractEntity<Car>{
     }
 
     @Override
-    public boolean split(String rowData) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean id_equals(Object obj) {
+        return this.plate_id.equals(((Car)obj).plate_id);
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int hashCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public String toString() {
-        return "Car{" + "plate" + this.plate.getFullPlateNumber() + ", license=" + license + ", regDate=" + regDate + ", carType=" + carType + ", driver_id=" + driver_id + '}';
+        return "Car{" + "plate" + this.plate_id + ", license=" + license + ", regDate=" + regDate + ", carType=" + carType + ", driver_id=" + driver_id + '}';
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package entityClass;
 
+import com.opencsv.bean.CsvBindByName;
 import enumClass.CarType;
 import java.util.Date;
 
@@ -14,7 +15,10 @@ import java.util.Date;
  */
 public class Taxi extends Car{
     
+    @CsvBindByName
     private String taxiLicense;
+    
+    @CsvBindByName
     private String taxiComapany;
 
     public Taxi() {
@@ -25,8 +29,8 @@ public class Taxi extends Car{
         this.taxiComapany = taxiComapany;
     }
 
-    public Taxi(String taxiLicense, String taxiComapany, String plateAlpha, String plateNumber, String license, Date regDate, CarType carType, String driver) {
-        super(plateAlpha, plateNumber, license, regDate, carType, driver);
+    public Taxi(String taxiLicense, String taxiComapany, String plate_id, String license, Date regDate, String carType, String driver) {
+        super(plate_id, license, regDate, carType, driver);
         this.taxiLicense = taxiLicense;
         this.taxiComapany = taxiComapany;
     }

@@ -5,6 +5,7 @@
  */
 package adtClass;
 import adtClass.interfaces.*;
+import entityClass.AbstractEntity;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -152,6 +153,15 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     }
 
     private void CheckRangeForAdd(int _index) {
+    }
+
+    public boolean find_AbstractEntity(AbstractEntity x) {
+        
+        for(T d: data){
+            if(((AbstractEntity)d).id_equals(x))
+                return true;
+        }
+        return false;
     }
     
     private class ListIterator implements Iterator<T> {

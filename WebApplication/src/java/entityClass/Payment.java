@@ -5,6 +5,7 @@
  */
 package entityClass;
 
+import com.opencsv.bean.CsvBindByName;
 import enumClass.PaymentStatus;
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -16,21 +17,32 @@ import java.util.Date;
 public class Payment extends AbstractEntity<Payment> {
     
     DecimalFormat df = new DecimalFormat("###.##");
+    
+    @CsvBindByName
     private String payment_id;
-    private PaymentStatus payment_status;
+    
+    @CsvBindByName(column = "payment_status_code")
+    private int payment_status;
+    
+    @CsvBindByName
     private Date payment_date;
+    
+    @CsvBindByName
     private Date payment_due_date;
+    
+    @CsvBindByName
     private double payment_amount;
     
-    public Payment(String payment_id, PaymentStatus payment_status, Date payment_date, double payment_amount) {
+    public Payment(String payment_id, int payment_status, Date payment_date, double payment_amount, Date payment_due_date) {
         this.payment_id = payment_id;
         this.payment_status = payment_status;
         this.payment_date = payment_date;
         this.payment_amount = payment_amount;
+        this.payment_due_date = payment_due_date;
     }
     
     public Payment() {
-        this("", PaymentStatus.Voided, null, 0.00);
+        this("", PaymentStatus.Voided.getCode(), null, 0.00, new Date());
     }
     
     public String getPayment_id() {
@@ -41,11 +53,11 @@ public class Payment extends AbstractEntity<Payment> {
         this.payment_id = payment_id;
     }
     
-    public PaymentStatus getPayment_status() {
+    public int getPayment_status() {
         return payment_status;
     }
     
-    public void setPayment_status(PaymentStatus payment_status) {
+    public void setPayment_status(int payment_status) {
         this.payment_status = payment_status;
     }
     
@@ -65,24 +77,27 @@ public class Payment extends AbstractEntity<Payment> {
         this.payment_amount = payment_amount;
     }
 
+    public Date getPayment_due_date() {
+        return payment_due_date;
+    }
+
+    public void setPayment_due_date(Date payment_due_date) {
+        this.payment_due_date = payment_due_date;
+    }
+    
     @Override
     public boolean isNotNull() {
         return this.payment_id != null;
     }
 
     @Override
-    public boolean split(String rowData) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean id_equals(Object obj) {
+        return this.payment_id.equals(((Payment)obj).payment_id);
     }
 
     @Override
     public boolean equals(Object obj) {
         return (this.payment_id == null ? ((Payment)obj).payment_id == null : this.payment_id.equals(((Payment)obj).payment_id));
-    }
-
-    @Override
-    public int hashCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

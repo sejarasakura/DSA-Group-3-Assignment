@@ -295,7 +295,7 @@ public class WithdrawTest {
     @Test
     private static void testing_one() {
 
-        Withdraw x = new Withdraw("W12334", "ASC1222", 7.80, new Date(), PaymentStatus.Completed.getCode(), "Note");
+        Withdraw x = new Withdraw();
 
         ArrList<Withdraw> employees = new ArrList(AbstractEntity.readDataFormCsv(x));
         
@@ -312,6 +312,8 @@ public class WithdrawTest {
         ArrList<Withdraw> employees = new ArrList<>();
         employees.add(x);
         employees.add(x2);
+        
+        x.updateThisToCsv();
 
         AbstractEntity.addDataToCsv(employees);
             

@@ -10,6 +10,6 @@ package adtClass;
  * @author ITSUKA KOTORI
  * @param <T>
  */
-public class CircularList<T> extends Queue<T> {
+public class CircularList<T> {
     
 }

@@ -47,7 +47,7 @@ public class Functions {
         String api_key = null;
         try
         {
-            FileInputStream fileIn = new FileInputStream("User.ser");
+            FileInputStream fileIn = new FileInputStream(WebConfig.API_KEY_URL);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             api_key = (String) in.readObject();
             in.close();
@@ -62,7 +62,7 @@ public class Functions {
         main.WebConfig.api_key = api_key;
         try
         {
-            FileOutputStream fileOut = new FileOutputStream("User.ser");
+            FileOutputStream fileOut = new FileOutputStream(WebConfig.API_KEY_URL);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(api_key);
             out.close();

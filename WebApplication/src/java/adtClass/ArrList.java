@@ -31,7 +31,6 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         data = (T[]) new Object[inicap];
     }
     
-    
     public ArrList(T[] arr){
         index = arr.length;
         data = (T[]) arr;

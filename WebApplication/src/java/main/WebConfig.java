@@ -40,6 +40,11 @@ public class WebConfig {
     public static String META_URL =  "../theme/meta.jsp";  
     
     /**
+     *  Web Site Meta URL
+     */
+    public static String API_KEY_URL = WebConfig.PROJECT_URL + "data/api.dat";  
+    
+    /**
      *  CSV BASIC SETTING
      */
     public static CsvWriterSettings CSV_SETTING = Functions.basic_setting();

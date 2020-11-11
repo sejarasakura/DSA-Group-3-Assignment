@@ -43,3 +43,11 @@
     background: #125688;
     color: white;
 }
+
+.f_a_link{
+    color: white;
+}
+
+.f_a_link::hover{
+    color: #DCDCDC;
+}

@@ -8,6 +8,9 @@ package pages_;
 import adtClass.*;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import entityClass.AbstractEntity;
+import entityClass.Customer;
+import entityClass.Driver;
 import entityClass.User;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -43,7 +46,19 @@ public class Header {
     }
 
     private void get_user_data(String uid) {
-
+        switch (uid.charAt(0)) {
+            case 'C':
+                Customer.readDataFormCsv(new Customer());
+                break;
+            case 'D':
+                Customer.readDataFormCsv(new Driver());
+                break;
+            case 'A':
+                Customer.readDataFormCsv(new Customer());
+                break;
+            default:
+                break;
+        }
     }
 
     public ArrList get_menu() throws FileNotFoundException {

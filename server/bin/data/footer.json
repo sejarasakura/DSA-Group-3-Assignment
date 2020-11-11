@@ -5,7 +5,7 @@
       {
         "s": "h3",
         "t": "About Us",
-        "l":  "#"
+        "l": "#"
       },
       {
         "s": "p",
@@ -75,6 +75,44 @@
         "s": "p",
         "t": "All Right Reserved",
         "l": "#"
+      }
+    ],
+    "widget-4": [
+      {
+        "c": "fa-facebook",
+        "t": "Facebook",
+        "l": "#",
+        "show": "0"
+      },
+      {
+        "c": "fa-twitter",
+        "t": "Twitter",
+        "l": "#",
+        "show": "1"
+      },
+      {
+        "c": "fa-google",
+        "t": "Google",
+        "l": "#",
+        "show": "1"
+      },
+      {
+        "c": "fa-linkedin",
+        "t": "Linked",
+        "l": "#",
+        "show": "1"
+      },
+      {
+        "c": "fa-youtube",
+        "t": "Youtube",
+        "l": "#",
+        "show": "0"
+      },
+      {
+        "c": "fa-instagram",
+        "t": "Instagram",
+        "l": "#",
+        "show": "1"
       }
     ]
   }

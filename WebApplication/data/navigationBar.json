@@ -1,0 +1,127 @@
+{
+    "name": "ITSUKA KOTORI",
+    "nav": {
+        "all_user":[
+            {
+                "text": "Home",
+                "url": "#"
+            },
+            {
+                "text": "Help",
+                "url": "#"
+            }
+        ],
+        "driver": [
+            {
+                "text": "Fetch Now",
+                "url": "#"
+            },
+            {
+                "text": "Withdraw",
+                "url": "#"
+            },
+            {
+                "text": "Cars",
+                "url": "#"
+            },
+            {
+                "text": "License",
+                "url": "#"
+            },
+            {
+                "text": "Your Reviews",
+                "url": "#"
+            }
+        ],
+        "customer": [
+            {
+                "text": "Find A Driver",
+                "url": "#"
+            },
+            {
+                "text": "Rent Wallet",
+                "url": "#"
+            },
+            {
+                "text": "Favourite Drives",
+                "url": "#"
+            },
+            {
+                "text": "Membership",
+                "url": "#"
+            },
+            {
+                "text": "My Reviews",
+                "url": "#"
+            }
+        ],
+        "admin": [
+            {
+                "text": "Dashboard",
+                "url": "#",
+                "child": [
+                    {
+                        "text": "Monthly Reports",
+                        "url": "#"
+                    }
+                ]
+            },
+            {
+                "text": "Customer",
+                "url": "#"
+            },
+            {
+                "text": "Driver",
+                "url": "#",
+                "child": [
+                    {
+                        "text": "Cars",
+                        "url": "#"
+                    },
+                    {
+                        "text": "License",
+                        "url": "#"
+                    },
+                    {
+                        "text": "Problems",
+                        "url": "#"
+                    }
+                ]
+            },
+            {
+                "text": "Setting",
+                "url": "#"
+            }
+        ],
+        "unauthor_user": [
+            {
+                "text": "Login",
+                "url": "#"
+            },
+            {
+                "text": "Register",
+                "url": "#"
+            }
+        ],
+        "author_user": [
+            {
+                "text": "My Account",
+                "url": "#",
+                "child": [
+                    {
+                        "text": "My Accounts Detials",
+                        "url": "#"
+                    },
+                    {
+                        "text": "Change Password",
+                        "url": "#"
+                    },
+                    {
+                        "text": "Logout",
+                        "url": ""
+                    }
+                ]
+            }
+        ]
+    }
+}

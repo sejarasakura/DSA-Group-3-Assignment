@@ -88,22 +88,27 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         return STORING_DIR + "\\" + this.getClass().getSimpleName() + ".csv";
     }
 
+    /**
+     * Adding listed new record to CSV file.
+     *
+     * @param datas
+     * @return
+     */
+    public static boolean addDataToCsv(ArrList<? extends AbstractEntity> datas) {
     //<editor-fold defaultstate="collapsed" desc="add record">
-    public static boolean addDataToCsv(ArrList<? extends AbstractEntity> it) {
-
         boolean result = true;
 
         /* block lenght less than */
-        if (it.size() <= 0) {
+        if (datas.size() <= 0) {
             return false;
         }
 
         /* read data from file */
-        ArrList<AbstractEntity> data = new ArrList(AbstractEntity.privateReadDataFormCsv(it.get(0), false));
+        ArrList<AbstractEntity> data = new ArrList(AbstractEntity.privateReadDataFormCsv(datas.get(0), false));
 
         boolean depucate_record, all_d_r = true;
         /* add new data to array list */
-        for (AbstractEntity x : it) {
+        for (AbstractEntity x : datas) {
 
             depucate_record = data.find_AbstractEntity(x);
             all_d_r &= depucate_record;
@@ -124,11 +129,11 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
         if (result && !all_d_r) {
             System.out.println(OutputColor.TEXT_GREEN
-                    + "added record to file : " + it.get(0).getStorageFile()
+                    + "added record to file : " + datas.get(0).getStorageFile()
                     + OutputColor.TEXT_RESET);
         } else {
             System.out.println(OutputColor.TEXT_RED
-                    + "adding record unsucessful in file : " + it.get(0).getStorageFile()
+                    + "adding record unsucessful in file : " + datas.get(0).getStorageFile()
                     + OutputColor.TEXT_RESET);
         }
 
@@ -138,10 +143,19 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     }
     //</editor-fold>
     
+    
+    /**
+     * Reading all record form CSV file.
+     *
+     * @param reference
+     * @return
+     */
+    public static Iterator<? extends AbstractEntity> readDataFormCsv(AbstractEntity reference) {
     //<editor-fold defaultstate="collapsed" desc="read record">
+        return privateReadDataFormCsv(reference, true);
+    }
     
     private static Iterator<? extends AbstractEntity> privateReadDataFormCsv(AbstractEntity c, boolean show_e) {
-
         try {
 
             ArrList<AbstractEntity> entity;
@@ -172,13 +186,20 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         return null;
     }
 
-    public static Iterator<? extends AbstractEntity> readDataFormCsv(AbstractEntity c) {
-        return privateReadDataFormCsv(c, true);
-    }
 
     //</editor-fold>
     
+    /**
+     * Rewrite all record to CSV file.
+     *
+     * @param datas
+     * @return
+     */
+    public static boolean reWriteAllDataToCsv(ArrList<? extends AbstractEntity> datas) {
     //<editor-fold defaultstate="collapsed" desc="write record">
+        return privateReWriteAllDataToCsv(datas, true);
+    }
+    
     public static boolean privateReWriteAllDataToCsv(ArrList<? extends AbstractEntity> it, boolean show_e) {
 
         if (it.size() <= 0) {
@@ -214,15 +235,16 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         return false;
 
     }
-
-    public static boolean reWriteAllDataToCsv(ArrList<? extends AbstractEntity> it) {
-        return privateReWriteAllDataToCsv(it, true);
-    }
-
     //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="update record">
+    /**
+     * Update the listed record
+     *
+     * @param datas
+     * @return
+     */
     public static boolean updateDataToCsv(ArrList<? extends AbstractEntity> datas) {
+    //<editor-fold defaultstate="collapsed" desc="update record">
 
         /* block error */
         if (datas.size() <= 0) {
@@ -255,8 +277,14 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
     //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="delete record">
+    /**
+     * Delete the listed record
+     *
+     * @param datas
+     * @return
+     */
     public static boolean deleteDataToCsv(ArrList<? extends AbstractEntity> datas) {
+    //<editor-fold defaultstate="collapsed" desc="delete record">
 
         /* block error */
         if (datas.size() <= 0) {

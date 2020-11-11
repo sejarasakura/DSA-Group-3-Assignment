@@ -56,11 +56,11 @@ public class Customer extends User <Customer>{
         this.memberType_id = memberType;
     }
 
-    public Customer(ArrList<String> Allbooking, String current_booking, String memberType, String id, String ic, String name, String email, String phoneNumber) {
-        super(id, ic, name, email, phoneNumber);
-        this.all_booking_id = Allbooking;
-        this.current_booking_id = current_booking;
-        this.memberType_id = memberType;
+    public Customer(ArrList<String> all_booking_id, String current_booking_id, String memberType_id, String user_id, String ic, String name, String email, String phoneNumber, String role, String username, String password) {
+        super(user_id, ic, name, email, phoneNumber, role, username, password);
+        this.all_booking_id = all_booking_id;
+        this.current_booking_id = current_booking_id;
+        this.memberType_id = memberType_id;
     }
 
     public ArrList<String> getAll_booking_id() {
@@ -109,7 +109,7 @@ public class Customer extends User <Customer>{
 
     @Override
     public boolean id_equals(Object obj) {
-        return this.getId().equals(((Customer)obj).getId());
+        return this.getUser_id().equals(((Customer)obj).getUser_id());
     }
     
     public static void main(String[] args) {
@@ -124,8 +124,8 @@ public class Customer extends User <Customer>{
         try {
             // name of generated csv
             Customer x = new Customer();
-            x.setId("C0011");
-            x.setId("C0011");
+            x.setUser_id("C0011");
+            x.setUser_id("C0011");
             ArrList<String> d = new ArrList<String>();
             d.add("Haha");
             d.add("gG.COM");
@@ -149,4 +149,14 @@ public class Customer extends User <Customer>{
             Logger.getLogger(Withdraw.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
+
+    @Override
+    public User login() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User register() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -18,7 +18,7 @@ public abstract class User<T> extends AbstractEntity<User>{
      * User Id primary key 
      */
     @CsvBindByName
-    private String id;
+    private String user_id;
     
     /**
      * User IC if have
@@ -44,24 +44,54 @@ public abstract class User<T> extends AbstractEntity<User>{
     @CsvBindByName
     private String phoneNumber;
     
-    
     /**
      * User role
      */
     @CsvBindByName
     private String role;
 
+    /**
+     * User role
+     */
+    @CsvBindByName
+    private String username;
+
+    /**
+     * User role
+     */
+    @CsvBindByName
+    private String password;
+
     public User() {
     }
-    
-    public User(String id, String ic, String name, String email, String phoneNumber) {
-        this.id = id;
+
+    public User(String user_id, String ic, String name, String email, String phoneNumber, String role, String username, String password) {
+        this.user_id = user_id;
         this.ic = ic;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.username = username;
+        this.password = password;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public String getRole() {
         return role;
     }
@@ -70,8 +100,8 @@ public abstract class User<T> extends AbstractEntity<User>{
         this.role = role;
     }
     
-    public String getId() {
-        return id;
+    public String getUser_id() {
+        return user_id;
     }
 
     public String getIc() {
@@ -90,8 +120,8 @@ public abstract class User<T> extends AbstractEntity<User>{
         return phoneNumber;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public void setIc(String ic) {
@@ -110,17 +140,13 @@ public abstract class User<T> extends AbstractEntity<User>{
         this.phoneNumber = phoneNumber;
     }
     
-    public void login(){
-        
-    }
+    public abstract User login();
     
-    public void register(){
-        
-    }
+    public abstract User register();
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", ic=" + ic + ", name=" + name + ", email=" + email + ", phoneNumber=" + phoneNumber + '}';
+        return "User{" + "id=" + user_id + ", ic=" + ic + ", name=" + name + ", email=" + email + ", phoneNumber=" + phoneNumber + '}';
     }
     
 }

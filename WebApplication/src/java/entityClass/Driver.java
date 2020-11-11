@@ -26,18 +26,21 @@ public class Driver extends User<Driver>{
     private adtClass.Queue<Booking> accepted_booking;
     
     public Driver() {
-        this(new ArrList(), new Queue(), "", "", "", "", "");
+        super();
     }
-    
+
     public Driver(ArrList<String> car_plate, Queue<Booking> accepted_booking) {
-        this(car_plate, accepted_booking, "", "", "", "", "");
-    }
-    
-    public Driver(ArrList<String> car_plate, Queue<Booking> accepted_booking, String id, String ic, String name, String email, String phoneNumber) {
-        super(id, ic, name, email, phoneNumber);
+        super();
         this.car_plate = car_plate;
         this.accepted_booking = accepted_booking;
     }
+
+    public Driver(ArrList<String> car_plate, Queue<Booking> accepted_booking, String user_id, String ic, String name, String email, String phoneNumber, String role, String username, String password) {
+        super(user_id, ic, name, email, phoneNumber, role, username, password);
+        this.car_plate = car_plate;
+        this.accepted_booking = accepted_booking;
+    }
+    
     
     public ArrList<Plate> getArrListPlate(){
         
@@ -75,7 +78,7 @@ public class Driver extends User<Driver>{
     
     @Override
     public boolean id_equals(Object obj) {
-        return this.getId().equals(((Driver)obj).getId());
+        return this.getUser_id().equals(((Driver)obj).getUser_id());
     }
     
     @Override
@@ -90,6 +93,16 @@ public class Driver extends User<Driver>{
 
     @Override
     public int compareTo(Object t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User login() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User register() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

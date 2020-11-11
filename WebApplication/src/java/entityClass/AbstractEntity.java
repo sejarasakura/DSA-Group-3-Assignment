@@ -79,6 +79,11 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     @Override
     public abstract int compareTo(Object t);
 
+    /**
+     * To get the storage file path
+     *
+     * @return
+     */
     public String getStorageFile() {
         return STORING_DIR + "\\" + this.getClass().getSimpleName() + ".csv";
     }
@@ -313,4 +318,5 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         ref.add(this);
         return AbstractEntity.deleteDataToCsv(ref);
     }
+    
 }

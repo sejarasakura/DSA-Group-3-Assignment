@@ -26,6 +26,11 @@
         "s": "p",
         "t": "Rentcars story",
         "l": "#"
+      },
+      {
+        "s": "p",
+        "t": "Admin",
+        "l": "admin/index.jsp"
       }
     ],
     "widget-2": [

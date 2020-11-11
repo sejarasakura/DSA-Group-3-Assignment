@@ -45,9 +45,9 @@
 }
 
 .f_a_link{
-    color: white;
+    color: white!important;
 }
 
-.f_a_link::hover{
-    color: #DCDCDC;
+.f_a_link:hover{
+    color: #DCDCDC!important;
 }

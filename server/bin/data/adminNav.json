@@ -1,0 +1,83 @@
+{
+  "name": "ITSUKA KOTORI",
+  "admin-nav": {
+    "nav-1": {
+      "title": "Apprearance",
+      "href": "",
+      "child": [
+        {
+          "t": "Navigation Bar",
+          "l": "#"
+        },
+        {
+          "t": "Footer",
+          "l": "#"
+        },
+        {
+          "t": "Others",
+          "l": "#"
+        }
+      ]
+    },
+    "nav-2": {
+      "title": "Users",
+      "href": "",
+      "child": [
+        {
+          "t": "Admin",
+          "l": ""
+        },
+        {
+          "t": "Customer",
+          "l": ""
+        },
+        {
+          "t": "Driver",
+          "l": ""
+        }
+      ]
+    },
+    "nav-3": {
+      "title": "Adminsration",
+      "href": "",
+      "child": [
+        {
+          "t": "Renting order",
+          "l": ""
+        },
+        {
+          "t": "Payment",
+          "l": ""
+        },
+        {
+          "t": "Withdraw",
+          "l": ""
+        }
+      ]
+    },
+    "nav-4": {
+      "title": "Google Map",
+      "href": "",
+      "child": [
+        {
+          "t": "API KEY",
+          "l": ""
+        },
+        {
+          "t": "Console Link",
+          "l": ""
+        }
+      ]
+    },
+    "nav-5": {
+      "title": "Settings",
+      "href": "",
+      "child": [
+        {
+          "t": "values",
+          "l":  ""
+        }
+      ]
+    }
+  }
+}

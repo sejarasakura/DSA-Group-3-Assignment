@@ -15,14 +15,19 @@ public class WebConfig {
     
 
     /**
-     *  Web Site Header URL
+     *  Project directory URL
      */
     public static String PROJECT_URL = "C:/Users/ITSUKA KOTORI/Documents/GitHub/DSA-Group-3-Assignment/WebApplication/";
     
     /**
-     *  Web Site Header URL
+     *  Web Site URL
      */
     public static String WEB_URL = "http://localhost:8080/WebApplication/";
+    
+    /**
+     *  Web Site Admin URL
+     */
+    public static String ADMIN_URL = (WEB_URL + "admin/");
 
     /**
      *  Web Site Header URL
@@ -33,6 +38,16 @@ public class WebConfig {
      *  Web Site Footer URL
      */
     public static String FOOTER_URL = "../theme/footer.jsp";
+
+    /**
+     *  Web Site Header URL
+     */
+    public static String ADMIN_HEADER_URL = "../theme/admin_header.jsp";
+    
+    /**
+     *  Web Site Footer URL
+     */
+    public static String ADMIN_FOOTER_URL = "../theme/admin_footer.jsp";
     
     /**
      *  Web Site Meta URL
@@ -43,11 +58,6 @@ public class WebConfig {
      *  Web Site Meta URL
      */
     public static String API_KEY_URL = WebConfig.PROJECT_URL + "data/api.dat";  
-    
-    /**
-     *  CSV BASIC SETTING
-     */
-    public static CsvWriterSettings CSV_SETTING = Functions.basic_setting();
     
     /**
      *  GOOGLE Map API Key

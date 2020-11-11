@@ -8,7 +8,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
-    <%main.JavaApplicationDSA.ShowDirectory(request);%>
     <footer style="padding-top: 40px; padding-bottom: 40px; margin-top: 50px; background-color: #555">
 
         <div class="container" style="color: #fff">

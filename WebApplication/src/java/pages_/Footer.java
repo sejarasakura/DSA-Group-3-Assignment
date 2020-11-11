@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import main.WebConfig;
 
 /**
  *
@@ -75,7 +76,7 @@ public class Footer {
             show = Integer.parseInt(x.get("show").toString());
             if(show == 1)
                 sb.append(String.format("<a href=\"%s\" class=\"fa %s pull-right fa-master\"></a>", 
-                    x.get("l"), x.get("c")));
+                    WebConfig.WEB_URL + x.get("l"), x.get("c")));
         }
         sb.append("</div>");
         sb.append("</div>");
@@ -87,7 +88,7 @@ public class Footer {
     } 
     private String build_right_html(Map data){
         return String.format("<div class=\"row\"> <div class=\"col-sm-12\"> <%s class=\"pull-right\"><a class=\"f_a_link\" href=\"%s\">%s</a></%s> </div> </div>", 
-                data.get("s"), data.get("l"), data.get("t"), data.get("s"));
+                data.get("s"), WebConfig.WEB_URL + data.get("l"), data.get("t"), data.get("s"));
     } 
     
 }

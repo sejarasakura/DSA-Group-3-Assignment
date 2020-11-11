@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class Functions {
     
-    public static String getWebpageTitle(HttpServletRequest request){
-        return "Rent Car" + (request.getParameter("title") == null?"":(" - " + request.getParameter("title")));
+    public static String getWebpageTitle(HttpServletRequest request, String prag){
+        return "Rent Car" + (request.getParameter(prag) == null?"":(" - " + request.getParameter(prag)));
     }
     
     public static int startUpInitialData(){

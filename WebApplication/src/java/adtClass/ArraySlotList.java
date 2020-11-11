@@ -92,7 +92,7 @@ public class ArraySlotList <T extends Comparable<T>> implements InterfaceSloting
     @Override
     public T remove(int _index) {
         CheckRange(_index); 
-        Object x = data[_index];
+        T x = data[_index];
         for (int i = _index; i < index - 1; i++) {
             data[i] = data[i + 1]; 
         }

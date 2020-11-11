@@ -17,8 +17,8 @@ This project has been done by my collage life on B'S on software development yea
 
 
 ### Technical Skill used 
-- Java (Generic typr, Collection type, Interetor, Enum, Implementation, read write Json and csv)
-- Jsp (Include dinamic file)
-- Html (Form, )
-- Bootstrap()
-- Javascript (JQuery, )
+- Java (Abstract data type, Generic type, Collection type, Interetor, Enum, Implementation, read write Json and csv)
+- Jsp 
+- Html 
+- Bootstrap
+- Javascript (JQuery, Generated graph or report)

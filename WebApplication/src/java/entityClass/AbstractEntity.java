@@ -235,7 +235,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         return false;
 
     }
-    //</editor-fold>
+    //</editor-fold>  
     
     /**
      * Update the listed record

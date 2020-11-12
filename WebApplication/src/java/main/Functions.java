@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package main;
+import adtClass.ArrList;
 import adtClass.HashedDictionary;
 import com.univocity.parsers.csv.CsvWriterSettings;
 import java.io.FileInputStream;
@@ -72,6 +73,28 @@ public class Functions {
         } catch (IOException ex) {
             Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, null, ex);
         } 
+    }
+    
+    public static String friendlyJsonTitle(String res){
+        ArrList<String> data = null;
+        if(res.contains("-"))
+            data =  new ArrList<String>(res.split("-"));
+        
+        if(res.contains("_"))
+            data =  new ArrList<String>(res.split("_"));
+        
+        if(data ==null)
+            return "";
+        
+        StringBuilder sb = new StringBuilder();
+        char[] chars;
+        for(String x: data){
+            chars = x.toCharArray();
+            chars[0] = Character.toUpperCase(chars[0]);
+            sb.append(chars);
+            sb.append(" ");
+        }
+        return sb.toString();
     }
     
 }

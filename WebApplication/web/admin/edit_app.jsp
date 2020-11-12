@@ -4,14 +4,23 @@
     Author     : ITSUKA KOTORI
 --%>
 
+<%@page import="pages_.EditAdmin"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    EditAdmin editadmin;
+%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <jsp:include page="<%= main.WebConfig.META_URL%>">
+            <jsp:param name="title" value="Apprearance" />
+        </jsp:include>    
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <jsp:include page="<%= main.WebConfig.ADMIN_HEADER_URL%>" >
+            <jsp:param name="menu_bar" value="Overview" />
+        </jsp:include>    
+        
+        <jsp:include page="<%= main.WebConfig.ADMIN_FOOTER_URL%>" />
     </body>
 </html>

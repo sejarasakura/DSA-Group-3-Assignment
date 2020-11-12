@@ -1,125 +1,126 @@
 {
     "name": "ITSUKA KOTORI",
 	"e-title": "Navigation Bar",
+	"base": "nav",
     "nav": {
         "all_user":[
             {
-                "text": "Home",
-                "url": "#"
+                "t": "Home",
+                "l": "#"
             },
             {
-                "text": "Help",
-                "url": "#"
+                "t": "Help",
+                "l": "#"
             }
         ],
         "driver": [
             {
-                "text": "Fetch Now",
-                "url": "#"
+                "t": "Fetch Now",
+                "l": "#"
             },
             {
-                "text": "Withdraw",
-                "url": "#"
+                "t": "Withdraw",
+                "l": "#"
             },
             {
-                "text": "Cars",
-                "url": "#"
+                "t": "Cars",
+                "l": "#"
             },
             {
-                "text": "License",
-                "url": "#"
+                "t": "License",
+                "l": "#"
             },
             {
-                "text": "Your Reviews",
-                "url": "#"
+                "t": "Your Reviews",
+                "l": "#"
             }
         ],
         "customer": [
             {
-                "text": "Find A Driver",
-                "url": "#"
+                "t": "Find A Driver",
+                "l": "#"
             },
             {
-                "text": "Rent Wallet",
-                "url": "#"
+                "t": "Rent Wallet",
+                "l": "#"
             },
             {
-                "text": "Favourite Drives",
-                "url": "#"
+                "t": "Favourite Drives",
+                "l": "#"
             },
             {
-                "text": "Membership",
-                "url": "#"
+                "t": "Membership",
+                "l": "#"
             },
             {
-                "text": "My Reviews",
-                "url": "#"
+                "t": "My Reviews",
+                "l": "#"
             }
         ],
         "admin": [
             {
-                "text": "Dashboard",
-                "url": "#",
+                "t": "Dashboard",
+                "l": "#",
                 "child": [
                     {
-                        "text": "Monthly Reports",
-                        "url": ""
+                        "t": "Monthly Reports",
+                        "l": ""
                     }
                 ]
             },
             {
-                "text": "Customer",
-                "url": "#"
+                "t": "Customer",
+                "l": "#"
             },
             {
-                "text": "Driver",
-                "url": "#",
+                "t": "Driver",
+                "l": "#",
                 "child": [
                     {
-                        "text": "Cars",
-                        "url": "#"
+                        "t": "Cars",
+                        "l": "#"
                     },
                     {
-                        "text": "License",
-                        "url": "#"
+                        "t": "License",
+                        "l": "#"
                     },
                     {
-                        "text": "Problems",
-                        "url": "#"
+                        "t": "Problems",
+                        "l": "#"
                     }
                 ]
             },
             {
-                "text": "Setting",
-                "url": "#"
+                "t": "Setting",
+                "l": "#"
             }
         ],
         "unauthor_user": [
             {
-                "text": "Login",
-                "url": "#"
+                "t": "Login",
+                "l": "#"
             },
             {
-                "text": "Register",
-                "url": "#"
+                "t": "Register",
+                "l": "#"
             }
         ],
         "author_user": [
             {
-                "text": "My Account",
-                "url": "#",
+                "t": "My Account",
+                "l": "#",
                 "child": [
                     {
-                        "text": "My Accounts Detials",
-                        "url": "#"
+                        "t": "My Accounts Detials",
+                        "l": "#"
                     },
                     {
-                        "text": "Change Password",
-                        "url": "#"
+                        "t": "Change Password",
+                        "l": "#"
                     },
                     {
-                        "text": "Logout",
-                        "url": ""
+                        "t": "Logout",
+                        "l": ""
                     }
                 ]
             }

@@ -132,9 +132,9 @@ public class Header {
         sb.append("<li class=\"dropdown\">");
         sb.append("<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"")
                 .append(main.WebConfig.WEB_URL)
-                .append(data.get("url"))
+                .append(data.get("l"))
                 .append("\">")
-                .append(data.get("text"))
+                .append(data.get("t"))
                 .append(" <span class=\"caret\"></span>")
                 .append("</a>");
         sb.append("<ul class=\"dropdown-menu\">");
@@ -149,8 +149,8 @@ public class Header {
     private String getlist(Map data) {
         return "<li class=\"art-list\"><a href=\""
                 + main.WebConfig.WEB_URL
-                + data.get("url")
-                + "\">" + data.get("text") + "</a></li>";
+                + data.get("l")
+                + "\">" + data.get("t") + "</a></li>";
     }
 
 }

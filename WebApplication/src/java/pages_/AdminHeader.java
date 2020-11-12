@@ -45,7 +45,7 @@ public class AdminHeader {
         sb.append("<div class=\"panel panel-default\" style=\"margin: 0px\">");
         sb.append("<div class=\"panel-heading\">");
         sb.append("<h4 class=\"panel-title\">");
-        sb.append(String.format("<a data-toggle=\"collapse\" href=\"#%s\"><b>%s</b></a>", key, map.get("title")));
+        sb.append(String.format("<a data-toggle=\"collapse\" href=\"#%s\"><b>%s</b></a>", key, map.get("t")));
         sb.append("</h4></div>");
         if (map.get("child") == null) {
             sb.append("</div>");

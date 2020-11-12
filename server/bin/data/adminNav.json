@@ -1,28 +1,29 @@
 {
   "name": "ITSUKA KOTORI",
   "e-title": "Admin Navigation Bar",
+  "base": "admin-nav",
   "admin-nav": {
     "nav-1": {
-      "title": "Apprearance",
-      "href": "",
+      "t": "Appre",
+      "l": "",
       "child": [
         {
           "t": "Navigation Bar",
-          "l": "#"
+          "l": "edit_app.jsp?edit=navigationBar"
         },
         {
           "t": "Footer",
-          "l": "#"
+          "l": "edit_app.jsp?edit=footer"
         },
         {
           "t": "Others",
-          "l": "#"
+          "l": "edit_app.jsp?edit=adminNav"
         }
       ]
     },
     "nav-2": {
-      "title": "Users",
-      "href": "",
+      "t": "Users",
+      "l": "",
       "child": [
         {
           "t": "Admin",
@@ -39,8 +40,8 @@
       ]
     },
     "nav-3": {
-      "title": "Adminsration",
-      "href": "",
+      "t": "Adminsration",
+      "l": "",
       "child": [
         {
           "t": "Renting order",
@@ -57,8 +58,8 @@
       ]
     },
     "nav-4": {
-      "title": "Google Map",
-      "href": "",
+      "t": "Google Map",
+      "l": "",
       "child": [
         {
           "t": "API KEY",
@@ -71,8 +72,8 @@
       ]
     },
     "nav-5": {
-      "title": "Settings",
-      "href": "",
+      "t": "Settings",
+      "l": "",
       "child": [
         {
           "t": "values",

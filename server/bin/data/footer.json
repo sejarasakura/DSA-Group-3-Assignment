@@ -1,6 +1,7 @@
 {
   "name": "ITSUKA KOTORI",
   "e-title": "Footer widget",
+  "base": "footer",
   "footer": {
     "widget-1": [
       {

@@ -6,15 +6,14 @@
 package pages_;
 
 import adtClass.*;
+import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import entityClass.AbstractEntity;
 import entityClass.Customer;
 import entityClass.Driver;
 import entityClass.User;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 

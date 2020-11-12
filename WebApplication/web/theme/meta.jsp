@@ -25,4 +25,5 @@
 <script src="<%= getServletContext().getInitParameter("DomainName")%>/theme/lib/jquery/jquery-3.5.1.min.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>/theme/lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>/theme/lib/datatable/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
 

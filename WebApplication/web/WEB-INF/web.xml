@@ -18,6 +18,10 @@
         <servlet-class>main.DataInit</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeJson</servlet-name>
+        <servlet-class>servelet.ChangeJson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -25,6 +29,10 @@
     <servlet-mapping>
         <servlet-name>DataInit</servlet-name>
         <url-pattern>/DataInit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeJson</servlet-name>
+        <url-pattern>/update-json</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

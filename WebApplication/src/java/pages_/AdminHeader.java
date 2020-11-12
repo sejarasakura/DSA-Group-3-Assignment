@@ -23,6 +23,7 @@ public class AdminHeader {
     public AdminHeader(HttpServletRequest request){
         
     }
+    
     public ArrList<String> get_admin_nav() throws FileNotFoundException {
         ArrList<String> result = new ArrList<String>();
         String x = System.getProperty("user.dir") + "/data/adminNav.json";

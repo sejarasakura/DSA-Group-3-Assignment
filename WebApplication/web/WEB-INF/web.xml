@@ -32,7 +32,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangeJson</servlet-name>
-        <url-pattern>/update-json</url-pattern>
+        <url-pattern>/admin/update-json</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

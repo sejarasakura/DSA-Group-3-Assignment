@@ -32,17 +32,25 @@ public class Footer {
         Gson gson = new Gson();
         Map map = gson.fromJson(reader, Map.class);
         map = (Map)map.get("footer");
+        
+        //Load data of widget 1
         Stack widget = new Stack((Iterable) map.get("widget-1"));
         result.add("<div class=\"col-sm-3\">");
         result.add(get_wiget_3(widget));
         result.add("</div>");
+        
+        //Load data of widget 2
         widget = new Stack((Iterable) map.get("widget-2"));
         result.add("<div class=\"col-sm-3\">");
         result.add(get_wiget_3(widget));
         result.add("</div>");
         result.add("<div class=\"col-sm-6\">");
+        
+        //Load data of widget 3
         widget = new Stack((Iterable) map.get("widget-3"));
         result.add(get_wiget_6(widget));
+        
+        //Load data of widget 4
         widget = new Stack((Iterable) map.get("widget-4"));
         result.add(get_anou(widget));
         result.add("</div>");
@@ -89,6 +97,6 @@ public class Footer {
     private String build_right_html(Map data){
         return String.format("<div class=\"row\"> <div class=\"col-sm-12\"> <%s class=\"pull-right\"><a class=\"f_a_link\" href=\"%s\">%s</a></%s> </div> </div>", 
                 data.get("s"), WebConfig.WEB_URL + data.get("l"), data.get("t"), data.get("s"));
-    } 
+    }
     
 }

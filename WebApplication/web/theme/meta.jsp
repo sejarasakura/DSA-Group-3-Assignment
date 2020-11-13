@@ -26,4 +26,5 @@
 <script src="<%= getServletContext().getInitParameter("DomainName")%>/theme/lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>/theme/lib/datatable/datatables.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 

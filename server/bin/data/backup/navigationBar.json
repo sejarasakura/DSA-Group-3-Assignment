@@ -57,6 +57,44 @@
                 "l": "#"
             }
         ],
+        "admin": [
+            {
+                "t": "Dashboard",
+                "l": "#",
+                "child": [
+                    {
+                        "t": "Monthly Reports",
+                        "l": ""
+                    }
+                ]
+            },
+            {
+                "t": "Customer",
+                "l": "#"
+            },
+            {
+                "t": "Driver",
+                "l": "#",
+                "child": [
+                    {
+                        "t": "Cars",
+                        "l": "#"
+                    },
+                    {
+                        "t": "License",
+                        "l": "#"
+                    },
+                    {
+                        "t": "Problems",
+                        "l": "#"
+                    }
+                ]
+            },
+            {
+                "t": "Setting",
+                "l": "#"
+            }
+        ],
         "unauthor_user": [
             {
                 "t": "Login",

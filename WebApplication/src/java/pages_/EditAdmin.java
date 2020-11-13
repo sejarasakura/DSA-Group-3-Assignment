@@ -107,13 +107,13 @@ public class EditAdmin {
         String title = main.Functions.friendlyJsonTitle(key);
         ArrList datas = new ArrList((Iterable) prop.get("child"));
         StringBuilder sb = new StringBuilder();
-        sb.append("<form>");
-        sb.append("<div class=\"panel panel-default\">")
+        sb.append("<form>")
+                .append("<div class=\"panel panel-default\">")
                 .append("<div class=\"panel-heading\">")
-                .append("<h2>").append(title).append("</h2><br>");
-        sb.append(form_group(base + "." + key, (String) prop.get("t"), (String) prop.get("l")));
-        sb.append("</div>");
-        sb.append("<div class=\"panel-body\">");
+                .append("<h2>").append(title).append("</h2><br>")
+                .append(form_group(base + "." + key, (String) prop.get("t"), (String) prop.get("l")))
+                .append("</div>")
+                .append("<div class=\"panel-body\">");
         int count = 0;
         for (Iterator it = datas.iterator(); it.hasNext();) {
             Map x = (Map) it.next();
@@ -121,22 +121,22 @@ public class EditAdmin {
                     (String) x.get("t"), (String) x.get("l")));
             count++;
         }
-        sb.append("<div class=\"form-group row\">");
-        sb.append("<div class=\"col-sm-12\">");
-        sb.append("<button class=\"btn btn-default form-control\"><i class='fas fa-plus'></i> Add new child</button>");
-        sb.append("</div>");
-        sb.append("</div>");
-        sb.append("<div class=\"form-group row\">");
-        sb.append("<div class=\"col-sm-6\">");
-        sb.append("<a href=\"edit_app.jsp?edit=").append(edit).append("\" class=\"btn btn-danger form-control\">discharge</a>");
-        sb.append("</div>");
-        sb.append("<div class=\"col-sm-6\">");
-        sb.append("<button type=\"button\" class=\"btn btn-warning form-control\">update</button>");
-        sb.append("</div>");
-        sb.append("</div>");
-        sb.append("</div>");
-        sb.append("</div>");
-        sb.append("<form>");
+        sb.append("<div class=\"form-group row\">")
+                .append("<div class=\"col-sm-12\">")
+                .append("<button class=\"btn btn-default form-control\"><i class='fas fa-plus'></i> Add new child</button>")
+                .append("</div>")
+                .append("</div>")
+                .append("<div class=\"form-group row\">")
+                .append("<div class=\"col-sm-6\">")
+                .append("<a href=\"edit_app.jsp?edit=").append(edit).append("\" class=\"btn btn-danger form-control\">discharge</a>")
+                .append("</div>")
+                .append("<div class=\"col-sm-6\">")
+                .append("<button type=\"button\" class=\"btn btn-warning form-control\">update</button>")
+                .append("</div>")
+                .append("</div>")
+                .append("</div>")
+                .append("</div>")
+                .append("<form>");
         return sb.toString();
     }
 

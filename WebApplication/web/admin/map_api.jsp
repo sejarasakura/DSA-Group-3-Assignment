@@ -1,16 +1,10 @@
 <%-- 
-    Document   : edit_app
-    Created on : Nov 12, 2020, 4:33:48 PM
+    Document   : map_api
+    Created on : Nov 14, 2020, 4:50:04 PM
     Author     : ITSUKA KOTORI
 --%>
 
-<%@page import="adtClass.ArrList"%>
-<%@page import="pages_.EditAdmin"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    EditAdmin editadmin = new EditAdmin(request);
-    ArrList<String> view = editadmin.generateHtml();
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,11 +16,6 @@
         <jsp:include page="<%= main.WebConfig.ADMIN_HEADER_URL%>" >
             <jsp:param name="menu_bar" value="Overview" />
         </jsp:include>    
-        <%
-            for (String v : view) {
-                out.write(v);
-            }
-        %>
         <jsp:include page="<%= main.WebConfig.ADMIN_FOOTER_URL%>" />
     </body>
 </html>

@@ -144,6 +144,24 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         System.arraycopy(old, 0, data, 0, index);
 
     }
+    
+    public boolean removeSameElement(){
+        if(index == 0 || index == 1)
+            return true;
+        
+        T[] temp = (T[]) new Object[index];  
+        int j = 0;  
+        for (int i=0; i<index-1; i++){  
+            if (!data[i].equals(data[i+1])){  
+                temp[j++] = data[i];  
+            }  
+         }  
+        temp[j++] = data[index-1];     
+        
+        System.arraycopy(temp, 0, data, 0, j);  
+        
+        return true;
+    }
 
     private void CheckRange(int _index) {
         if (_index < 0 || _index >= index) 
@@ -161,6 +179,10 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
                 return true;
         }
         return false;
+    }
+
+    public boolean isEmpty() {
+        return index <= 0;
     }
     
     private class ListIterator implements Iterator<T> {

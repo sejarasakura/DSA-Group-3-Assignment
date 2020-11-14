@@ -22,6 +22,10 @@
         <servlet-name>ChangeJson</servlet-name>
         <servlet-class>servelet.ChangeJson</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminUpdateElement</servlet-name>
+        <servlet-class>servelet.AdminUpdateElement</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -33,6 +37,10 @@
     <servlet-mapping>
         <servlet-name>ChangeJson</servlet-name>
         <url-pattern>/admin/update-json</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateElement</servlet-name>
+        <url-pattern>/admin/update-ele</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

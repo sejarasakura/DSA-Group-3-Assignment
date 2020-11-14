@@ -76,6 +76,7 @@ public class Functions {
     }
     
     public static String friendlyJsonTitle(String res){
+        
         ArrList<String> data = null;
         if(res.contains("-"))
             data =  new ArrList<String>(res.split("-"));
@@ -83,16 +84,16 @@ public class Functions {
         if(res.contains("_"))
             data =  new ArrList<String>(res.split("_"));
         
-        if(data ==null)
-            return "";
-        
+        if(data ==null){
+            data = new ArrList<String>();
+            data.add(res);
+        }
         StringBuilder sb = new StringBuilder();
         char[] chars;
         for(String x: data){
             chars = x.toCharArray();
             chars[0] = Character.toUpperCase(chars[0]);
-            sb.append(chars);
-            sb.append(" ");
+            sb.append(chars).append(" ");
         }
         return sb.toString();
     }

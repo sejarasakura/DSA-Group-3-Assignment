@@ -58,7 +58,7 @@ public class AdminHeader {
         while (!childQueue.isEmpty()) {
             ref = (Map)childQueue.pop();
             sb.append(String.format("<li class=\"list-group-item\"><a href=\"%s\">%s</a></li>",
-            WebConfig.ADMIN_URL + ref.get("l"), ref.get("t")));
+            ref.get("l"), ref.get("t")));
         }
         sb.append("</ul>");
         sb.append("</div>");

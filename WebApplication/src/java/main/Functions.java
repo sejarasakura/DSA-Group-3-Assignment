@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package main;
-import adtClass.ArrList;
-import adtClass.HashedDictionary;
+import adt.ArrList;
+import adt.HashedDictionary;
 import com.univocity.parsers.csv.CsvWriterSettings;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -4,8 +4,8 @@
     Author     : ITSUKA KOTORI
 --%>
 
-<%@page import="adtClass.ArrList"%>
-<%@page import="pages_.EditAdmin"%>
+<%@page import="adt.ArrList"%>
+<%@page import="pages.EditAdmin"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     EditAdmin editadmin = new EditAdmin(request);

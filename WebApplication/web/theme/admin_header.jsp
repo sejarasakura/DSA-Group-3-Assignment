@@ -4,8 +4,8 @@
     Author     : ITSUKA KOTORI
 --%>
 
-<%@page import="pages_.AdminHeader"%>
-<%@page import="adtClass.ArrList"%>
+<%@page import="pages.AdminHeader"%>
+<%@page import="adt.ArrList"%>
 <%@page import="main.Datas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 

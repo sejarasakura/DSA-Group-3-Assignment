@@ -5,7 +5,7 @@
  */
 package servelet;
 
-import adtClass.ArrList;
+import adt.ArrList;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.File;

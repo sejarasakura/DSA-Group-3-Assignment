@@ -5,8 +5,13 @@
  */
 package main;
 
-import adtClass.*;
-import entityClass.*;
+import entity.Driver;
+import entity.Booking;
+import entity.Car;
+import entity.Customer;
+import adt.HashedDictionary;
+import adt.Queue;
+import adt.ArrList;
 
 /**
  *

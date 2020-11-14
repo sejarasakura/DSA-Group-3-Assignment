@@ -5,8 +5,10 @@
  */
 package entityClass;
 
-import adtClass.ArrList;
-import enumClass.PaymentStatus;
+import entity.AbstractEntity;
+import entity.Withdraw;
+import adt.ArrList;
+import xenum.PaymentStatus;
 import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Level;

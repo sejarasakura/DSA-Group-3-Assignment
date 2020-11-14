@@ -1,7 +1,10 @@
 package main;
 
-import adtClass.ArrList;
-import adtClass.Stack;
+import adt.ArrList;
+import adt.Stack;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.awt.Point;
 import java.lang.reflect.Array;
 
 
@@ -25,18 +28,15 @@ public class JavaApplicationDSA {
         /**
          * Teacher is golden > _ > !!
          */
-        Stack<Integer> i = new Stack<Integer>();
-        i.push(1);
-        i.push(5);
-        i.push(3);
-        i.push(10);
-        i.push(-1);
-        adtClass.ArraySlotList as = new adtClass.ArraySlotList(i);
-        as.sort();
-        ArrList a = new ArrList(as);
-        for(Object x: a){
-            System.out.println(x);
-        }
+        Gson g = new GsonBuilder().setPrettyPrinting().create();
+        Stack<Point> i = new Stack<Point>();
+        i.push(new Point(2, 4));
+        i.push(new Point(7, 1));
+        i.push(new Point(0, 9));
+        i.push(new Point(5, 7));
+        i.push(new Point(12, -4));
+        ArrList a = new ArrList(i);
+        System.out.println(g.toJson(a, ArrList.class));
     }
     
     public static void ShowDirectory(Object args){

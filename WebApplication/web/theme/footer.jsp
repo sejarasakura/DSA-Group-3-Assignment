@@ -3,8 +3,8 @@
     Created on : Nov 7, 2020, 3:47:43 PM
     Author     : ITSUKA KOTORI
 --%>
-<%@page import="pages_.Footer"%>
-<%@page import="adtClass.ArrList"%>
+<%@page import="pages.Footer"%>
+<%@page import="adt.ArrList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 

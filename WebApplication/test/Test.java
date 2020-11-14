@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import adtClass.*;
+import adt.ArrList;
 import com.google.gson.Gson;
 import java.io.*;
 import java.util.*;
@@ -21,10 +21,10 @@ public class Test {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         Integer[] intarr = {0, 4, 2, 6 ,9};
-        adtClass.ArraySlotList<Integer> arrslotlist = new adtClass.ArraySlotList<Integer> (intarr);
-        adtClass.ArrList<Integer> arrlist = new adtClass.ArrList<Integer> (arrslotlist);
-        adtClass.Queue<Integer> qlist = new adtClass.Queue<Integer> (arrslotlist);
-        adtClass.Stack<Integer> slist = new adtClass.Stack<Integer> (arrslotlist);
+        adt.ArraySlotList<Integer> arrslotlist = new adt.ArraySlotList<Integer> (intarr);
+        adt.ArrList<Integer> arrlist = new adt.ArrList<Integer> (arrslotlist);
+        adt.Queue<Integer> qlist = new adt.Queue<Integer> (arrslotlist);
+        adt.Stack<Integer> slist = new adt.Stack<Integer> (arrslotlist);
         System.out.println(arrlist);
         System.out.println(arrslotlist);
         arrslotlist.sort();
@@ -38,7 +38,7 @@ public class Test {
         Gson gson = new Gson();
         Map map = gson.fromJson(jsonString, Map.class);
         Iterable<Object> ig1 = (Iterable<Object>) map.get("employee.salary");
-        adtClass.ArrList<Object> xlist  = new ArrList<Object>(ig1);
+        adt.ArrList<Object> xlist  = new ArrList<Object>(ig1);
         Map m2 = (Map) xlist.get(0);
         System.out.println(m2);
     }

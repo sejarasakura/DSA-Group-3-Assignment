@@ -8,7 +8,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-           
+        <jsp:include page="<%= main.WebConfig.META_URL%>">
+            <jsp:param name="title" value="Home" />
+        </jsp:include>    
     </head>
     <body>
         <jsp:include page="<%= main.WebConfig.HEADER_URL%>" />

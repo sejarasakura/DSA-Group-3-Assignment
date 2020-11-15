@@ -23,3 +23,5 @@ hs_err_pid*
 server/logs/
 server/logs/localhost_access_log.2020-11-11.txt
 /WebApplication/dist/
+WebApplication/src/java/main/WebConfig.java
+

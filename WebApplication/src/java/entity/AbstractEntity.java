@@ -21,8 +21,9 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ITSUKA KOTORI
- * @param <T>
+ * @author Lim Sai Keat
+ * @param <T> Must be extends class to get the name of class to rename the file eg. AbstractEntity.csv
+ * Then entity data must be comparable, and serializable
  */
 public abstract class AbstractEntity<T extends AbstractEntity> implements Comparable, Serializable {
 
@@ -32,7 +33,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     public static final String STORING_DIR = System.getProperty("user.dir") + "\\data";
 
     /**
-     *
+     * Empty constructor 
      */
     public AbstractEntity() {
 
@@ -142,7 +143,9 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
     }
     //</editor-fold>
-    
+    public static boolean addDataToCsv(Iterable<? extends AbstractEntity> datas){
+        return addDataToCsv(new ArrList(datas));
+    }
     
     /**
      * Reading all record form CSV file.
@@ -236,6 +239,10 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
     }
     //</editor-fold>  
+    public static boolean reWriteAllDataToCsv(Iterable<? extends AbstractEntity> datas){
+        return reWriteAllDataToCsv(new ArrList(datas));
+    }
+    
     
     /**
      * Update the listed record
@@ -276,6 +283,10 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     }
 
     //</editor-fold>
+    public static boolean updateDataToCsv(Iterable<? extends AbstractEntity> datas){
+        return updateDataToCsv(new ArrList(datas));
+    }
+    
     
     /**
      * Delete the listed record
@@ -316,6 +327,10 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     }
 
     //</editor-fold>
+    public static boolean deleteDataToCsv(Iterable<? extends AbstractEntity> datas){
+        return deleteDataToCsv(new ArrList(datas));
+    }
+    
     
     /*
     * for large amount

@@ -51,20 +51,35 @@ public abstract class User<T> extends AbstractEntity<User>{
     private String role;
 
     /**
-     * User role
+     * User username
+     * User profile picture will save by the ${username}.png
      */
     @CsvBindByName
     private String username;
 
     /**
-     * User role
+     * User password
      */
     @CsvBindByName
     private String password;
 
+    /**
+     * Constructor 
+     */
     public User() {
     }
 
+    /**
+     * Parameter constructor
+     * @param user_id
+     * @param ic
+     * @param name
+     * @param email
+     * @param role
+     * @param phoneNumber
+     * @param password
+     * @param username
+     */
     public User(String user_id, String ic, String name, String email, String phoneNumber, String role, String username, String password) {
         this.user_id = user_id;
         this.ic = ic;
@@ -75,6 +90,20 @@ public abstract class User<T> extends AbstractEntity<User>{
         this.username = username;
         this.password = password;
     }
+    
+    /**
+     * User login functions that will return user or null for not found
+     * @param data
+     * @return 
+     */
+    public abstract User login(User data);
+    
+    /**
+     * User registration function that success will return user and null for fail
+     * @param data
+     * @return 
+     */
+    public abstract User register(User data);
 
     public String getUsername() {
         return username;
@@ -139,10 +168,6 @@ public abstract class User<T> extends AbstractEntity<User>{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
-    public abstract User login();
-    
-    public abstract User register();
 
     @Override
     public String toString() {

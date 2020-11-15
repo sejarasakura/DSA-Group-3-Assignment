@@ -4,12 +4,11 @@
     Author     : ITSUKA KOTORI
 --%>
 
+<%@page import="java.util.*"%>
+<%@page import="adt.ArrList"%>
+<%@page import="com.google.gson.Gson"%>
 <%@page import="pages.AdminCreateGraph"%>
 <%@page import="cilent.Graph_allocation"%>
-<%@page import="java.util.*"%>
-<%@page import="com.google.gson.Gson"%>
-<%@page import="java.util.Map"%>
-<%@page import="adt.ArrList"%>
 <%@page import="org.apache.commons.text.StringEscapeUtils" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 

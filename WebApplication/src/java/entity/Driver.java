@@ -98,13 +98,14 @@ public class Driver extends User<Driver>{
     }
 
     @Override
-    public User login() {
+    public User login(User data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public User register() {
+    public User register(User data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
 }

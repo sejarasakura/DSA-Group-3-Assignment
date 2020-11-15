@@ -148,12 +148,12 @@ public class Customer extends User <Customer>{
     } 
 
     @Override
-    public User login() {
+    public User login(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public User register() {
+    public User register(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

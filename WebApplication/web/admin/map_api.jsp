@@ -15,7 +15,11 @@
     <body>
         <jsp:include page="<%= main.WebConfig.ADMIN_HEADER_URL%>" >
             <jsp:param name="menu_bar" value="Overview" />
-        </jsp:include>    
+        </jsp:include>   
+        <h1>
+            Google Map API Key
+        </h1>
+        
         <jsp:include page="<%= main.WebConfig.ADMIN_FOOTER_URL%>" />
     </body>
 </html>

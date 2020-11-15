@@ -20,7 +20,7 @@
     </head>
     <body>
         <jsp:include page="<%= main.WebConfig.ADMIN_HEADER_URL%>" >
-            <jsp:param name="menu_bar" value="Overview" />
+            <jsp:param name="menu_bar" value="Edit ${param.edit}" />
         </jsp:include>    
         <%
             for (String v : view) {

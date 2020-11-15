@@ -87,7 +87,16 @@ public class EditAdmin {
                 result.add(displayProperties((Iterable) map.get(m), (String) m));
             }
         });
+        result.add("<script>$(document).ready(function(){");
+        map.keySet().forEach((m) -> {
+            result.add(jquery_generate((String) m));
+        });
+        result.add("});</script>");
         return result;
+    }
+
+    public String jquery_generate(String key) {
+        return "$(\"#p-h-" + key + "\").click(function(){ $(\"#p-b-" + key + "\").toggle(); $(\"#p-f-" + key + "\").toggle(); if($(\"#p-b-" + key + "\").is(\":hidden\")){ $(this).html(\"<span class=\\\"glyphicon glyphicon-plus\\\"></span> show\"); }else{ $(this).html(\"<span class=\\\"glyphicon glyphicon-minus\\\"></span> hide\"); } });";
     }
 
     public String displayProperties(Iterable prop, String key) {
@@ -100,10 +109,17 @@ public class EditAdmin {
                 .append("</div>").append("<div class=\"panel-body\" id=\"p-b-")
                 .append(key).append("\">");
         int count = 0;
+        boolean header = false;
         for (Iterator it = prop.iterator(); it.hasNext();) {
             Map x = (Map) it.next();
             if (x.get("child") == null) {
-                sb.append(display_group((String) x.get("t"), (String) x.get("l")));
+                if (x.get("show") != null) {
+                    sb.append(display_group((String) x.get("t"), (String) x.get("l"), (String) x.get("show")));
+                } else if (x.get("s") != null) {
+                    sb.append(display_group((String) x.get("t"), (String) x.get("l"), (String) x.get("s")));
+                } else {
+                    sb.append(display_group((String) x.get("t"), (String) x.get("l")));
+                }
             } else {
                 ArrList ar = new ArrList((Iterable) x.get("child"));
                 if (ar.isEmpty()) {
@@ -113,7 +129,7 @@ public class EditAdmin {
             }
             count++;
         }
-        sb.append("</div><div class=\"panel-footer\" id=\"p-f-all_user\">")
+        sb.append("</div><div class=\"panel-footer\" id=\"p-f-").append(key).append("\">")
                 .append("<div class=\"form-group row\">")
                 .append("<div class=\"col-sm-12\">")
                 .append("<a href=\"edit_app.jsp?edit=").append(edit)
@@ -123,8 +139,65 @@ public class EditAdmin {
     }
 
     public String editProperties(Iterable prop, String key) {
-        ArrList<String> prag = new ArrList<String>(prop);
-        return "";
+        String title = main.Functions.friendlyJsonTitle(key);
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div class=\"panel panel-default\">")
+                .append("<div class=\"panel-heading\">").append("<div class=\"row\"> <div class=\"col-sm-6\"> ")
+                .append(title).append(" </div> <div class=\"col-sm-6\"> <button type=\"button\" class=\"btn btn-default pull-right\" id=\"p-h-")
+                .append(key).append("\"> <span class=\"glyphicon glyphicon-plus\"></span> show </button> </div> </div>")
+                .append("</div>").append("<div class=\"panel-body\" id=\"p-b-")
+                .append(key).append("\">")
+                .append("<form action=\"/WebApplication/admin/update-ele\" method=\"post\">");
+        int count = 0;
+        String header = "";
+        for (Iterator it = prop.iterator(); it.hasNext();) {
+            Map x = (Map) it.next();
+            if (x.get("child") == null) {
+                if (x.get("show") != null) {
+                    sb.append(form_group_S(base + "." + key + ".child[" + count + "]", (String) x.get("t"), (String) x.get("l"), (String) x.get("show")));
+                } else if (x.get("s") != null) {
+                    sb.append(form_group(base + "." + key + ".child[" + count + "]", (String) x.get("t"), (String) x.get("l"), (String) x.get("s")));
+                } else {
+                    sb.append(form_group(base + "." + key + ".child[" + count + "]", (String) x.get("t"), (String) x.get("l")));
+                }
+            } else {
+                ArrList ar = new ArrList((Iterable) x.get("child"));
+                if (ar.isEmpty()) {
+                    sb.append(display_group((String) x.get("t"), (String) x.get("l")));
+                }
+                sb.append(displayChildProp(x));
+            }
+            count++;
+        }
+        sb.append("<div class=\"form-group row\">")
+                .append(" <input type=\"hidden\" id=\"count\" name=\"count\" value=\"").append(count).append("\">")
+                .append(" <input type=\"hidden\" id=\"edit\" name=\"edit\" value=\"").append(edit).append("\">")
+                .append(" <input type=\"hidden\" id=\"t\" name=\"t\" value=\"").append(t).append("\">")
+                .append("<div class=\"col-sm-6\">")
+                .append("<a href=\"edit_app.jsp?edit=").append(edit).append("\" class=\"btn btn-danger form-control\">cancel</a>")
+                .append("</div>")
+                .append("<div class=\"col-sm-6\">")
+                .append("<button type=\"submit\" class=\"btn btn-warning form-control\">update</button>")
+                .append("</div>")
+                .append("</div>")
+                .append("</div>")
+                .append("</form>")
+                .append("<div class=\"panel-footer\">")
+                .append("<form action=\"/WebApplication/admin/add-new-ele\" method=\"post\">")
+                .append("<div class=\"form-group row\">")
+                .append("<div class=\"col-sm-12\">")
+                .append(" <input type=\"hidden\" id=\"count\" name=\"count\" value=\"").append(count).append("\">")
+                .append(" <input type=\"hidden\" id=\"add\" name=\"add\" value=\"").append(edit).append("\">")
+                .append(" <input type=\"hidden\" id=\"t\" name=\"t\" value=\"").append(t).append("\">")
+                .append(" <input type=\"hidden\" id=\"add-new\" name=\"add-new\" value=\"").append(t).append("\">")
+                .append("<button type=\"button\" data-toggle=\"modal\" data-target=\"#modal2\" class=\"btn btn-default form-control\"><i class='fas fa-plus'></i> Add new child</button>")
+                .append("</div>")
+                .append("</div>")
+                .append("<div class=\"modal fade\" id=\"modal2\" role=\"dialog\"> <div class=\"modal-dialog\"> <!-- Modal content--> <div class=\"modal-content\"> <div class=\"modal-header\"> <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button> <h4 class=\"modal-title\">Add new child</h4> </div> <div class=\"modal-body\"> <div class=\"form-group row\"> <div class=\"col-sm-6\"> <input type=\"text\" class=\"form-control\" id=\"_title\" name=\"_title\" placeholder=\"Title\"> </div> <div class=\"col-sm-6\"> <input type=\"text\" class=\"form-control\" id=\"_url\" name=\"_url\" placeholder=\"URL\"> </div> </div> </div> <div class=\"modal-footer\"> <button type=\"submit\" class=\"btn btn-success\">Add</button> <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button> </div> </div> </div> </div>")
+                .append("</form>")
+                .append("</div>")
+                .append("</div>");
+        return sb.toString();
     }
 
     private String displayChildProp(Map prop) {
@@ -238,8 +311,22 @@ public class EditAdmin {
                 id, title, id, url);
     }
 
+    public String form_group_S(String id, String title, String url, String show) {
+        return String.format("<div class=\"form-group row\"> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.t\" placeholder=\"Shown Title ( Empty to remove )\" value=\"%s\"> </div> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.l\" placeholder=\"To URL\" value=\"%s\"> </div> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.show\" placeholder=\"Show = 1 / Not show = 0\" value=\"%s\"> </div> </div>",
+                id, title, id, url, id, show);
+    }
+
+    public String form_group(String id, String title, String url, String html) {
+        return String.format("<div class=\"form-group row\"> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.t\" placeholder=\"Shown Title ( Empty to remove )\" value=\"%s\"> </div> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.l\" placeholder=\"To URL\" value=\"%s\"> </div> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.s\" placeholder=\"Html tag\" value=\"%s\"> </div> </div>",
+                id, title, id, url, id, html);
+    }
+
     public String display_group(String title, String url) {
         return String.format("<div class=\"form-group row\"> <div class=\"col-sm-6\"> %s </div> <div class=\"col-sm-6\"> %s </div> </div>", title, url);
+    }
+
+    public String display_group(String title, String url, String html) {
+        return String.format("<div class=\"form-group row\"> <div class=\"col-sm-4\"> %s </div> <div class=\"col-sm-4\"> %s </div> <div class=\"col-sm-4\"> %s </div> </div>", title, url, html);
     }
 
 }

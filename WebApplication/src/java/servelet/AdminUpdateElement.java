@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import main.WebConfig;
 
 /**
  *
@@ -84,7 +85,7 @@ public class AdminUpdateElement extends HttpServlet {
             outputStream.write(gson.toJson(map).getBytes());
             outputStream.flush();
         }
-        str.append("http://localhost:8080/WebApplication/admin/edit_app.jsp?edit=").append(edit);
+        str.append(WebConfig.WEB_URL).append("admin/edit_app.jsp?edit=").append(edit);
         response.sendRedirect(str.toString());
     }
 

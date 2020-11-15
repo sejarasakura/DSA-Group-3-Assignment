@@ -27,7 +27,7 @@ public class WebConfig {
     /**
      *  Web Site Admin URL
      */
-    public static String ADMIN_URL = (WEB_URL + "admin/");
+    public static String ADMIN_URL = (WEB_URL + "admin/index.jsp");
 
     /**
      *  Web Site Header URL

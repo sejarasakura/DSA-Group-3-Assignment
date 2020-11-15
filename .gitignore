@@ -22,3 +22,4 @@ hs_err_pid*
 # server log
 server/logs/
 server/logs/localhost_access_log.2020-11-11.txt
+/WebApplication/dist/

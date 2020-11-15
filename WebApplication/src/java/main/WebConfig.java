@@ -17,7 +17,7 @@ public class WebConfig {
     /**
      *  Project directory URL
      */
-    public static String PROJECT_URL = "C:/Users/ITSUKA KOTORI/Documents/GitHub/DSA-Group-3-Assignment/WebApplication/";
+    public static String PROJECT_URL = "C:/Users/User/Documents/GitHub/DSA-Group-3-Assignment/WebApplication/";
     
     /**
      *  Web Site URL

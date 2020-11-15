@@ -13,7 +13,7 @@ import com.univocity.parsers.csv.CsvWriterSettings;
  */
 public class WebConfig {
     
-    //ignore
+
     /**
      *  Project directory URL
      */
@@ -27,7 +27,7 @@ public class WebConfig {
     /**
      *  Web Site Admin URL
      */
-    public static String ADMIN_URL = (WEB_URL + "admin/index.jsp");
+    public static String ADMIN_URL = (WEB_URL + "admin/");
 
     /**
      *  Web Site Header URL

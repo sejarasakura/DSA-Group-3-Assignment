@@ -26,6 +26,10 @@
         <servlet-name>AdminUpdateElement</servlet-name>
         <servlet-class>servelet.AdminUpdateElement</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>example</servlet-name>
+        <servlet-class>servelet.example</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -41,6 +45,10 @@
     <servlet-mapping>
         <servlet-name>AdminUpdateElement</servlet-name>
         <url-pattern>/admin/update-ele</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>example</servlet-name>
+        <url-pattern>/example</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

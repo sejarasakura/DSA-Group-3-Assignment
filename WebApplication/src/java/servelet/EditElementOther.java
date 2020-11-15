@@ -5,8 +5,17 @@
  */
 package servelet;
 
+import adt.ArrList;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +41,127 @@ public class EditElementOther extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
+        int count = Integer.parseInt(request.getParameter("count")) + 1, x_count;
+        String edit = request.getParameter("edit");
+        String t = request.getParameter("t");
+        String header = request.getParameter("header");
+        String dir = System.getProperty("user.dir") + "/data/" + edit + ".json";
+        JsonReader reader = new JsonReader(new FileReader(dir));
+        Gson gson = new Gson();
+        Map map = gson.fromJson(reader, Map.class);
+        String base = (String) map.get("base");
+        String front_id = new StringBuilder()
+                .append(base).append(".").append(t).append(".").toString();
+        Map base_map = (Map) map.get(base);
+        ArrList new_detias_map = new ArrList();
+        ArrList child;
+        File jsonFile = new File(dir);
+        StringBuilder str = new StringBuilder();
+        String id, x_title, x_url, x_s, x_c, x_counts;
+
+        switch (header) {
+            case "show":
+                for (int i = 0; i < count; i++) {
+                    id = front_id + "child[" + i + "].";
+                    x_title = request.getParameter(id + "t");
+                    x_url = request.getParameter(id + "l");
+                    x_s = request.getParameter(id + "show");
+                    x_c = request.getParameter(id + "c");
+                    if (!x_title.isEmpty()) {
+                        new_detias_map.add(getDataShow(x_title, x_url, x_s, x_c));
+                    }
+                }
+                break;
+            case "s":
+                for (int i = 0; i < count; i++) {
+                    id = front_id + "child[" + i + "].";
+                    x_title = request.getParameter(id + "t");
+                    x_url = request.getParameter(id + "l");
+                    x_s = request.getParameter(id + "s");
+                    if (!x_title.isEmpty()) {
+                        new_detias_map.add(getDataS(x_title, x_url, x_s));
+                    }
+                }
+                break;
+            default:
+                for (int i = 0; i < count; i++) {
+                    id = front_id + "child[" + i + "].";
+                    x_counts = request.getParameter(id + "count");
+                    if (x_counts == null) {
+                        x_title = request.getParameter(id + "t");
+                        x_url = request.getParameter(id + "l");
+                        if (!x_title.isEmpty()) {
+                            new_detias_map.add(getData(x_title, x_url));
+                        }
+                    } else {
+                        x_count = Integer.parseInt(x_counts) + 1;
+                        child = new ArrList();
+                        for (int j = 0; j < x_count; j++) {
+                            x_title = request.getParameter(id + j + ".t");
+                            x_url = request.getParameter(id + j + ".l");
+                            if (!x_title.isEmpty()) {
+                                child.add(getData(x_title, x_url));
+                            }
+                        }
+                        x_title = request.getParameter(id + "t");
+                        x_url = request.getParameter(id + "l");
+                        if (!x_title.isEmpty()) {
+                            new_detias_map.add(getDataChild(x_title, x_url, child));
+                        }
+                    }
+                }
+                break;
+        }
+        //update syntax
+        base_map.put(t, new_detias_map.toArray());
+        map.put(base, base_map);
+
+        // write new json string into jsonfile1.json file
+        try (OutputStream outputStream = new FileOutputStream(jsonFile)) {
+            outputStream.write(gson.toJson(map).getBytes());
+            outputStream.flush();
+        }
+        str.append("http://localhost:8080/WebApplication/admin/edit_app.jsp?edit=").append(edit);
+        response.sendRedirect(str.toString());
+    }
+
+    private Map getDataS(String title, String url, String s) {
+        Map map = new HashMap();
+        map.put("l", url);
+        map.put("t", title);
+        map.put("s", s);
+        return map;
+    }
+
+    private Map getDataShow(String title, String url, String show, String c) {
+        Map map = new HashMap();
+        map.put("l", url);
+        map.put("t", title);
+        map.put("show", show);
+        map.put("c", c);
+        return map;
+    }
+
+    private Map getData(String title, String url) {
+        Map map = new HashMap();
+        if (title.contains(".child")) {
+            ArrList al = new ArrList();
+            al.add(getData("new", "#"));
+            map.put("child", al.toArray());
+            title = title.split(".child")[0];
+        }
+        map.put("l", url);
+        map.put("t", title);
+        return map;
+    }
+
+    private Map getDataChild(String title, String url, ArrList x) {
+        Map map = new HashMap();
+        map.put("child", x.toArray());
+        map.put("l", url);
+        map.put("t", title);
+        return map;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

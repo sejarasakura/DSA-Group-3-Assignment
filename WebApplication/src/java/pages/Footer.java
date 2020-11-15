@@ -83,8 +83,7 @@ public class Footer {
             x = (Map) data.pop();
             show = Integer.parseInt(x.get("show").toString());
             if(show == 1)
-                sb.append(String.format("<a href=\"%s\" class=\"fa %s pull-right fa-master\"></a>", 
-                    WebConfig.WEB_URL + x.get("l"), x.get("c")));
+                sb.append(String.format("<a href=\"%s\" class=\"fa %s pull-right fa-master\"></a>",x.get("l"), x.get("c")));
         }
         sb.append("</div>");
         sb.append("</div>");

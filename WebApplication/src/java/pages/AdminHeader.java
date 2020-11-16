@@ -6,7 +6,7 @@
 package pages;
 
 import adt.ArrList;
-import adt.Stack;
+import adt.XStack;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.FileNotFoundException;
@@ -32,7 +32,7 @@ public class AdminHeader {
         Gson gson = new Gson();
         Map map = gson.fromJson(reader, Map.class);
         map = (Map) map.get("admin-nav");
-        Stack data = new Stack(map.keySet().iterator());
+        XStack data = new XStack(map.keySet().iterator());
         String key;
         while (!data.isEmpty()) {
             key = (String) data.pop();
@@ -52,7 +52,7 @@ public class AdminHeader {
             sb.append("</div>");
             return sb.toString();
         }
-        Stack childQueue = new Stack((Iterable) map.get("child"));
+        XStack childQueue = new XStack((Iterable) map.get("child"));
         sb.append(String.format("<div id=\"%s\" class=\"panel-collapse collapse\" style=\"padding-left: 10px\">", key));
         sb.append("<ul class=\"list-group\">");
         Map ref;

@@ -14,7 +14,7 @@ import adt.node.TableEntry;
  * @param <K> Key 
  * @param <V> Value
  */
-public class HashedDictionary<K,V> implements InterfaceHashDictionary<K,V>, Cloneable, java.io.Serializable{
+public class XHashedDictionary<K,V> implements InterfaceHashDictionary<K,V>, Cloneable, java.io.Serializable{
 
 
     private TableEntry<K, V>[] hashTable;
@@ -26,11 +26,11 @@ public class HashedDictionary<K,V> implements InterfaceHashDictionary<K,V>, Clon
     private static final int DEFAULT_SIZE = 101; 
 
 
-    public HashedDictionary() {
+    public XHashedDictionary() {
       this(DEFAULT_SIZE);
     }
 
-    public HashedDictionary(int tableSize) {
+    public XHashedDictionary(int tableSize) {
       hashTable = new TableEntry[tableSize];
       numberOfEntries = 0;
     }

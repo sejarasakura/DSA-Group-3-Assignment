@@ -5,11 +5,14 @@
  */
 package adt;
 
+import adt.interfaces.InterfaceLinkedList;
+import java.util.Iterator;
+
 /**
  *
  * @author ITSUKA KOTORI
- * @param <T>
  */
-public class CircularList<T> {
+public class XLinkedList<T> implements java.io.Serializable{
+
     
 }

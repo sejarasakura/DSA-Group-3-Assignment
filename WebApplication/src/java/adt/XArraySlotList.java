@@ -17,29 +17,29 @@ import adt.interfaces.InterfaceSlotingElements;
  * @param <T>
  * 
  */
-public class ArraySlotList <T extends Comparable<T>> implements InterfaceSlotingElements <T>, InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable{
+public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotingElements <T>, InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable{
 
     final private static int INITIAL_CAPACITY = 0;
     protected T[] data;
     protected int index = -1;
     
-    public ArraySlotList() {
+    public XArraySlotList() {
         this((T[])new Comparable[INITIAL_CAPACITY]);
     }
 
-    public ArraySlotList(T[] array) {
+    public XArraySlotList(T[] array) {
         this.data = array;
         this.index = array.length;
     }
     
-    public ArraySlotList(Iterator<T> arrList) {
+    public XArraySlotList(Iterator<T> arrList) {
         this();
         while(arrList.hasNext()){
             this.add(arrList.next());
         }
     }
     
-    public ArraySlotList(Iterable<T> arrList) {
+    public XArraySlotList(Iterable<T> arrList) {
         this(arrList.iterator());
     }
     
@@ -221,7 +221,7 @@ public class ArraySlotList <T extends Comparable<T>> implements InterfaceSloting
     @Override
     public void sort(){
         this.sort(data, 0, this.index - 1);
-        Stack s = new Stack(this);
+        XStack s = new XStack(this);
         int i = this.index;
         while(!s.isEmpty()){
             i--;

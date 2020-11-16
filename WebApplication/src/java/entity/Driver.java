@@ -5,7 +5,7 @@
  */
 package entity;
 
-import adt.Queue;
+import adt.XQueue;
 import adt.ArrList;
 import com.opencsv.bean.CsvBindByName;
 

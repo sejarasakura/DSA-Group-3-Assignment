@@ -6,7 +6,7 @@
 package pages;
 
 import adt.ArrList;
-import adt.Stack;
+import adt.XStack;
 import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -71,7 +71,7 @@ public class Header {
         map = (Map) map.get("nav");
         boolean author_user = true;
         // all user
-        Stack all_user = new Stack((Iterable) map.get("all_user"));
+        XStack all_user = new XStack((Iterable) map.get("all_user"));
         while (!all_user.isEmpty()) {
             result.add(build_html((Map) all_user.pop()));
         }
@@ -84,20 +84,20 @@ public class Header {
 
             switch (role) {
                 case "A":
-                    all_user = new Stack((Iterable) map.get("admin"));
+                    all_user = new XStack((Iterable) map.get("admin"));
                     while (!all_user.isEmpty()) {
                         result.add(build_html((Map) all_user.pop()));
                     }
                     break;
                 // all authorise end
                 case "C":
-                    all_user = new Stack((Iterable) map.get("customer"));
+                    all_user = new XStack((Iterable) map.get("customer"));
                     while (!all_user.isEmpty()) {
                         result.add(build_html((Map) all_user.pop()));
                     }
                     break;
                 case "D":
-                    all_user = new Stack((Iterable) map.get("driver"));
+                    all_user = new XStack((Iterable) map.get("driver"));
                     while (!all_user.isEmpty()) {
                         result.add(build_html((Map) all_user.pop()));
                     }
@@ -110,12 +110,12 @@ public class Header {
             author_user = false;
         }
         if (author_user) {
-            all_user = new Stack((Iterable) map.get("author_user"));
+            all_user = new XStack((Iterable) map.get("author_user"));
             while (!all_user.isEmpty()) {
                 result.add(build_html((Map) all_user.pop()));
             }
         } else {
-            all_user = new Stack((Iterable) map.get("unauthor_user"));
+            all_user = new XStack((Iterable) map.get("unauthor_user"));
             while (!all_user.isEmpty()) {
                 result.add(build_html((Map) all_user.pop()));
             }
@@ -128,7 +128,7 @@ public class Header {
             return getlist(data);
         }
 
-        Stack childQueue = new Stack((Iterable) data.get("child"));
+        XStack childQueue = new XStack((Iterable) data.get("child"));
         StringBuilder sb = new StringBuilder();
         sb.append("<li class=\"dropdown\">");
         sb.append("<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"")

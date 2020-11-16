@@ -6,7 +6,7 @@
 package pages;
 
 import adt.ArrList;
-import adt.Stack;
+import adt.XStack;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.FileNotFoundException;
@@ -34,30 +34,30 @@ public class Footer {
         map = (Map)map.get("footer");
         
         //Load data of widget 1
-        Stack widget = new Stack((Iterable) map.get("widget-1"));
+        XStack widget = new XStack((Iterable) map.get("widget-1"));
         result.add("<div class=\"col-sm-3\">");
         result.add(get_wiget_3(widget));
         result.add("</div>");
         
         //Load data of widget 2
-        widget = new Stack((Iterable) map.get("widget-2"));
+        widget = new XStack((Iterable) map.get("widget-2"));
         result.add("<div class=\"col-sm-3\">");
         result.add(get_wiget_3(widget));
         result.add("</div>");
         result.add("<div class=\"col-sm-6\">");
         
         //Load data of widget 3
-        widget = new Stack((Iterable) map.get("widget-3"));
+        widget = new XStack((Iterable) map.get("widget-3"));
         result.add(get_wiget_6(widget));
         
         //Load data of widget 4
-        widget = new Stack((Iterable) map.get("widget-4"));
+        widget = new XStack((Iterable) map.get("widget-4"));
         result.add(get_anou(widget));
         result.add("</div>");
         return result;
     }
     
-    public String get_wiget_3(Stack data){
+    public String get_wiget_3(XStack data){
         String result = new String();
         while (!data.isEmpty()) {
             result += build_html((Map) data.pop());
@@ -65,7 +65,7 @@ public class Footer {
         return result;
     }
     
-    public String get_wiget_6(Stack data){
+    public String get_wiget_6(XStack data){
         String result = new String();
         while (!data.isEmpty()) {
             result += build_right_html((Map) data.pop());
@@ -73,7 +73,7 @@ public class Footer {
         return result;
     }
     
-    public String get_anou(Stack data){
+    public String get_anou(XStack data){
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"row\">");
         sb.append("<div class=\"col-sm-12\">");

@@ -9,8 +9,8 @@ import entity.Driver;
 import entity.Booking;
 import entity.Car;
 import entity.Customer;
-import adt.HashedDictionary;
-import adt.Queue;
+import adt.XHashedDictionary;
+import adt.XQueue;
 import adt.ArrList;
 
 /**
@@ -25,7 +25,7 @@ public class Datas {
      * @author ITSUKA KOTORI
      * web page setting in the dictionary
      */
-    public static HashedDictionary<String, Object> settings;
+    public static XHashedDictionary<String, Object> settings;
     
     /**
      *
@@ -53,7 +53,7 @@ public class Datas {
      * @author ITSUKA KOTORI 
      * all the customer
      */
-    public static Queue<Booking> currentBooking;
+    public static XQueue<Booking> currentBooking;
     
     /**
      *

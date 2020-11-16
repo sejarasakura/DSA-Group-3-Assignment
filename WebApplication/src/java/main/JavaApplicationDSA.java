@@ -1,7 +1,7 @@
 package main;
 
 import adt.ArrList;
-import adt.Stack;
+import adt.XStack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.awt.Point;
@@ -29,7 +29,7 @@ public class JavaApplicationDSA {
          * Teacher is golden > _ > !!
          */
         Gson g = new GsonBuilder().setPrettyPrinting().create();
-        Stack<Point> i = new Stack<Point>();
+        XStack<Point> i = new XStack<Point>();
         i.push(new Point(2, 4));
         i.push(new Point(7, 1));
         i.push(new Point(0, 9));

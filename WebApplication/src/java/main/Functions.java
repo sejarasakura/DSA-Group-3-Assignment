@@ -5,7 +5,7 @@
  */
 package main;
 import adt.ArrList;
-import adt.HashedDictionary;
+import adt.XHashedDictionary;
 import com.univocity.parsers.csv.CsvWriterSettings;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,7 +30,7 @@ public class Functions {
     }
     
     public static int startUpInitialData(){
-        Datas.settings = new HashedDictionary<String, Object>(256);
+        Datas.settings = new XHashedDictionary<String, Object>(256);
         Datas.settings.add("image/logo", WebConfig.WEB_URL + "img/logo.png");
         Datas.settings.add("image/user", WebConfig.WEB_URL + "img/user.png");
         Datas.settings.add("text/title", "Rentcars.com");

@@ -15,23 +15,23 @@ import java.util.NoSuchElementException;
  * @author ITSUKA KOTORI
  * @param <T>
  */
-public final class Stack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java.io.Serializable{
+public final class XStack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java.io.Serializable{
 
     private int n;          // size of the stack
     private SingleNode<T> first;     // top of stack
 
-    public Stack() {
+    public XStack() {
         first = null;
         n = 0;
     }
 
-    public Stack(Iterable<T> ib) {
+    public XStack(Iterable<T> ib) {
         this(ib.iterator());
     }
     
-    public Stack(Iterator<T> is) {
+    public XStack(Iterator<T> is) {
         this();
-        Stack s = new Stack();
+        XStack s = new XStack();
         while(is.hasNext()){
             try{
                 s.push(is.next());

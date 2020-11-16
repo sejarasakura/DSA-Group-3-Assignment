@@ -15,13 +15,13 @@ import java.util.NoSuchElementException;
  * @author ITSUKA KOTORI
  * @param <T>
  */
-public class Queue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, java.io.Serializable{
+public class XQueue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, java.io.Serializable{
 
     private final DoubleNode<T> head;
     private final DoubleNode<T> tail;
     private int size;
     
-    public Queue() {
+    public XQueue() {
         head = new DoubleNode<T>(null);
         tail = new DoubleNode<T>(null);
         head.next = tail;
@@ -29,13 +29,13 @@ public class Queue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, jav
         size = 0;
     }
     
-    public Queue(Iterable<T> ib) {
+    public XQueue(Iterable<T> ib) {
         this(ib.iterator());
     }
     
-    public Queue(Iterator<T> is) {
+    public XQueue(Iterator<T> is) {
         this();
-        Stack s = new Stack();
+        XStack s = new XStack();
         while(is.hasNext()){
             try{
                 s.push(is.next());

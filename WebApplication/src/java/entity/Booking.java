@@ -19,11 +19,29 @@ public class Booking extends AbstractEntity<Booking> {
     private String booking_id;
     
     @CsvBindByName
-    private Date booking_date;
+    private String booking_description;
+    
+    @CsvBindByName
+    private String booking_type;
     
     @CsvBindByName
     @CsvDate("dd.MM.yyyy.hh.mm.ss")
-    private Date fetch_date;
+    private Date booking_date;
+    
+    @CsvBindByName
+    private String driver_id;
+    
+    @CsvBindByName
+    private String customer_id;
+    
+    @CsvBindByName
+    private String chats_id;
+    
+    @CsvBindByName
+    private String mapping_id;
+    
+    @CsvBindByName
+    private String paymentNumber;
     
     @CsvBindByName(column = "booking_status_code")
     private String bookingStatus;

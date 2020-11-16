@@ -174,4 +174,23 @@ public abstract class User<T> extends AbstractEntity<User>{
         return "User{" + "id=" + user_id + ", ic=" + ic + ", name=" + name + ", email=" + email + ", phoneNumber=" + phoneNumber + '}';
     }
     
+    @Override
+    public boolean isNotNull() {
+        return this.user_id != null;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean id_equals(Object obj) {
+        return this.user_id.equals(((User)obj).user_id);
+    }
+
+    @Override
+    public int compareTo(Object t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

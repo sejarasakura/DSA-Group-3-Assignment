@@ -30,7 +30,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     /**
      * Data storing directory
      */
-    public static final String STORING_DIR = System.getProperty("user.dir") + "\\data";
+    public static final String STORING_DIR = main.WebConfig.PROJECT_URL + "data";
 
     /**
      * Empty constructor 
@@ -86,7 +86,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @return
      */
     public String getStorageFile() {
-        return STORING_DIR + "\\" + this.getClass().getSimpleName() + ".csv";
+        return STORING_DIR + "/" + this.getClass().getSimpleName() + ".csv";
     }
 
     /**
@@ -165,8 +165,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
             FileReader fr = new FileReader(c.getStorageFile());
 
-            entity = new ArrList<AbstractEntity>(
-                    new CsvToBeanBuilder(fr).withType(c.getClass()).build().parse());
+            entity = new ArrList<AbstractEntity>(new CsvToBeanBuilder(fr).withType(c.getClass()).build().parse());
 
             if (show_e) {
                 System.out.println(OutputColor.TEXT_GREEN

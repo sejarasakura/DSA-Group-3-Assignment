@@ -5,7 +5,10 @@
  */
 package main;
 
+import adt.ArrList;
 import com.univocity.parsers.csv.CsvWriterSettings;
+import json.ClassSaving;
+import json.CreateDisplayClassJson;
 
 /**
  *
@@ -63,4 +66,9 @@ public class WebConfig {
      *  GOOGLE Map API Key
      */
     public static String api_key = Functions.getApiKey();
+
+    /**
+     *  Saving detai ,ls 
+     */
+    public final static ArrList<ClassSaving> CLASS_SAVING = new CreateDisplayClassJson().readData(WebConfig.PROJECT_URL + "data/access.json"); 
 }

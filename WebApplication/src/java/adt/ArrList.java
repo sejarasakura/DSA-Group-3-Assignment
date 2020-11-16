@@ -6,7 +6,6 @@
 package adt;
 import adt.interfaces.InterfaceArrayList;
 import entity.AbstractEntity;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;

@@ -16,60 +16,18 @@ import com.opencsv.bean.CsvBindByName;
 public class Driver extends User<Driver>{
     
     /*
-    * Driver car
-    */
-    @CsvBindByName
-    private ArrList<String> car_plate;    
-    
-    /*
     * Driver accepted booking
     */
-    private adt.Queue<Booking> accepted_booking;
+    @CsvBindByName
+    private String driver_license;
     
     public Driver() {
         super();
     }
 
-    public Driver(ArrList<String> car_plate, Queue<Booking> accepted_booking) {
-        super();
-        this.car_plate = car_plate;
-        this.accepted_booking = accepted_booking;
-    }
-
-    public Driver(ArrList<String> car_plate, Queue<Booking> accepted_booking, String user_id, String ic, String name, String email, String phoneNumber, String role, String username, String password) {
-        super(user_id, ic, name, email, phoneNumber, role, username, password);
-        this.car_plate = car_plate;
-        this.accepted_booking = accepted_booking;
-    }
-    
-    
-    public ArrList<Plate> getArrListPlate(){
-        
-        if(car_plate == null)
-            return null;
-        if(car_plate.size() <= 0)
-            return null;
-                    
-        ArrList<Plate> r = new ArrList<Plate>();
-        
-        for(String p : car_plate){
-            r.add(Plate.getPlate(p, " "));
-        }
-        
-        return r;
-    }
-    
-    public Plate getPlate(int x){
-        return Plate.getPlate(car_plate.get(x), " ");
-    }
-    
-    private boolean driver_accept_booking(Booking booking){
-        try{
-            accepted_booking.enqueue(booking);
-            return true;
-        }catch(Exception e){
-            return false;
-        }
+    public Driver(String driver_license, String user_id, String ic, String name, String email, String phoneNumber, String role, String username, String password) {
+        super(user_id, ic, name, email, phoneNumber, "", username, password);
+        this.driver_license = driver_license;
     }
 
     @Override

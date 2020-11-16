@@ -10,7 +10,10 @@ import entity.Withdraw;
 import adt.ArrList;
 import xenum.PaymentStatus;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -27,6 +30,67 @@ import static org.junit.Assert.*;
 public class WithdrawTest {
     
     public WithdrawTest() {
+        Map map = new Map() {
+            @Override
+            public int size() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEmpty() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean containsKey(Object o) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean containsValue(Object o) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Object get(Object o) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Object put(Object k, Object v) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Object remove(Object o) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putAll(Map map) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void clear() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Set keySet() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Collection values() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Set entrySet() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
     }
     
     @BeforeClass
@@ -308,16 +372,8 @@ public class WithdrawTest {
     public void main2() {
 
         // name of generated csv
-        Withdraw x = new Withdraw("WINISBEST", "HAII PEI", 7.88, new Date(), PaymentStatus.Completed.getCode(), "Note");
-        Withdraw x2 = new Withdraw("HAHAAAA", "HAHA GG", 9.99, new Date(), PaymentStatus.Completed.getCode(), "Note");
-        
-        ArrList<Withdraw> employees = new ArrList<>();
-        employees.add(x);
-        employees.add(x2);
-        
-        x.updateThisToCsv();
-
-        AbstractEntity.addDataToCsv(employees);
+        //Withdraw x = new Withdraw("WINISBEST", "HAII PEI", 7.88, new Date(), PaymentStatus.Completed.getCode(), "Note");
+        //Withdraw x2 = new Withdraw("HAHAAAA", "HAHA GG", 9.99, new Date(), PaymentStatus.Completed.getCode(), "Note");
             
     } 
 

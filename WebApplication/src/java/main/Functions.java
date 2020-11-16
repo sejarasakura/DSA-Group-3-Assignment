@@ -13,9 +13,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import json.ClassSaving;
 
 /**
  *
@@ -98,4 +100,11 @@ public class Functions {
         return sb.toString();
     }
     
+    public static ClassSaving getSavingClass(Class cls){
+        for(int i = 0; i < WebConfig.CLASS_SAVING.size(); i++){
+            if(cls.getName().equals(WebConfig.CLASS_SAVING.get(i).getClassname()))
+                return WebConfig.CLASS_SAVING.get(i);
+        }
+        return null;
+    }
 }

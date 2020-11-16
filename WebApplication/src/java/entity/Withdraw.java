@@ -67,6 +67,12 @@ public class Withdraw extends AbstractEntity<Withdraw> {
      * note
      */
     @CsvBindByName
+    private String driver_id;
+
+    /**
+     * note
+     */
+    @CsvBindByName
     private String note;
 
     public Withdraw() {
@@ -75,16 +81,7 @@ public class Withdraw extends AbstractEntity<Withdraw> {
     public Withdraw(String withdraw_id) {
         this.withdraw_id = withdraw_id;
     }
-
-    public Withdraw(String withdraw_id, String user_id, double amout, Date date, int status, String note) {
-        this.withdraw_id = withdraw_id;
-        this.user_id = user_id;
-        this.amout = amout;
-        this.date = date;
-        this.status = status;
-        this.note = note;
-    }
-
+    
     public String getWithdraw_id() {
         return withdraw_id;
     }
@@ -127,6 +124,14 @@ public class Withdraw extends AbstractEntity<Withdraw> {
 
     public String getNote() {
         return note;
+    }
+
+    public String getDriver_id() {
+        return driver_id;
+    }
+
+    public void setDriver_id(String driver_id) {
+        this.driver_id = driver_id;
     }
 
     public void setNote(String note) {

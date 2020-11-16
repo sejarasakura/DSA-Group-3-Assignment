@@ -16,24 +16,13 @@ import java.util.Date;
 public class Taxi extends Car{
     
     @CsvBindByName
+    private String taxiId;
+    
+    @CsvBindByName
     private String taxiLicense;
     
     @CsvBindByName
     private String taxiComapany;
-
-    public Taxi() {
-    }
-    
-    public Taxi(String taxiLicense, String taxiComapany) {
-        this.taxiLicense = taxiLicense;
-        this.taxiComapany = taxiComapany;
-    }
-
-    public Taxi(String taxiLicense, String taxiComapany, String plate_id, String license, Date regDate, String carType, String driver) {
-        super(plate_id, license, regDate, carType, driver);
-        this.taxiLicense = taxiLicense;
-        this.taxiComapany = taxiComapany;
-    }
 
     public String getTaxiLicense() {
         return taxiLicense;
@@ -51,5 +40,12 @@ public class Taxi extends Car{
         this.taxiComapany = taxiComapany;
     }
 
+    public String getTaxiId() {
+        return taxiId;
+    }
+
+    public void setTaxiId(String taxiId) {
+        this.taxiId = taxiId;
+    }
     
 }

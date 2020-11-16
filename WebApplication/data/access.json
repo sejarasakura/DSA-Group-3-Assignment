@@ -1,0 +1,641 @@
+{
+  "data": [
+    {
+      "classname": "entity.Chat",
+      "extension": ".csv",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "chat_details_id",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "java.lang.String",
+            "name": "message",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.util.Date",
+            "name": "send_date",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "boolean",
+            "name": "read",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 4
+      }
+    },
+    {
+      "classname": "entity.Chats",
+      "extension": ".csv",
+      "add": true,
+      "delete": false,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "chats_id",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "adt.ArrList",
+            "name": "chats_details_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 2
+      }
+    },
+    {
+      "classname": "entity.Mapping",
+      "extension": ".csv",
+      "add": true,
+      "delete": false,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "map_id",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "java.lang.String",
+            "name": "source_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "destination_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.util.Date",
+            "name": "fetch_date",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 4
+      }
+    },
+    {
+      "classname": "entity.Booking",
+      "extension": ".csv",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "booking_id",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "java.lang.String",
+            "name": "booking_description",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "booking_type",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.util.Date",
+            "name": "booking_date",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "driver_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "customer_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "chats_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "mapping_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "paymentNumber",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "bookingStatus",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 10
+      }
+    },
+    {
+      "classname": "entity.Payment",
+      "extension": ".csv",
+      "add": true,
+      "delete": false,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "payment_id",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "int",
+            "name": "payment_status",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.util.Date",
+            "name": "payment_date",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.util.Date",
+            "name": "payment_due_date",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "double",
+            "name": "payment_amount",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 5
+      }
+    },
+    {
+      "classname": "entity.Review",
+      "extension": ".csv",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "driverUserName",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "java.lang.String",
+            "name": "customerUserName",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "paymentNumber",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "adt.ArrList",
+            "name": "comments",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "int",
+            "name": "driverRating",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.util.Date",
+            "name": "reviewDate",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 6
+      }
+    },
+    {
+      "classname": "entity.Customer",
+      "extension": ".csv",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "current_booking_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "memberType_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "user_id",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "java.lang.String",
+            "name": "ic",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "name",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "email",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "phoneNumber",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "role",
+            "display": false,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "username",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "password",
+            "display": false,
+            "update": false,
+            "auto_inc": false
+          }
+        ],
+        "index": 10
+      }
+    },
+    {
+      "classname": "entity.Driver",
+      "extension": ".csv",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "driver_license",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "user_id",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "java.lang.String",
+            "name": "ic",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "name",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "email",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "phoneNumber",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "role",
+            "display": true,
+            "update": false,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "username",
+            "display": true,
+            "update": false,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "password",
+            "display": false,
+            "update": false,
+            "auto_inc": false
+          }
+        ],
+        "index": 9
+      }
+    },
+    {
+      "classname": "entity.Withdraw",
+      "extension": ".csv",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "withdraw_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "user_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "double",
+            "name": "amout",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.util.Date",
+            "name": "date",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "int",
+            "name": "status",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "driver_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "note",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 7
+      }
+    },
+    {
+      "classname": "entity.Plate",
+      "extension": ".csv",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "plate_id",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "java.lang.String",
+            "name": "plateAlpha",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "plateNumber",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 3
+      }
+    },
+    {
+      "classname": "entity.Car",
+      "extension": ".csv",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "driver_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "plate_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "license",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.util.Date",
+            "name": "regDate",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "carType",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 4
+      }
+    },
+    {
+      "classname": "entity.Taxi",
+      "extension": ".csv",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "taxiId",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "java.lang.String",
+            "name": "taxiLicense",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "taxiComapany",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "plate_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "license",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.util.Date",
+            "name": "regDate",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "carType",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 7
+      }
+    }
+  ],
+  "index": 12
+}

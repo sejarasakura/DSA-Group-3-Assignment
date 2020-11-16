@@ -44,7 +44,7 @@ public class Car extends AbstractEntity<Car>{
     /*
     * To calculate the year using the car?
     */
-    @CsvRecurse
+    @CsvBindByName
     private String driver_id;
     
     public Car() {

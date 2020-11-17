@@ -105,7 +105,8 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         }
 
         /* read data from file */
-        ArrList<AbstractEntity> data = new ArrList(AbstractEntity.privateReadDataFormCsv(datas.get(0), false));
+        Object obj = AbstractEntity.privateReadDataFormCsv(datas.get(0), false);
+        ArrList<AbstractEntity> data = (obj == null)?new ArrList():new ArrList((Iterator)obj);
 
         boolean depucate_record, all_d_r = true;
         /* add new data to array list */
@@ -177,7 +178,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
             return entity.iterator();
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(AbstractEntity.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
 
         if (show_e) {
@@ -258,7 +259,8 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         }
 
         /* read data from file */
-        ArrList<AbstractEntity> allrecord = new ArrList(AbstractEntity.privateReadDataFormCsv(datas.get(0), false));
+        Object obj = AbstractEntity.privateReadDataFormCsv(datas.get(0), false);
+        ArrList<AbstractEntity> allrecord = obj == null?new ArrList():new ArrList((Iterator)obj);
         boolean updated, allUpdate = true;
         for (AbstractEntity data : datas) {
             updated = false;
@@ -302,7 +304,8 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         }
 
         /* read data from file */
-        ArrList<AbstractEntity> allrecord = new ArrList(AbstractEntity.privateReadDataFormCsv(datas.get(0), false));
+        Object obj = AbstractEntity.privateReadDataFormCsv(datas.get(0), false);
+        ArrList<AbstractEntity> allrecord = obj == null?new ArrList():new ArrList((Iterator)obj);
         boolean deleted, alldelete = true;
         for (AbstractEntity data : datas) {
             deleted = false;

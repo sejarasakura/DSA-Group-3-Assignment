@@ -32,7 +32,7 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     
     public ArrList(T[] arr){
         index = arr.length;
-        data = (T[]) arr;
+        data = arr;
     }
     
     public ArrList(Iterable<T> ib){

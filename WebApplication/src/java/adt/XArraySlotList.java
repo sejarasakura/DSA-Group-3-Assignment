@@ -97,7 +97,7 @@ public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotin
             data[i] = data[i + 1]; 
         }
         index--;
-        return (T)x;
+        return x;
     }
 
     @Override
@@ -175,7 +175,7 @@ public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotin
 
     }
     
-    private int partition(T arr[], int low, int high) 
+    private int partition(T[] arr, int low, int high)
     { 
         T pivot = arr[high];  
         int i = (low-1); // index of smaller element 
@@ -203,7 +203,7 @@ public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotin
         return i+1; 
     } 
   
-    private void sort(T arr[], int low, int high) 
+    private void sort(T[] arr, int low, int high)
     { 
         if (low < high) 
         { 

@@ -4,10 +4,10 @@
     Author     : ITSUKA KOTORI
 --%>
 
-<%@page import="pages.AdminHeader"%>
-<%@page import="adt.ArrList"%>
-<%@page import="main.Datas"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="pages.AdminHeader" %>
+<%@page import="adt.ArrList" %>
+<%@page import="main.Datas" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <!-- Sidebar -->
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:200px">
@@ -18,15 +18,16 @@
     </center>
     <%ArrList<String> lists = new AdminHeader(request).get_admin_nav();%>
     <% for (String list : lists) {
-            out.write(list);
-       }%>
+        out.write(list);
+    }%>
 </div>
 
 <!-- Page Content -->
 <div style="margin-left:200px">
     <nav class="navbar navbar-default">
         <div class="w3-container ">
-            <h1><%= main.Functions.getWebpageTitle(request, "menu_bar")%></h1>
+            <h1><%= main.Functions.getWebpageTitle(request, "menu_bar")%>
+            </h1>
         </div>
     </nav>
 

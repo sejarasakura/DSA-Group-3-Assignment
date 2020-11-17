@@ -52,7 +52,7 @@ public enum ErrorDetails  implements AbstractEnum{
      * Error Description
      */
     private final String decription;
-    private ErrorDetails(int code, String name, String des){
+    ErrorDetails(int code, String name, String des){
         this.code = code;
         this.name = name;
         this.decription = des;

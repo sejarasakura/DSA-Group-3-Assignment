@@ -29,7 +29,7 @@ import main.WebConfig;
  */
 public class CreateDisplayClassJson {
 
-    private ArrList<Class> class_s = new ArrList<Class>();
+    private final ArrList<Class> class_s = new ArrList<Class>();
 
     /**
      * @param args the command line arguments

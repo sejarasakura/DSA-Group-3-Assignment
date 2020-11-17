@@ -44,7 +44,7 @@ public enum MemberShip  implements AbstractEnum{
      * MemberShip Values
      */
     private final static MemberShip[] vs = MemberShip.values();
-    private MemberShip(String code, int seq_code, String name, String description, double discount) {
+    MemberShip(String code, int seq_code, String name, String description, double discount) {
         this.code = code;
         this.seq_code = seq_code;
         this.name = name;

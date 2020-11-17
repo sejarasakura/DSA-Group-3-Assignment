@@ -11,6 +11,6 @@ package xenum;
  */
 public interface AbstractEnum {
     
-    public String getStringCode();
+    String getStringCode();
     
 }

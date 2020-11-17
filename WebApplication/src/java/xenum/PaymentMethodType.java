@@ -29,7 +29,7 @@ public enum PaymentMethodType  implements AbstractEnum{
     private final String name;
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Enumerator(PaymentMethodType) constructor">
-    private PaymentMethodType(String code, double charge, String name) {
+    PaymentMethodType(String code, double charge, String name) {
         this.code = code;
         this.charge = charge;
         this.name = name;

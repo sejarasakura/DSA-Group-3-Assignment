@@ -26,13 +26,13 @@ import json.FeildAccessbility;
  */
 public class EditEntity {
 
-    private StringBuilder stringBuilder;
-    private ClassSaving classSaving;
+    private final StringBuilder stringBuilder;
+    private final ClassSaving classSaving;
     private ArrList<AbstractEntity> datas;
-    private ArrList<Method> feilds = new ArrList<Method>();
+    private final ArrList<Method> feilds = new ArrList<Method>();
     private int j;
     
-    public static void main(String args[]){
+    public static void main(String[] args){
         EditEntity ee = getNewEditEntity("Customer");
         System.out.print(ee.getHtml());
     }

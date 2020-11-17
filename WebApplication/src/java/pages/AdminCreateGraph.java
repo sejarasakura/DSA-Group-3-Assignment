@@ -33,7 +33,7 @@ public class AdminCreateGraph {
             list.add(map);
         }
 
-        return (String) gsonObj.toJson(list.toArray());
+        return gsonObj.toJson(list.toArray());
     }
     
     public String getSampleData2(){
@@ -55,6 +55,6 @@ public class AdminCreateGraph {
         list2.add(new Graph_allocation(120, 49));
         list2.add(new Graph_allocation(130, 41));
         
-        return (String) gsonObj2.toJson(list2.toArray());
+        return gsonObj2.toJson(list2.toArray());
     }
 }

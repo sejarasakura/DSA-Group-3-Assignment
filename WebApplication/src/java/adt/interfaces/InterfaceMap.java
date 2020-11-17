@@ -19,27 +19,27 @@ public interface InterfaceMap<K, V> extends Map<K, V> {
      * @return the number of key-value mappings in this map
      */
     @Override
-    public int size();
+    int size();
 
     /**
      * @return ture if this map contains no key-value mappings
      */
     @Override
-    public boolean isEmpty();
+    boolean isEmpty();
 
     /**
      * @param key key whose presence in this map is to be tested
      * @return true if this map contains a mapping for the specified key
      */
     @Override
-    public boolean containsKey(Object key);
+    boolean containsKey(Object key);
 
     /**
      * @param value value whose presence in this map is to be tested
      * @return true if this map maps one or more keys to the specified value
      */
     @Override
-    public boolean containsValue(Object value);
+    boolean containsValue(Object value);
 
     /**
      * @param key the key whose associated value is to be returned
@@ -47,7 +47,7 @@ public interface InterfaceMap<K, V> extends Map<K, V> {
      * if this map contains no mapping for the key
      */
     @Override
-    public V get(Object key);
+    V get(Object key);
 
     /**
      * @param key key with which the specified value is to be associated
@@ -55,7 +55,7 @@ public interface InterfaceMap<K, V> extends Map<K, V> {
      * @return
      */
     @Override
-    public V put(K key, V value);
+    V put(K key, V value);
 
     /**
      * @param key key whose mapping is to be removed from the map
@@ -63,37 +63,37 @@ public interface InterfaceMap<K, V> extends Map<K, V> {
      * null if there was no mapping for key.
      */
     @Override
-    public V remove(Object key);
+    V remove(Object key);
 
     /**
      * @param m mappings to be stored in this map
      */
-    public void putAll(InterfaceMap<? extends K, ? extends V> m);
+    void putAll(InterfaceMap<? extends K, ? extends V> m);
 
     /**
      * Removes all of the mappings from this map (optional operation). The map
      * will be empty after this call returns.
      */
     @Override
-    public void clear();
+    void clear();
 
     /**
      * @return a set view of the keys contained in this map
      */
     @Override
-    public Set<K> keySet();
+    Set<K> keySet();
 
     /**
      * @return a collection view of the values contained in this map
      */
     @Override
-    public Collection<V> values();
+    Collection<V> values();
 
     /**
      * @return a set view of the mappings contained in this map
      */
     @Override
-    public Set<Map.Entry<K, V>> entrySet();
+    Set<Map.Entry<K, V>> entrySet();
 
     /**
      * A map entry (key-value pair).
@@ -152,7 +152,7 @@ public interface InterfaceMap<K, V> extends Map<K, V> {
      * @return <tt>true</tt> if the specified object is equal to this map
      */
     @Override
-    public boolean equals(Object o);
+    boolean equals(Object o);
 
     /**
      * Returns the hash code value for this map.
@@ -160,5 +160,5 @@ public interface InterfaceMap<K, V> extends Map<K, V> {
      * @return
      */
     @Override
-    public int hashCode();
+    int hashCode();
 }

@@ -46,7 +46,7 @@ public enum CarType  implements AbstractEnum{
     private final float base_fair_price, minimum_price, price_per_km, price_per_min;
     
     private final static CarType[] vs = CarType.values();
-    private CarType(String code, String name, int seat_number, float base_fair_price, float min_price, float price_per_km, float price_per_min, String desc) {
+    CarType(String code, String name, int seat_number, float base_fair_price, float min_price, float price_per_km, float price_per_min, String desc) {
         this.code = code;
         this.name = name;
         this.seat_number = seat_number;

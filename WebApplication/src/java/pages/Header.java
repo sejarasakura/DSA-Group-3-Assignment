@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 public class Header {
 
     private User user = null;
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     public Header(HttpServletRequest request) {
         Cookie[] cs = request.getCookies();

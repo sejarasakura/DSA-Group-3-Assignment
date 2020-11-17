@@ -94,7 +94,7 @@ public class Chat extends AbstractEntity{
     
     @Override
     public boolean isNotNull() {
-        return this.chat_details_id == null ? false: !this.chat_details_id.isEmpty();
+        return this.chat_details_id != null && !this.chat_details_id.isEmpty();
     }
     
     @Override

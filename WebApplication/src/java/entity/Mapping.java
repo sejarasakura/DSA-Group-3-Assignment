@@ -95,7 +95,7 @@ public class Mapping extends AbstractEntity<Mapping>{
     
     @Override
     public boolean isNotNull() {
-        return this.map_id == null ? false: !this.map_id.isEmpty();
+        return this.map_id != null && !this.map_id.isEmpty();
     }
 
     @Override

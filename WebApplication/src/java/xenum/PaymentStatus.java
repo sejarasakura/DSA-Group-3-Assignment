@@ -30,20 +30,20 @@ public enum PaymentStatus  implements AbstractEnum{
      *  Payment Status code
      */
     @CsvBindByName(column = "payment_status_code")
-    private int code;
+    private final int code;
      
     /**
      *  Payment Description
      */
-    private String disc;
+    private final String disc;
     
     /**
      *  Payment Title
      */        
-    private String title;    
-    private final static PaymentStatus[] vs = PaymentStatus.values();;
+    private final String title;
+    private final static PaymentStatus[] vs = PaymentStatus.values();
 
-    private PaymentStatus(int value, String title, String disc) {
+    PaymentStatus(int value, String title, String disc) {
         this.code = value;
         this.disc = disc;
         this.title = title;

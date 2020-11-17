@@ -23,7 +23,7 @@ public enum BookingStatus implements AbstractEnum{
     EXPIRED("B6", "Booking Expired", "Your booking is expired and not available at now"),
     COMPLETED("B7", "Booking Completed", "Thank for your bookihn and payment");
     
-    private final static BookingStatus[] vs = BookingStatus.values();;
+    private final static BookingStatus[] vs = BookingStatus.values();
 
     /**
      * Booking Status Saving ID
@@ -41,7 +41,7 @@ public enum BookingStatus implements AbstractEnum{
      */
     private final String decription;
     
-    private BookingStatus(String code, String name, String des){
+    BookingStatus(String code, String name, String des){
         this.code = code;
         this.name = name;
         this.decription = des;

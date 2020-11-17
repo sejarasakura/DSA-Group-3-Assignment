@@ -58,7 +58,7 @@ public class Footer {
     }
     
     public String get_wiget_3(XStack data){
-        String result = new String();
+        String result = "";
         while (!data.isEmpty()) {
             result += build_html((Map) data.pop());
         }
@@ -66,7 +66,7 @@ public class Footer {
     }
     
     public String get_wiget_6(XStack data){
-        String result = new String();
+        String result = "";
         while (!data.isEmpty()) {
             result += build_right_html((Map) data.pop());
         }

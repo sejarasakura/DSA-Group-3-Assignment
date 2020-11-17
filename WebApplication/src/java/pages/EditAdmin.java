@@ -23,7 +23,11 @@ import javax.servlet.http.HttpServletRequest;
 public class EditAdmin {
 
     public static String ERROR = "<h1>Error found</h1>";
-    private String json_data = "", e_title, base, edit, t;
+    private String json_data = "";
+    private String e_title;
+    private String base;
+    private final String edit;
+    private final String t;
     private boolean status = false;
     private Map map;
 
@@ -67,7 +71,7 @@ public class EditAdmin {
     public ArrList<String> generateAdminNav() {
         ArrList<String> result = new ArrList<String>();
         map.keySet().forEach((m) -> {
-            if (((String) m).equals(t)) {
+            if (m.equals(t)) {
                 result.add(editProperties((Map) map.get(m), (String) m));
             } else {
                 result.add(displayProperties((Map) map.get(m), (String) m));
@@ -81,7 +85,7 @@ public class EditAdmin {
     public ArrList<String> generateAdminNor() {
         ArrList<String> result = new ArrList<String>();
         map.keySet().forEach((m) -> {
-            if (((String) m).equals(t)) {
+            if (m.equals(t)) {
                 result.add(editProperties((Iterable) map.get(m), (String) m));
             } else {
                 result.add(displayProperties((Iterable) map.get(m), (String) m));

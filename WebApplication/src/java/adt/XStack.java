@@ -11,20 +11,19 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *
  * @author ITSUKA KOTORI
  * @param <T>
  */
 public final class XStack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java.io.Serializable{
-
-    private int n;          // size of the stack
-    private SingleNode<T> first;     // top of stack
-
+    
+    private int n;
+    private SingleNode<T> first;
+    
     public XStack() {
         first = null;
         n = 0;
     }
-
+    
     public XStack(Iterable<T> ib) {
         this(ib.iterator());
     }
@@ -52,7 +51,7 @@ public final class XStack<T> implements InterfaceStack<T>, Iterable<T>, Cloneabl
         first.next = oldfirst;
         n++;
     }
-
+    
     @Override
     public T pop() {
         if (isEmpty()) 
@@ -63,7 +62,7 @@ public final class XStack<T> implements InterfaceStack<T>, Iterable<T>, Cloneabl
         n--;
         return item;
     }
-
+    
     @Override
     public T peek() {
         if (isEmpty()) 
@@ -71,12 +70,12 @@ public final class XStack<T> implements InterfaceStack<T>, Iterable<T>, Cloneabl
         
         return first.item;
     }
-
+    
     @Override
     public int size() {
         return n;
     }
-
+    
     @Override
     public boolean isEmpty() {
         return first == null;
@@ -96,7 +95,7 @@ public final class XStack<T> implements InterfaceStack<T>, Iterable<T>, Cloneabl
     public Iterator<T> iterator() {
         return new StackIterator(); 
     }
-
+    
     // an iterator, doesn't implement remove() since it's optional
     private class StackIterator implements Iterator<T> {
         

@@ -11,7 +11,7 @@ import java.util.*;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim sai keat
  * @param <K> Key
  * @param <V> Value
  */

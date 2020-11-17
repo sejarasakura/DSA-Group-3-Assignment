@@ -12,7 +12,8 @@ import java.util.NoSuchElementException;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lai Hong Wah
+ * @module Chatting, Booking
  * @param <T>
  */
 public class XQueue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, java.io.Serializable{
@@ -116,7 +117,6 @@ public class XQueue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, ja
         return s.toString();
     }
     
-    // an iterator, doesn't implement remove() since it's optional
     private class QueueIterator implements Iterator<T> {
         
         private DoubleNode<T> current = head;

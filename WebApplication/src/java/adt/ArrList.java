@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim sai keat
  * @param <T>
  */
 public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable{
@@ -173,8 +173,8 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
 
     public boolean find_AbstractEntity(AbstractEntity x) {
         
-        for(T d: data){
-            if(((AbstractEntity)d).id_equals(x))
+        for(int i = 0; i < index; i++){
+            if(((AbstractEntity)data[i]).id_equals(x))
                 return true;
         }
         return false;

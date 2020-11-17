@@ -13,7 +13,7 @@ import adt.interfaces.InterfaceSlotingElements;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Chun Phang Chew
  * @param <T>
  * 
  */

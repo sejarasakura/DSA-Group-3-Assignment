@@ -30,9 +30,9 @@ public enum ErrorDetails  implements AbstractEnum{
     E015(15, "Driver has no register car", "The selected driver has not yet register a car, please try agian for another driver thank you."),
     E016(16, "Date format error", "The date format you enter is not correct please try agian !! pleas echeck back the date format"),
     E017(17, "Your id is not found in database", "Please try agian later, please ensure that you had logined to your account before use this function"),
-    E018(18, "", ""),
-    E019(19, "", ""),
-    E020(20, "", ""),
+    E018(18, "The username is registered", "The username is currentlly using by other user"),
+    E019(19, "The password not match", "Password not match error, please reenter agian"),
+    E020(20, "The email is registed", "The email account hasbean registed by other user"),
     E021(21, "", ""),
     E022(22, "", ""),
     E023(23, "", "");
@@ -66,10 +66,10 @@ public enum ErrorDetails  implements AbstractEnum{
     public String getDecription() {
         return decription;
     }
-    public ErrorDetails getValue(String code){
+    public static ErrorDetails getValue(String code){
         return getValue(Integer.valueOf(code));
     }
-    public ErrorDetails getValue(int code){
+    public static ErrorDetails getValue(int code){
         return ErrorDetails.valueOf(String.format("E%03d", code));
     }
     public String getUrl() {

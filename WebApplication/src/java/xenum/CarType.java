@@ -25,6 +25,7 @@ public enum CarType  implements AbstractEnum{
      */
     @CsvBindByName(column = "car_type_code")
     private final String code;
+
     /**
      * Car Type Name
      */
@@ -96,6 +97,7 @@ public enum CarType  implements AbstractEnum{
         }
         return null;
     }
+
      public static CarType getValue(Object quickar_type){
          if(quickar_type instanceof CarType)
             return (CarType)quickar_type;
@@ -105,6 +107,7 @@ public enum CarType  implements AbstractEnum{
             return null;
         }
      }
+
     @Override
     public String getStringCode() {
         return this.getCode();

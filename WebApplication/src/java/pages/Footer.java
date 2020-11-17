@@ -26,13 +26,15 @@ public class Footer {
     }
     
     public ArrList get_footer() throws FileNotFoundException {
-        ArrList<String> result = new ArrList<String>();
-        String x = System.getProperty("user.dir") + "/data/footer.json";
-        JsonReader reader = new JsonReader(new FileReader(x));
-        Gson gson = new Gson();
-        Map map = gson.fromJson(reader, Map.class);
-        map = (Map)map.get("footer");
+        if(main.Datas.settings.getValue("footer") != null)
+            return this.get_old_footer((Map) main.Datas.settings.getValue("footer"));
         
+        return this.get_new_footer();
+    }
+    
+    private ArrList get_old_footer(Map map) throws FileNotFoundException {
+        
+        ArrList<String> result = new ArrList<String>();
         //Load data of widget 1
         XStack widget = new XStack((Iterable) map.get("widget-1"));
         result.add("<div class=\"col-sm-3\">");
@@ -55,6 +57,14 @@ public class Footer {
         result.add(get_anou(widget));
         result.add("</div>");
         return result;
+    }
+    private ArrList get_new_footer() throws FileNotFoundException {
+        String x = System.getProperty("user.dir") + "/data/footer.json";
+        JsonReader reader = new JsonReader(new FileReader(x));
+        Gson gson = new Gson();
+        Map map = gson.fromJson(reader, Map.class);
+        map = (Map)map.get("footer");
+        return get_old_footer(map);
     }
     
     public String get_wiget_3(XStack data){

@@ -25,16 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 public class Header {
 
     private User user = null;
-    private final HttpServletRequest request;
 
     public Header(HttpServletRequest request) {
-        Cookie[] cs = request.getCookies();
-        for (Cookie c : cs) {
-            if (c.getName().equals("user")) {
-                get_user_data(c.getValue());
-            }
-        }
-        this.request = request;
+        this.user = main.Functions.getUserSession(request);
     }
 
     public User getUser() {
@@ -62,13 +55,60 @@ public class Header {
     }
 
     public ArrList get_menu() throws FileNotFoundException {
+        if(main.Datas.settings.getValue("nav") == null)
+            return get_new_menu();
+        else{
+            return get_pre_menu((Map) main.Datas.settings.getValue("nav"));
+        }
+        
+    }
+    
+    private ArrList get_new_menu() throws FileNotFoundException {
 
-        ArrList<String> result = new ArrList<String>();
         String x = System.getProperty("user.dir") + "/data/navigationBar.json";
         JsonReader reader = new JsonReader(new FileReader(x));
         Gson gson = new Gson();
         Map map = gson.fromJson(reader, Map.class);
         map = (Map) map.get("nav");
+        main.Datas.settings.add("nav", map);
+        return get_pre_menu(map);
+        
+    }
+
+    private String build_html(Map data) {
+        if (data.get("child") == null) {
+            return getlist(data);
+        }
+
+        XStack childQueue = new XStack((Iterable) data.get("child"));
+        StringBuilder sb = new StringBuilder();
+        sb.append("<li class=\"dropdown\">");
+        sb.append("<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"")
+                .append(main.WebConfig.WEB_URL)
+                .append(data.get("l"))
+                .append("\">")
+                .append(data.get("t"))
+                .append(" <span class=\"caret\"></span>")
+                .append("</a>");
+        sb.append("<ul class=\"dropdown-menu\">");
+        while (!childQueue.isEmpty()) {
+            sb.append(getlist((Map) childQueue.pop()));
+        }
+        sb.append("</ul>");
+        sb.append("</li>");
+        return sb.toString();
+    }
+
+    private String getlist(Map data) {
+        return "<li class=\"art-list\"><a href=\""
+                + main.WebConfig.WEB_URL
+                + data.get("l")
+                + "\">" + data.get("t") + "</a></li>";
+    }
+
+    private ArrList get_pre_menu(Map map){
+        
+        ArrList<String> result = new ArrList<String>();
         boolean author_user = true;
         // all user
         XStack all_user = new XStack((Iterable) map.get("all_user"));
@@ -122,36 +162,4 @@ public class Header {
         }
         return result;
     }
-
-    private String build_html(Map data) {
-        if (data.get("child") == null) {
-            return getlist(data);
-        }
-
-        XStack childQueue = new XStack((Iterable) data.get("child"));
-        StringBuilder sb = new StringBuilder();
-        sb.append("<li class=\"dropdown\">");
-        sb.append("<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"")
-                .append(main.WebConfig.WEB_URL)
-                .append(data.get("l"))
-                .append("\">")
-                .append(data.get("t"))
-                .append(" <span class=\"caret\"></span>")
-                .append("</a>");
-        sb.append("<ul class=\"dropdown-menu\">");
-        while (!childQueue.isEmpty()) {
-            sb.append(getlist((Map) childQueue.pop()));
-        }
-        sb.append("</ul>");
-        sb.append("</li>");
-        return sb.toString();
-    }
-
-    private String getlist(Map data) {
-        return "<li class=\"art-list\"><a href=\""
-                + main.WebConfig.WEB_URL
-                + data.get("l")
-                + "\">" + data.get("t") + "</a></li>";
-    }
-
 }

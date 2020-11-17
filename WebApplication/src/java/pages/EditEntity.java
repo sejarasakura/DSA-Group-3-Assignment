@@ -26,23 +26,24 @@ import json.FeildAccessbility;
  */
 public class EditEntity {
 
+    private final String enchar = "\u2022";
     private final StringBuilder stringBuilder;
     private final ClassSaving classSaving;
     private ArrList<AbstractEntity> datas;
     private final ArrList<Method> feilds = new ArrList<Method>();
     private int j;
-    
-    public static void main(String[] args){
-        EditEntity ee = getNewEditEntity("Customer");
+
+    public static void main(String[] args) {
+        EditEntity ee = getNewEditEntity("Admin");
         System.out.print(ee.getHtml());
     }
-    
-    public static EditEntity getNewEditEntity(String class_name){
+
+    public static EditEntity getNewEditEntity(String class_name) {
         EditEntity result = null;
-        try {  
-            Class<?> cls = Class.forName("entity."+class_name);
+        try {
+            Class<?> cls = Class.forName("entity." + class_name);
             Constructor c = cls.getConstructor();
-            AbstractEntity x = (AbstractEntity)c.newInstance();
+            AbstractEntity x = (AbstractEntity) c.newInstance();
             result = new EditEntity(x);
         } catch (ClassNotFoundException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
             Logger.getLogger(EditEntity.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,27 +57,49 @@ public class EditEntity {
         if (classSaving == null) {
             return;
         }
-        
+
         stringBuilder.append("<h2 class='mb-3'>").append(refence.getClass()).append("</h2><br><table id=\"dtBasicExample\" class=\"table\" width=\"100%\">");
         generateHeader(refence);
         stringBuilder.append("<tbody>");
-        datas = new ArrList(AbstractEntity.readDataFormCsv(refence));
+        Iterator obj = AbstractEntity.readDataFormCsv(refence);
+        datas = (obj == null) ? new ArrList() : new ArrList(obj);
         for (int i = 0; i < datas.size(); i++) {
             generateBody(datas.get(i));
         }
-        stringBuilder.append("</tbody> </table> <script> $(document).ready(function () { $('#dtBasicExample').DataTable(); $('.dataTables_length').addClass('bs-select'); }); </script>");
+        stringBuilder.append("</tbody>");
+        stringBuilder.append(" </table> <script> $(document).ready(function () { $('#dtBasicExample').DataTable(); $('.dataTables_length').addClass('bs-select'); }); </script>");
     }
 
     public String getHtml() {
         return stringBuilder.toString();
     }
-    
-    private String toGetter(){
+
+    private String toGetter() {
         StringBuilder sb = new StringBuilder();
         char[] data = classSaving.getFields().get(j).getName().toCharArray();
         data[0] = Character.toUpperCase(data[0]);
         sb.append("get").append(data);
         return sb.toString();
+    }
+
+    private void generateFooter(AbstractEntity ref) {
+        try {
+            stringBuilder.append("<tfoot><tr>");
+            for (j = 0; j < classSaving.getFields().size(); j++) {
+                System.out.println(classSaving.getFields().get(j).getName() + ref.getClass());
+                stringBuilder
+                        .append("<th>")
+                        .append(classSaving.getFields().get(j).getType())
+                        .append("</th>");
+            }
+            stringBuilder.append("</tr></tfoot>");
+        } catch (SecurityException ex) {
+            Logger.getLogger(EditEntity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void generateInput(FeildAccessbility x) {
+
     }
 
     private void generateHeader(AbstractEntity ref) {
@@ -97,7 +120,13 @@ public class EditEntity {
         try {
             stringBuilder.append("<tr>");
             for (j = 0; j < feilds.size(); j++) {
-                stringBuilder.append("<td>").append(feilds.get(j).invoke(entity)).append("</td>");
+                if (classSaving.getFields().get(j).isDisplay()) {
+                    stringBuilder.append("<td>").append(feilds.get(j).invoke(entity)).append("</td>");
+                }else{
+                    stringBuilder.append("<td>")
+                            .append(main.Functions.repeat(enchar, ((String)feilds.get(j).invoke(entity)).length()))
+                            .append("</td>");
+                }
             }
             stringBuilder.append("</tr>");
         } catch (SecurityException | IllegalArgumentException | IllegalAccessException | InvocationTargetException ex) {

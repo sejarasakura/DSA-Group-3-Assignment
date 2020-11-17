@@ -6,7 +6,6 @@
 package main;
 
 import adt.ArrList;
-import com.univocity.parsers.csv.CsvWriterSettings;
 import json.ClassSaving;
 import json.CreateDisplayClassJson;
 
@@ -30,37 +29,37 @@ public class WebConfig {
     /**
      *  Web Site Admin URL
      */
-    public static String ADMIN_URL = (WEB_URL + "admin/");
+    public final static String ADMIN_URL = (WebConfig.WEB_URL + "admin/");
 
     /**
      *  Web Site Header URL
      */
-    public static String HEADER_URL = "../theme/header.jsp";
+    public final static String HEADER_URL = "../theme/header.jsp";
     
     /**
      *  Web Site Footer URL
      */
-    public static String FOOTER_URL = "../theme/footer.jsp";
+    public final static String FOOTER_URL = "../theme/footer.jsp";
 
     /**
      *  Web Site Header URL
      */
-    public static String ADMIN_HEADER_URL = "../theme/admin_header.jsp";
+    public final static String ADMIN_HEADER_URL = "../theme/admin_header.jsp";
     
     /**
      *  Web Site Footer URL
      */
-    public static String ADMIN_FOOTER_URL = "../theme/admin_footer.jsp";
+    public final static String ADMIN_FOOTER_URL = "../theme/admin_footer.jsp";
     
     /**
      *  Web Site Meta URL
      */
-    public static String META_URL =  "../theme/meta.jsp";  
+    public final static String META_URL =  "../theme/meta.jsp";  
     
     /**
      *  Web Site Meta URL
      */
-    public static String API_KEY_URL = WebConfig.PROJECT_URL + "data/api.dat";  
+    public final static String API_KEY_URL = WebConfig.PROJECT_URL + "data/api.dat";  
     
     /**
      *  GOOGLE Map API Key
@@ -68,7 +67,22 @@ public class WebConfig {
     public static String api_key = Functions.getApiKey();
 
     /**
-     *  Saving detai ,ls 
+     *  Saving details 
      */
     public final static ArrList<ClassSaving> CLASS_SAVING = new CreateDisplayClassJson().readData(WebConfig.PROJECT_URL + "data/access.json"); 
+    
+    /**
+     *  Session key details 
+     */
+    public final static String LOGIN_SEESION_KEY = "rent-user";
+    
+    /**
+     *  Image storing directory
+     */
+    public final static String IMG_URL = WebConfig.WEB_URL + "img/";
+    
+    /**
+     *  Profile image storing directory
+     */
+    public final static String PROFILE_IMG_URL = WebConfig.IMG_URL + "profile/";
 }

@@ -20,7 +20,7 @@ public class FeildAccessbility {
     public FeildAccessbility() {
     }
 
-    public FeildAccessbility(String type, String name, boolean display, boolean update, boolean delete, boolean add, boolean auto_inc) {
+    public FeildAccessbility(String type, String name, boolean display, boolean update, boolean auto_inc) {
         this.type = type;
         this.name = name;
         this.display = display;

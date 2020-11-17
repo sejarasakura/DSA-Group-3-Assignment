@@ -5,6 +5,7 @@
  */
 package entity;
 
+import adt.ArrList;
 import com.opencsv.bean.CsvBindByName;
 
 /**
@@ -167,6 +168,21 @@ public abstract class User<T> extends AbstractEntity<User>{
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+    
+    public static boolean searchUsername(ArrList<? extends User> users, String data){
+        for(User user: users){
+            if(user.username == null ? data == null : user.username.equals(data))
+                return true;
+        }
+        return false;
+    }
+    public static boolean searchEmail(ArrList<? extends User> users, String data){
+        for(User user: users){
+            if(user.email == null ? data == null : user.email.equals(data))
+                return true;
+        }
+        return false;
     }
 
     @Override

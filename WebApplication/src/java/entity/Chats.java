@@ -12,7 +12,7 @@ import com.opencsv.bean.CsvBindByName;
  *
  * @author ITSUKA KOTORI
  */
-public class Chats {
+public class Chats extends AbstractEntity{
     
     @CsvBindByName
     private String chats_id;
@@ -34,6 +34,31 @@ public class Chats {
 
     public void setChats_details_id(ArrList<String> chats_details_id) {
         this.chats_details_id = chats_details_id;
+    }
+
+    @Override
+    public boolean isNotNull() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean id_equals(Object obj) {
+        return this.chats_id.equals(((Chats)obj).chats_id);
+    }
+
+    @Override
+    public String toString() {
+        return "Chats{" + "chats_id=" + chats_id + ", chats_details_id=" + chats_details_id + '}';
+    }
+
+    @Override
+    public int compareTo(Object t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

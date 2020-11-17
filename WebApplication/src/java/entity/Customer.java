@@ -44,7 +44,9 @@ public class Customer extends User<Customer> {
     public Customer() {
     }
 
-    public Customer(String current_booking_id, String memberType_id, String user_id, String ic, String name, String email, String phoneNumber, String role, String username, String password) {
+    public Customer(String current_booking_id, String memberType_id, 
+            String user_id, String ic, String name, String email, 
+            String phoneNumber, String username, String password) {
         super(user_id, ic, name, email, phoneNumber, "c", username, password);
         this.current_booking_id = current_booking_id;
         this.memberType_id = memberType_id;

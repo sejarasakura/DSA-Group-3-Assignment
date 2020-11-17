@@ -102,7 +102,7 @@ public class Payment extends AbstractEntity<Payment> {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Payment{" + "df=" + df + ", payment_id=" + payment_id + ", payment_status=" + payment_status + ", payment_date=" + payment_date + ", payment_due_date=" + payment_due_date + ", payment_amount=" + payment_amount + '}';
     }
 
     @Override

@@ -29,13 +29,13 @@ public class JavaApplicationDSA {
          * Teacher is golden > _ > !!
          */
         Gson g = new GsonBuilder().setPrettyPrinting().create();
-        XStack<Point> i = new XStack<Point>();
-        i.push(new Point(2, 4));
-        i.push(new Point(7, 1));
-        i.push(new Point(0, 9));
-        i.push(new Point(5, 7));
-        i.push(new Point(12, -4));
-        ArrList a = new ArrList(i);
+        XStack<Point> stack = new XStack<Point>();
+        stack.push(new Point(2, 4));
+        stack.push(new Point(7, 1));
+        stack.push(new Point(0, 9));
+        stack.push(new Point(5, 7));
+        stack.push(new Point(12, -4));
+        ArrList a = new ArrList(stack);
         System.out.println(g.toJson(a, ArrList.class));
     }
     

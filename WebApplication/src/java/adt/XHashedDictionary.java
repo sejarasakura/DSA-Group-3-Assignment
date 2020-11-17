@@ -7,32 +7,38 @@ package adt;
 
 import adt.interfaces.InterfaceHashDictionary;
 import adt.node.TableEntry;
+import java.util.*;
 
 /**
  *
  * @author ITSUKA KOTORI
- * @param <K> Key 
+ * @param <K> Key
  * @param <V> Value
  */
-public class XHashedDictionary<K,V> implements InterfaceHashDictionary<K,V>, Cloneable, java.io.Serializable{
-
+public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, Cloneable, java.io.Serializable {
 
     private TableEntry<K, V>[] hashTable;
     private int numberOfEntries;
 
     /**
-     *  Default size of the array
+     * Default size of the array
      */
-    private static final int DEFAULT_SIZE = 101; 
-
+    private static final int DEFAULT_SIZE = 101;
 
     public XHashedDictionary() {
-      this(DEFAULT_SIZE);
+        this(DEFAULT_SIZE);
     }
 
     public XHashedDictionary(int tableSize) {
-      hashTable = new TableEntry[tableSize];
-      numberOfEntries = 0;
+        hashTable = new TableEntry[tableSize];
+        numberOfEntries = 0;
+    }
+
+    public XHashedDictionary(Map data) {
+        this(data.size());
+        data.keySet().forEach((_item) -> {
+            this.add((K)_item, (V)data.get(_item));
+        });
     }
 
     @Override
@@ -41,18 +47,18 @@ public class XHashedDictionary<K,V> implements InterfaceHashDictionary<K,V>, Clo
         V oldValue; // value to return
 
         if (isFull()) {
-          rehash();
+            rehash();
         }
 
         int index = getHashIndex(key);
 
         if ((hashTable[index] == null) || hashTable[index].isRemoved()) { // key not found, so insert new entry
-          hashTable[index] = new TableEntry<K, V>(key, value);
-          numberOfEntries++;
-          oldValue = null;
-        } else { 
-          oldValue = hashTable[index].getValue();
-          hashTable[index].setValue(value);
+            hashTable[index] = new TableEntry<K, V>(key, value);
+            numberOfEntries++;
+            oldValue = null;
+        } else {
+            oldValue = hashTable[index].getValue();
+            hashTable[index].setValue(value);
         } // end if
 
         return oldValue;
@@ -67,17 +73,17 @@ public class XHashedDictionary<K,V> implements InterfaceHashDictionary<K,V>, Clo
         index = locate(index, key);
 
         if (index != -1) {
-          removedValue = hashTable[index].getValue();
-          hashTable[index].setToRemoved();
-          numberOfEntries--;
+            removedValue = hashTable[index].getValue();
+            hashTable[index].setToRemoved();
+            numberOfEntries--;
             return removedValue;
-        } 
+        }
         return null;
     }
 
     @Override
     public V getValue(K key) {
-        
+
         V result;
 
         int index = getHashIndex(key);
@@ -87,16 +93,26 @@ public class XHashedDictionary<K,V> implements InterfaceHashDictionary<K,V>, Clo
             result = hashTable[index].getValue();
             return result;
         }
-        
+
         return null;
 
+    }
+    
+    public Map getMap(){
+        Map map = new HashMap();
+        for (TableEntry<K, V> hashTable1 : hashTable) {
+            if ((hashTable1 != null) && hashTable1.isIn()) {
+                map.put(hashTable1.getKey(), hashTable1.getValue());
+            }
+        }
+        return map;
     }
 
     private int locate(int index, K key) {
         if (hashTable[index] == null || !key.equals(hashTable[index].getKey())) {
-          return -1;
+            return -1;
         } else {
-          return index;
+            return index;
         }
     }
 
@@ -123,7 +139,7 @@ public class XHashedDictionary<K,V> implements InterfaceHashDictionary<K,V>, Clo
     @Override
     public void clear() {
         for (int index = 0; index < hashTable.length; index++) {
-          hashTable[index] = null;
+            hashTable[index] = null;
         }
 
         numberOfEntries = 0;
@@ -131,15 +147,15 @@ public class XHashedDictionary<K,V> implements InterfaceHashDictionary<K,V>, Clo
 
     private int getHashIndex(K key) {
 
-      int hashIndex = key.hashCode() % hashTable.length;
+        int hashIndex = key.hashCode() % hashTable.length;
 
-      if (hashIndex < 0) {
-        hashIndex = hashIndex + hashTable.length;
-      } // end if
+        if (hashIndex < 0) {
+            hashIndex = hashIndex + hashTable.length;
+        } // end if
 
-      return hashIndex;
+        return hashIndex;
     }
-    
+
     /**
      * Task: Increases the size of the hash table to twice its old size.
      */
@@ -152,27 +168,27 @@ public class XHashedDictionary<K,V> implements InterfaceHashDictionary<K,V>, Clo
         numberOfEntries = 0;
 
         for (int index = 0; index < oldSize; index++) {
-          if ((oldTable[index] != null) && oldTable[index].isIn()) {
-            add(oldTable[index].getKey(), oldTable[index].getValue());
-          }
-        } 
+            if ((oldTable[index] != null) && oldTable[index].isIn()) {
+                add(oldTable[index].getKey(), oldTable[index].getValue());
+            }
+        }
 
-    } 
-    
+    }
+
     @Override
     public String toString() {
         String outputStr = "";
         for (int index = 0; index < hashTable.length; index++) {
-          outputStr += String.format("%4d. ", index);
-          if (hashTable[index] == null) {
-            outputStr += "null " + "\n";
-          } else if (hashTable[index].isRemoved()) {
-            outputStr += "notIn " + "\n";
-          } else {
-            outputStr += hashTable[index].getKey() + " " + hashTable[index].getValue() + "\n";
-          }
+            outputStr += String.format("%4d. ", index);
+            if (hashTable[index] == null) {
+                outputStr += "null " + "\n";
+            } else if (hashTable[index].isRemoved()) {
+                outputStr += "notIn " + "\n";
+            } else {
+                outputStr += hashTable[index].getKey() + " " + hashTable[index].getValue() + "\n";
+            }
         } // end for
         outputStr += "\n";
         return outputStr;
-    } 
+    }
 }

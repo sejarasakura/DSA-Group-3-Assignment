@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/commons-beanutils-1.9.4-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections4-4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/gson-2.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/univocity-parsers-2.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang3-3.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/opencsv-5.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-text-1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/sojo-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang3-3.11-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections4-4.4-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-text-1.9-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-beanutils-1.9.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

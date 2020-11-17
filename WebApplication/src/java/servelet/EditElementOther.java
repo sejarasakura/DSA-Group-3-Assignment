@@ -6,6 +6,7 @@
 package servelet;
 
 import adt.ArrList;
+import adt.XHashedDictionary;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.File;
@@ -127,41 +128,41 @@ public class EditElementOther extends HttpServlet {
     }
 
     private Map getDataS(String title, String url, String s) {
-        Map map = new HashMap();
-        map.put("l", url);
-        map.put("t", title);
-        map.put("s", s);
-        return map;
+        XHashedDictionary map = new XHashedDictionary();
+        map.add("l", url);
+        map.add("t", title);
+        map.add("s", s);
+        return map.getMap();
     }
 
     private Map getDataShow(String title, String url, String show, String c) {
-        Map map = new HashMap();
-        map.put("l", url);
-        map.put("t", title);
-        map.put("show", show);
-        map.put("c", c);
-        return map;
+        XHashedDictionary map = new XHashedDictionary();
+        map.add("l", url);
+        map.add("t", title);
+        map.add("show", show);
+        map.add("c", c);
+        return map.getMap();
     }
 
     private Map getData(String title, String url) {
-        Map map = new HashMap();
+        XHashedDictionary map = new XHashedDictionary();
         if (title.contains(".child")) {
             ArrList al = new ArrList();
             al.add(getData("new", "#"));
-            map.put("child", al.toArray());
+            map.add("child", al.toArray());
             title = title.split(".child")[0];
         }
-        map.put("l", url);
-        map.put("t", title);
-        return map;
+        map.add("l", url);
+        map.add("t", title);
+        return map.getMap();
     }
 
     private Map getDataChild(String title, String url, ArrList x) {
-        Map map = new HashMap();
-        map.put("child", x.toArray());
-        map.put("l", url);
-        map.put("t", title);
-        return map;
+        XHashedDictionary map = new XHashedDictionary();
+        map.add("child", x.toArray());
+        map.add("l", url);
+        map.add("t", title);
+        return map.getMap();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

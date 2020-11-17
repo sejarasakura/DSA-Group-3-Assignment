@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/DSA-Group-3-Assignment.iml" filepath="$PROJECT_DIR$/.idea/DSA-Group-3-Assignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebApplication/WebApplication.iml" filepath="$PROJECT_DIR$/WebApplication/WebApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebApplication/src/WebApplication1.iml" filepath="$PROJECT_DIR$/WebApplication/src/WebApplication1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+    </modules>
+  </component>
+</project>

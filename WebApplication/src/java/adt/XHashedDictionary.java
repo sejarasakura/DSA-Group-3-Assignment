@@ -23,7 +23,7 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
     /**
      * Default size of the array
      */
-    private static final int DEFAULT_SIZE = 101;
+    private static final int DEFAULT_SIZE = 16;
 
     public XHashedDictionary() {
         this(DEFAULT_SIZE);

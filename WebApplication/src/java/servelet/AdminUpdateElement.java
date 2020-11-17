@@ -45,12 +45,14 @@ public class AdminUpdateElement extends HttpServlet {
         String dir = System.getProperty("user.dir") + "/data/" + edit + ".json";
         JsonReader reader = new JsonReader(new FileReader(dir));
         Gson gson = new Gson();
+        // <editor-fold defaultstate="collapsed" desc="Read json data">
         Map map = gson.fromJson(reader, Map.class);
         String base = (String) map.get("base");
         String front_id = new StringBuilder()
                 .append(base).append(".").append(t).append(".").toString();
         Map base_map = (Map) map.get(base);
         Map details_map = (Map) base_map.get(t);
+        // </editor-fold>
         ArrList child = new ArrList();
         File jsonFile = new File(dir);
         StringBuilder str = new StringBuilder();

@@ -6,6 +6,7 @@
 package servelet;
 
 import adt.ArrList;
+import adt.XHashedDictionary;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.File;
@@ -48,6 +49,7 @@ public class AdminAddAppElement extends HttpServlet {
             return;
         }
 
+        // <editor-fold defaultstate="collapsed" desc="Modify json">
         String dir = System.getProperty("user.dir") + "/data/" + edit + ".json";
         JsonReader reader = new JsonReader(new FileReader(dir));
         Gson gson = new Gson();
@@ -65,6 +67,7 @@ public class AdminAddAppElement extends HttpServlet {
             base_map.put(t, details_mp);
         }
         map.put(base, base_map);
+        // </editor-fold>
 
         // write new json string into jsonfile1.json file
         File jsonFile = new File(dir);
@@ -72,21 +75,22 @@ public class AdminAddAppElement extends HttpServlet {
             outputStream.write(gson.toJson(map).getBytes());
             outputStream.flush();
         }
-        
+
         StringBuilder str = new StringBuilder();
         str.append("http://localhost:8080/WebApplication/admin/edit_app.jsp?edit=")
                 .append(edit);
-        if(t != null)
+        if (t != null) {
             str.append("&t=").append(t);
+        }
         response.sendRedirect(str.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="Writing file function">
     private Map getData(String title, String url) {
-        HashMap map = new HashMap();
-        map.put("t", title);
-        map.put("l", url);
-        return map;
+        XHashedDictionary map = new XHashedDictionary();
+        map.add("t", title);
+        map.add("l", url);
+        return map.getMap();
     }
     // </editor-fold>
 

@@ -1,0 +1,37 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/server/lib/el-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/jasper.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/servlet-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-dbcp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-coyote.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/websocket-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-i18n-fr.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/catalina-storeconfig.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-i18n-de.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/annotations-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/catalina-tribes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-i18n-es.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-i18n-ja.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/jsp-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-websocket.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/jaspic-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-i18n-ru.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/ecj-4.6.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-i18n-zh-CN.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-jdbc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/catalina.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-i18n-ko.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-jni.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/catalina-ha.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/tomcat-util-scan.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/jasper-el.jar!/" />
+      <root url="jar://$PROJECT_DIR$/server/lib/catalina-ant.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

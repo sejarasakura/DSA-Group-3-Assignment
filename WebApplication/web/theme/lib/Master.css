@@ -51,3 +51,27 @@
 .f_a_link:hover {
     color: #DCDCDC !important;
 }
+
+.login{
+    width: 400px;
+    border-radius: 20px;
+    border: 1px #999 solid;
+    padding: 30px;
+    margin: auto;
+}
+.register{
+    width: 700px;
+    border-radius: 20px;
+    border: 1px #999 solid;
+    padding: 30px;
+    margin: auto;
+}
+.img-login{
+    margin: 30px auto;
+}
+.toggle-password{
+    cursor: pointer!important;
+}
+.error{
+    color: red!important;
+}

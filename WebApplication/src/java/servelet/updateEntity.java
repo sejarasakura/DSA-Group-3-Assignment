@@ -5,23 +5,20 @@
  */
 package servelet;
 
-import entity.*;
-import adt.*;
 import java.io.IOException;
-import java.util.Iterator;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import xenum.MemberShip;
 
 /**
  *
  * @author ITSUKA KOTORI
  */
-@WebServlet(name = "RegisterAction", urlPatterns = {"/RegisterAction"})
-public class RegisterAction extends HttpServlet {
+@WebServlet(name = "updateEntity", urlPatterns = {"/admin/updateEntity"})
+public class updateEntity extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,59 +32,19 @@ public class RegisterAction extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String fname = request.getParameter("fname");
-        String lname = request.getParameter("lname");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String password2 = request.getParameter("password2");
-        String email = request.getParameter("email");
-        String registerAsDriver = request.getParameter("registerAsDriver");
-        ArrList user;
-        Iterator reader;
-        User current_user;
-        boolean usernameUsed, driver = false;
-
-        if (registerAsDriver!=null) {
-            reader = AbstractEntity.readDataFormCsv(new Driver());
-            driver = true;
-            username = "d-" + username;
-        } else {
-            reader = AbstractEntity.readDataFormCsv(new Customer());
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet updateEntity</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.print(request.getParameter("jsp-action"));
+            out.println("<h1>Servlet updateEntity at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
-        if (reader == null) {
-            user = new ArrList();
-        } else {
-            user = new ArrList(reader);
-        }
-
-        usernameUsed = User.searchUsername(user, username);
-        if (usernameUsed) {
-            response.sendRedirect(request.getHeader("referer") + "?E=18");
-        }
-        usernameUsed = User.searchUsername(user, email);
-        if (usernameUsed) {
-            response.sendRedirect(request.getHeader("referer") + "?E=20");
-        }
-        if (password == null ? password2 != null : !password.equals(password2)) {
-            response.sendRedirect(request.getHeader("referer") + "?E=19");
-        }
-
-        if (driver) {
-            current_user = new Driver("", "", "", fname + ' ' + lname, email,
-                    "", username, password);
-        } else {
-            current_user = new Customer("", MemberShip.NORMAL.getDatabaseCode(),
-                    "", "", fname + ' ' + lname, email, "", username, password);
-        }
-        
-        current_user.setUser_id((String) cilent.IDManager.generateId(current_user, true));
-        
-        current_user.addThisToCsv();
-        
-        main.Functions.setUserSession(request, current_user);
-        
-        response.sendRedirect((String) main.Datas.settings.getValue("pages/account"));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

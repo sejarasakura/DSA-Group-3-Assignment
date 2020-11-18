@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package adt;
+
 import adt.interfaces.InterfaceArrayList;
 import entity.AbstractEntity;
 import java.util.Iterator;
@@ -15,41 +16,41 @@ import java.util.function.Consumer;
  * @author Lim sai keat
  * @param <T>
  */
-public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable{
+public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable {
 
     final private static int INITIAL_CAPACITY = 1;
     protected T[] data;
     protected int index = -1;
-    
-    public ArrList(){
+
+    public ArrList() {
         this(1);
     }
-    
-    public ArrList(int inicap){
+
+    public ArrList(int inicap) {
         index = 0;
         data = (T[]) new Object[inicap];
     }
-    
-    public ArrList(T[] arr){
+
+    public ArrList(T[] arr) {
         index = arr.length;
         data = arr;
     }
-    
-    public ArrList(Iterable<T> ib){
+
+    public ArrList(Iterable<T> ib) {
         this(ib.iterator());
     }
-    
-    public ArrList(Iterator<T> is){
+
+    public ArrList(Iterator<T> is) {
         this();
-        while(is.hasNext()){
-            try{
+        while (is.hasNext()) {
+            try {
                 this.add(is.next());
-            }catch(Exception ex){
-                
+            } catch (Exception ex) {
+
             }
         }
     }
-    
+
     @Override
     public Iterator<T> iterator() {
         return new ListIterator();
@@ -62,13 +63,13 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
 
     @Override
     public void add(int _index, T element) {
-        CheckRangeForAdd(_index); 
-        
+        CheckRangeForAdd(_index);
+
         if (data.length == index) {
-            ensureCapacity(index + 1); 
+            ensureCapacity(index + 1);
         }
         for (int i = index; i > _index; i--) {
-            data[i] = data[i - 1]; 
+            data[i] = data[i - 1];
         }
         data[_index] = element;
         index++;
@@ -76,7 +77,7 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
 
     @Override
     public void addAll(T[] c) {
-        for(T x: c){
+        for (T x : c) {
             add(index, x);
         }
     }
@@ -84,9 +85,9 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     @Override
     public void addAll(int _index, T[] c) {
         int count = 0;
-        for(T x: c){
+        for (T x : c) {
             add(_index + count, x);
-            count ++;
+            count++;
         }
     }
 
@@ -97,26 +98,27 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
 
     @Override
     public T remove(int _index) {
-        CheckRange(_index); 
+        CheckRange(_index);
         Object x = data[_index];
         for (int i = _index; i < index - 1; i++) {
-            data[i] = data[i + 1]; 
+            data[i] = data[i + 1];
         }
         index--;
-        return (T)x;
+        return (T) x;
     }
 
     @Override
     public void set(int _index, T element) {
-        CheckRange(_index); 
+        CheckRange(_index);
         data[_index] = element;
     }
 
     @Override
     public int indexOf(T o) {
-        for(int i = 0; i < index; i ++){
-            if(data[i].equals(o))
+        for (int i = 0; i < index; i++) {
+            if (data[i].equals(o)) {
                 return i;
+            }
         }
         return -1;
     }
@@ -130,52 +132,55 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     public T[] toArray() {
         return data.clone();
     }
-    
+
     @SuppressWarnings("unchecked")
     public void ensureCapacity(int minCapacity) {
         if (index >= minCapacity) {
             return;
         }
 
-        T[] old = data; 
+        T[] old = data;
         data = (T[]) new Object[minCapacity];
 
         System.arraycopy(old, 0, data, 0, index);
 
     }
-    
-    public boolean removeSameElement(){
-        if(index == 0 || index == 1)
+
+    public boolean removeSameElement() {
+        if (index == 0 || index == 1) {
             return true;
-        
-        T[] temp = (T[]) new Object[index];  
-        int j = 0;  
-        for (int i=0; i<index-1; i++){  
-            if (!data[i].equals(data[i+1])){  
-                temp[j++] = data[i];  
-            }  
-         }  
-        temp[j++] = data[index-1];     
-        
-        System.arraycopy(temp, 0, data, 0, j);  
-        
+        }
+
+        T[] temp = (T[]) new Object[index];
+        int j = 0;
+        for (int i = 0; i < index - 1; i++) {
+            if (!data[i].equals(data[i + 1])) {
+                temp[j++] = data[i];
+            }
+        }
+        temp[j++] = data[index - 1];
+
+        System.arraycopy(temp, 0, data, 0, j);
+
         return true;
     }
 
     private void CheckRange(int _index) {
-        if (_index < 0 || _index >= index) 
+        if (_index < 0 || _index >= index) {
             throw new IndexOutOfBoundsException();
-        
+        }
+
     }
 
     private void CheckRangeForAdd(int _index) {
     }
 
     public boolean find_AbstractEntity(AbstractEntity x) {
-        
-        for(int i = 0; i < index; i++){
-            if(((AbstractEntity)data[i]).id_equals(x))
+
+        for (int i = 0; i < index; i++) {
+            if (((AbstractEntity) data[i]).id_equals(x)) {
                 return true;
+            }
         }
         return false;
     }
@@ -183,10 +188,11 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     public boolean isEmpty() {
         return index <= 0;
     }
-    
+
     private class ListIterator implements Iterator<T> {
 
         private int iteratorIndex = -1;
+
         @Override
         public boolean hasNext() {
             return iteratorIndex < index - 1;
@@ -194,8 +200,9 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
 
         @Override
         public T next() {
-            if (!hasNext()) 
+            if (!hasNext()) {
                 throw new NoSuchElementException();
+            }
             iteratorIndex++;
             return data[iteratorIndex];
         }
@@ -211,13 +218,14 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         }
 
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         String r = "";
-        for(T d: (data)){
-            r += ""+  d + ", ";
+        for (int i = 0; i < (index - 1); i++) {
+            r += "" + data[i] + ", ";
         }
+        r += "" + data[index];
         return r;
     }
 }

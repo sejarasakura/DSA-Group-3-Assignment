@@ -84,7 +84,7 @@ public class Chat extends AbstractEntity{
         this.send_date = send_date;
     }
 
-    public boolean isRead() {
+    public boolean getRead() {
         return read;
     }
 

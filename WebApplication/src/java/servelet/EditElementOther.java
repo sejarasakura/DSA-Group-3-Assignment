@@ -50,8 +50,7 @@ public class EditElementOther extends HttpServlet {
         Gson gson = new Gson();
         Map map = gson.fromJson(reader, Map.class);
         String base = (String) map.get("base");
-        String front_id = new StringBuilder()
-                .append(base).append(".").append(t).append(".").toString();
+        String front_id = new StringBuilder().append(base).append(".").append(t).append(".").toString();
         Map base_map = (Map) map.get(base);
         ArrList new_detias_map = new ArrList();
         ArrList child;
@@ -59,6 +58,7 @@ public class EditElementOther extends HttpServlet {
         StringBuilder str = new StringBuilder();
         String id, x_title, x_url, x_s, x_c, x_counts;
 
+        //update syntax
         switch (header) {
             case "show":
                 for (int i = 0; i < count; i++) {
@@ -112,7 +112,6 @@ public class EditElementOther extends HttpServlet {
                 }
                 break;
         }
-        //update syntax
         base_map.put(t, new_detias_map.toArray());
         map.put(base, base_map);
 

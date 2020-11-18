@@ -3,6 +3,7 @@
     {
       "classname": "entity.Chat",
       "extension": ".csv",
+      "identifier": "chat_details_id",
       "add": true,
       "delete": true,
       "fields": {
@@ -42,6 +43,7 @@
     {
       "classname": "entity.Chats",
       "extension": ".csv",
+      "identifier": "chats_id",
       "add": true,
       "delete": false,
       "fields": {
@@ -67,6 +69,7 @@
     {
       "classname": "entity.Mapping",
       "extension": ".csv",
+      "identifier": "map_id",
       "add": true,
       "delete": false,
       "fields": {
@@ -106,6 +109,7 @@
     {
       "classname": "entity.Booking",
       "extension": ".csv",
+      "identifier": "booking_id",
       "add": true,
       "delete": true,
       "fields": {
@@ -187,6 +191,7 @@
     {
       "classname": "entity.Payment",
       "extension": ".csv",
+      "identifier": "payment_id",
       "add": true,
       "delete": false,
       "fields": {
@@ -233,27 +238,28 @@
     {
       "classname": "entity.Review",
       "extension": ".csv",
+      "identifier": "paymentNumber",
       "add": true,
       "delete": true,
       "fields": {
         "data": [
           {
             "type": "java.lang.String",
-            "name": "driverUserName",
-            "display": true,
-            "update": false,
-            "auto_inc": true
-          },
-          {
-            "type": "java.lang.String",
-            "name": "customerUserName",
+            "name": "paymentNumber",
             "display": true,
             "update": true,
             "auto_inc": false
           },
           {
             "type": "java.lang.String",
-            "name": "paymentNumber",
+            "name": "driverUserName",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "customerUserName",
             "display": true,
             "update": true,
             "auto_inc": false
@@ -286,6 +292,7 @@
     {
       "classname": "entity.Customer",
       "extension": ".csv",
+      "identifier": "user_id",
       "add": true,
       "delete": true,
       "fields": {
@@ -367,6 +374,7 @@
     {
       "classname": "entity.Driver",
       "extension": ".csv",
+      "identifier": "user_id",
       "add": true,
       "delete": true,
       "fields": {
@@ -439,8 +447,77 @@
       }
     },
     {
+      "classname": "entity.Admin",
+      "extension": ".csv",
+      "identifier": "user_id",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "user_id",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "java.lang.String",
+            "name": "ic",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "name",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "email",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "phoneNumber",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "role",
+            "display": true,
+            "update": false,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "username",
+            "display": true,
+            "update": false,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "password",
+            "display": false,
+            "update": false,
+            "auto_inc": false
+          }
+        ],
+        "index": 8
+      }
+    },
+    {
       "classname": "entity.Withdraw",
       "extension": ".csv",
+      "identifier": "withdraw_id",
       "add": true,
       "delete": true,
       "fields": {
@@ -449,8 +526,8 @@
             "type": "java.lang.String",
             "name": "withdraw_id",
             "display": true,
-            "update": true,
-            "auto_inc": false
+            "update": false,
+            "auto_inc": true
           },
           {
             "type": "java.lang.String",
@@ -501,6 +578,7 @@
     {
       "classname": "entity.Plate",
       "extension": ".csv",
+      "identifier": "plate_id",
       "add": true,
       "delete": true,
       "fields": {
@@ -533,20 +611,21 @@
     {
       "classname": "entity.Car",
       "extension": ".csv",
+      "identifier": "plate_id",
       "add": true,
       "delete": true,
       "fields": {
         "data": [
           {
             "type": "java.lang.String",
-            "name": "driver_id",
+            "name": "plate_id",
             "display": true,
             "update": true,
             "auto_inc": false
           },
           {
             "type": "java.lang.String",
-            "name": "plate_id",
+            "name": "driver_id",
             "display": true,
             "update": true,
             "auto_inc": false
@@ -579,6 +658,7 @@
     {
       "classname": "entity.Taxi",
       "extension": ".csv",
+      "identifier": "taxiId",
       "add": true,
       "delete": true,
       "fields": {

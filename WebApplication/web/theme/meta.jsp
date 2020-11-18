@@ -14,12 +14,12 @@
 <title><%= main.Functions.getWebpageTitle(request, "title")%>
 </title>
 <%-- import css lib--%>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/datatable/datatables.min_1.css" rel="stylesheet"/>
 <link href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/datatable/datatables.min_1.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/bootstrap/css/toogle-switch.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <%-- CSS --%>
 <link href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/Master.css" rel="stylesheet"/>

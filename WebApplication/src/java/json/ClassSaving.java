@@ -15,6 +15,7 @@ public class ClassSaving {
     
     private String classname;
     private String extension;
+    private String identifier;
     private boolean add;
     private boolean delete;
     private ArrList<FeildAccessbility> fields;
@@ -26,6 +27,14 @@ public class ClassSaving {
     }
 
     public ClassSaving() {
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public String getClassname() {

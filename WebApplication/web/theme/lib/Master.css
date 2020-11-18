@@ -75,3 +75,15 @@
 .error{
     color: red!important;
 }
+.glyphicon-plus, .glyphicon-circle-arrow-up{
+    color: #09b83e!important;
+}
+.glyphicon-plus:hover, .glyphicon-circle-arrow-up:hover{
+    color: #00c300!important;
+}
+.glyphicon-trash{
+    color: #df2029!important;
+}
+.glyphicon-trash:hover{
+    color: #cd201f!important;
+}

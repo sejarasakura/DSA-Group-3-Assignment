@@ -22,7 +22,7 @@
             <h1 class="text-center">Create a new Account</h1>
             <br>
             <div class="register"> 
-                <form id="mainForm" method="post" action="<%= WebConfig.WEB_URL%>/RegisterAction">
+                <form id="mainForm" method="post" action="<%= WebConfig.WEB_URL%>RegisterAction">
                     <img src="<%= main.Datas.settings.getValue("image/logo")%>" alt="Users" 
                          class="img-circle img-login center-block" width="80" height="80"> 
                     <div class="form-group row">

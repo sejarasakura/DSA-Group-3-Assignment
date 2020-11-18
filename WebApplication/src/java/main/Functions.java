@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import json.ClassSaving;
 import xenum.ErrorDetails;
 
@@ -39,6 +40,7 @@ public class Functions {
         Datas.settings.add("text/title", "Rentcars.com");
         Datas.settings.add("pages/login", WebConfig.WEB_URL + "pages/login.jsp");
         Datas.settings.add("pages/register", WebConfig.WEB_URL + "pages/register.jsp");
+        Datas.settings.add("pages/account", WebConfig.WEB_URL + "pages/account.jsp");
         return 1;
     }
 
@@ -130,11 +132,13 @@ public class Functions {
         return (String) Datas.settings.getValue("image/user");
     }
 
-    private static String displayErrorMessage(String e) {
+    private static String displayErrorMessage(String e, String c) {
         ErrorDetails er = ErrorDetails.getValue(e);
         return new StringBuilder()
                 .append("<div class=\"container\">")
-                .append("<div class=\"alert alert-danger alert-dismissible fade in\">")
+                .append("<div class=\"alert ")
+                .append(c)
+                .append(" alert-dismissible fade in\">")
                 .append("<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>")
                 .append("<strong> ERROR ")
                 .append(er.getCode())
@@ -148,7 +152,11 @@ public class Functions {
     public static String displayErrorMessage(HttpServletRequest request) {
         String e = request.getParameter("E");
         if (e != null) {
-            return displayErrorMessage(e);
+            return displayErrorMessage(e, "alert-danger");
+        }
+        e = request.getParameter("W");
+        if (e != null) {
+            return displayErrorMessage(e, "alert-warning");
         }
         return "";
     }
@@ -158,5 +166,14 @@ public class Functions {
             return "";
         }
         return new String(new char[count]).replace("\0", str);
+    }
+    
+    public static void checkLogin(HttpServletResponse response, User user) throws IOException{
+        if(user == null){
+            response.sendRedirect((String) Datas.settings.getValue("pages/login"));
+            return;
+        }
+        if(!user.isNotNull())
+            response.sendRedirect((String) Datas.settings.getValue("pages/login"));
     }
 }

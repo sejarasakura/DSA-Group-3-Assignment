@@ -45,7 +45,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @return
      */
     public abstract boolean isNotNull();
-
+    
     /**
      * Check is same or not
      *
@@ -54,7 +54,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      */
     @Override
     public abstract boolean equals(Object obj);
-
+    
     /**
      * Check id is same or not
      *
@@ -62,7 +62,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @return
      */
     public abstract boolean id_equals(Object obj);
-
+    
     /**
      * Convert to string
      *
@@ -70,7 +70,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      */
     @Override
     public abstract String toString();
-
+    
     /**
      * To support comparable
      *
@@ -79,7 +79,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      */
     @Override
     public abstract int compareTo(Object t);
-
+    
     /**
      * To get the storage file path
      *
@@ -88,7 +88,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     public String getStorageFile() {
         return STORING_DIR + "/" + this.getClass().getSimpleName() + ".csv";
     }
-
+    
     /**
      * Adding listed new record to CSV file.
      *
@@ -216,7 +216,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
                                 .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
                                 .withEscapechar(CSVWriter.DEFAULT_ESCAPE_CHARACTER)
                                 .withLineEnd(CSVWriter.DEFAULT_LINE_END)
-                                .withOrderedResults(false)
                                 .build();
 
                 csvWriter.write((Iterator<AbstractEntity>) it.iterator());
@@ -242,7 +241,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     public static boolean reWriteAllDataToCsv(Iterable<? extends AbstractEntity> datas){
         return reWriteAllDataToCsv(new ArrList(datas));
     }
-    
     
     /**
      * Update the listed record
@@ -288,7 +286,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         return updateDataToCsv(new ArrList(datas));
     }
     
-    
     /**
      * Delete the listed record
      *
@@ -311,28 +308,25 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
             deleted = false;
             for (int i = 0; i < allrecord.size() && deleted == false; i++) {
                 if (data.id_equals(allrecord.get(i))) {
-                    System.out.println(OutputColor.TEXT_GREEN
-                            + "deleted record :" + data + OutputColor.TEXT_RESET);
+                    System.out.println(OutputColor.TEXT_GREEN + "deleted record :" + data + OutputColor.TEXT_RESET);
                     allrecord.remove(i);
                     deleted = true;
                 }
             }
             alldelete &= deleted;
             if (deleted == false) {
-                System.out.println(OutputColor.TEXT_RED
-                        + "fail delete :" + data + OutputColor.TEXT_RESET);
+                System.out.println(OutputColor.TEXT_RED + "fail delete :" + data + OutputColor.TEXT_RESET);
             }
         }
         alldelete &= privateReWriteAllDataToCsv(datas, false);
 
         return alldelete;
     }
-
+    
     //</editor-fold>
     public static boolean deleteDataToCsv(Iterable<? extends AbstractEntity> datas){
         return deleteDataToCsv(new ArrList(datas));
     }
-    
     
     /*
     * for large amount
@@ -343,7 +337,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         ref.add(this);
         return updateDataToCsv(ref);
     }
-
+    
     /*
     * for large amount
     * Un efficent method is need read faster use AbstractEntity.addDataToCsv for large amount
@@ -353,7 +347,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         ref.add(this);
         return AbstractEntity.addDataToCsv(ref);
     }
-
+    
     /*
     * for large amount
     * Un efficent method is need update faster use AbstractEntity.updateDataToCsv for large amount

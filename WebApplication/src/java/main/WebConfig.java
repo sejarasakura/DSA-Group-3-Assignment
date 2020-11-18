@@ -6,6 +6,7 @@
 package main;
 
 import adt.ArrList;
+import java.text.SimpleDateFormat;
 import json.ClassSaving;
 import json.CreateDisplayClassJson;
 
@@ -85,4 +86,9 @@ public class WebConfig {
      *  Profile image storing directory
      */
     public final static String PROFILE_IMG_URL = WebConfig.IMG_URL + "profile/";
+    
+    /**
+     *  Date format
+     */
+    public final static SimpleDateFormat LOCAL_DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 }

@@ -32,9 +32,20 @@ public class Plate extends AbstractEntity<Plate>{
     @CsvBindByName
     private String plateNumber;
 
+    public Plate() {
+    }
+
     public Plate(String plateAlpha, String plateNumber) {
         this.plateAlpha = plateAlpha;
         this.plateNumber = plateNumber;
+    }
+
+    public String getPlate_id() {
+        return plate_id;
+    }
+
+    public void setPlate_id(String plate_id) {
+        this.plate_id = plate_id;
     }
 
     public String getPlateAlpha() {

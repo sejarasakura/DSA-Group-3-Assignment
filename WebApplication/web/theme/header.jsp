@@ -5,7 +5,7 @@
 --%>
 <%@page import="main.Datas" %>
 <%@page import="main.WebConfig" %>
-<%@page import="pages.Header" %>
+<%@page import="cilent.pages.Header" %>
 <%@page import="adt.ArrList" %>
 <%@page import="entity.User" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"

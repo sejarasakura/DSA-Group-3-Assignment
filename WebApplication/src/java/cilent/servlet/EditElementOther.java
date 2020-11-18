@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servelet;
+package cilent.servlet;
 
 import adt.ArrList;
 import adt.XHashedDictionary;

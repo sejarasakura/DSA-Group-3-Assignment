@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pages;
+package cilent.pages;
 
 import adt.ArrList;
 import cilent.IDManager;
@@ -15,8 +15,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import json.ClassSaving;
-import json.FeildAccessbility;
+import entity.json.ClassSaving;
+import entity.json.FeildAccessbility;
 
 /**
  *
@@ -197,7 +197,7 @@ public class EditEntity {
         data = null;
         idsss = null;
         prefix = "";
-        stringBuilder.append("<td><input type=");
+        stringBuilder.append("<td><div class=\"form-group\"><input type=");
         data = feilds.get(j).invoke(entity);
         switch (fb.getType()) {
             case "java.lang.String":
@@ -216,7 +216,7 @@ public class EditEntity {
                 break;
             case "double":
                 write_type = "number";
-                write_query += "step=\"0.1\" min='0' ";
+                write_query += "step=\"0.01\" min='0' ";
                 value = data == null ? "0.00" : String.format("%.2f", data);
                 break;
             case "int":
@@ -246,6 +246,6 @@ public class EditEntity {
         stringBuilder.append("id='").append(prefix).append(fb.getName()).append("' ");
         stringBuilder.append("name='").append(prefix).append(fb.getName()).append("' ");
         stringBuilder.append("value='").append(value).append("' ");
-        stringBuilder.append(write_query).append("></td>");
+        stringBuilder.append(write_query).append("></div></td>");
     }
 }

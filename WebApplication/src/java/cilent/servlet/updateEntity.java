@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servelet;
+package cilent.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,14 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import main.WebConfig;
 
 /**
  *
  * @author ITSUKA KOTORI
  */
-@WebServlet(name = "UpdateApiKey", urlPatterns = {"/admin/UpdateApiKey"})
-public class UpdateApiKey extends HttpServlet {
+@WebServlet(name = "updateEntity", urlPatterns = {"/admin/updateEntity"})
+public class updateEntity extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,11 +32,19 @@ public class UpdateApiKey extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        StringBuilder str = new StringBuilder();
-        String api_key = request.getParameter("apiKey");
-        str.append(WebConfig.WEB_URL).append("admin/map_api.jsp");
-        main.Functions.setApiKey(api_key);
-        response.sendRedirect(str.toString());
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet updateEntity</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.print(request.getParameter("jsp-action"));
+            out.println("<h1>Servlet updateEntity at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

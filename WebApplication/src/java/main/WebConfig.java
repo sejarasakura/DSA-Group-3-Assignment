@@ -7,8 +7,8 @@ package main;
 
 import adt.ArrList;
 import java.text.SimpleDateFormat;
-import json.ClassSaving;
-import json.CreateDisplayClassJson;
+import entity.json.ClassSaving;
+import entity.json.CreateDisplayClassJson;
 
 /**
  *

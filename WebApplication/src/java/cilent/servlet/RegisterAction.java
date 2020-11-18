@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servelet;
+package cilent.servlet;
 
-import entity.*;
 import adt.*;
+import entity.*;
 import java.io.IOException;
 import java.util.Iterator;
 import javax.servlet.ServletException;
@@ -47,7 +47,7 @@ public class RegisterAction extends HttpServlet {
         User current_user;
         boolean usernameUsed, driver = false;
 
-        if (registerAsDriver!=null) {
+        if (registerAsDriver != null) {
             reader = AbstractEntity.readDataFormCsv(new Driver());
             driver = true;
             username = "d-" + username;
@@ -64,13 +64,16 @@ public class RegisterAction extends HttpServlet {
         usernameUsed = User.searchUsername(user, username);
         if (usernameUsed) {
             response.sendRedirect(request.getHeader("referer") + "?E=18");
+            return;
         }
         usernameUsed = User.searchUsername(user, email);
         if (usernameUsed) {
             response.sendRedirect(request.getHeader("referer") + "?E=20");
+            return;
         }
         if (password == null ? password2 != null : !password.equals(password2)) {
             response.sendRedirect(request.getHeader("referer") + "?E=19");
+            return;
         }
 
         if (driver) {
@@ -80,13 +83,13 @@ public class RegisterAction extends HttpServlet {
             current_user = new Customer("", MemberShip.NORMAL.getDatabaseCode(),
                     "", "", fname + ' ' + lname, email, "", username, password);
         }
-        
+
         current_user.setUser_id((String) cilent.IDManager.generateId(current_user, true));
-        
+
         current_user.addThisToCsv();
-        
+
         main.Functions.setUserSession(request, current_user);
-        
+
         response.sendRedirect((String) main.Datas.settings.getValue("pages/account"));
     }
 

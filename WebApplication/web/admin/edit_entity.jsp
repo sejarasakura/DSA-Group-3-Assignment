@@ -4,7 +4,7 @@
     Author     : ITSUKA KOTORI
 --%>
 
-<%@page import="pages.EditEntity" %>
+<%@page import="cilent.pages.EditEntity" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%
     EditEntity editEntity = EditEntity.getNewEditEntity(request.getParameter("edit"), request.getParameter("id"));

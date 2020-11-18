@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pages;
+package cilent.pages;
 
 import adt.ArrList;
 import com.google.gson.Gson;
@@ -68,7 +68,7 @@ public class EditAdmin {
         return result;
     }
 
-    public ArrList<String> generateAdminNav() {
+    private ArrList<String> generateAdminNav() {
         ArrList<String> result = new ArrList<String>();
         map.keySet().forEach((m) -> {
             if (m.equals(t)) {
@@ -79,11 +79,11 @@ public class EditAdmin {
         });
         result.add("<div class=\"form-group row\"> <div class=\"col-sm-12\"> <button type=\"button\" class=\"btn btn-success form-control\" data-toggle=\"modal\" data-target=\"#myModal\"> <i class='fas fa-plus'></i> Add new element </button> </div> </div>");
         result.add("<div class=\"modal fade\" id=\"myModal\" role=\"dialog\"> <div class=\"modal-dialog\"> <!-- Modal content--> <div class=\"modal-content\"> <form action=\"/WebApplication/admin/add-new-ele?add=" + edit + "\" method=\"post\"> <div class=\"modal-header\"> <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button> <h4 class=\"modal-title\">Add new element</h4> </div> <div class=\"modal-body\"> <div class=\"form-group row\"> <div class=\"col-sm-6\"> Items name / json key: </div> <div class=\"col-sm-6\"> <input type=\"text\" class=\"form-control\" id=\"add-new\" name=\"add-new\" placeholder=\"Name\"> </div> </div> <div class=\"form-group row\"> <div class=\"col-sm-6\"> <input type=\"text\" class=\"form-control\" id=\"_title\" name=\"_title\" placeholder=\"Title\"> </div> <div class=\"col-sm-6\"> <input type=\"text\" class=\"form-control\" id=\"_url\" name=\"_url\" placeholder=\"URL\"> </div> </div> </div> <div class=\"modal-footer\"> <button type=\"submit\" class=\"btn btn-success\">Add</button> <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button> </div> </form> </div> </div> </div>");
-        result.add("<a href=\"" + main.WebConfig.WEB_URL + "ClearSetting?key="+base+"\" class=\"btn btn-success pull-right\">Reload</a>");
+        result.add("<a href=\"" + main.WebConfig.WEB_URL + "ClearSetting?key=" + base + "\" class=\"btn btn-success pull-right\">Reload</a>");
         return result;
     }
 
-    public ArrList<String> generateAdminNor() {
+    private ArrList<String> generateAdminNor() {
         ArrList<String> result = new ArrList<String>();
         map.keySet().forEach((m) -> {
             if (m.equals(t)) {
@@ -97,15 +97,15 @@ public class EditAdmin {
             result.add(jquery_generate((String) m));
         });
         result.add("});</script>");
-        result.add("<a href=\"" + main.WebConfig.WEB_URL + "ClearSetting?key="+base+"\" class=\"btn btn-success pull-right\">Reload</a>");
+        result.add("<a href=\"" + main.WebConfig.WEB_URL + "ClearSetting?key=" + base + "\" class=\"btn btn-success pull-right\">Reload</a>");
         return result;
     }
 
-    public String jquery_generate(String key) {
+    private String jquery_generate(String key) {
         return "$(\"#p-h-" + key + "\").click(function(){ $(\"#p-b-" + key + "\").toggle(); $(\"#p-f-" + key + "\").toggle(); if($(\"#p-b-" + key + "\").is(\":hidden\")){ $(this).html(\"<span class=\\\"glyphicon glyphicon-plus\\\"></span> show\"); }else{ $(this).html(\"<span class=\\\"glyphicon glyphicon-minus\\\"></span> hide\"); } });";
     }
 
-    public String displayProperties(Iterable prop, String key) {
+    private String displayProperties(Iterable prop, String key) {
         String title = main.Functions.friendlyJsonTitle(key);
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"panel panel-default\">")
@@ -144,11 +144,10 @@ public class EditAdmin {
         return sb.toString();
     }
 
-    public String editProperties(Iterable prop, String key) {
+    private String editProperties(Iterable prop, String key) {
         String title = main.Functions.friendlyJsonTitle(key);
         StringBuilder sb = new StringBuilder();
-        sb
-                .append("<form action=\"/WebApplication/admin/EditElement\" method=\"post\">").append("<div class=\"panel panel-default\">")
+        sb.append("<form action=\"/WebApplication/admin/EditElement\" method=\"post\">").append("<div class=\"panel panel-default\">")
                 .append("<div class=\"panel-heading\">").append("<div class=\"row\"> <div class=\"col-sm-6\"> ")
                 .append(title).append(" </div> <div class=\"col-sm-6\"> <button type=\"button\" class=\"btn btn-default pull-right\" id=\"p-h-")
                 .append(key).append("\"> <span class=\"glyphicon glyphicon-plus\"></span> show </button> </div> </div>")
@@ -185,10 +184,8 @@ public class EditAdmin {
                 sb.append(form_group(base + "." + key + ".child[" + count + "]", "", ""));
                 break;
         }
-        sb
-                .append("</div>")
-                .append("<div class=\"panel-footer\">");
-        sb.append("<div class=\"form-group row\">")
+        sb.append("</div>")
+                .append("<div class=\"panel-footer\">").append("<div class=\"form-group row\">")
                 .append(" <input type=\"hidden\" id=\"count\" name=\"count\" value=\"").append(count).append("\">")
                 .append(" <input type=\"hidden\" id=\"edit\" name=\"edit\" value=\"").append(edit).append("\">")
                 .append(" <input type=\"hidden\" id=\"t\" name=\"t\" value=\"").append(t).append("\">")
@@ -247,7 +244,7 @@ public class EditAdmin {
         return sb.toString();
     }
 
-    public String displayProperties(Map prop, String key) {
+    private String displayProperties(Map prop, String key) {
         String title = main.Functions.friendlyJsonTitle(key);
         ArrList datas = prop.get("child") == null ? new ArrList() : new ArrList((Iterable) prop.get("child"));
         StringBuilder sb = new StringBuilder();
@@ -274,7 +271,7 @@ public class EditAdmin {
         return sb.toString();
     }
 
-    public String editProperties(Map prop, String key) {
+    private String editProperties(Map prop, String key) {
         String title = main.Functions.friendlyJsonTitle(key);
         ArrList datas = prop.get("child") == null ? new ArrList() : new ArrList((Iterable) prop.get("child"));
         StringBuilder sb = new StringBuilder();
@@ -332,26 +329,26 @@ public class EditAdmin {
      * @param url
      * @return
      */
-    public String form_group(String id, String title, String url) {
+    private String form_group(String id, String title, String url) {
         return String.format("<div class=\"form-group row\"> <div class=\"col-sm-6\"> <input type=\"text\" class=\"form-control\" name=\"%s.t\" placeholder=\"Shown Title ( Empty to remove )\" value=\"%s\"> </div> <div class=\"col-sm-6\"> <input type=\"text\" class=\"form-control\" name=\"%s.l\" placeholder=\"To URL\" value=\"%s\"> </div> </div>",
                 id, title, id, url);
     }
 
-    public String form_group_S(String id, String title, String url, String class_s, String show) {
+    private String form_group_S(String id, String title, String url, String class_s, String show) {
         return String.format("<div class=\"form-group row\"> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.t\" placeholder=\"Shown Title ( Empty to remove )\" value=\"%s\"> </div> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.l\" placeholder=\"To URL\" value=\"%s\"> </div> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.show\" placeholder=\"Show = 1 / Not show = 0\" value=\"%s\"> <input type=\"hidden\" class=\"form-control\" name=\"%s.c\" value=\"%s\"></div> </div>",
                 id, title, id, url, id, show, id, class_s);
     }
 
-    public String form_group(String id, String title, String url, String html) {
+    private String form_group(String id, String title, String url, String html) {
         return String.format("<div class=\"form-group row\"> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.t\" placeholder=\"Shown Title ( Empty to remove )\" value=\"%s\"> </div> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.l\" placeholder=\"To URL\" value=\"%s\"> </div> <div class=\"col-sm-4\"> <input type=\"text\" class=\"form-control\" name=\"%s.s\" placeholder=\"Html tag\" value=\"%s\"> </div> </div>",
                 id, title, id, url, id, html);
     }
 
-    public String display_group(String title, String url) {
+    private String display_group(String title, String url) {
         return String.format("<div class=\"form-group row\"> <div class=\"col-sm-6\"> %s </div> <div class=\"col-sm-6\"> %s </div> </div>", title, url);
     }
 
-    public String display_group(String title, String url, String html) {
+    private String display_group(String title, String url, String html) {
         return String.format("<div class=\"form-group row\"> <div class=\"col-sm-4\"> %s </div> <div class=\"col-sm-4\"> %s </div> <div class=\"col-sm-4\"> %s </div> </div>", title, url, html);
     }
 

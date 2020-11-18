@@ -8,13 +8,9 @@ package pages;
 import adt.ArrList;
 import cilent.IDManager;
 import entity.AbstractEntity;
-import entity.Withdraw;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -38,7 +34,7 @@ public class EditEntity {
     private String parameter_id;
 
     public static void main(String[] args) {
-        EditEntity ee = getNewEditEntity("Chat", "");
+        EditEntity ee = getNewEditEntity("Taxi", "");
         System.out.print(ee.getHtml());
     }
 
@@ -59,7 +55,7 @@ public class EditEntity {
         stringBuilder = new StringBuilder();
         classSaving = main.Functions.getSavingClass(refence.getClass());
         if (classSaving == null) {
-            System.out.println(refence.getClass().getName());
+            System.out.println(xenum.OutputColor.TEXT_RED + refence.getClass() + xenum.OutputColor.TEXT_RESET);
             return;
         }
         stringBuilder.append("<form method='post' id='updateform'　name='updateform' action='updateEntity'>");
@@ -216,21 +212,21 @@ public class EditEntity {
                 break;
             case "adt.ArrList":
                 write_type = "text";
-                value = data == null ? "":data.toString();
+                value = data == null ? "" : data.toString();
                 break;
             case "double":
                 write_type = "number";
                 write_query += "step=\"0.1\" min='0' ";
-                value = data == null ? "0.00":String.format("%.2f", data);
+                value = data == null ? "0.00" : String.format("%.2f", data);
                 break;
             case "int":
                 write_type = "number";
-                value = data == null ? "0":String.format("%d", data);
+                value = data == null ? "0" : String.format("%d", data);
                 break;
             case "boolean":
                 write_type = "checkbox";
-                value = data == null ? "false":(boolean)data?"true":"false";
-                write_query += data == "true"?"checked ":" ";
+                value = data == null ? "false" : (boolean) data ? "true" : "false";
+                write_query += data == "true" ? "checked " : " ";
                 break;
         }
         stringBuilder.append("'").append(write_type).append("' ");

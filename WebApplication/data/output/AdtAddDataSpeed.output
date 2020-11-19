@@ -1,0 +1,178 @@
+run:
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestArrListsAddingSpeeds.loopArrList
+# Parameters: (N = 1000000)
+
+# Run progress: 0.00% complete, ETA 00:08:20
+# Fork: 1 of 1
+# Warmup Iteration   1: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   2: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   3: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   4: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   5: ≈ 10⁻⁶ ms/op
+Iteration   1: ≈ 10⁻⁶ ms/op
+Iteration   2: ≈ 10⁻⁶ ms/op
+Iteration   3: ≈ 10⁻⁶ ms/op
+Iteration   4: ≈ 10⁻⁶ ms/op
+Iteration   5: ≈ 10⁻⁶ ms/op
+
+
+Result "com.test.adt.speed.TestArrListsAddingSpeeds.loopArrList":
+  ≈ 10⁻⁶ ms/op
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestArrListsAddingSpeeds.loopArray
+# Parameters: (N = 1000000)
+
+# Run progress: 20.00% complete, ETA 00:06:42
+# Fork: 1 of 1
+# Warmup Iteration   1: 7.748 ms/op
+# Warmup Iteration   2: 7.724 ms/op
+# Warmup Iteration   3: 7.673 ms/op
+# Warmup Iteration   4: 7.841 ms/op
+# Warmup Iteration   5: 8.093 ms/op
+Iteration   1: 11.369 ms/op
+Iteration   2: 10.326 ms/op
+Iteration   3: 7.726 ms/op
+Iteration   4: 7.846 ms/op
+Iteration   5: 7.687 ms/op
+
+
+Result "com.test.adt.speed.TestArrListsAddingSpeeds.loopArray":
+  8.991 ±(99.9%) 6.684 ms/op [Average]
+  (min, avg, max) = (7.687, 8.991, 11.369), stdev = 1.736
+  CI (99.9%): [2.307, 15.675] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestArrListsAddingSpeeds.loopLibArrayList
+# Parameters: (N = 1000000)
+
+# Run progress: 40.00% complete, ETA 00:05:01
+# Fork: 1 of 1
+# Warmup Iteration   1: <failure>
+
+java.lang.OutOfMemoryError: Java heap space
+	at java.util.Arrays.copyOf(Arrays.java:3181)
+	at java.util.ArrayList.grow(ArrayList.java:261)
+	at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:235)
+	at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:227)
+	at java.util.ArrayList.add(ArrayList.java:458)
+	at com.test.adt.speed.TestArrListsAddingSpeeds.loopLibArrayList(TestArrListsAddingSpeeds.java:98)
+	at com.test.adt.speed.jmh_generated.TestArrListsAddingSpeeds_loopLibArrayList_jmhTest.loopLibArrayList_avgt_jmhStub(TestArrListsAddingSpeeds_loopLibArrayList_jmhTest.java:232)
+	at com.test.adt.speed.jmh_generated.TestArrListsAddingSpeeds_loopLibArrayList_jmhTest.loopLibArrayList_AverageTime(TestArrListsAddingSpeeds_loopLibArrayList_jmhTest.java:173)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.openjdk.jmh.runner.BenchmarkHandler$BenchmarkTask.call(BenchmarkHandler.java:453)
+	at org.openjdk.jmh.runner.BenchmarkHandler$BenchmarkTask.call(BenchmarkHandler.java:437)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestArrListsAddingSpeeds.loopQueue
+# Parameters: (N = 1000000)
+
+# Run progress: 60.00% complete, ETA 00:02:30
+# Fork: 1 of 1
+# Warmup Iteration   1: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   2: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   3: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   4: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   5: ≈ 10⁻⁶ ms/op
+Iteration   1: ≈ 10⁻⁶ ms/op
+Iteration   2: ≈ 10⁻⁶ ms/op
+Iteration   3: ≈ 10⁻⁶ ms/op
+Iteration   4: ≈ 10⁻⁶ ms/op
+Iteration   5: ≈ 10⁻⁶ ms/op
+
+
+Result "com.test.adt.speed.TestArrListsAddingSpeeds.loopQueue":
+  ≈ 10⁻⁶ ms/op
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestArrListsAddingSpeeds.loopStack
+# Parameters: (N = 1000000)
+
+# Run progress: 80.00% complete, ETA 00:01:21
+# Fork: 1 of 1
+# Warmup Iteration   1: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   2: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   3: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   4: ≈ 10⁻⁶ ms/op
+# Warmup Iteration   5: ≈ 10⁻⁶ ms/op
+Iteration   1: ≈ 10⁻⁶ ms/op
+Iteration   2: ≈ 10⁻⁶ ms/op
+Iteration   3: ≈ 10⁻⁶ ms/op
+Iteration   4: ≈ 10⁻⁶ ms/op
+Iteration   5: ≈ 10⁻⁶ ms/op
+
+
+Result "com.test.adt.speed.TestArrListsAddingSpeeds.loopStack":
+  ≈ 10⁻⁶ ms/op
+
+
+# Run complete. Total time: 00:07:06
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                 (N)  Mode  Cnt   Score    Error  Units
+TestArrListsAddingSpeeds.loopArrList  1000000  avgt    5  ≈ 10⁻⁶           ms/op
+TestArrListsAddingSpeeds.loopArray    1000000  avgt    5   8.991 ±  6.684  ms/op
+TestArrListsAddingSpeeds.loopQueue    1000000  avgt    5  ≈ 10⁻⁶           ms/op
+TestArrListsAddingSpeeds.loopStack    1000000  avgt    5  ≈ 10⁻⁶           ms/op
+BUILD SUCCESSFUL (total time: 7 minutes 7 seconds)

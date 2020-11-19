@@ -7,11 +7,12 @@ package adt.interfaces;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author none
  * @param <T>
  */
 public interface InterfaceCircularList<T> {
 
-    
-    
+    /**
+     * Teacher is golden
+     */
 }

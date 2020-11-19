@@ -24,7 +24,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 @Fork(value = 2, jvmArgs = {"-Xms2G", "-Xmx2G"})
-public class TestArrListSpeed {
+public class TestLoopsSpeed {
 
     @Param({"10000000"})
     private int N;
@@ -34,7 +34,7 @@ public class TestArrListSpeed {
     public static void main(String[] args) throws RunnerException {
 
         Options opt = new OptionsBuilder()
-                .include(TestArrListSpeed.class.getSimpleName())
+                .include(TestLoopsSpeed.class.getSimpleName())
                 .forks(1)
                 .build();
 

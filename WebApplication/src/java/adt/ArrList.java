@@ -201,7 +201,6 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         if (_index < 0 || _index >= index) {
             throw new IndexOutOfBoundsException();
         }
-
     }
 
     private class ListIterator implements Iterator<T> {

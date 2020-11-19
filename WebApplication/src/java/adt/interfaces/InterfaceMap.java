@@ -59,8 +59,8 @@ public interface InterfaceMap<K, V> extends Map<K, V> {
 
     /**
      * @param key key whose mapping is to be removed from the map
-     * @return the previous value associated with key, or
-     * null if there was no mapping for key.
+     * @return the previous value associated with key, or null if there was no
+     * mapping for key.
      */
     @Override
     V remove(Object key);
@@ -144,7 +144,6 @@ public interface InterfaceMap<K, V> extends Map<K, V> {
         int hashCode();
     }
 
-    // Comparison and hashing
     /**
      * Compares the specified object with this map for equality.
      *

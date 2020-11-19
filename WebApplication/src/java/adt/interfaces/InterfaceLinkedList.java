@@ -11,5 +11,8 @@ package adt.interfaces;
  * @param <T>
  */
 public interface InterfaceLinkedList<T> {
-    
+
+    /**
+     * Teacher is golden
+     */
 }

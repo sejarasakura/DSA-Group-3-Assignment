@@ -1,0 +1,19 @@
+{
+	"data"[
+		{
+			"classname":"Withdraw",
+			"extension":".csv"
+			"fields":[
+				{
+					"type":"java.util.String",
+					"name":"booking_id",
+					"display":true,
+					"update":true,
+					"delete":true,
+					"add":true,
+					"auto_inc":true
+				}
+			]
+		}
+	]
+}

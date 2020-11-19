@@ -30,28 +30,21 @@ public class Datas {
     /**
      *
      * @author ITSUKA KOTORI 
-     * all the driver
+     * all the online driver
      */
     public static ArrList<Driver> drivers;
     
     /**
      *
      * @author ITSUKA KOTORI 
-     * all the car
-     */
-    public static ArrList<Car> cars;
-    
-    /**
-     *
-     * @author ITSUKA KOTORI 
-     * all the customer
+     * all the online customer
      */
     public static ArrList<Customer> customers;
     
     /**
      *
      * @author ITSUKA KOTORI 
-     * all the customer
+     * all the current request booking
      */
     public static XQueue<Booking> currentBooking;
     

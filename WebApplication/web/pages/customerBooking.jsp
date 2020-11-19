@@ -14,8 +14,8 @@
         </jsp:include>
         <style>
             #map {
-                height: 400px;
-                /* The height is 400 pixels */
+                height: 600px;
+                /* The height is 600 pixels */
                 width: 100%;
                 /* The width is the width of the web page */
             }

@@ -25,3 +25,9 @@ server/logs/localhost_access_log.2020-11-11.txt
 /WebApplication/dist/
 WebApplication/data/api.dat
 server/conf/Catalina/localhost/WebApplication.xml
+
+#build
+nbproject/private/
+build/
+nbbuild/
+

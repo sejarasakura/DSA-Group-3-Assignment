@@ -9,18 +9,18 @@ import adt.ArrList;
 import adt.XHashedDictionary;
 import com.univocity.parsers.csv.CsvWriterSettings;
 import entity.User;
+import entity.json.ClassSaving;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import entity.json.ClassSaving;
 import xenum.ErrorDetails;
 
 /**
@@ -167,13 +167,23 @@ public class Functions {
         }
         return new String(new char[count]).replace("\0", str);
     }
-    
-    public static void checkLogin(HttpServletResponse response, User user) throws IOException{
-        if(user == null){
+
+    public static void checkLogin(HttpServletResponse response, User user) throws IOException {
+        if (user == null) {
             response.sendRedirect((String) Datas.settings.getValue("pages/login"));
             return;
         }
-        if(!user.isNotNull())
+        if (!user.isNotNull()) {
             response.sendRedirect((String) Datas.settings.getValue("pages/login"));
+        }
+    }
+
+    static String getProjectDir() {
+        File currDir = new File(".");
+        String path = ((String) currDir.getAbsolutePath());
+        path = path.substring(0, path.length() - 1).split("server")[0];
+        path = path.replace('\\', '/') + "WebApplication/";
+        System.out.println(xenum.OutputColor.TEXT_BLUE + "Loaded path: " + path + xenum.OutputColor.TEXT_RESET);
+        return path;
     }
 }

@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 
-<footer id=customer-footer" style="padding-top: 40px; padding-bottom: 40px; background-color: #555">
+<footer id="customer-footer" style="padding-top: 40px; padding-bottom: 40px; background-color: #555">
 
     <div class="container" style="color: #fff">
         <div class="row">

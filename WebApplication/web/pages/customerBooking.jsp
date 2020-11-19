@@ -21,6 +21,7 @@
             }
 
         </style>
+        <link href="../theme/lib/full-page.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <jsp:include page="<%= main.WebConfig.HEADER_URL%>"/>

@@ -6,11 +6,8 @@
 package cilent;
 
 import adt.ArrList;
-import com.opencsv.bean.CsvBindByName;
 import entity.AbstractEntity;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import org.apache.commons.beanutils.BeanUtils;
 
 /**
  *
@@ -21,7 +18,7 @@ public class FieldSeperator<T extends AbstractEntity> {
 
     private ArrList<Field> fields;
     private T x;
-    
+
     public FieldSeperator() {
         Class cls = x.getClass();
         fields = new ArrList(cls.getDeclaredFields());
@@ -47,7 +44,4 @@ public class FieldSeperator<T extends AbstractEntity> {
     public void setX(T x) {
         this.x = x;
     }
-    
-    
-    
 }

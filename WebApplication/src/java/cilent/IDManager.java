@@ -7,10 +7,7 @@ package cilent;
 
 import adt.ArrList;
 import com.opencsv.bean.*;
-import entity.AbstractEntity;
 import entity.*;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author ITSUKA KOTORI
  */
-public class IDManager extends AbstractEntity{
+public class IDManager extends AbstractEntity {
 
     @CsvBindByName
     private String className;
@@ -54,7 +51,7 @@ public class IDManager extends AbstractEntity{
     public void setIdentityName(String identityName) {
         this.identityName = identityName;
     }
-    
+
     public String getClassName() {
         return className;
     }
@@ -86,23 +83,24 @@ public class IDManager extends AbstractEntity{
     public void setLastSeqNumber(int lastSeqNumber) {
         this.lastSeqNumber = lastSeqNumber;
     }
-    
+
     @Override
     public boolean isNotNull() {
-        if(this.className == null)
+        if (this.className == null) {
             return false;
+        }
         return !this.className.isEmpty();
     }
 
     @Override
     public boolean equals(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
 //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean id_equals(Object obj) {
-        return this.className.equals(((IDManager)obj).className);
+        return this.className.equals(((IDManager) obj).className);
     }
 
     @Override
@@ -112,29 +110,30 @@ public class IDManager extends AbstractEntity{
 
     @Override
     public int compareTo(Object t) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
 //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public static Object generateId(AbstractEntity ref){
+
+    public static Object generateId(AbstractEntity ref) {
         return generateId(ref, false);
     }
-    
-    public static Object generateId(AbstractEntity ref, boolean update){
+
+    public static Object generateId(AbstractEntity ref, boolean update) {
         String str;
         Iterator obj = AbstractEntity.readDataFormCsv(new IDManager());
         ArrList<IDManager> datas = (obj == null) ? new ArrList() : new ArrList(obj);
         boolean job = false;
-        for(int i = 0; i< datas.size() || !job; i++){
-            if(datas.get(i).className.equals(ref.getClass().getName())){
+        for (int i = 0; i < datas.size() || !job; i++) {
+            if (datas.get(i).className.equals(ref.getClass().getName())) {
                 try {
                     str = String.format(datas.get(i).formatString, datas.get(i).lastSeqNumber);
                     Object r;
-                    if(datas.get(i).dataType.equals("java.lang.Integer"))
+                    if (datas.get(i).dataType.equals("java.lang.Integer")) {
                         r = Integer.parseInt(str);
-                    else
+                    } else {
                         r = str;
-                    if(update){
+                    }
+                    if (update) {
                         datas.get(i).lastSeqNumber++;
                         AbstractEntity.reWriteAllDataToCsv(datas);
                     }
@@ -146,13 +145,14 @@ public class IDManager extends AbstractEntity{
         }
         return null;
     }
-    
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         System.out.println(generateId(new Customer()));
         System.out.println(generateId(new Driver()));
         System.out.println(generateId(new Booking()));
     }
-    public static void main2(String[] args){
+
+    public static void main2(String[] args) {
         ArrList<IDManager> im = new ArrList();
         im.add(new IDManager(Customer.class.getName(), "C%05d", String.class.getName(), 1, "user_id"));
         im.add(new IDManager(Driver.class.getName(), "D%05d", String.class.getName(), 1, "user_id"));

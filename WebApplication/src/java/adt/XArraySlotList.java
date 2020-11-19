@@ -6,44 +6,46 @@
 package adt;
 
 import adt.interfaces.InterfaceArrayList;
+import adt.interfaces.InterfaceSlotingElements;
+import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
-import adt.interfaces.InterfaceSlotingElements;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Chun Phang Chew
  * @param <T>
- * 
+ *
  */
-public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotingElements <T>, InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable{
+public class XArraySlotList<T extends Comparable<T>> implements InterfaceSlotingElements<T>, InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable {
 
     final private static int INITIAL_CAPACITY = 0;
     protected T[] data;
     protected int index = -1;
-    
+
     public XArraySlotList() {
-        this((T[])new Comparable[INITIAL_CAPACITY]);
+        this((T[]) new Comparable[INITIAL_CAPACITY]);
     }
 
     public XArraySlotList(T[] array) {
         this.data = array;
         this.index = array.length;
     }
-    
+
     public XArraySlotList(Iterator<T> arrList) {
         this();
-        while(arrList.hasNext()){
+        while (arrList.hasNext()) {
             this.add(arrList.next());
         }
     }
-    
+
     public XArraySlotList(Iterable<T> arrList) {
         this(arrList.iterator());
     }
-    
-    
+
     @Override
     public Iterator<T> iterator() {
         return new ListIterator();
@@ -56,13 +58,13 @@ public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotin
 
     @Override
     public void add(int _index, T element) {
-        CheckRangeForAdd(_index); 
-        
+        CheckRangeForAdd(_index);
+
         if (data.length == index) {
-            ensureCapacity(index + 1); 
+            ensureCapacity(index + 1);
         }
         for (int i = index; i > _index; i--) {
-            data[i] = data[i - 1]; 
+            data[i] = data[i - 1];
         }
         data[_index] = element;
         index++;
@@ -70,7 +72,7 @@ public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotin
 
     @Override
     public void addAll(T[] c) {
-        for(T x: c){
+        for (T x : c) {
             add(index, x);
         }
     }
@@ -78,9 +80,9 @@ public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotin
     @Override
     public void addAll(int _index, T[] c) {
         int count = 0;
-        for(T x: c){
+        for (T x : c) {
             add(_index + count, x);
-            count ++;
+            count++;
         }
     }
 
@@ -91,10 +93,10 @@ public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotin
 
     @Override
     public T remove(int _index) {
-        CheckRange(_index); 
+        CheckRange(_index);
         T x = data[_index];
         for (int i = _index; i < index - 1; i++) {
-            data[i] = data[i + 1]; 
+            data[i] = data[i + 1];
         }
         index--;
         return x;
@@ -102,15 +104,16 @@ public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotin
 
     @Override
     public void set(int _index, T element) {
-        CheckRange(_index); 
+        CheckRange(_index);
         data[_index] = element;
     }
 
     @Override
     public int indexOf(T o) {
-        for(int i = 0; i < index; i ++){
-            if(data[i].equals(o))
+        for (int i = 0; i < index; i++) {
+            if (data[i].equals(o)) {
                 return i;
+            }
         }
         return -1;
     }
@@ -124,41 +127,103 @@ public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotin
     public T[] toArray() {
         return data.clone();
     }
-    
+
     @SuppressWarnings("unchecked")
     public void ensureCapacity(int minCapacity) {
         if (index >= minCapacity) {
             return;
         }
 
-        T[] old = data; 
+        T[] old = data;
         data = (T[]) new Comparable[minCapacity];
 
         System.arraycopy(old, 0, data, 0, index);
 
     }
 
+    @Override
+    public void sort() {
+        this.sort(data, 0, this.index - 1);
+        XStack s = new XStack(this);
+        int i = this.index;
+        while (!s.isEmpty()) {
+            i--;
+            data[i] = (T) s.pop();
+        }
+    }
+
+    @Override
+    public void sortDesc() {
+        this.sort(data, 0, this.index - 1);
+    }
+
+    @Override
+    public boolean sort(String field, Class _class) {
+        try {
+            Method f = _class.getMethod(fieldToGetter(field));
+            boolean r = sort(f);
+            XStack s = new XStack(this);
+            int i = this.index;
+            while (!s.isEmpty()) {
+                i--;
+                data[i] = (T) s.pop();
+            }
+            return r;
+        } catch (SecurityException | NoSuchMethodException ex) {
+            Logger.getLogger(XArraySlotList.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean sortDesc(String field, Class _class) {
+        try {
+            Method f = _class.getMethod(fieldToGetter(field));
+            return sort(f);
+        } catch (SecurityException | NoSuchMethodException ex) {
+            Logger.getLogger(XArraySlotList.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        String r = "";
+        for (T d : (data)) {
+            r += "" + d + ", ";
+        }
+        return r;
+    }
+
     private void CheckRange(int _index) {
-        if (_index < 0 || _index >= index) 
+        if (_index < 0 || _index >= index) {
             throw new IndexOutOfBoundsException();
-        
+        }
+
+    }
+
+    private String fieldToGetter(String name) {
+        return "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
     private void CheckRangeForAdd(int _index) {
+        // cilent is golden
     }
-    
+
     private class ListIterator implements Iterator<T> {
 
         private int iteratorIndex = -1;
+
         @Override
         public boolean hasNext() {
-            return iteratorIndex < index -1;
+            return iteratorIndex < index - 1;
         }
 
         @Override
         public T next() {
-            if (!hasNext()) 
+            if (!hasNext()) {
                 throw new NoSuchElementException();
+            }
             iteratorIndex++;
             return data[iteratorIndex];
         }
@@ -174,73 +239,112 @@ public class XArraySlotList <T extends Comparable<T>> implements InterfaceSlotin
         }
 
     }
-    
-    private int partition(T[] arr, int low, int high)
-    { 
-        T pivot = arr[high];  
-        int i = (low-1); // index of smaller element 
-        for (int j=low; j<high; j++) 
-        { 
-            try{
-            // If current element is smaller than the pivot 
-            if (arr[j].compareTo(pivot) > 0) 
-            { 
-                i++; 
-  
-                // swap arr[i] and arr[j] 
-                T temp = arr[i]; 
-                arr[i] = arr[j]; 
-                arr[j] = temp; 
-            } 
-            }catch(Exception ex){}
-        } 
-  
-        // swap arr[i+1] and arr[high] (or pivot) 
-        T temp = arr[i+1]; 
-        arr[i+1] = arr[high]; 
-        arr[high] = temp; 
-  
-        return i+1; 
-    } 
-  
-    private void sort(T[] arr, int low, int high)
-    { 
-        if (low < high) 
-        { 
-            /* pi is partitioning index, arr[pi] is  
-              now at right place */
-            int pi = partition(arr, low, high); 
-  
-            // Recursively sort elements before 
-            // partition and after partition 
-            sort(arr, low, pi-1); 
-            sort(arr, pi+1, high); 
-        } 
-    } 
-    
-    @Override
-    public void sort(){
-        this.sort(data, 0, this.index - 1);
-        XStack s = new XStack(this);
-        int i = this.index;
-        while(!s.isEmpty()){
-            i--;
-            data[i] = (T) s.pop();
+
+    private int partition(T[] arr, int low, int high) {
+        T pivot = arr[high];
+        int i = (low - 1); // index of smaller element
+        for (int j = low; j < high; j++) {
+            try {
+                // If current element is smaller than the pivot
+                if (arr[j].compareTo(pivot) > 0) {
+                    i++;
+
+                    // swap arr[i] and arr[j]
+                    T temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            } catch (Exception ex) {
+            }
         }
-    }
-    
-    @Override
-    public void sortDesc(){
-        this.sort(data, 0, this.index - 1);
-    }
-    
-    @Override
-    public String toString(){
-        String r = "";
-        for(T d: (data)){
-            r +=""+  d + ", ";
-        }
-        return r;
+
+        // swap arr[i+1] and arr[high] (or pivot)
+        T temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
     }
 
+    private void sort(T[] arr, int low, int high) {
+        if (low < high) {
+            /* pi is partitioning index, arr[pi] is
+              now at right place */
+            int pi = partition(arr, low, high);
+
+            // Recursively sort elements before
+            // partition and after partition
+            sort(arr, low, pi - 1);
+            sort(arr, pi + 1, high);
+        }
+    }
+
+    /**
+     * @param getter reflection methods to call getter dynamic
+     * @param slot_method to get the default slotting methods Object
+     * compareTo(Object) | null for int
+     */
+    private int partition_m(T[] arr, int low, int high, Method slot_method, Method getter) {
+        T pivot = arr[high];
+        int i = (low - 1); // index of smaller element
+        for (int j = low; j < high; j++) {
+            try {
+                // If current element is smaller than the pivot
+                int result;
+                if (slot_method != null) {
+                    result = (int) slot_method.invoke(getter.invoke(arr[j]), getter.invoke(pivot));
+                } else {
+                    result = Integer.compare((int) getter.invoke(arr[j]), (int) getter.invoke(pivot));
+                }
+                if (result > 0) {
+                    i++;
+                    // swap arr[i] and arr[j]
+                    T temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            } catch (Exception ex) {
+
+            }
+        }
+
+        // swap arr[i+1] and arr[high] (or pivot)
+        T temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
+    }
+
+    private void sort_m(T[] arr, int low, int high, Method slot_method, Method getter) {
+        if (low < high) {
+            /* pi is partitioning index, arr[pi] is
+              now at right place */
+            int pi = partition_m(arr, low, high, slot_method, getter);
+
+            // Recursively sort elements before
+            // partition and after partition
+            sort_m(arr, low, pi - 1, slot_method, getter);
+            sort_m(arr, pi + 1, high, slot_method, getter);
+        }
+    }
+
+    private boolean sort(Method methods) {
+        Class<?> cls = methods.getReturnType();
+        try {
+            if (cls != int.class) {
+                Method m = cls.getDeclaredMethod("compareTo", cls);
+                if (m.getReturnType() != int.class) {
+                    return false;
+                }
+                this.sort_m(data, 0, this.index - 1, m, methods);
+                return true;
+            }
+            this.sort_m(data, 0, this.index - 1, null, methods);
+        } catch (NoSuchMethodException | SecurityException ex) {
+            Logger.getLogger(XArraySlotList.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return false;
+    }
 }

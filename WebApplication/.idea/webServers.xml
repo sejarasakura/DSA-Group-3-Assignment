@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="07e05661-2a8f-4ac1-907e-27d7902a7fe4" name="gg" url="http://localhost">
+        <fileTransfer mountedRoot="C:\Users\ITSUKA KOTORI\Documents\GitHub\DSA-Group-3-Assignment\server\work\Catalina\localhost\WebApplication" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

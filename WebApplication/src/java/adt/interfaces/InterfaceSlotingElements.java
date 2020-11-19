@@ -11,17 +11,29 @@ package adt.interfaces;
  * @param <T>
  */
 public interface InterfaceSlotingElements<T> {
-    
+
     /*
     *  The Sloting Methood Only If need Array method pls implement ArrayList
-    *  Tecknic using quick slot 
-    */
+    *  Tecknic using quick slot
+     */
     void sort();
-    
+
     /*
     *  The Sloting Methood Only If need Array method pls implement ArrayList
-    *  Tecknic using quick slot 
-    */
+    *  Tecknic using quick slot
+     */
     void sortDesc();
-    
+
+    /*
+    *  The Sloting Methood Only If need Array method pls implement ArrayList
+    *  Tecknic using quick slot
+     */
+    boolean sort(String field, Class _class);
+
+    /*
+    *  The Sloting Methood Only If need Array method pls implement ArrayList
+    *  Tecknic using quick slot
+     */
+    boolean sortDesc(String field, Class _class);
+
 }

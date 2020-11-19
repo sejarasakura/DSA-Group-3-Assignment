@@ -63,10 +63,9 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
 
     @Override
     public void add(int _index, T element) {
-        CheckRangeForAdd(_index);
 
         if (data.length == index) {
-            ensureCapacity(index + 1);
+            expandCapacity(index + 1);
         }
         for (int i = index; i > _index; i--) {
             data[i] = data[i - 1];
@@ -133,46 +132,42 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         return data.clone();
     }
 
-    @SuppressWarnings("unchecked")
-    public void ensureCapacity(int minCapacity) {
-        if (index >= minCapacity) {
-            return;
-        }
-
-        T[] old = data;
-        data = (T[]) new Object[minCapacity];
-
-        System.arraycopy(old, 0, data, 0, index);
-
+    public T[] clear() {
+        T[] x = data.clone();
+        data = (T[]) new Object[INITIAL_CAPACITY];
+        index = 0;
+        return x;
     }
 
     public boolean removeSameElement() {
         if (index == 0 || index == 1) {
             return true;
         }
-
-        T[] temp = (T[]) new Object[index];
+        XArraySlotList a = new XArraySlotList(this);
+        a.sort();
+        data = (T[]) a.toArray();
         int j = 0;
         for (int i = 0; i < index - 1; i++) {
             if (!data[i].equals(data[i + 1])) {
-                temp[j++] = data[i];
+                data[j++] = data[i];
             }
         }
-        temp[j++] = data[index - 1];
-
-        System.arraycopy(temp, 0, data, 0, j);
-
+        data[j++] = data[index - 1];
+        index = j;
         return true;
     }
 
-    private void CheckRange(int _index) {
-        if (_index < 0 || _index >= index) {
-            throw new IndexOutOfBoundsException();
+    @Override
+    public String toString() {
+        if (index <= 0) {
+            return "Empty";
         }
-
-    }
-
-    private void CheckRangeForAdd(int _index) {
+        String r = "";
+        for (int i = 0; i < (index - 1); i++) {
+            r += "" + data[i] + ", ";
+        }
+        r += "" + data[index - 1];
+        return r;
     }
 
     public boolean find_AbstractEntity(AbstractEntity x) {
@@ -187,6 +182,26 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
 
     public boolean isEmpty() {
         return index <= 0;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void expandCapacity(int minCapacity) {
+        if (index >= minCapacity) {
+            return;
+        }
+
+        T[] old = data;
+        data = (T[]) new Object[minCapacity];
+
+        System.arraycopy(old, 0, data, 0, index);
+
+    }
+
+    private void CheckRange(int _index) {
+        if (_index < 0 || _index >= index) {
+            throw new IndexOutOfBoundsException();
+        }
+
     }
 
     private class ListIterator implements Iterator<T> {
@@ -217,15 +232,5 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
             Iterator.super.forEachRemaining(cnsmr);
         }
 
-    }
-
-    @Override
-    public String toString() {
-        String r = "";
-        for (int i = 0; i < (index - 1); i++) {
-            r += "" + data[i] + ", ";
-        }
-        r += "" + data[index];
-        return r;
     }
 }

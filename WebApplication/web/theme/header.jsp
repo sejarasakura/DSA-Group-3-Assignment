@@ -13,7 +13,7 @@
 <% User u = main.Functions.getUserSession(request); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<nav class="navbar navbar-default" style="padding-top: 10px; padding-bottom: 10px;">
+<nav id="customer-header" class="navbar navbar-default" style="padding-top: 10px; padding-bottom: 10px;">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="" href="<%= getServletContext().getInitParameter("DomainName")%>">

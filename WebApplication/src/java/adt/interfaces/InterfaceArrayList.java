@@ -7,7 +7,7 @@ package adt.interfaces;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  * @param <T>
  */
 public interface InterfaceArrayList<T> {

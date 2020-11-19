@@ -10,7 +10,7 @@ package adt.interfaces;
  * @author ITSUKA KOTORI
  * @param <T>
  */
-public interface InterfaceSlotingElements<T> {
+public interface InterfaceSortingElements<T> {
 
     /**
      * The Sorting Method Only If need Array method pls implement ArrayList

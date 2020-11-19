@@ -143,7 +143,7 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         if (index == 0 || index == 1) {
             return true;
         }
-        XArraySlotList a = new XArraySlotList(this);
+        XArraySortList a = new XArraySortList(this);
         a.sort();
         data = (T[]) a.toArray();
         int j = 0;

@@ -5,7 +5,7 @@
  */
 package com.test.adt.exe;
 
-import adt.XArraySlotList;
+import adt.XArraySortList;
 
 /**
  *
@@ -33,7 +33,7 @@ public class TestSlotList {
      * Example of sorting Integer
      */
     public static void text_one() {
-        XArraySlotList list = new XArraySlotList();
+        XArraySortList list = new XArraySortList();
         list.add(1);
         list.add(-1);
         list.add(9);
@@ -54,7 +54,7 @@ public class TestSlotList {
      */
     public static void text_two() {
 
-        XArraySlotList<String> list = new XArraySlotList<String>();
+        XArraySortList<String> list = new XArraySortList<String>();
         list.add("Haha");
         list.add("Gegeo");
         list.add("Jojo");
@@ -75,7 +75,7 @@ public class TestSlotList {
      */
     public static void text_three() {
 
-        XArraySlotList list = new XArraySlotList();
+        XArraySortList list = new XArraySortList();
         list.add(new Haha(-1, "H"));
         list.add(new Haha(-7, "M"));
         list.add(new Haha(20, "G"));
@@ -95,7 +95,7 @@ public class TestSlotList {
      * Example of sorting Comparable
      */
     public static void text_four() {
-        XArraySlotList list = new XArraySlotList();
+        XArraySortList list = new XArraySortList();
         list.add(new Haha(-1, "H"));
         list.add(new Haha(-7, "M"));
         list.add(new Haha(20, "G"));

@@ -6,13 +6,13 @@
 package adt;
 
 import adt.interfaces.InterfaceArrayList;
-import adt.interfaces.InterfaceSlotingElements;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import adt.interfaces.InterfaceSortingElements;
 
 /**
  *
@@ -20,29 +20,29 @@ import java.util.logging.Logger;
  * @param <T>
  *
  */
-public class XArraySlotList<T extends Comparable<T>> implements InterfaceSlotingElements<T>, InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable {
+public class XArraySortList<T extends Comparable<T>> implements InterfaceSortingElements<T>, InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable {
 
     final private static int INITIAL_CAPACITY = 0;
     protected T[] data;
     protected int index = -1;
 
-    public XArraySlotList() {
+    public XArraySortList() {
         this((T[]) new Comparable[INITIAL_CAPACITY]);
     }
 
-    public XArraySlotList(T[] array) {
+    public XArraySortList(T[] array) {
         this.data = array;
         this.index = array.length;
     }
 
-    public XArraySlotList(Iterator<T> arrList) {
+    public XArraySortList(Iterator<T> arrList) {
         this();
         while (arrList.hasNext()) {
             this.add(arrList.next());
         }
     }
 
-    public XArraySlotList(Iterable<T> arrList) {
+    public XArraySortList(Iterable<T> arrList) {
         this(arrList.iterator());
     }
 
@@ -170,7 +170,7 @@ public class XArraySlotList<T extends Comparable<T>> implements InterfaceSloting
             }
             return r;
         } catch (SecurityException | NoSuchMethodException ex) {
-            Logger.getLogger(XArraySlotList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XArraySortList.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
@@ -181,7 +181,7 @@ public class XArraySlotList<T extends Comparable<T>> implements InterfaceSloting
             Method f = _class.getMethod(fieldToGetter(field));
             return sort(f);
         } catch (SecurityException | NoSuchMethodException ex) {
-            Logger.getLogger(XArraySlotList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XArraySortList.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
@@ -342,7 +342,7 @@ public class XArraySlotList<T extends Comparable<T>> implements InterfaceSloting
             }
             this.sort_m(data, 0, this.index - 1, null, methods);
         } catch (NoSuchMethodException | SecurityException ex) {
-            Logger.getLogger(XArraySlotList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XArraySortList.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
         return false;

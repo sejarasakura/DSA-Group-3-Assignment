@@ -21,7 +21,7 @@ public class Test {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         Integer[] intarr = {0, 4, 2, 6 ,9};
-        adt.XArraySlotList<Integer> arrslotlist = new adt.XArraySlotList<Integer> (intarr);
+        adt.XArraySortList<Integer> arrslotlist = new adt.XArraySortList<Integer> (intarr);
         adt.ArrList<Integer> arrlist = new adt.ArrList<Integer> (arrslotlist);
         adt.XQueue<Integer> qlist = new adt.XQueue<Integer> (arrslotlist);
         adt.XStack<Integer> slist = new adt.XStack<Integer> (arrslotlist);

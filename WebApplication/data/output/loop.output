@@ -1,0 +1,143 @@
+run:
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestArrListSpeed.loopFor
+# Parameters: (N = 10000000)
+
+# Run progress: 0.00% complete, ETA 00:06:40
+# Fork: 1 of 1
+# Warmup Iteration   1: 56.277 ms/op
+# Warmup Iteration   2: 56.048 ms/op
+# Warmup Iteration   3: 57.656 ms/op
+# Warmup Iteration   4: 57.638 ms/op
+# Warmup Iteration   5: 58.557 ms/op
+Iteration   1: 56.879 ms/op
+Iteration   2: 56.117 ms/op
+Iteration   3: 56.060 ms/op
+Iteration   4: 56.853 ms/op
+Iteration   5: 55.907 ms/op
+
+
+Result "com.test.adt.speed.TestArrListSpeed.loopFor":
+  56.363 ±(99.9%) 1.791 ms/op [Average]
+  (min, avg, max) = (55.907, 56.363, 56.879), stdev = 0.465
+  CI (99.9%): [54.572, 58.155] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestArrListSpeed.loopForEach
+# Parameters: (N = 10000000)
+
+# Run progress: 25.00% complete, ETA 00:05:03
+# Fork: 1 of 1
+# Warmup Iteration   1: 61.090 ms/op
+# Warmup Iteration   2: 61.509 ms/op
+# Warmup Iteration   3: 61.495 ms/op
+# Warmup Iteration   4: 61.484 ms/op
+# Warmup Iteration   5: 61.473 ms/op
+Iteration   1: 61.123 ms/op
+Iteration   2: 61.578 ms/op
+Iteration   3: 61.038 ms/op
+Iteration   4: 62.565 ms/op
+Iteration   5: 61.883 ms/op
+
+
+Result "com.test.adt.speed.TestArrListSpeed.loopForEach":
+  61.637 ±(99.9%) 2.396 ms/op [Average]
+  (min, avg, max) = (61.038, 61.637, 62.565), stdev = 0.622
+  CI (99.9%): [59.241, 64.034] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestArrListSpeed.loopIterator
+# Parameters: (N = 10000000)
+
+# Run progress: 50.00% complete, ETA 00:03:22
+# Fork: 1 of 1
+# Warmup Iteration   1: 68.464 ms/op
+# Warmup Iteration   2: 68.836 ms/op
+# Warmup Iteration   3: 68.859 ms/op
+# Warmup Iteration   4: 68.825 ms/op
+# Warmup Iteration   5: 69.013 ms/op
+Iteration   1: 68.700 ms/op
+Iteration   2: 69.954 ms/op
+Iteration   3: 91.388 ms/op
+Iteration   4: 94.349 ms/op
+Iteration   5: 71.023 ms/op
+
+
+Result "com.test.adt.speed.TestArrListSpeed.loopIterator":
+  79.083 ±(99.9%) 48.729 ms/op [Average]
+  (min, avg, max) = (68.700, 79.083, 94.349), stdev = 12.655
+  CI (99.9%): [30.354, 127.812] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestArrListSpeed.loopWhile
+# Parameters: (N = 10000000)
+
+# Run progress: 75.00% complete, ETA 00:01:41
+# Fork: 1 of 1
+# Warmup Iteration   1: 66.462 ms/op
+# Warmup Iteration   2: 59.591 ms/op
+# Warmup Iteration   3: 58.301 ms/op
+# Warmup Iteration   4: 58.757 ms/op
+# Warmup Iteration   5: 56.749 ms/op
+Iteration   1: 57.046 ms/op
+Iteration   2: 56.299 ms/op
+Iteration   3: 56.166 ms/op
+Iteration   4: 56.761 ms/op
+Iteration   5: 56.973 ms/op
+
+
+Result "com.test.adt.speed.TestArrListSpeed.loopWhile":
+  56.649 ±(99.9%) 1.529 ms/op [Average]
+  (min, avg, max) = (56.166, 56.649, 57.046), stdev = 0.397
+  CI (99.9%): [55.120, 58.177] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:06:45
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                           (N)  Mode  Cnt   Score    Error  Units
+TestArrListSpeed.loopFor       10000000  avgt    5  56.363 ±  1.791  ms/op
+TestArrListSpeed.loopForEach   10000000  avgt    5  61.637 ±  2.396  ms/op
+TestArrListSpeed.loopIterator  10000000  avgt    5  79.083 ± 48.729  ms/op
+TestArrListSpeed.loopWhile     10000000  avgt    5  56.649 ±  1.529  ms/op
+BUILD SUCCESSFUL (total time: 6 minutes 46 seconds)

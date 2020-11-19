@@ -5,7 +5,6 @@ import adt.XStack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.awt.Point;
-import java.lang.reflect.Array;
 
 
 /*
@@ -13,8 +12,6 @@ import java.lang.reflect.Array;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 /**
  *
  * @author ITSUKA KOTORI
@@ -37,9 +34,10 @@ public class JavaApplicationDSA {
         stack.push(new Point(12, -4));
         ArrList a = new ArrList(stack);
         System.out.println(g.toJson(a, ArrList.class));
+        System.out.println(main.WebConfig.api_key);
     }
-    
-    public static void ShowDirectory(Object args){
-        
+
+    public static void ShowDirectory(Object args) {
+
     }
 }

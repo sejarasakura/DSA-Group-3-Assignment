@@ -14,7 +14,7 @@
         <style type="text/css">
           #map{ width:700px; height: 500px; }
         </style>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG24EIIq1K0uhrWm2_LUTF3W3KeVcDqWw"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key="></script>
         <title>Save Marker Example</title>
     </head>
     <body>

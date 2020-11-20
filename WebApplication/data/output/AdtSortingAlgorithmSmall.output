@@ -1,0 +1,176 @@
+run:
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestSortListSlotAlgorithmSpeedsSmall.BubberSloting
+# Parameters: (N = 50)
+
+# Run progress: 0.00% complete, ETA 00:08:20
+# Fork: 1 of 1
+# Warmup Iteration   1: 26.153 ns/op
+# Warmup Iteration   2: 24.453 ns/op
+# Warmup Iteration   3: 23.424 ns/op
+# Warmup Iteration   4: 23.155 ns/op
+# Warmup Iteration   5: 23.627 ns/op
+Iteration   1: 23.144 ns/op
+Iteration   2: 23.315 ns/op
+Iteration   3: 22.564 ns/op
+Iteration   4: 23.832 ns/op
+Iteration   5: 23.404 ns/op
+
+
+Result "com.test.adt.speed.TestSortListSlotAlgorithmSpeedsSmall.BubberSloting":
+  23.252 ±(99.9%) 1.773 ns/op [Average]
+  (min, avg, max) = (22.564, 23.252, 23.832), stdev = 0.461
+  CI (99.9%): [21.478, 25.025] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestSortListSlotAlgorithmSpeedsSmall.InsertSloting
+# Parameters: (N = 50)
+
+# Run progress: 20.00% complete, ETA 00:06:42
+# Fork: 1 of 1
+# Warmup Iteration   1: 23.680 ns/op
+# Warmup Iteration   2: 25.277 ns/op
+# Warmup Iteration   3: 20.555 ns/op
+# Warmup Iteration   4: 20.305 ns/op
+# Warmup Iteration   5: 20.289 ns/op
+Iteration   1: 20.305 ns/op
+Iteration   2: 20.220 ns/op
+Iteration   3: 20.324 ns/op
+Iteration   4: 20.640 ns/op
+Iteration   5: 20.386 ns/op
+
+
+Result "com.test.adt.speed.TestSortListSlotAlgorithmSpeedsSmall.InsertSloting":
+  20.375 ±(99.9%) 0.614 ns/op [Average]
+  (min, avg, max) = (20.220, 20.375, 20.640), stdev = 0.159
+  CI (99.9%): [19.761, 20.989] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestSortListSlotAlgorithmSpeedsSmall.MergeSloting
+# Parameters: (N = 50)
+
+# Run progress: 40.00% complete, ETA 00:05:01
+# Fork: 1 of 1
+# Warmup Iteration   1: 2804.707 ns/op
+# Warmup Iteration   2: 2794.278 ns/op
+# Warmup Iteration   3: 2777.517 ns/op
+# Warmup Iteration   4: 2677.124 ns/op
+# Warmup Iteration   5: 2725.741 ns/op
+Iteration   1: 2762.962 ns/op
+Iteration   2: 2801.155 ns/op
+Iteration   3: 2776.341 ns/op
+Iteration   4: 2728.937 ns/op
+Iteration   5: 2713.018 ns/op
+
+
+Result "com.test.adt.speed.TestSortListSlotAlgorithmSpeedsSmall.MergeSloting":
+  2756.482 ±(99.9%) 137.224 ns/op [Average]
+  (min, avg, max) = (2713.018, 2756.482, 2801.155), stdev = 35.637
+  CI (99.9%): [2619.259, 2893.706] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestSortListSlotAlgorithmSpeedsSmall.QuickSloting
+# Parameters: (N = 50)
+
+# Run progress: 60.00% complete, ETA 00:03:20
+# Fork: 1 of 1
+# Warmup Iteration   1: 383.261 ns/op
+# Warmup Iteration   2: 374.726 ns/op
+# Warmup Iteration   3: 375.077 ns/op
+# Warmup Iteration   4: 378.641 ns/op
+# Warmup Iteration   5: 379.548 ns/op
+Iteration   1: 367.836 ns/op
+Iteration   2: 379.353 ns/op
+Iteration   3: 376.359 ns/op
+Iteration   4: 385.027 ns/op
+Iteration   5: 373.113 ns/op
+
+
+Result "com.test.adt.speed.TestSortListSlotAlgorithmSpeedsSmall.QuickSloting":
+  376.338 ±(99.9%) 24.902 ns/op [Average]
+  (min, avg, max) = (367.836, 376.338, 385.027), stdev = 6.467
+  CI (99.9%): [351.436, 401.240] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.adt.speed.TestSortListSlotAlgorithmSpeedsSmall.SelectionSloting
+# Parameters: (N = 50)
+
+# Run progress: 80.00% complete, ETA 00:01:40
+# Fork: 1 of 1
+# Warmup Iteration   1: 678.098 ns/op
+# Warmup Iteration   2: 441.549 ns/op
+# Warmup Iteration   3: 646.190 ns/op
+# Warmup Iteration   4: 638.152 ns/op
+# Warmup Iteration   5: 640.759 ns/op
+Iteration   1: 635.275 ns/op
+Iteration   2: 646.728 ns/op
+Iteration   3: 634.040 ns/op
+Iteration   4: 642.483 ns/op
+Iteration   5: 651.261 ns/op
+
+
+Result "com.test.adt.speed.TestSortListSlotAlgorithmSpeedsSmall.SelectionSloting":
+  641.957 ±(99.9%) 28.358 ns/op [Average]
+  (min, avg, max) = (634.040, 641.957, 651.261), stdev = 7.364
+  CI (99.9%): [613.600, 670.315] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:08:22
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                              (N)  Mode  Cnt     Score     Error  Units
+TestSortListSlotAlgorithmSpeedsSmall.BubberSloting      50  avgt    5    23.252 ±   1.773  ns/op
+TestSortListSlotAlgorithmSpeedsSmall.InsertSloting      50  avgt    5    20.375 ±   0.614  ns/op
+TestSortListSlotAlgorithmSpeedsSmall.MergeSloting       50  avgt    5  2756.482 ± 137.224  ns/op
+TestSortListSlotAlgorithmSpeedsSmall.QuickSloting       50  avgt    5   376.338 ±  24.902  ns/op
+TestSortListSlotAlgorithmSpeedsSmall.SelectionSloting   50  avgt    5   641.957 ±  28.358  ns/op
+BUILD SUCCESSFUL (total time: 8 minutes 23 seconds)

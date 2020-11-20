@@ -14,6 +14,7 @@
 <title><%= main.Functions.getWebpageTitle(request, "title")%>
 </title>
 <%-- import css lib--%>
+<link href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/bootstrap/foo-css.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/datatable/datatables.min_1.css" rel="stylesheet"/>

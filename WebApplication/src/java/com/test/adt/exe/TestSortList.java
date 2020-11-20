@@ -11,7 +11,7 @@ import adt.XArraySortList;
  *
  * @author ITSUKA KOTORI
  */
-public class TestSlotList {
+public class TestSortList {
 
     /**
      * Main drive to test the functions

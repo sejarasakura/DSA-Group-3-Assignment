@@ -4,6 +4,7 @@
     Author     : ITSUKA KOTORI
 --%>
 
+<%@page import="main.Datas"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,8 @@
     </head>
     <body>
         <jsp:include page="<%= main.WebConfig.HEADER_URL%>"/>
-        <h1>Haha</h1>
+        
+        
         <jsp:include page="<%= main.WebConfig.FOOTER_URL%>"/>
     </body>
 </html>

@@ -34,7 +34,9 @@ public class RegisterAction extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
+        /* Decalation */
         String fname = request.getParameter("fname");
         String lname = request.getParameter("lname");
         String username = request.getParameter("username");
@@ -42,11 +44,12 @@ public class RegisterAction extends HttpServlet {
         String password2 = request.getParameter("password2");
         String email = request.getParameter("email");
         String registerAsDriver = request.getParameter("registerAsDriver");
-        ArrList user;
+        ArrList users;
         Iterator reader;
         User current_user;
         boolean usernameUsed, driver = false;
 
+        /* Read data to array list */
         if (registerAsDriver != null) {
             reader = AbstractEntity.readDataFormCsv(new Driver());
             driver = true;
@@ -55,22 +58,28 @@ public class RegisterAction extends HttpServlet {
             reader = AbstractEntity.readDataFormCsv(new Customer());
         }
 
+        /* Check have data or not */
         if (reader == null) {
-            user = new ArrList();
+            users = new ArrList();
         } else {
-            user = new ArrList(reader);
+            users = new ArrList(reader);
         }
 
-        usernameUsed = User.searchUsername(user, username);
+        /* Find username is it excite or not */
+        usernameUsed = User.searchUsername(users, username);
         if (usernameUsed) {
             response.sendRedirect(request.getHeader("referer") + "?E=18");
             return;
         }
-        usernameUsed = User.searchUsername(user, email);
+
+        /* Find email is it excite or not */
+        usernameUsed = User.searchEmail(users, email);
         if (usernameUsed) {
             response.sendRedirect(request.getHeader("referer") + "?E=20");
             return;
         }
+
+        /* Double check password is it same or not */
         if (password == null ? password2 != null : !password.equals(password2)) {
             response.sendRedirect(request.getHeader("referer") + "?E=19");
             return;
@@ -86,7 +95,9 @@ public class RegisterAction extends HttpServlet {
 
         current_user.setUser_id((String) cilent.IDManager.generateId(current_user, true));
 
-        current_user.addThisToCsv();
+        users.add(current_user);
+
+        AbstractEntity.reWriteAllDataToCsv(users);
 
         main.Functions.setUserSession(request, current_user);
 

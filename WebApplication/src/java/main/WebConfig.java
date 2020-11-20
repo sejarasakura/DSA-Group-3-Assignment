@@ -8,6 +8,7 @@ package main;
 import adt.ArrList;
 import entity.json.ClassSaving;
 import entity.json.CreateDisplayClassJson;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 /**
@@ -85,6 +86,11 @@ public class WebConfig {
      * Profile image storing directory
      */
     public final static String PROFILE_IMG_URL = WebConfig.IMG_URL + "profile/";
+
+    /**
+     * Profile image storing directory
+     */
+    public final static DecimalFormat ROUND = new DecimalFormat("###.##");
 
     /**
      * Date format

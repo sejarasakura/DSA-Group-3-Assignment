@@ -6,13 +6,13 @@
 package adt;
 
 import adt.interfaces.InterfaceArrayList;
+import adt.interfaces.InterfaceSortingElements;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import adt.interfaces.InterfaceSortingElements;
 
 /**
  *
@@ -281,18 +281,18 @@ public class XArraySortList<T extends Comparable<T>> implements InterfaceSorting
 
     /**
      * @param getter reflection methods to call getter dynamic
-     * @param slot_method to get the default slotting methods Object
+     * @param sort_method to get the default sorting methods Object
      * compareTo(Object) | null for int
      */
-    private int partition_m(T[] arr, int low, int high, Method slot_method, Method getter) {
+    private int partition_m(T[] arr, int low, int high, Method sort_method, Method getter) {
         T pivot = arr[high];
         int i = (low - 1); // index of smaller element
         for (int j = low; j < high; j++) {
             try {
                 // If current element is smaller than the pivot
                 int result;
-                if (slot_method != null) {
-                    result = (int) slot_method.invoke(getter.invoke(arr[j]), getter.invoke(pivot));
+                if (sort_method != null) {
+                    result = (int) sort_method.invoke(getter.invoke(arr[j]), getter.invoke(pivot));
                 } else {
                     result = Integer.compare((int) getter.invoke(arr[j]), (int) getter.invoke(pivot));
                 }
@@ -316,16 +316,16 @@ public class XArraySortList<T extends Comparable<T>> implements InterfaceSorting
         return i + 1;
     }
 
-    private void sort_m(T[] arr, int low, int high, Method slot_method, Method getter) {
+    private void sort_m(T[] arr, int low, int high, Method sort_method, Method getter) {
         if (low < high) {
             /* pi is partitioning index, arr[pi] is
               now at right place */
-            int pi = partition_m(arr, low, high, slot_method, getter);
+            int pi = partition_m(arr, low, high, sort_method, getter);
 
             // Recursively sort elements before
             // partition and after partition
-            sort_m(arr, low, pi - 1, slot_method, getter);
-            sort_m(arr, pi + 1, high, slot_method, getter);
+            sort_m(arr, low, pi - 1, sort_method, getter);
+            sort_m(arr, pi + 1, high, sort_method, getter);
         }
     }
 

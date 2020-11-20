@@ -90,3 +90,16 @@
 #customer-footer{
     margin-top: 50px;
 }
+.btn-rent{
+    background-color: #ff1a4b;
+    color: #fff;
+}
+.btn-rent:hover{
+    background-color: #d5243e;
+    color: #fff;
+}
+.btn-rent:disabled{
+    background-color: #d5243e;
+    color: #fff;
+    opacity: 0.5;
+}

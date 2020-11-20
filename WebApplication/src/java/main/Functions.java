@@ -41,6 +41,7 @@ public class Functions {
         Datas.settings.add("pages/login", WebConfig.WEB_URL + "pages/login.jsp");
         Datas.settings.add("pages/register", WebConfig.WEB_URL + "pages/register.jsp");
         Datas.settings.add("pages/account", WebConfig.WEB_URL + "pages/account.jsp");
+        Datas.settings.add("widget/cartype-select", "../widget/carousel_feeinfo.jsp");
         return 1;
     }
 
@@ -127,7 +128,28 @@ public class Functions {
     public static String getProfileUrl(HttpServletRequest request) {
         User u = getUserSession(request);
         if (u != null) {
-            return WebConfig.PROFILE_IMG_URL + u.getUsername();
+            boolean _exists;
+            String url = WebConfig.PROFILE_IMG_URL + u.getUsername();
+            File temp;
+            try {
+                temp = File.createTempFile(url, ".png");
+                _exists = temp.exists();
+                if (_exists) {
+                    return url + ".png";
+                }
+                temp = File.createTempFile(url, ".jpeg");
+                _exists = temp.exists();
+                if (_exists) {
+                    return url + ".png";
+                }
+                temp = File.createTempFile(url, ".jpg");
+                _exists = temp.exists();
+                if (_exists) {
+                    return url + ".png";
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return (String) Datas.settings.getValue("image/user");
     }
@@ -178,7 +200,7 @@ public class Functions {
         }
     }
 
-    static String getProjectDir() {
+    public static String getProjectDir() {
         File currDir = new File(".");
         String path = ((String) currDir.getAbsolutePath());
         path = path.substring(0, path.length() - 1).split("server")[0];
@@ -186,4 +208,5 @@ public class Functions {
         System.out.println(xenum.OutputColor.TEXT_BLUE + "Loaded path: " + path + xenum.OutputColor.TEXT_RESET);
         return path;
     }
+
 }

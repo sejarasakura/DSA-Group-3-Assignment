@@ -21,7 +21,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.beanutils.BeanUtils;
 
 /**
  *
@@ -44,8 +43,8 @@ public class Customer extends User<Customer> {
     public Customer() {
     }
 
-    public Customer(String current_booking_id, String memberType_id, 
-            String user_id, String ic, String name, String email, 
+    public Customer(String current_booking_id, String memberType_id,
+            String user_id, String ic, String name, String email,
             String phoneNumber, String username, String password) {
         super(user_id, ic, name, email, phoneNumber, "c", username, password);
         this.current_booking_id = current_booking_id;
@@ -75,7 +74,7 @@ public class Customer extends User<Customer> {
 
     @Override
     public String toString() {
-        return "Customer{" + "current_booking=" + current_booking_id + ", memberType=" + memberType_id + ", " + '}';
+        return "Customer{" + "current_booking_id=" + current_booking_id + ", memberType_id=" + memberType_id + ", " + super.toString() + '}';
     }
 
     @Override
@@ -123,7 +122,7 @@ public class Customer extends User<Customer> {
         }
         for (Field f : field) {
             if (f.isAnnotationPresent(CsvBindByName.class)) {
-                
+
             }
         }
     }

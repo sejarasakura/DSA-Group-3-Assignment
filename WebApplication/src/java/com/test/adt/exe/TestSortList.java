@@ -6,6 +6,12 @@
 package com.test.adt.exe;
 
 import adt.XArraySortList;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +32,14 @@ public class TestSortList {
         text_three();
         System.out.println();
         text_four();
+        System.out.println();
+        try {
+            text_five();
+            System.out.println();
+            text_six();
+        } catch (ParseException ex) {
+            Logger.getLogger(TestSortList.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println();
     }
 
@@ -112,6 +126,78 @@ public class TestSortList {
         System.out.println("After desc slot(field, Haha.class) : " + list);
         list.sortDesc("field2", Haha.class);
         System.out.println("After desc slot(field2, Haha.class) : " + list);
+    }
+
+    public static void text_five() throws ParseException {
+        XArraySortList list = new XArraySortList();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        list.add(dateFormat.parse("2021-10-31"));
+        list.add(dateFormat.parse("1999-12-3"));
+        list.add(dateFormat.parse("2006-7-1"));
+        list.add(dateFormat.parse("2009-2-22"));
+        list.add(dateFormat.parse("2023-10-1"));
+        list.add(new Date());
+        System.out.println("Slot Comparable to is call the method compareTo in the class\n=================");
+        System.out.println("Before slot : " + list);
+        list.sort("month", Date.class);
+        System.out.println("After slot(month, Date.class) : " + list);
+        list.sort("year", Date.class);
+        System.out.println("After slot(year, Date.class) : " + list);
+        list.sortDesc("month", Date.class);
+        System.out.println("After desc slot(month, Date.class) : " + list);
+        list.sortDesc("year", Date.class);
+        System.out.println("After desc slot(year, Date.class) : " + list);
+        list.sort();
+        System.out.println("After slot() : " + list);
+        list.sortDesc();
+        System.out.println("After desc slot() : " + list);
+    }
+
+    public static void text_six() throws ParseException {
+        XArraySortList list = new XArraySortList();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        list.add(new GGa(dateFormat.parse("2021-10-31")));
+        list.add(new GGa(dateFormat.parse("1999-12-3")));
+        list.add(new GGa(dateFormat.parse("1999-10-3")));
+        list.add(new GGa(dateFormat.parse("1999-5-29")));
+        list.add(new GGa(dateFormat.parse("2006-7-1")));
+        list.add(new GGa(dateFormat.parse("2009-2-22")));
+        list.add(new GGa(dateFormat.parse("2023-10-1")));
+        list.add(new GGa(new Date()));
+        System.out.println("Slot Comparable to is call the method compareTo in the class\n=================");
+        System.out.println("Before slot : " + list);
+        System.out.println(list.sort("date", GGa.class));
+        System.out.println("After slot(date, GGa.class) : " + list);
+        System.out.println(list.sortDesc("date", GGa.class));
+        System.out.println("After sortDesc(date, GGa.class) : " + list);
+    }
+
+    public static class GGa implements Comparable {
+
+        static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        private Date date;
+
+        public GGa(Date date) {
+            this.date = date;
+        }
+
+        public Date getDate() {
+            return date;
+        }
+
+        public void setDate(Date date) {
+            this.date = date;
+        }
+
+        @Override
+        public int compareTo(Object t) {
+            return this.date.compareTo(((GGa) t).getDate());
+        }
+
+        @Override
+        public String toString() {
+            return "GGa{" + "date=" + dateFormat.format(date) + '}';
+        }
     }
 
     public static class Haha implements Comparable {

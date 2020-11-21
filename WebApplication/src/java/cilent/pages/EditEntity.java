@@ -208,7 +208,7 @@ public class EditEntity {
                 break;
             case "adt.ArrList":
                 write_type = "text";
-                value = data == null ? "" : data.toString();
+                value = data == null ? "" : ((ArrList) data).toInput();
                 break;
             case "double":
                 write_type = "number";
@@ -225,7 +225,6 @@ public class EditEntity {
                 write_query += data == "true" ? "checked " : " ";
                 break;
         }
-        stringBuilder.append("'").append(write_type).append("' ");
         if (add) {
             prefix = "add_";
             if (fb.isAuto_inc()) {
@@ -240,7 +239,7 @@ public class EditEntity {
             }
         }
         stringBuilder
-                .append("<td><div class=\"form-group\"><input type=")
+                .append("<td><div class=\"form-group\"><input ")
                 .append("type='").append(write_type).append("' ")
                 .append("id='").append(prefix).append(fb.getName()).append("' ")
                 .append("name='").append(prefix).append(fb.getName()).append("' ")

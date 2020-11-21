@@ -140,15 +140,14 @@ public class Functions {
                 temp = File.createTempFile(url, ".jpeg");
                 _exists = temp.exists();
                 if (_exists) {
-                    return url + ".png";
+                    return url + ".jpeg";
                 }
                 temp = File.createTempFile(url, ".jpg");
                 _exists = temp.exists();
                 if (_exists) {
-                    return url + ".png";
+                    return url + ".jpg";
                 }
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return (String) Datas.settings.getValue("image/user");
@@ -207,6 +206,14 @@ public class Functions {
         path = path.replace('\\', '/') + "WebApplication/";
         System.out.println(xenum.OutputColor.TEXT_BLUE + "Loaded path: " + path + xenum.OutputColor.TEXT_RESET);
         return path;
+    }
+
+    public static String fieldToGetter(String name) {
+        return new StringBuilder().append("get").append(name.substring(0, 1).toUpperCase()).append(name.substring(1)).toString();
+    }
+
+    public static String fieldToSetter(String name) {
+        return new StringBuilder().append("set").append(name.substring(0, 1).toUpperCase()).append(name.substring(1)).toString();
     }
 
 }

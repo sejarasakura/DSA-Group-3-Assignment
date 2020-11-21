@@ -33,8 +33,6 @@
                     onSubmit: function (result) {
                         if (result) {
                             var input = $("<input>").attr("name", "jsp-action").val("add");
-                            input.type = 'hidden';
-                            input2.type = 'hidden';
                             $('#updateform').append(input);
                             $('#updateform').append(input2);
                             $('#updateform').submit();
@@ -52,12 +50,11 @@
                     body: "Do you sure want to update ? the record is no backup. ",
                     onSubmit: function (result) {
                         if (result) {
-                            var input = $("<input>").attr("name", "jsp-action").val("update");
+                            var input3 = $("<input>").attr("name", "jsp-action").val("update");
                             var input = $("<input>").attr("name", "id").val("${param.id}");
-                            input.type = 'hidden';
-                            input2.type = 'hidden';
                             $('#updateform').append(input);
                             $('#updateform').append(input2);
+                            $('#updateform').append(input3);
                             $('#updateform').submit();
                         } else {
                         }
@@ -74,8 +71,6 @@
                     onSubmit: function (result) {
                         if (result) {
                             var input = $("<input>").attr("name", "jsp-action").val("add");
-                            input.type = 'hidden';
-                            input2.type = 'hidden';
                             $('#updateform').append(input);
                             $('#updateform').append(input2);
                             $('#updateform').submit();

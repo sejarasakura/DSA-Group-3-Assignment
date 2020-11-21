@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static main.Datas.TYPE_SWITCH;
 import xenum.ErrorDetails;
 
 /**
@@ -34,7 +35,7 @@ public class Functions {
     }
 
     public static int startUpInitialData() {
-        Datas.settings = new XHashedDictionary<String, Object>(256);
+        Datas.settings = new XHashedDictionary<String, Object>();
         Datas.settings.add("image/logo", WebConfig.IMG_URL + "logo.png");
         Datas.settings.add("image/user", WebConfig.IMG_URL + "user.png");
         Datas.settings.add("text/title", "Rentcars.com");
@@ -214,6 +215,10 @@ public class Functions {
 
     public static String fieldToSetter(String name) {
         return new StringBuilder().append("set").append(name.substring(0, 1).toUpperCase()).append(name.substring(1)).toString();
+    }
+
+    public static boolean isGeneralType(String type) {
+        return TYPE_SWITCH.contains(type);
     }
 
 }

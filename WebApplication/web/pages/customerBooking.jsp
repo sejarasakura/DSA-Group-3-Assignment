@@ -240,8 +240,6 @@
                 calculatePrice('price_<%= i%>', <%= types.get(i).getBase_fair_price()%>, <%= types.get(i).getMinimum_price()%>,
             <%= types.get(i).getPrice_per_km()%>, <%= types.get(i).getPrice_per_min()%>, dist_map, time_map) + "\n";
             <%}%>
-
-                alert(data);
             }
             function calculatePrice(element_id, base_fare, min_fare, per_km, per_min, dist_map, time_map) {
                 const output = document.getElementById(element_id);

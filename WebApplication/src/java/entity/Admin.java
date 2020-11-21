@@ -9,7 +9,7 @@ package entity;
  *
  * @author ITSUKA KOTORI
  */
-public class Admin extends User{
+public class Admin extends User {
 
     public Admin() {
         this.setRole("a");
@@ -18,7 +18,7 @@ public class Admin extends User{
     public Admin(String user_id, String ic, String name, String email, String phoneNumber, String role, String username, String password) {
         super(user_id, ic, name, email, phoneNumber, "a", username, password);
     }
-    
+
     @Override
     public User login(User data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -41,12 +41,12 @@ public class Admin extends User{
 
     @Override
     public boolean id_equals(Object obj) {
-        return this.equals(obj);
+        return super.id_equals(obj);
     }
 
     @Override
     public int compareTo(Object t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

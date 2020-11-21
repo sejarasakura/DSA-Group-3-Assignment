@@ -7,6 +7,7 @@ package adt;
 
 import adt.interfaces.InterfaceArrayList;
 import adt.interfaces.InterfaceSortingElements;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -303,8 +304,8 @@ public class XArraySortList<T extends Comparable<T>> implements InterfaceSorting
                     arr[i] = arr[j];
                     arr[j] = temp;
                 }
-            } catch (Exception ex) {
-
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                Logger.getLogger(XArraySortList.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

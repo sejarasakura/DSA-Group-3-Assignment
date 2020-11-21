@@ -6,7 +6,8 @@
 package adt;
 
 import adt.interfaces.InterfaceHashDictionary;
-import adt.node.TableEntry;
+import adt.node.Entry;
+import adt.node.NewTableEntry;
 import java.util.*;
 
 /**
@@ -17,99 +18,138 @@ import java.util.*;
  */
 public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, Cloneable, java.io.Serializable {
 
-    private TableEntry<K, V>[] hashTable;
-    private int numberOfEntries;
+    /**
+     * The table, resized as necessary. Length MUST Always be a power of two.
+     */
+    private NewTableEntry<K, V>[] table;
+
+    /**
+     * size
+     */
+    private int size;
+
+    /**
+     * The next size value at which to resize (capacity * load factor).
+     */
+    int threshold;
+
+    /**
+     * The load factor for the hash table.
+     */
+    final float loadFactor;
 
     /**
      * Default size of the array
      */
     private static final int DEFAULT_SIZE = 16;
 
+    /**
+     * The maximum capacity, used if a higher value specified
+     */
+    static final int MAXIMUM_CAPACITY = 1 << 30;
+
+    /**
+     * Load factor default value
+     */
+    static final float DEFAULT_LOAD_FACTOR = 0.75f;
+
+    /**
+     * The number of times this HashMap has been structurally
+     */
+    transient int modCount;
+
     public XHashedDictionary() {
-        this(DEFAULT_SIZE);
+        this(DEFAULT_SIZE, DEFAULT_LOAD_FACTOR);
     }
 
-    public XHashedDictionary(int tableSize) {
-        hashTable = new TableEntry[tableSize];
-        numberOfEntries = 0;
+    public XHashedDictionary(int initialCapacity, float loadFactor) {
+
+        if (initialCapacity < 0) {
+            throw new IllegalArgumentException("Illegal initial capacity: "
+                    + initialCapacity);
+        }
+        if (initialCapacity > MAXIMUM_CAPACITY) {
+            initialCapacity = MAXIMUM_CAPACITY;
+        }
+        if (loadFactor <= 0 || Float.isNaN(loadFactor)) {
+            throw new IllegalArgumentException("Illegal load factor: "
+                    + loadFactor);
+        }
+
+        int capacity = 1;
+        while (capacity < initialCapacity) {
+            capacity <<= 1;
+        }
+
+        this.loadFactor = loadFactor;
+        threshold = (int) (capacity * loadFactor);
+        table = new NewTableEntry[capacity];
     }
 
     public XHashedDictionary(Map data) {
-        this(data.size());
+        this(data.size(), DEFAULT_LOAD_FACTOR);
         data.keySet().forEach((_item) -> {
-            this.add((K)_item, (V)data.get(_item));
+            this.add((K) _item, (V) data.get(_item));
         });
     }
 
     @Override
     public V add(K key, V value) {
 
-        V oldValue; // value to return
-
-        if (isFull()) {
-            rehash();
+        if (key == null) {
+            return putForNullKey(value);
+        }
+        int hash = hash(key.hashCode());
+        int i = indexFor(hash, table.length);
+        for (NewTableEntry<K, V> e = table[i]; e != null; e = e.next) {
+            Object k;
+            if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+                V oldValue = e.value;
+                e.value = value;
+                e.recordAccess(this);
+                return oldValue;
+            }
         }
 
-        int index = getHashIndex(key);
-
-        if ((hashTable[index] == null) || hashTable[index].isRemoved()) { // key not found, so insert new entry
-            hashTable[index] = new TableEntry<K, V>(key, value);
-            numberOfEntries++;
-            oldValue = null;
-        } else {
-            oldValue = hashTable[index].getValue();
-            hashTable[index].setValue(value);
-        } // end if
-
-        return oldValue;
+        modCount++;
+        addEntry(hash, key, value, i);
+        return null;
 
     }
 
     @Override
     public V remove(K key) {
-        V removedValue;
 
-        int index = getHashIndex(key);
-        index = locate(index, key);
+        NewTableEntry<K, V> e = removeEntryForKey(key);
+        return (e == null ? null : e.value);
 
-        if (index != -1) {
-            removedValue = hashTable[index].getValue();
-            hashTable[index].setToRemoved();
-            numberOfEntries--;
-            return removedValue;
-        }
-        return null;
     }
 
     @Override
     public V getValue(K key) {
 
-        V result;
-
-        int index = getHashIndex(key);
-        index = locate(index, key);
-
-        if (index != -1) {
-            result = hashTable[index].getValue();
-            return result;
+        if (key == null) {
+            return getForNullKey();
         }
-
+        int hash = hash(key.hashCode());
+        for (NewTableEntry<K, V> e = table[indexFor(hash, table.length)];
+                e != null;
+                e = e.next) {
+            Object k;
+            if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+                return e.value;
+            }
+        }
         return null;
 
     }
-    
-    public Map getMap(){
-        Map map = new HashMap();
-        for (TableEntry<K, V> hashTable1 : hashTable) {
-            if ((hashTable1 != null) && hashTable1.isIn()) {
-                map.put(hashTable1.getKey(), hashTable1.getValue());
-            }
-        }
-        return map;
+
+    public Map getMap() {
+        return null;
     }
 
     private int locate(int index, K key) {
-        if (hashTable[index] == null || !key.equals(hashTable[index].getKey())) {
+        if (table[index] == null || !key.equals(table[index].getKey())) {
             return -1;
         } else {
             return index;
@@ -118,12 +158,13 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
 
     @Override
     public boolean contains(K key) {
-        return getValue(key) != null;
+
+        return getEntry(key) != null;
     }
 
     @Override
     public boolean isEmpty() {
-        return numberOfEntries == 0;
+        return size == 0;
     }
 
     @Override
@@ -133,62 +174,195 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
 
     @Override
     public int getSize() {
-        return numberOfEntries;
+        return size;
     }
 
     @Override
     public void clear() {
-        for (int index = 0; index < hashTable.length; index++) {
-            hashTable[index] = null;
+        modCount++;
+        Entry[] tab = table;
+        for (int i = 0; i < tab.length; i++) {
+            tab[i] = null;
         }
-
-        numberOfEntries = 0;
-    }
-
-    private int getHashIndex(K key) {
-
-        int hashIndex = key.hashCode() % hashTable.length;
-
-        if (hashIndex < 0) {
-            hashIndex = hashIndex + hashTable.length;
-        } // end if
-
-        return hashIndex;
-    }
-
-    /**
-     * Task: Increases the size of the hash table to twice its old size.
-     */
-    private void rehash() {
-        TableEntry<K, V>[] oldTable = hashTable;
-        int oldSize = hashTable.length;
-        int newSize = 2 * oldSize;
-
-        hashTable = new TableEntry[newSize];
-        numberOfEntries = 0;
-
-        for (int index = 0; index < oldSize; index++) {
-            if ((oldTable[index] != null) && oldTable[index].isIn()) {
-                add(oldTable[index].getKey(), oldTable[index].getValue());
-            }
-        }
+        size = 0;
 
     }
 
     @Override
     public String toString() {
-        String outputStr = "";
-        for (int index = 0; index < hashTable.length; index++) {
-            outputStr += String.format("%4d. ", index);
-            if (hashTable[index] == null) {
-                outputStr += "null " + "\n";
-            } else if (hashTable[index].isRemoved()) {
-                outputStr += "notIn " + "\n";
+        StringBuilder outputStr = new StringBuilder();
+        for (int index = 0; index < table.length; index++) {
+
+            if (table[index] == null) {
             } else {
-                outputStr += hashTable[index].getKey() + " " + hashTable[index].getValue() + "\n";
+                outputStr.append(index).append(table[index].getKey()).append(" ")
+                        .append(table[index].getValue()).append("\n");
             }
         } // end for
-        outputStr += "\n";
-        return outputStr;
+        outputStr.append("\n");
+        return outputStr.toString();
+    }
+
+    public boolean containsValue(Object value) {
+        if (value == null) {
+            return containsNullValue();
+        }
+
+        NewTableEntry[] tab = table;
+        for (int i = 0; i < tab.length; i++) {
+            for (NewTableEntry e = tab[i]; e != null; e = e.next) {
+                if (value.equals(e.value)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Removes and returns the entry associated with the specified key in the
+     * HashMap. Returns null if the HashMap contains no mapping for this key.
+     */
+    final NewTableEntry<K, V> removeEntryForKey(Object key) {
+        int hash = (key == null) ? 0 : hash(key.hashCode());
+        int i = indexFor(hash, table.length);
+        NewTableEntry<K, V> prev = table[i];
+        NewTableEntry<K, V> e = prev;
+
+        while (e != null) {
+            NewTableEntry<K, V> next = e.next;
+            Object k;
+            if (e.hash == hash && ((k = e.key) == key || (key != null && key.equals(k)))) {
+                modCount++;
+                size--;
+                if (prev == e) {
+                    table[i] = next;
+                } else {
+                    prev.next = next;
+                }
+                e.recordRemoval(this);
+                return e;
+            }
+            prev = e;
+            e = next;
+        }
+
+        return e;
+    }
+
+    /**
+     * Subclass overrides this to alter the behavior of put method.
+     */
+    void addEntry(int hash, K key, V value, int bucketIndex) {
+        NewTableEntry<K, V> e = table[bucketIndex];
+        table[bucketIndex] = new NewTableEntry<>(hash, key, value, e);
+        if (size++ >= threshold) {
+            resize(2 * table.length);
+        }
+    }
+
+    void resize(int newCapacity) {
+        Entry[] oldTable = table;
+        int oldCapacity = oldTable.length;
+        if (oldCapacity == MAXIMUM_CAPACITY) {
+            threshold = Integer.MAX_VALUE;
+            return;
+        }
+
+        NewTableEntry[] newTable = new NewTableEntry[newCapacity];
+        transfer(newTable);
+        table = newTable;
+        threshold = (int) (newCapacity * loadFactor);
+    }
+
+    /**
+     * Offloaded version of put for null keys
+     */
+    private V putForNullKey(V value) {
+        for (NewTableEntry<K, V> e = table[0]; e != null; e = e.next) {
+            if (e.key == null) {
+                V oldValue = e.value;
+                e.value = value;
+                e.recordAccess(this);
+                return oldValue;
+            }
+        }
+        modCount++;
+        addEntry(0, null, value, 0);
+        return null;
+    }
+
+    /**
+     * Transfers all entries from current table to newTable.
+     */
+    void transfer(NewTableEntry[] newTable) {
+        NewTableEntry[] src = table;
+        int newCapacity = newTable.length;
+        for (int j = 0; j < src.length; j++) {
+            NewTableEntry<K, V> e = src[j];
+            if (e != null) {
+                src[j] = null;
+                do {
+                    NewTableEntry<K, V> next = e.next;
+                    int i = indexFor(e.hash, newCapacity);
+                    e.next = newTable[i];
+                    newTable[i] = e;
+                    e = next;
+                } while (e != null);
+            }
+        }
+    }
+
+    /**
+     * Applies a supplemental hash function to a given hashCode
+     */
+    static int hash(int h) {
+        h ^= (h >>> 20) ^ (h >>> 12);
+        return h ^ (h >>> 7) ^ (h >>> 4);
+    }
+
+    /**
+     * Returns index for hash code h.
+     */
+    static int indexFor(int h, int length) {
+        return h & (length - 1);
+    }
+
+    private V getForNullKey() {
+        for (NewTableEntry<K, V> e = table[0]; e != null; e = e.next) {
+            if (e.key == null) {
+                return e.value;
+            }
+        }
+        return null;
+    }
+
+    final NewTableEntry<K, V> getEntry(Object key) {
+        int hash = (key == null) ? 0 : hash(key.hashCode());
+        for (NewTableEntry<K, V> e = table[indexFor(hash, table.length)];
+                e != null;
+                e = e.next) {
+            Object k;
+            if (e.hash == hash
+                    && ((k = e.key) == key || (key != null && key.equals(k)))) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Special-case code for containsValue with null argument
+     */
+    private boolean containsNullValue() {
+        NewTableEntry[] tab = table;
+        for (NewTableEntry tab1 : tab) {
+            for (NewTableEntry e = tab1; e != null; e = e.next) {
+                if (e.value == null) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

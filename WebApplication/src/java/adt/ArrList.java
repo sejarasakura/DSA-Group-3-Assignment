@@ -224,6 +224,22 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         }
     }
 
+    public String toInput() {
+        if (index <= 0) {
+            return "";
+        }
+        return this.toString();
+    }
+
+    public void formInput(String input) {
+        this.clear();
+        if (!input.contains(",")) {
+            return;
+        }
+        this.data = (T[]) input.split(",");
+        this.index = data.length;
+    }
+
     private class ListIterator implements Iterator<T> {
 
         private int iteratorIndex = -1;

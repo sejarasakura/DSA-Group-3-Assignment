@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/datatable/datatables.min_1.css" rel="stylesheet"/>
-<link href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/datatable/datatables.min_1.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/bootstrap/css/toogle-switch.css">
 
@@ -31,7 +30,7 @@
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/bootstrap/bootstrap-show-modal.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/datatable/datatables.min_1.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/validator/jquery.validate.min.js"></script>
-<script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/datatable/additional-methods.min.js"></script>
+<script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/validator/additional-methods.min.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/Master.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 

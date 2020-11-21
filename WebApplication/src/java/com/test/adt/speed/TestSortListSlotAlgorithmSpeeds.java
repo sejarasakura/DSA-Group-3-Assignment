@@ -92,6 +92,7 @@ public class TestSortListSlotAlgorithmSpeeds {
                     array[j] = temp;
                 }
             }
+
             if (alreadySorted == true) {
                 break;
             }

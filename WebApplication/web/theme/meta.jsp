@@ -28,6 +28,7 @@
 <%-- import javascript lib--%>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/jquery/jquery-3.5.1.min.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/bootstrap/bootstrap-show-modal.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/datatable/datatables.min_1.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/validator/jquery.validate.min.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/datatable/additional-methods.min.js"></script>

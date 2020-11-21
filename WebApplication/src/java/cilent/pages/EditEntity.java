@@ -8,6 +8,8 @@ package cilent.pages;
 import adt.ArrList;
 import cilent.IDManager;
 import entity.AbstractEntity;
+import entity.json.ClassSaving;
+import entity.json.FeildAccessbility;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -15,8 +17,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import entity.json.ClassSaving;
-import entity.json.FeildAccessbility;
 
 /**
  *
@@ -77,19 +77,13 @@ public class EditEntity {
         return stringBuilder.toString();
     }
 
-    private String toGetter() {
-        StringBuilder sb = new StringBuilder();
-        char[] data = classSaving.getFields().get(j).getName().toCharArray();
-        data[0] = Character.toUpperCase(data[0]);
-        sb.append("get").append(data);
-        return sb.toString();
-    }
-
     private void generateFooter(AbstractEntity ref) {
         try {
             stringBuilder.append("<tfoot><tr>");
             stringBuilder.append("<td>");
-            submitIcon("glyphicon-plus", "");
+            if (this.classSaving.isAdd()) {
+                submitIcon("glyphicon-plus", "");
+            }
             stringBuilder.append("</td>");
             for (j = 0; j < classSaving.getFields().size(); j++) {
                 write_one_input(ref, classSaving.getFields().get(j), true);
@@ -105,8 +99,7 @@ public class EditEntity {
             stringBuilder.append("<thead><tr>");
             stringBuilder.append("<th class=\"th-sm\">====</th>");
             for (j = 0; j < classSaving.getFields().size(); j++) {
-                System.out.println(classSaving.getFields().get(j).getName() + ref.getClass());
-                feilds.add(ref.getClass().getMethod(toGetter()));
+                feilds.add(ref.getClass().getMethod(main.Functions.fieldToGetter(classSaving.getFields().get(j).getName())));
                 stringBuilder.append("<th class=\"th-sm\">").append(classSaving.getFields().get(j).getName()).append("</th>");
                 if (classSaving.getFields().get(j).getName().equals(classSaving.getIdentifier())) {
                     this.identifier_index = j;
@@ -123,7 +116,9 @@ public class EditEntity {
             if (feilds.get(identifier_index).invoke(entity).equals(this.parameter_id)) {
                 stringBuilder.append("<tr>");
                 stringBuilder.append("<td>");
-                displayIcon(entity.getClass().getSimpleName(), "glyphicon-trash");
+                if (this.classSaving.isDelete()) {
+                    submitIcon("glyphicon-trash", "");
+                }
                 displayIcon(entity.getClass().getSimpleName(), "glyphicon-remove");
                 submitIcon("glyphicon-circle-arrow-up", "");
                 stringBuilder.append("</td>");
@@ -132,7 +127,9 @@ public class EditEntity {
             } else {
                 stringBuilder.append("<tr>");
                 stringBuilder.append("<td>");
-                displayIcon(entity.getClass().getSimpleName(), "glyphicon-trash");
+                if (this.classSaving.isDelete()) {
+                    submitIcon("glyphicon-trash", "");
+                }
                 displayIcon(entity.getClass().getSimpleName(), (String) feilds.get(identifier_index).invoke(entity), "glyphicon-pencil", "");
                 stringBuilder.append("</td>");
                 printDisplayBody(entity);
@@ -197,7 +194,6 @@ public class EditEntity {
         data = null;
         idsss = null;
         prefix = "";
-        stringBuilder.append("<td><div class=\"form-group\"><input type=");
         data = feilds.get(j).invoke(entity);
         switch (fb.getType()) {
             case "java.lang.String":
@@ -238,14 +234,17 @@ public class EditEntity {
                 value = (idsss instanceof Integer) ? String.format("%d", idsss) : (String) idsss;
             }
         } else {
+            prefix = "update_";
             if (!fb.isUpdate()) {
                 write_query += "disabled ";
             }
         }
-        stringBuilder.append("type='").append(write_type).append("' ");
-        stringBuilder.append("id='").append(prefix).append(fb.getName()).append("' ");
-        stringBuilder.append("name='").append(prefix).append(fb.getName()).append("' ");
-        stringBuilder.append("value='").append(value).append("' ");
-        stringBuilder.append(write_query).append("></div></td>");
+        stringBuilder
+                .append("<td><div class=\"form-group\"><input type=")
+                .append("type='").append(write_type).append("' ")
+                .append("id='").append(prefix).append(fb.getName()).append("' ")
+                .append("name='").append(prefix).append(fb.getName()).append("' ")
+                .append("value='").append(value).append("' ")
+                .append(write_query).append("></div></td>");
     }
 }

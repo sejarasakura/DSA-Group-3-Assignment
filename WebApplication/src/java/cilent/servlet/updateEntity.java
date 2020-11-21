@@ -5,8 +5,8 @@
  */
 package cilent.servlet;
 
+import cilent.UpdateEntityListCilent;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,20 +32,19 @@ public class updateEntity extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String jsp_action = request.getParameter("jsp-action");
-            String edit = request.getParameter("edit");
-            String id = request.getParameter("id");
+        String jsp_action = request.getParameter("jsp-action");
+        String edit = request.getParameter("edit");
 
-            switch (jsp_action.toLowerCase()) {
-                case "delete":
-                    break;
-                case "add":
-                    break;
-                case "update":
-                    break;
-            }
+        switch (jsp_action.toLowerCase()) {
+            case "delete":
+                break;
+            case "add":
+                break;
+            case "update":
+                UpdateEntityListCilent x = new UpdateEntityListCilent(edit, request);
+                break;
         }
+        response.sendRedirect(main.WebConfig.ADMIN_URL + "edit_entity.jsp?edit=" + edit);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

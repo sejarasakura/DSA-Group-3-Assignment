@@ -57,6 +57,8 @@ Iteration   4: 62.565 ms/op
 Iteration   5: 61.883 ms/op
 
 
+
+
 Result "com.test.adt.speed.TestArrListSpeed.loopForEach":
   61.637 ±(99.9%) 2.396 ms/op [Average]
   (min, avg, max) = (61.038, 61.637, 62.565), stdev = 0.622

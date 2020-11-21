@@ -715,7 +715,47 @@
         ],
         "index": 7
       }
+    },
+    {
+      "classname": "entity.InfoMessage",
+      "extension": ".csv",
+      "identifier": "code",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "code",
+            "display": true,
+            "update": false,
+            "auto_inc": true
+          },
+          {
+            "type": "java.lang.String",
+            "name": "name",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "decription",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "cssClass",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 4
+      }
     }
   ],
-  "index": 13
+  "index": 14
 }

@@ -157,6 +157,27 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         return true;
     }
 
+    public T searchItem(T element) {
+        ArrList<Integer> r = search(element);
+        if (r.isEmpty()) {
+            return null;
+        }
+        return data[r.get(0)];
+    }
+
+    public ArrList<Integer> search(T element) {
+
+        ArrList<Integer> result = new ArrList<Integer>();
+
+        for (int i = 0; i < index - 1; i++) {
+            if (data[i].equals(data[i + 1])) {
+                result.add(i);
+            }
+        }
+
+        return result;
+    }
+
     @Override
     public String toString() {
         if (index <= 0) {

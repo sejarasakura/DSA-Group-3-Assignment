@@ -27,16 +27,65 @@
         $(document).ready(function () {
             var input2 = $("<input>").attr("name", "edit").val("${param.edit}");
             $(".glyphicon-plus").click(function () {
-                var input = $("<input>").attr("name", "jsp-action").val("add");
-                $('#updateform').append(input);
-                $('#updateform').append(input2);
-                $('#updateform').submit();
+                $.showConfirm({
+                    title: "Confirm add",
+                    body: "Do you sure want to add ? ",
+                    onSubmit: function (result) {
+                        if (result) {
+                            var input = $("<input>").attr("name", "jsp-action").val("add");
+                            input.type = 'hidden';
+                            input2.type = 'hidden';
+                            $('#updateform').append(input);
+                            $('#updateform').append(input2);
+                            $('#updateform').submit();
+                        } else {
+                        }
+                    },
+                    textTrue: "Add", Truecls: "btn btn-success",
+                    textFalse: "No", Falsecls: "btn btn-secondary",
+                    onDispose: function () {}
+                });
             });
             $(".glyphicon-circle-arrow-up").click(function () {
-                var input = $("<input>").attr("name", "jsp-action").val("update");
-                $('#updateform').append(input);
-                $('#updateform').append(input2);
-                $('#updateform').submit();
+                $.showConfirm({
+                    title: "Confirm update",
+                    body: "Do you sure want to update ? the record is no backup. ",
+                    onSubmit: function (result) {
+                        if (result) {
+                            var input = $("<input>").attr("name", "jsp-action").val("update");
+                            var input = $("<input>").attr("name", "id").val("${param.id}");
+                            input.type = 'hidden';
+                            input2.type = 'hidden';
+                            $('#updateform').append(input);
+                            $('#updateform').append(input2);
+                            $('#updateform').submit();
+                        } else {
+                        }
+                    },
+                    textTrue: "Update", Truecls: "btn btn-warning",
+                    textFalse: "No", Falsecls: "btn btn-secondary",
+                    onDispose: function () {}
+                });
+            });
+            $(".glyphicon-trash").click(function () {
+                $.showConfirm({
+                    title: "Please confirm",
+                    body: "Do you sure want to delete ? the record is no backup. ",
+                    onSubmit: function (result) {
+                        if (result) {
+                            var input = $("<input>").attr("name", "jsp-action").val("add");
+                            input.type = 'hidden';
+                            input2.type = 'hidden';
+                            $('#updateform').append(input);
+                            $('#updateform').append(input2);
+                            $('#updateform').submit();
+                        } else {
+                        }
+                    },
+                    textTrue: "Delete", Truecls: "btn btn-danger",
+                    textFalse: "No", Falsecls: "btn btn-secondary",
+                    onDispose: function () {}
+                });
             });
         });
     </script>

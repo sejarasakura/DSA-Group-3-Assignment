@@ -10,7 +10,11 @@ package xenum;
  * @author ITSUKA KOTORI
  */
 public interface AbstractEnum {
-    
+
     String getStringCode();
-    
+
+    String getName();
+
+    public AbstractEnum setMyValue(Object string);
+
 }

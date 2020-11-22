@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import xenum.AbstractEnum;
 
 /**
  *
@@ -89,7 +90,7 @@ public class EditEntity {
                 write_one_input(ref, classSaving.getFields().get(j), true);
             }
             stringBuilder.append("</tr>");
-        } catch (SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+        } catch (SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException | NoSuchMethodException ex) {
             Logger.getLogger(EditEntity.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -168,7 +169,12 @@ public class EditEntity {
     private void printDisplayBody(AbstractEntity entity) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         for (j = 0; j < feilds.size(); j++) {
             if (classSaving.getFields().get(j).isDisplay()) {
-                stringBuilder.append("<td>").append(feilds.get(j).invoke(entity)).append("</td>");
+                if (classSaving.getFields().get(j).getType().contains(".xenum")) {
+
+                } else {
+                    stringBuilder.append("<td>").append(feilds.get(j).invoke(entity)).append("</td>");
+                }
+
             } else {
                 stringBuilder.append("<td>")
                         .append(main.Functions.repeat(enchar, ((String) feilds.get(j).invoke(entity)).length()))
@@ -180,14 +186,20 @@ public class EditEntity {
     private void generateInput(AbstractEntity entity) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
         for (j = 0; j < feilds.size(); j++) {
-            write_one_input(entity, classSaving.getFields().get(j), false);
+            try {
+                write_one_input(entity, classSaving.getFields().get(j), false);
+            } catch (ClassNotFoundException | NoSuchMethodException ex) {
+                Logger.getLogger(EditEntity.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     private String write_type, write_query, value;
     private Object data, idsss, prefix;
+    private Class<?> _class_ref;
+    private boolean check;
 
-    private void write_one_input(AbstractEntity entity, FeildAccessbility fb, boolean add) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    private void write_one_input(AbstractEntity entity, FeildAccessbility fb, boolean add) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException {
         write_type = "text";
         write_query = "";
         value = "";
@@ -224,6 +236,11 @@ public class EditEntity {
                 value = data == null ? "false" : (boolean) data ? "true" : "false";
                 write_query += data == "true" ? "checked " : " ";
                 break;
+            default:
+                if (fb.getType().contains("xenum.")) {
+                    value = (String) ((data == null) ? "" : ((AbstractEnum) data).getStringCode());
+                }
+                break;
         }
         if (add) {
             prefix = "add_";
@@ -238,12 +255,32 @@ public class EditEntity {
                 write_query += "disabled ";
             }
         }
-        stringBuilder
-                .append("<td><div class=\"form-group\"><input ")
-                .append("type='").append(write_type).append("' ")
-                .append("id='").append(prefix).append(fb.getName()).append("' ")
-                .append("name='").append(prefix).append(fb.getName()).append("' ")
-                .append("value='").append(value).append("' ")
-                .append(write_query).append("></div></td>");
+        if (fb.getType().contains("xenum.")) {
+            _class_ref = Class.forName(fb.getType());
+            ArrList<AbstractEnum> enum_list = new ArrList<AbstractEnum>((AbstractEnum[]) _class_ref.getMethod("values").invoke(null));
+            stringBuilder.append("<td>")
+                    .append("<div class=\"form-group\">")
+                    .append("<select class=\"\"")
+                    .append("id='").append(prefix).append(fb.getName()).append("' ")
+                    .append("name='").append(prefix).append(fb.getName()).append("'>");
+            for (AbstractEnum _enum : enum_list) {
+                check = data == null ? false : (((AbstractEnum) data).getStringCode() == null ? _enum.getStringCode() == null : ((AbstractEnum) data).getStringCode().equals(_enum.getStringCode()));
+                stringBuilder.append("<option value='")
+                        .append(_enum.getStringCode()).append("' ")
+                        .append(check ? "selected " : " ")
+                        .append(">").append(_enum.getName())
+                        .append("</option>");
+            }
+            stringBuilder.append("</select>")
+                    .append("</div>").append("</td>");
+        } else {
+            stringBuilder
+                    .append("<td><div class=\"form-group\"><input ")
+                    .append("type='").append(write_type).append("' ")
+                    .append("id='").append(prefix).append(fb.getName()).append("' ")
+                    .append("name='").append(prefix).append(fb.getName()).append("' ")
+                    .append("value='").append(value).append("' ")
+                    .append(write_query).append("></div></td>");
+        }
     }
 }

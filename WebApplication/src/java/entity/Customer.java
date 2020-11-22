@@ -9,10 +9,12 @@ package entity;
 import adt.ArrList;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import csv.converter.MemberShipConverter;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.Field;
@@ -21,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import xenum.MemberShip;
 
 /**
  *
@@ -37,8 +40,8 @@ public class Customer extends User<Customer> {
     /*
     * Membership of customer Basic, Premium, and Normal
      */
-    @CsvBindByName
-    private String memberType_id;
+    @CsvCustomBindByName(converter = MemberShipConverter.class, column = "memberType_id")
+    private MemberShip memberType;
 
     public Customer() {
     }
@@ -48,7 +51,7 @@ public class Customer extends User<Customer> {
             String phoneNumber, String username, String password) {
         super(user_id, ic, name, email, phoneNumber, "c", username, password);
         this.current_booking_id = current_booking_id;
-        this.memberType_id = memberType_id;
+        this.memberType = MemberShip.valueOf(memberType_id);
     }
 
     public String getCurrent_booking_id() {
@@ -59,12 +62,12 @@ public class Customer extends User<Customer> {
         this.current_booking_id = current_booking_id;
     }
 
-    public String getMemberType_id() {
-        return memberType_id;
+    public MemberShip getMemberType() {
+        return memberType;
     }
 
-    public void setMemberType_id(String memberType_id) {
-        this.memberType_id = memberType_id;
+    public void setMemberType(MemberShip memberType) {
+        this.memberType = memberType;
     }
 
     @Override
@@ -74,7 +77,7 @@ public class Customer extends User<Customer> {
 
     @Override
     public String toString() {
-        return "Customer{" + "current_booking_id=" + current_booking_id + ", memberType_id=" + memberType_id + ", " + super.toString() + '}';
+        return "Customer{" + "current_booking_id=" + current_booking_id + ", memberType_id=" + memberType + ", " + super.toString() + '}';
     }
 
     @Override

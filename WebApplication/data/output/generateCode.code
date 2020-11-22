@@ -1,0 +1,263 @@
+run:
+AbstractEnum.java
+BookingStatus.java
+CarType.java
+ErrorDetails.java
+MemberShip.java
+OutputColor.java
+PaymentMethodType.java
+PaymentStatus.java
+
+
+
+
+/*Auto generated code by class csv.converter.generate.AutoGenerateEnumConverter*/
+package csv.converter;
+import adt.*;
+import xenum.*;
+import com.opencsv.bean.*;
+import com.opencsv.exceptions.*;
+/**
+ *
+ * @author Lim sai Keat
+ */
+public class xenum.AbstractEnumConverter extends AbstractBeanField {
+
+
+	@Override
+	protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		xenum.AbstractEnum obj = (xenum.AbstractEnum) value;
+		return obj.()
+		
+	}
+
+	@Override
+	protected Object convert(String string) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+		
+		return obj.(string)
+		
+	}
+}
+
+
+
+
+/*Auto generated code by class csv.converter.generate.AutoGenerateEnumConverter*/
+package csv.converter;
+import adt.*;
+import xenum.*;
+import com.opencsv.bean.*;
+import com.opencsv.exceptions.*;
+/**
+ *
+ * @author Lim sai Keat
+ */
+public class xenum.BookingStatusConverter extends AbstractBeanField {
+
+
+	@Override
+	protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		xenum.BookingStatus obj = (xenum.BookingStatus) value;
+		return obj.()
+		
+	}
+
+	@Override
+	protected Object convert(String string) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+		
+		return obj.(string)
+		
+	}
+}
+
+
+
+
+/*Auto generated code by class csv.converter.generate.AutoGenerateEnumConverter*/
+package csv.converter;
+import adt.*;
+import xenum.*;
+import com.opencsv.bean.*;
+import com.opencsv.exceptions.*;
+/**
+ *
+ * @author Lim sai Keat
+ */
+public class xenum.CarTypeConverter extends AbstractBeanField {
+
+
+	@Override
+	protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		xenum.CarType obj = (xenum.CarType) value;
+		return obj.()
+		
+	}
+
+	@Override
+	protected Object convert(String string) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+		
+		return obj.(string)
+		
+	}
+}
+
+
+
+
+/*Auto generated code by class csv.converter.generate.AutoGenerateEnumConverter*/
+package csv.converter;
+import adt.*;
+import xenum.*;
+import com.opencsv.bean.*;
+import com.opencsv.exceptions.*;
+/**
+ *
+ * @author Lim sai Keat
+ */
+public class xenum.ErrorDetailsConverter extends AbstractBeanField {
+
+
+	@Override
+	protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		xenum.ErrorDetails obj = (xenum.ErrorDetails) value;
+		return obj.()
+		
+	}
+
+	@Override
+	protected Object convert(String string) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+		
+		return obj.(string)
+		
+	}
+}
+
+
+
+
+/*Auto generated code by class csv.converter.generate.AutoGenerateEnumConverter*/
+package csv.converter;
+import adt.*;
+import xenum.*;
+import com.opencsv.bean.*;
+import com.opencsv.exceptions.*;
+/**
+ *
+ * @author Lim sai Keat
+ */
+public class xenum.MemberShipConverter extends AbstractBeanField {
+
+
+	@Override
+	protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		xenum.MemberShip obj = (xenum.MemberShip) value;
+		return obj.()
+		
+	}
+
+	@Override
+	protected Object convert(String string) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+		
+		return obj.(string)
+		
+	}
+}
+
+
+
+
+/*Auto generated code by class csv.converter.generate.AutoGenerateEnumConverter*/
+package csv.converter;
+import adt.*;
+import xenum.*;
+import com.opencsv.bean.*;
+import com.opencsv.exceptions.*;
+/**
+ *
+ * @author Lim sai Keat
+ */
+public class xenum.OutputColorConverter extends AbstractBeanField {
+
+
+	@Override
+	protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		xenum.OutputColor obj = (xenum.OutputColor) value;
+		return obj.()
+		
+	}
+
+	@Override
+	protected Object convert(String string) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+		
+		return obj.(string)
+		
+	}
+}
+
+
+
+
+/*Auto generated code by class csv.converter.generate.AutoGenerateEnumConverter*/
+package csv.converter;
+import adt.*;
+import xenum.*;
+import com.opencsv.bean.*;
+import com.opencsv.exceptions.*;
+/**
+ *
+ * @author Lim sai Keat
+ */
+public class xenum.PaymentMethodTypeConverter extends AbstractBeanField {
+
+
+	@Override
+	protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		xenum.PaymentMethodType obj = (xenum.PaymentMethodType) value;
+		return obj.()
+		
+	}
+
+	@Override
+	protected Object convert(String string) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+		
+		return obj.(string)
+		
+	}
+}
+
+
+
+
+/*Auto generated code by class csv.converter.generate.AutoGenerateEnumConverter*/
+package csv.converter;
+import adt.*;
+import xenum.*;
+import com.opencsv.bean.*;
+import com.opencsv.exceptions.*;
+/**
+ *
+ * @author Lim sai Keat
+ */
+public class xenum.PaymentStatusConverter extends AbstractBeanField {
+
+
+	@Override
+	protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		xenum.PaymentStatus obj = (xenum.PaymentStatus) value;
+		return obj.()
+		
+	}
+
+	@Override
+	protected Object convert(String string) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+		
+		return obj.(string)
+		
+	}
+}
+
+
+
+
+
+BUILD SUCCESSFUL (total time: 0 seconds)

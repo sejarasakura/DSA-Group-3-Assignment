@@ -6,8 +6,9 @@
 package entity;
 
 import com.opencsv.bean.*;
-import xenum.BookingStatus;
+import csv.converter.BookingStatusConverter;
 import java.util.Date;
+import xenum.BookingStatus;
 
 /**
  *
@@ -17,34 +18,37 @@ public class Booking extends AbstractEntity<Booking> {
 
     @CsvBindByName
     private String booking_id;
-    
+
     @CsvBindByName
     private String booking_description;
-    
+
     @CsvBindByName
     private String booking_type;
-    
+
     @CsvBindByName
     @CsvDate("dd.MM.yyyy.hh.mm.ss")
     private Date booking_date;
-    
+
     @CsvBindByName
     private String driver_id;
-    
+
     @CsvBindByName
     private String customer_id;
-    
+
     @CsvBindByName
     private String chats_id;
-    
+
     @CsvBindByName
     private String mapping_id;
-    
+
     @CsvBindByName
     private String paymentNumber;
-    
-    @CsvBindByName(column = "booking_status_code")
-    private String bookingStatus;
+
+    @CsvCustomBindByName(converter = BookingStatusConverter.class, column = "booking_status_code")
+    private BookingStatus bookingStatus;
+
+    public Booking() {
+    }
 
     public String getBooking_id() {
         return booking_id;
@@ -118,11 +122,11 @@ public class Booking extends AbstractEntity<Booking> {
         this.paymentNumber = paymentNumber;
     }
 
-    public String getBookingStatus() {
+    public BookingStatus getBookingStatus() {
         return bookingStatus;
     }
 
-    public void setBookingStatus(String bookingStatus) {
+    public void setBookingStatus(BookingStatus bookingStatus) {
         this.bookingStatus = bookingStatus;
     }
 
@@ -145,10 +149,10 @@ public class Booking extends AbstractEntity<Booking> {
     public int compareTo(Object t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public boolean id_equals(Object obj) {
-        return this.booking_id.equals(((Booking)obj).booking_id);
+        return this.booking_id.equals(((Booking) obj).booking_id);
     }
 
 }

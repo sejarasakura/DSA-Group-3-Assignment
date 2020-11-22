@@ -13,7 +13,7 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim sai Keat
  */
 public class ArrListConverter extends AbstractBeanField {
 

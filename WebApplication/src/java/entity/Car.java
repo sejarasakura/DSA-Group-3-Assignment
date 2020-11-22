@@ -6,8 +6,11 @@
 package entity;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
+import csv.converter.CarTypeConverter;
 import java.util.Date;
+import xenum.CarType;
 
 /**
  *
@@ -37,8 +40,8 @@ public class Car extends AbstractEntity<Car> {
     /*
     * CarType
      */
-    @CsvBindByName(column = "car_type_code")
-    private String carType;
+    @CsvCustomBindByName(converter = CarTypeConverter.class, column = "car_type_code")
+    private CarType carType;
 
     /*
     * To calculate the year using the car?
@@ -49,7 +52,7 @@ public class Car extends AbstractEntity<Car> {
     public Car() {
     }
 
-    public Car(String plate_id, String license, Date regDate, String carType, String driver_id) {
+    public Car(String plate_id, String license, Date regDate, CarType carType, String driver_id) {
         this.plate_id = plate_id;
         this.license = license;
         this.regDate = regDate;
@@ -57,11 +60,11 @@ public class Car extends AbstractEntity<Car> {
         this.driver_id = driver_id;
     }
 
-    public String getCarType() {
+    public CarType getCarType() {
         return carType;
     }
 
-    public void setCarType(String carType) {
+    public void setCarType(CarType carType) {
         this.carType = carType;
     }
 

@@ -6,9 +6,13 @@
 package entity;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
+import csv.converter.PaymentMethodTypeConverter;
+import csv.converter.PaymentStatusConverter;
 import java.text.DecimalFormat;
 import java.util.Date;
+import xenum.PaymentMethodType;
 import xenum.PaymentStatus;
 
 /**
@@ -22,8 +26,11 @@ public class Payment extends AbstractEntity<Payment> {
     @CsvBindByName
     private String payment_id;
 
-    @CsvBindByName(column = "payment_status_code")
-    private int payment_status;
+    @CsvCustomBindByName(converter = PaymentStatusConverter.class, column = "payment_status_code")
+    private PaymentStatus payment_status;
+
+    @CsvCustomBindByName(converter = PaymentMethodTypeConverter.class, column = "payment_method_code")
+    private PaymentMethodType payment_method;
 
     @CsvBindByName
     @CsvDate("dd.MM.yyyy.hh.mm.ss")
@@ -36,16 +43,17 @@ public class Payment extends AbstractEntity<Payment> {
     @CsvBindByName
     private double payment_amount;
 
-    public Payment(String payment_id, int payment_status, Date payment_date, double payment_amount, Date payment_due_date) {
+    public Payment(String payment_id, PaymentStatus payment_status, PaymentMethodType payment_method, Date payment_date, Date payment_due_date, double payment_amount) {
         this.payment_id = payment_id;
         this.payment_status = payment_status;
+        this.payment_method = payment_method;
         this.payment_date = payment_date;
-        this.payment_amount = payment_amount;
         this.payment_due_date = payment_due_date;
+        this.payment_amount = payment_amount;
     }
 
     public Payment() {
-        this("", PaymentStatus.Voided.getCode(), null, 0.00, new Date());
+        this("", PaymentStatus.Voided, PaymentMethodType.NOT_YET_PAID, new Date(), null, 0.00);
     }
 
     public String getPayment_id() {
@@ -56,12 +64,20 @@ public class Payment extends AbstractEntity<Payment> {
         this.payment_id = payment_id;
     }
 
-    public int getPayment_status() {
+    public PaymentStatus getPayment_status() {
         return payment_status;
     }
 
-    public void setPayment_status(int payment_status) {
+    public void setPayment_status(PaymentStatus payment_status) {
         this.payment_status = payment_status;
+    }
+
+    public PaymentMethodType getPayment_method() {
+        return payment_method;
+    }
+
+    public void setPayment_method(PaymentMethodType payment_method) {
+        this.payment_method = payment_method;
     }
 
     public Date getPayment_date() {

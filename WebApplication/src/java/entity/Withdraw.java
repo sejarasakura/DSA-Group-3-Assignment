@@ -6,8 +6,11 @@
 package entity;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
+import csv.converter.PaymentStatusConverter;
 import java.util.Date;
+import xenum.PaymentStatus;
 
 /**
  *
@@ -43,8 +46,8 @@ public class Withdraw extends AbstractEntity<Withdraw> {
     /**
      * status
      */
-    @CsvBindByName(column = "payment_status_code")
-    private int status;
+    @CsvCustomBindByName(converter = PaymentStatusConverter.class, column = "payment_status_code")
+    private PaymentStatus status;
 
     /**
      * note
@@ -97,11 +100,11 @@ public class Withdraw extends AbstractEntity<Withdraw> {
         this.date = date;
     }
 
-    public int getStatus() {
+    public PaymentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(PaymentStatus status) {
         this.status = status;
     }
 

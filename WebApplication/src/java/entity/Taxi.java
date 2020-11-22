@@ -6,8 +6,8 @@
 package entity;
 
 import com.opencsv.bean.CsvBindByName;
-import xenum.CarType;
 import java.util.Date;
+import xenum.CarType;
 
 /**
  *
@@ -51,7 +51,7 @@ public class Taxi extends Car {
     public Taxi() {
     }
 
-    public Taxi(String taxiId, String taxiLicense, String taxiComapany, String plate_id, String license, Date regDate, String carType, String driver_id) {
+    public Taxi(String taxiId, String taxiLicense, String taxiComapany, String plate_id, String license, Date regDate, CarType carType, String driver_id) {
         super(plate_id, license, regDate, carType, driver_id);
         this.taxiId = taxiId;
         this.taxiLicense = taxiLicense;
@@ -65,7 +65,7 @@ public class Taxi extends Car {
 
     @Override
     public boolean isNotNull() {
-        return this.taxiId == null ? false:!this.taxiId.isEmpty();
+        return this.taxiId == null ? false : !this.taxiId.isEmpty();
     }
 
 }

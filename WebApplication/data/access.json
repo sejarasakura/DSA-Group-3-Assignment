@@ -178,7 +178,7 @@
             "auto_inc": false
           },
           {
-            "type": "java.lang.String",
+            "type": "xenum.BookingStatus",
             "name": "bookingStatus",
             "display": true,
             "update": true,
@@ -204,7 +204,7 @@
             "auto_inc": true
           },
           {
-            "type": "int",
+            "type": "xenum.PaymentStatus",
             "name": "payment_status",
             "display": true,
             "update": true,
@@ -227,6 +227,13 @@
           {
             "type": "double",
             "name": "payment_amount",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "xenum.PaymentMethodType",
+            "name": "payment_method",
             "display": true,
             "update": true,
             "auto_inc": false
@@ -305,8 +312,8 @@
             "auto_inc": false
           },
           {
-            "type": "java.lang.String",
-            "name": "memberType_id",
+            "type": "xenum.MemberShip",
+            "name": "memberType",
             "display": true,
             "update": true,
             "auto_inc": false
@@ -551,7 +558,7 @@
             "auto_inc": false
           },
           {
-            "type": "int",
+            "type": "xenum.PaymentStatus",
             "name": "status",
             "display": true,
             "update": true,
@@ -645,14 +652,14 @@
             "auto_inc": false
           },
           {
-            "type": "java.lang.String",
+            "type": "xenum.CarType",
             "name": "carType",
             "display": true,
             "update": true,
             "auto_inc": false
           }
         ],
-        "index": 4
+        "index": 5
       }
     },
     {
@@ -706,7 +713,7 @@
             "auto_inc": false
           },
           {
-            "type": "java.lang.String",
+            "type": "xenum.CarType",
             "name": "carType",
             "display": true,
             "update": true,

@@ -82,4 +82,8 @@ public enum BookingStatus implements AbstractEnum {
         return this.getCode();
     }
 
+    @Override
+    public AbstractEnum setMyValue(Object string) {
+        return getValue(string);
+    }
 }

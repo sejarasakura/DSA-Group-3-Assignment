@@ -5,40 +5,43 @@
  */
 package entity;
 
+import adt.ArrList;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import java.util.*;
 
 /**
- * Mapping class to store mapping details include booking destination and source and fetch date
+ * Mapping class to store mapping details include booking destination and source
+ * and fetch date
+ *
  * @Mapping
  * @author ITSUKA KOTORI
  */
-public class Mapping extends AbstractEntity<Mapping>{
-    
+public class Mapping extends AbstractEntity<Mapping> {
+
     /**
      * Primary key of the map
      */
     @CsvBindByName
     private String map_id;
-    
+
     /**
      * Form position id format follow by Google map API
      */
     @CsvBindByName
     private String source_id;
-    
+
     /**
      * To position id format follow by qq map API
      */
     @CsvBindByName
     private String destination_id;
-    
+
     /**
      * Customer fetching date
      */
     @CsvBindByName
-    @CsvDate("dd.MM.yyyy.hh.mm.ss")
+    @CsvDate(main.WebConfig.saving_date_format)
     private Date fetch_date;
 
     /**
@@ -46,9 +49,10 @@ public class Mapping extends AbstractEntity<Mapping>{
      */
     public Mapping() {
     }
-    
+
     /**
      * Parameter constructor
+     *
      * @param map_id
      * @param source_id
      * @param destination_id
@@ -92,7 +96,7 @@ public class Mapping extends AbstractEntity<Mapping>{
     public void setFetch_date(Date fetch_date) {
         this.fetch_date = fetch_date;
     }
-    
+
     @Override
     public boolean isNotNull() {
         return this.map_id != null && !this.map_id.isEmpty();
@@ -102,10 +106,10 @@ public class Mapping extends AbstractEntity<Mapping>{
     public String toString() {
         return "Mapping{" + "map_id=" + map_id + ", source_id=" + source_id + ", destination_id=" + destination_id + ", fetch_date=" + fetch_date + '}';
     }
-    
+
     @Override
     public boolean id_equals(Object obj) {
-        return ((Mapping)obj).map_id.equals(this.map_id);
+        return ((Mapping) obj).map_id.equals(this.map_id);
     }
 
     @Override
@@ -120,21 +124,36 @@ public class Mapping extends AbstractEntity<Mapping>{
             return false;
         }
         final Mapping other = (Mapping) obj;
-           
+
         return Objects.equals(this.map_id, other.map_id);
     }
 
     @Override
     public int compareTo(Object t) {
-        return ((Mapping)t).map_id.compareTo(this.map_id);
+        return ((Mapping) t).map_id.compareTo(this.map_id);
     }
-    
-    public String loadGoogleMap(){
+
+    public String loadGoogleMap() {
         return null;
     }
-    
-    public Map getDestination(){
+
+    public Map getDestination() {
         Map map = new HashMap();
         return map;
+    }
+
+    /**
+     * clean up mapping data in mapping.csv
+     *
+     */
+    public static void cleanMap() {
+        ArrList<Mapping> ar = new ArrList(Mapping.readDataFormCsv(new Mapping()));
+        ArrList<Mapping> new_list = new ArrList<Mapping>();
+        for (Mapping a : ar) {
+            if (!a.destination_id.equals(a.source_id)) {
+                new_list.add(a);
+            }
+        }
+        Mapping.reWriteAllDataToCsv(new_list);
     }
 }

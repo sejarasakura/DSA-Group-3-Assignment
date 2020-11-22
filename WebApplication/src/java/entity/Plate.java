@@ -12,23 +12,23 @@ import com.opencsv.bean.CsvBindByName;
  *
  * @author ITSUKA KOTORI
  */
-public class Plate extends AbstractEntity<Plate>{
+public class Plate extends AbstractEntity<Plate> {
 
     /*
     * Car plate id
-    */
+     */
     @CsvBindByName
     private String plate_id;
-    
+
     /*
     * Car plate alphablate
-    */
+     */
     @CsvBindByName
     private String plateAlpha;
-    
+
     /*
     * Car plate number
-    */
+     */
     @CsvBindByName
     private String plateNumber;
 
@@ -63,21 +63,22 @@ public class Plate extends AbstractEntity<Plate>{
     public void setPlateNumber(String plateNumber) {
         this.plateNumber = plateNumber;
     }
-    
-    public String getFullPlateNumber(){
+
+    public String getFullPlateNumber() {
         return this.plateAlpha + " " + this.plateNumber;
     }
-    
-    public static Plate getPlate(String full_plate, String seperator){
-        
+
+    public static Plate getPlate(String full_plate, String seperator) {
+
         ArrList<String> split = new ArrList(full_plate.split(seperator));
-        if(split.size() < 2)
+        if (split.size() < 2) {
             return null;
-        
+        }
+
         return new Plate(split.get(0), split.get(1));
-        
+
     }
-    
+
     @Override
     public boolean isNotNull() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -85,7 +86,7 @@ public class Plate extends AbstractEntity<Plate>{
 
     @Override
     public boolean id_equals(Object obj) {
-        return this.plate_id.equals(((Plate)obj).plate_id);
+        return this.plate_id.equals(((Plate) obj).plate_id);
     }
 
     @Override
@@ -95,13 +96,12 @@ public class Plate extends AbstractEntity<Plate>{
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Plate{" + "plate_id=" + plate_id + ", plateAlpha=" + plateAlpha + ", plateNumber=" + plateNumber + '}';
     }
 
     @Override
     public int compareTo(Object t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }

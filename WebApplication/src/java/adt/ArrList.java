@@ -262,15 +262,33 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         if (index <= 0) {
             return "";
         }
-        return this.toString();
+        String r = "";
+        for (int i = 0; i < (index - 1); i++) {
+            r += "" + data[i] + "%";
+        }
+        r += "" + data[index - 1];
+        return r;
+    }
+
+    public String toHtml() {
+        System.out.println(this);
+        if (index <= 0) {
+            return "";
+        }
+        String r = "";
+        for (int i = 0; i < (index - 1); i++) {
+            r += "" + data[i] + "<br/>";
+        }
+        r += "" + data[index - 1];
+        return r;
     }
 
     public void formInput(String input) {
         this.clear();
-        if (!input.contains(",")) {
+        if (!input.contains("%")) {
             return;
         }
-        this.data = (T[]) input.split(",");
+        this.data = (T[]) input.split("%");
         this.index = data.length;
     }
 

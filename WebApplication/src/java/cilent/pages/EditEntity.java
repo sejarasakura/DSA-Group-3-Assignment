@@ -71,7 +71,7 @@ public class EditEntity {
         }
         generateFooter(refence);
         stringBuilder.append("</tbody>");
-        stringBuilder.append(" </table> </form> <script> $(document).ready(function () { $('#dtBasicExample').DataTable({ \"scrollX\": true }); $('.dataTables_length').addClass('bs-select'); }); </script>");
+        stringBuilder.append(" </table> </form>");
     }
 
     public String getHtml() {
@@ -170,7 +170,10 @@ public class EditEntity {
         for (j = 0; j < feilds.size(); j++) {
             if (classSaving.getFields().get(j).isDisplay()) {
                 if (classSaving.getFields().get(j).getType().contains(".xenum")) {
-
+                    stringBuilder.append("<td>").append(((AbstractEnum) feilds.get(j).invoke(entity)).getName()).append("</td>");
+                } else if (classSaving.getFields().get(j).getType().equals("java.util.Date")) {
+                    stringBuilder.append("<td>").append(main.WebConfig.LOCAL_DATETIME_FORMAT.format(
+                            feilds.get(j).invoke(entity))).append("</td>");
                 } else {
                     stringBuilder.append("<td>").append(feilds.get(j).invoke(entity)).append("</td>");
                 }

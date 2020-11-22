@@ -66,7 +66,6 @@ public class WebConfig {
      * GOOGLE Map API Key
      */
     public static String api_key = Functions.getApiKey();
-
     /**
      * Saving details
      */
@@ -101,4 +100,9 @@ public class WebConfig {
      * Debug mode to false to prevent multiple reload
      */
     public static boolean DEBUG_MODE = true;
+
+    /**
+     * Debug mode to false to prevent multiple reload
+     */
+    public final static String saving_date_format = "yyyy-MM-dd hh:mm:ss";
 }

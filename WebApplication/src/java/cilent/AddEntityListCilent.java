@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static main.Datas.TYPE_SWITCH;
 import main.Functions;
-import main.WebConfig;
 import static main.WebConfig.LOCAL_DATETIME_FORMAT;
 
 /**
@@ -146,13 +145,13 @@ public class AddEntityListCilent {
             }
         }
 
-        Object temp = IDManager.generateId(entity);
-        if (temp == null) {
-            response.sendRedirect(WebConfig.ADMIN_URL + "edit_entity.jsp?edit=" + this._class.getSimpleName()
-                    + "&I=");
+        if (classSaving.getFields().get(identifier_index).isAuto_inc()) {
+            Object temp = IDManager.generateId(entity);
+            if (temp != null) {
+                String id = IDManager.generateId(entity, true).toString();
+                setter.get(identifier_index).invoke(entity, id);
+            }
         }
-        String id = IDManager.generateId(entity, true).toString();
-        setter.get(identifier_index).invoke(entity, id);
 
         // Console display data
         sb.append(xenum.OutputColor.TEXT_PURPLE).append('\n').append(parameter_data);

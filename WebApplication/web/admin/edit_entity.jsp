@@ -82,6 +82,17 @@
                     onDispose: function () {}
                 });
             });
+            $('#dtBasicExample').DataTable({
+                "scrollX": true,
+                "fixedColumns": {
+                    leftColumns: 1
+                },
+                "fixedRows": {
+                    topColumns: 1
+                },
+                "orderFixed": [0, 'asc'],
+            });
+            $('.dataTables_length').addClass('bs-select');
         });
     </script>
 </html>

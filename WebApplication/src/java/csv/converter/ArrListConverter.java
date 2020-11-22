@@ -22,7 +22,7 @@ public class ArrListConverter extends AbstractBeanField {
         ArrList<String> o = (ArrList<String>) value;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < (o.size() - 1); i++) {
-            sb.append(o.get(i)).append("\\..");
+            sb.append(o.get(i)).append("%");
         }
         sb.append(o.get(o.size() - 1));
         return sb.toString();
@@ -30,12 +30,12 @@ public class ArrListConverter extends AbstractBeanField {
 
     @Override
     protected Object convert(String string) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
-        if (!string.contains("\\..")) {
+        if (!string.contains("%")) {
             ArrList<String> o = new ArrList<String>();
             o.add(string);
             return o;
         }
-        String[] split = string.split("\\..", 3);
+        String[] split = string.split("%");
         ArrList<String> o = new ArrList<String>(split);
         return o;
     }

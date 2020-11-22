@@ -5,7 +5,6 @@
  */
 package xenum;
 
-import com.opencsv.bean.CsvBindByName;
 import java.util.Arrays;
 
 /**
@@ -23,7 +22,6 @@ public enum CarType implements AbstractEnum {
     /**
      * Car Type Saving ID
      */
-    @CsvBindByName(column = "car_type_code")
     private final String code;
 
     /**
@@ -63,6 +61,7 @@ public enum CarType implements AbstractEnum {
         return code;
     }
 
+    @Override
     public String getName() {
         return name;
     }

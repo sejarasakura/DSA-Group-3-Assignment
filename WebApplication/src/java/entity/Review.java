@@ -7,8 +7,11 @@ package entity;
 
 import adt.ArrList;
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
+import csv.converter.ArrListConverter;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -25,7 +28,7 @@ public class Review extends AbstractEntity {
     @CsvBindByName
     private String paymentNumber;
 
-    @CsvBindByName
+    @CsvCustomBindByName(converter = ArrListConverter.class)
     private ArrList<String> comments;
 
     @CsvBindByName
@@ -89,18 +92,50 @@ public class Review extends AbstractEntity {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
     public boolean equals(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Review other = (Review) obj;
+        if (!Objects.equals(this.paymentNumber, other.paymentNumber)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean id_equals(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Review other = (Review) obj;
+        if (!Objects.equals(this.paymentNumber, other.paymentNumber)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Review{" + "driverUserName=" + driverUserName + ", customerUserName=" + customerUserName + ", paymentNumber=" + paymentNumber + ", comments=" + comments + ", driverRating=" + driverRating + ", reviewDate=" + reviewDate + '}';
     }
 
     @Override

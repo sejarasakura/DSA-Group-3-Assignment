@@ -14,7 +14,10 @@ public class CarTypeConverter extends AbstractBeanField {
     @Override
     protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
         CarType obj = (CarType) value;
-        return obj.getCode();
+        if (obj != null) {
+            return obj.getCode();
+        }
+        return "";
 
     }
 

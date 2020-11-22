@@ -14,7 +14,10 @@ public class MemberShipConverter extends AbstractBeanField {
     @Override
     protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
         MemberShip obj = (MemberShip) value;
-        return obj.getDatabaseCode();
+        if (obj != null) {
+            return obj.getDatabaseCode();
+        }
+        return "";
 
     }
 

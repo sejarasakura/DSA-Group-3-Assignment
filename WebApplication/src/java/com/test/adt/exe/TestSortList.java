@@ -5,6 +5,7 @@
  */
 package com.test.adt.exe;
 
+import adt.ArrList;
 import adt.XArraySortList;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -116,6 +117,7 @@ public class TestSortList {
         list.add(new Haha(-20, "G"));
         list.add(new Haha(-30, "Z"));
         list.add(new Haha(-30, "A"));
+        list.add(new Haha(10, "A"));
         System.out.println("Slot Comparable to is call the method compareTo in the class\n=================");
         System.out.println("Before slot : " + list);
         list.sort("field", Haha.class);
@@ -170,6 +172,23 @@ public class TestSortList {
         System.out.println("After slot(date, GGa.class) : " + list);
         System.out.println(list.sortDesc("date", GGa.class));
         System.out.println("After sortDesc(date, GGa.class) : " + list);
+    }
+
+    /**
+     * Example of search by fields
+     */
+    public static void text_seven() {
+        XArraySortList list = new XArraySortList();
+        list.add(new Haha(-1, "H"));
+        list.add(new Haha(-7, "M"));
+        list.add(new Haha(20, "G"));
+        list.add(new Haha(-20, "G"));
+        list.add(new Haha(-30, "Z"));
+        list.add(new Haha(-30, "A"));
+        list.add(new Haha(10, "A"));
+        System.out.println("Slot Comparable to is call the method searchByField in the class\n=================");
+        ArrList<Haha> x = new ArrList<Haha>(list);
+        System.out.println(x.searchByField("field2", "A", Haha.class));
     }
 
     public static class GGa implements Comparable {

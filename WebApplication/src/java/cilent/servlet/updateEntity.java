@@ -39,10 +39,10 @@ public class updateEntity extends HttpServlet {
             case "delete":
                 break;
             case "add":
-                AddEntityListCilent y = new AddEntityListCilent(edit, request);
+                AddEntityListCilent y = new AddEntityListCilent(edit, request, response);
                 break;
             case "update":
-                UpdateEntityListCilent x = new UpdateEntityListCilent(edit, request);
+                UpdateEntityListCilent x = new UpdateEntityListCilent(edit, request, response);
                 break;
         }
         response.sendRedirect(main.WebConfig.ADMIN_URL + "edit_entity.jsp?edit=" + edit);

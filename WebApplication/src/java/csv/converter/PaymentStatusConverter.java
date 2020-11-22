@@ -14,7 +14,10 @@ public class PaymentStatusConverter extends AbstractBeanField {
     @Override
     protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
         PaymentStatus obj = (PaymentStatus) value;
-        return obj.getStringCode();
+        if (obj != null) {
+            return obj.getStringCode();
+        }
+        return "";
 
     }
 

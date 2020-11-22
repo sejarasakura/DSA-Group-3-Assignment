@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import static main.Datas.TYPE_SWITCH;
 import main.Functions;
 import static main.WebConfig.LOCAL_DATETIME_FORMAT;
@@ -34,6 +35,7 @@ public class UpdateEntityListCilent {
     protected Constructor constructor;
     protected ClassSaving classSaving;
     protected HttpServletRequest request;
+    protected HttpServletResponse response;
     protected AbstractEntity acture_entity;
     protected int j, identifier_index = -99;
     protected ArrList<AbstractEntity> datas;
@@ -47,12 +49,13 @@ public class UpdateEntityListCilent {
      * @param class_name
      * @param request
      */
-    public UpdateEntityListCilent(String class_name, HttpServletRequest request) {
+    public UpdateEntityListCilent(String class_name, HttpServletRequest request, HttpServletResponse response) {
         try {
             _class = Class.forName("entity." + class_name);
             constructor = _class.getConstructor();
             entity = (AbstractEntity) constructor.newInstance();
             this.request = request;
+            this.response = response;
             System.out.println(start_update());
         } catch (ClassNotFoundException | SecurityException | InstantiationException
                 | IllegalAccessException | IllegalArgumentException
@@ -119,7 +122,8 @@ public class UpdateEntityListCilent {
             }
         }
         String parameter;
-        Object input = null;
+        Object input = null, _enum_data;
+        Class<?> _class_ref;
 
         // loop to each field and assign to acture entity
         for (j = 0; j < classSaving.getFields().size(); j++) {
@@ -146,7 +150,15 @@ public class UpdateEntityListCilent {
                         input = parameter_data.getValue(pragma) == null ? false : true;
                         break;
                     default:
-                        input = parameter_data.getValue(pragma);
+                        if (parameter_type.getTypeName().contains("xenum.")) {
+                            _class_ref = Class.forName(parameter_type.getTypeName());
+                            _enum_data = _class_ref.getEnumConstants()[0];
+                            _class_ref = _enum_data.getClass();
+                            input = _class_ref.getDeclaredMethod("setMyValue", Object.class).invoke(_enum_data, parameter_data.getValue(pragma));
+                            //_class_ref.getMethod("setMyValue").invoke(new Object(), parameter_data.getValue(pragma));
+                        } else {
+                            input = parameter_data.getValue(pragma);
+                        }
                         break;
                 }
                 if (input != null) {

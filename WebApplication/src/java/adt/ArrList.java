@@ -172,20 +172,28 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         return data[r.get(0)];
     }
 
-    public ArrList<T> searchByField(String field, Object element) {
-        T temp = (T) new Object();
-        Class<?> _class = temp.getClass();
+    public ArrList<T> searchByMethod(Method method, Object element) {
         ArrList<T> result = new ArrList<T>();
         try {
-            Method f = _class.getMethod(Functions.fieldToGetter(field));
             for (T d : data) {
-                if (f.invoke(d).equals(element)) {
+                if (method.invoke(d).equals(element)) {
                     result.add(d);
                 }
             }
-        } catch (NoSuchMethodException | SecurityException
+        } catch (SecurityException
                 | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException ex) {
+            Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public ArrList<T> searchByField(String field, Object element, Class<?> _class) {
+        ArrList<T> result = new ArrList<T>();
+        try {
+            Method f = _class.getDeclaredMethod(Functions.fieldToGetter(field));
+            return searchByMethod(f, element);
+        } catch (NoSuchMethodException | SecurityException | IllegalArgumentException ex) {
             Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;

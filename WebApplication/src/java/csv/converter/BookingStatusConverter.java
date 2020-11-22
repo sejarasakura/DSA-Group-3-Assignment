@@ -14,8 +14,10 @@ public class BookingStatusConverter extends AbstractBeanField {
     @Override
     protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
         BookingStatus obj = (BookingStatus) value;
-        return obj.getCode();
-
+        if (obj != null) {
+            return obj.getCode();
+        }
+        return "";
     }
 
     @Override

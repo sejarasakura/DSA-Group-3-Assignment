@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +46,7 @@ public class Functions {
         Datas.settings.add("pages/register", WebConfig.WEB_URL + "pages/register.jsp");
         Datas.settings.add("pages/account", WebConfig.WEB_URL + "pages/account.jsp");
         Datas.settings.add("widget/cartype-select", "../widget/carousel_feeinfo.jsp");
-        Datas.allMessage = (ArrList<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage());
+        Datas.allMessage = new ArrList(AbstractEntity.readDataFormCsv(new InfoMessage()));
         return 1;
     }
 
@@ -176,9 +177,9 @@ public class Functions {
 
     private static String displayErrorMessage(String e) {
         if (main.WebConfig.DEBUG_MODE) {
-            Datas.allMessage = (ArrList<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage());
+            Datas.allMessage = new ArrList<InfoMessage>((Iterator<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage()));
         }
-        InfoMessage result = Datas.allMessage.searchByField("code", e).get(0);
+        InfoMessage result = Datas.allMessage.searchByField("code", e, InfoMessage.class).get(0);
 
         return new StringBuilder()
                 .append("<div class=\"container\">")
@@ -186,7 +187,7 @@ public class Functions {
                 .append(result.getCssClass())
                 .append(" alert-dismissible fade in\">")
                 .append("<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>")
-                .append("<strong> ERROR ")
+                .append("<strong> ")
                 .append(result.getCode())
                 .append(" ")
                 .append(result.getName())

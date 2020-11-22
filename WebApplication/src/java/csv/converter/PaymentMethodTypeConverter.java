@@ -14,7 +14,10 @@ public class PaymentMethodTypeConverter extends AbstractBeanField {
     @Override
     protected String convertToWrite(Object value) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
         PaymentMethodType obj = (PaymentMethodType) value;
-        return obj.getCode();
+        if (obj != null) {
+            return obj.getCode();
+        }
+        return "";
 
     }
 

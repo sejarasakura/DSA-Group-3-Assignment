@@ -5,6 +5,7 @@
  */
 package entity;
 
+import com.opencsv.bean.CsvBindByName;
 import java.util.Objects;
 
 /**
@@ -13,9 +14,13 @@ import java.util.Objects;
  */
 public class InfoMessage extends AbstractEntity {
 
+    @CsvBindByName
     private String code;
+    @CsvBindByName
     private String name;
+    @CsvBindByName
     private String decription;
+    @CsvBindByName
     private String cssClass;
 
     public InfoMessage() {

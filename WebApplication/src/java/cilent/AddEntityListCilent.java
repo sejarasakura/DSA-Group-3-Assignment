@@ -9,6 +9,7 @@ import adt.ArrList;
 import cilent.pages.EditEntity;
 import entity.AbstractEntity;
 import entity.json.ClassSaving;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -17,8 +18,10 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import static main.Datas.TYPE_SWITCH;
 import main.Functions;
+import main.WebConfig;
 import static main.WebConfig.LOCAL_DATETIME_FORMAT;
 
 /**
@@ -35,6 +38,7 @@ public class AddEntityListCilent {
     protected Constructor constructor;
     protected ClassSaving classSaving;
     protected HttpServletRequest request;
+    protected HttpServletResponse response;
     protected int j, identifier_index = -99;
     protected ArrList<AbstractEntity> datas;
     protected ArrList<Method> setter = new ArrList<Method>();
@@ -46,19 +50,21 @@ public class AddEntityListCilent {
      *
      * @param class_name
      * @param request
+     * @param response
      */
-    public AddEntityListCilent(String class_name, HttpServletRequest request) {
+    public AddEntityListCilent(String class_name, HttpServletRequest request, HttpServletResponse response) {
         try {
             _class = Class.forName("entity." + class_name);
             constructor = _class.getConstructor();
             entity = (AbstractEntity) constructor.newInstance();
             this.request = request;
+            this.response = response;
             System.out.println(start_add());
         } catch (ClassNotFoundException | SecurityException | InstantiationException
                 | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | NoSuchMethodException ex) {
             Logger.getLogger(EditEntity.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
+        } catch (ParseException | IOException ex) {
             Logger.getLogger(AddEntityListCilent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -66,7 +72,7 @@ public class AddEntityListCilent {
     /**
      * update
      */
-    private StringBuilder start_add() throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ParseException, ClassNotFoundException {
+    private StringBuilder start_add() throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ParseException, ClassNotFoundException, IOException {
         StringBuilder sb = new StringBuilder();
 
         // get class information
@@ -97,7 +103,8 @@ public class AddEntityListCilent {
         }
 
         String parameter;
-        Object input = null;
+        Object input = null, _enum_data;
+        Class<?> _class_ref;
 
         // loop to each field and assign to acture entity
         for (j = 0; j < classSaving.getFields().size(); j++) {
@@ -123,7 +130,15 @@ public class AddEntityListCilent {
                     input = parameter_data.getValue(pragma) == null ? false : true;
                     break;
                 default:
-                    input = parameter_data.getValue(pragma);
+                    if (parameter_type.getTypeName().contains("xenum.")) {
+                        _class_ref = Class.forName(parameter_type.getTypeName());
+                        _enum_data = _class_ref.getEnumConstants()[0];
+                        _class_ref = _enum_data.getClass();
+                        input = _class_ref.getDeclaredMethod("setMyValue", Object.class).invoke(_enum_data, parameter_data.getValue(pragma));
+                        //_class_ref.getMethod("setMyValue").invoke(new Object(), parameter_data.getValue(pragma));
+                    } else {
+                        input = parameter_data.getValue(pragma);
+                    }
                     break;
             }
             if (input != null) {
@@ -131,6 +146,11 @@ public class AddEntityListCilent {
             }
         }
 
+        Object temp = IDManager.generateId(entity);
+        if (temp == null) {
+            response.sendRedirect(WebConfig.ADMIN_URL + "edit_entity.jsp?edit=" + this._class.getSimpleName()
+                    + "&I=");
+        }
         String id = IDManager.generateId(entity, true).toString();
         setter.get(identifier_index).invoke(entity, id);
 

@@ -123,7 +123,7 @@ public class IDManager extends AbstractEntity {
         Iterator obj = AbstractEntity.readDataFormCsv(new IDManager());
         ArrList<IDManager> datas = (obj == null) ? new ArrList() : new ArrList(obj);
         boolean job = false;
-        for (int i = 0; i < datas.size() || !job; i++) {
+        for (int i = 0; i < datas.size(); i++) {
             if (datas.get(i).className.equals(ref.getClass().getName())) {
                 try {
                     str = String.format(datas.get(i).formatString, datas.get(i).lastSeqNumber);

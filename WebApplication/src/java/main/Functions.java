@@ -8,6 +8,8 @@ package main;
 import adt.ArrList;
 import adt.XHashedDictionary;
 import com.univocity.parsers.csv.CsvWriterSettings;
+import entity.AbstractEntity;
+import entity.InfoMessage;
 import entity.User;
 import entity.json.ClassSaving;
 import java.io.File;
@@ -43,6 +45,7 @@ public class Functions {
         Datas.settings.add("pages/register", WebConfig.WEB_URL + "pages/register.jsp");
         Datas.settings.add("pages/account", WebConfig.WEB_URL + "pages/account.jsp");
         Datas.settings.add("widget/cartype-select", "../widget/carousel_feeinfo.jsp");
+        Datas.allMessage = (ArrList<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage());
         return 1;
     }
 
@@ -171,6 +174,27 @@ public class Functions {
                 .append(". </div> </div>").toString();
     }
 
+    private static String displayErrorMessage(String e) {
+        if (main.WebConfig.DEBUG_MODE) {
+            Datas.allMessage = (ArrList<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage());
+        }
+        InfoMessage result = Datas.allMessage.searchByField("code", e).get(0);
+
+        return new StringBuilder()
+                .append("<div class=\"container\">")
+                .append("<div class=\"alert ")
+                .append(result.getCssClass())
+                .append(" alert-dismissible fade in\">")
+                .append("<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>")
+                .append("<strong> ERROR ")
+                .append(result.getCode())
+                .append(" ")
+                .append(result.getName())
+                .append("!!</strong> ")
+                .append(result.getDecription())
+                .append(". </div> </div>").toString();
+    }
+
     public static String displayErrorMessage(HttpServletRequest request) {
         String e = request.getParameter("E");
         if (e != null) {
@@ -179,6 +203,10 @@ public class Functions {
         e = request.getParameter("W");
         if (e != null) {
             return displayErrorMessage(e, "alert-warning");
+        }
+        e = request.getParameter("I");
+        if (e != null) {
+            return displayErrorMessage(e);
         }
         return "";
     }

@@ -11,6 +11,7 @@ import adt.XQueue;
 import entity.Booking;
 import entity.Customer;
 import entity.Driver;
+import entity.InfoMessage;
 
 /**
  *
@@ -30,6 +31,7 @@ public class Datas {
     static {
         TYPE_SWITCH.add("int", Integer.TYPE);
         TYPE_SWITCH.add("long", Long.TYPE);
+        TYPE_SWITCH.add("boolean", Boolean.TYPE);
         TYPE_SWITCH.add("double", Double.TYPE);
         TYPE_SWITCH.add("float", Float.TYPE);
         TYPE_SWITCH.add("bool", Boolean.TYPE);
@@ -56,6 +58,12 @@ public class Datas {
      * @author ITSUKA KOTORI all the current request booking
      */
     public static XQueue<Booking> currentBooking;
+
+    /**
+     *
+     * @author ITSUKA KOTORI all the current request booking
+     */
+    public static ArrList<InfoMessage> allMessage;
 
     /**
      *

@@ -68,8 +68,8 @@ public class EditEntity {
         for (int i = 0; i < datas.size(); i++) {
             generateBody(datas.get(i));
         }
-        stringBuilder.append("</tbody>");
         generateFooter(refence);
+        stringBuilder.append("</tbody>");
         stringBuilder.append(" </table> </form> <script> $(document).ready(function () { $('#dtBasicExample').DataTable({ \"scrollX\": true }); $('.dataTables_length').addClass('bs-select'); }); </script>");
     }
 
@@ -79,7 +79,7 @@ public class EditEntity {
 
     private void generateFooter(AbstractEntity ref) {
         try {
-            stringBuilder.append("<tfoot><tr>");
+            stringBuilder.append("<tr>");
             stringBuilder.append("<td>");
             if (this.classSaving.isAdd()) {
                 submitIcon("glyphicon-plus", "");
@@ -88,7 +88,7 @@ public class EditEntity {
             for (j = 0; j < classSaving.getFields().size(); j++) {
                 write_one_input(ref, classSaving.getFields().get(j), true);
             }
-            stringBuilder.append("</tr></tfoot>");
+            stringBuilder.append("</tr>");
         } catch (SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(EditEntity.class.getName()).log(Level.SEVERE, null, ex);
         }

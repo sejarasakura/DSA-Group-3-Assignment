@@ -96,4 +96,9 @@ public class WebConfig {
      * Date format
      */
     public final static SimpleDateFormat LOCAL_DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+
+    /**
+     * Debug mode to false to prevent multiple reload
+     */
+    public static boolean DEBUG_MODE = true;
 }

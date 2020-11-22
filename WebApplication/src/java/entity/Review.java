@@ -7,30 +7,32 @@ package entity;
 
 import adt.ArrList;
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
 import java.util.Date;
 
 /**
  *
  * @author ITSUKA KOTORI
  */
-public class Review extends AbstractEntity{
-    
+public class Review extends AbstractEntity {
+
     @CsvBindByName
     private String driverUserName;
-    
+
     @CsvBindByName
     private String customerUserName;
-    
+
     @CsvBindByName
     private String paymentNumber;
-    
+
     @CsvBindByName
     private ArrList<String> comments;
-    
+
     @CsvBindByName
     private int driverRating;
-    
+
     @CsvBindByName
+    @CsvDate("dd.MM.yyyy.hh.mm.ss")
     private Date reviewDate;
 
     public String getDriverUserName() {
@@ -105,5 +107,5 @@ public class Review extends AbstractEntity{
     public int compareTo(Object t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

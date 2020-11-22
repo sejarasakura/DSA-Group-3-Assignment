@@ -156,7 +156,7 @@ public class UpdateEntityListCilent {
         }
 
         // Console display data
-        System.out.println(parameter_data);
+        sb.append(xenum.OutputColor.TEXT_PURPLE).append(parameter_data);
 
         // update a record to csv
         acture_entity.updateThisToCsv();

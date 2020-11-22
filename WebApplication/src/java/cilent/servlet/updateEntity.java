@@ -5,7 +5,7 @@
  */
 package cilent.servlet;
 
-import cilent.UpdateEntityListCilent;
+import cilent.*;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,6 +39,7 @@ public class updateEntity extends HttpServlet {
             case "delete":
                 break;
             case "add":
+                AddEntityListCilent y = new AddEntityListCilent(edit, request);
                 break;
             case "update":
                 UpdateEntityListCilent x = new UpdateEntityListCilent(edit, request);

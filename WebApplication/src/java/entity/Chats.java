@@ -7,17 +7,19 @@ package entity;
 
 import adt.ArrList;
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
+import csv.converter.ArrListConverter;
 
 /**
  *
  * @author ITSUKA KOTORI
  */
-public class Chats extends AbstractEntity{
-    
+public class Chats extends AbstractEntity {
+
     @CsvBindByName
     private String chats_id;
-    
-    @CsvBindByName
+
+    @CsvCustomBindByName(converter = ArrListConverter.class)
     private ArrList<String> chats_details_id;
 
     public String getChats_id() {
@@ -48,7 +50,7 @@ public class Chats extends AbstractEntity{
 
     @Override
     public boolean id_equals(Object obj) {
-        return this.chats_id.equals(((Chats)obj).chats_id);
+        return this.chats_id.equals(((Chats) obj).chats_id);
     }
 
     @Override
@@ -60,6 +62,5 @@ public class Chats extends AbstractEntity{
     public int compareTo(Object t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }

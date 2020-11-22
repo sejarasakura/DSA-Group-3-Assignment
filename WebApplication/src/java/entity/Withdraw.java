@@ -5,26 +5,9 @@
  */
 package entity;
 
-import adt.ArrList;
-import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
-import com.opencsv.bean.CsvRecurse;
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-import com.univocity.parsers.annotations.Parsed;
-import xenum.PaymentStatus;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -81,7 +64,7 @@ public class Withdraw extends AbstractEntity<Withdraw> {
     public Withdraw(String withdraw_id) {
         this.withdraw_id = withdraw_id;
     }
-    
+
     public String getWithdraw_id() {
         return withdraw_id;
     }
@@ -165,6 +148,6 @@ public class Withdraw extends AbstractEntity<Withdraw> {
 
     @Override
     public boolean id_equals(Object obj) {
-        return this.withdraw_id.equals(((Withdraw)obj).withdraw_id);
+        return this.withdraw_id.equals(((Withdraw) obj).withdraw_id);
     }
 }

@@ -6,6 +6,7 @@
 package entity;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,36 +14,36 @@ import java.util.Objects;
  *
  * @author ITSUKA KOTORI
  */
-public class Chat extends AbstractEntity{
+public class Chat extends AbstractEntity {
 
-    
     /*
     * Chat details id
-    */
+     */
     @CsvBindByName
     private String chat_details_id;
-    
+
     /*
     * Chat message
-    */
+     */
     @CsvBindByName
     private String message;
-    
+
     /*
     * Sending date
-    */
+     */
     @CsvBindByName
+    @CsvDate("dd.MM.yyyy.hh.mm.ss")
     private Date send_date;
-    
+
     /*
     * reading status
-    */
+     */
     @CsvBindByName
     private boolean read;
 
     /*
     * No param construstor
-    */
+     */
     public Chat() {
     }
 
@@ -52,7 +53,7 @@ public class Chat extends AbstractEntity{
     * @param message
     * @param send_date
     * @param chat_details_id
-    */
+     */
     public Chat(String chat_details_id, String message, Date send_date, boolean read) {
         this.chat_details_id = chat_details_id;
         this.message = message;
@@ -91,27 +92,27 @@ public class Chat extends AbstractEntity{
     public void setRead(boolean read) {
         this.read = read;
     }
-    
+
     @Override
     public boolean isNotNull() {
         return this.chat_details_id != null && !this.chat_details_id.isEmpty();
     }
-    
+
     @Override
     public boolean id_equals(Object obj) {
-        return Objects.equals(this.chat_details_id, ((Chat)obj).chat_details_id);
+        return Objects.equals(this.chat_details_id, ((Chat) obj).chat_details_id);
     }
 
     @Override
     public int compareTo(Object t) {
-        return ((Chat)t).chat_details_id.compareTo(this.chat_details_id);
+        return ((Chat) t).chat_details_id.compareTo(this.chat_details_id);
     }
 
     @Override
     public String toString() {
         return "Chat{" + "chat_details_id=" + chat_details_id + ", message=" + message + ", send_date=" + send_date + ", read=" + read + '}';
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -132,5 +133,5 @@ public class Chat extends AbstractEntity{
         }
         return Objects.equals(this.send_date, other.send_date);
     }
-    
+
 }

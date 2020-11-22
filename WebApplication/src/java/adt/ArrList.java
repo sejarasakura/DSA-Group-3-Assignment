@@ -7,9 +7,14 @@ package adt;
 
 import adt.interfaces.InterfaceArrayList;
 import entity.AbstractEntity;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import main.Functions;
 
 /**
  *
@@ -42,11 +47,13 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
 
     public ArrList(Iterator<T> is) {
         this();
-        while (is.hasNext()) {
-            try {
-                this.add(is.next());
-            } catch (Exception ex) {
+        if (is != null) {
+            while (is.hasNext()) {
+                try {
+                    this.add(is.next());
+                } catch (Exception ex) {
 
+                }
             }
         }
     }
@@ -163,6 +170,25 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
             return null;
         }
         return data[r.get(0)];
+    }
+
+    public ArrList<T> searchByField(String field, Object element) {
+        T temp = (T) new Object();
+        Class<?> _class = temp.getClass();
+        ArrList<T> result = new ArrList<T>();
+        try {
+            Method f = _class.getMethod(Functions.fieldToGetter(field));
+            for (T d : data) {
+                if (f.invoke(d).equals(element)) {
+                    result.add(d);
+                }
+            }
+        } catch (NoSuchMethodException | SecurityException
+                | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException ex) {
+            Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     public ArrList<Integer> search(T element) {

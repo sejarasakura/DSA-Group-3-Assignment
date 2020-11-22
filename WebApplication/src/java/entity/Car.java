@@ -6,47 +6,46 @@
 package entity;
 
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvRecurse;
-import xenum.CarType;
+import com.opencsv.bean.CsvDate;
 import java.util.Date;
 
 /**
  *
  * @author ITSUKA KOTORI
  */
-public class Car extends AbstractEntity<Car>{
-    
-    
+public class Car extends AbstractEntity<Car> {
+
     /*
     * Car License
-    */
+     */
     @CsvBindByName
     private String plate_id;
-    
+
     /*
     * Car License
-    */
+     */
     @CsvBindByName
     private String license;
-    
+
     /*
     * To calculate the year using the car?
-    */
+     */
     @CsvBindByName
+    @CsvDate("dd.MM.yyyy.hh.mm.ss")
     private Date regDate;
-    
+
     /*
     * CarType
-    */
+     */
     @CsvBindByName(column = "car_type_code")
     private String carType;
-    
+
     /*
     * To calculate the year using the car?
-    */
+     */
     @CsvBindByName
     private String driver_id;
-    
+
     public Car() {
     }
 
@@ -105,7 +104,7 @@ public class Car extends AbstractEntity<Car>{
     public void setDriver_id(String driver_id) {
         this.driver_id = driver_id;
     }
-    
+
     @Override
     public boolean isNotNull() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -113,9 +112,9 @@ public class Car extends AbstractEntity<Car>{
 
     @Override
     public boolean id_equals(Object obj) {
-        return this.plate_id.equals(((Car)obj).plate_id);
+        return this.plate_id.equals(((Car) obj).plate_id);
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -130,5 +129,5 @@ public class Car extends AbstractEntity<Car>{
     public int compareTo(Object t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

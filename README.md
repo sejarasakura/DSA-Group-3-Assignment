@@ -19,7 +19,7 @@ Booking module is the core module of this system with sub-module of payment. boo
 
 ### Technical Skill used 
 - Java (Abstract data type, Generic type, Collection type, Enum, Implementation, read write Json and csv)
-- Jsp 
+- Jsp (servlet, filter, user control)
 - Html 
 - Bootstrap (Modal, datatable)
-- Javascript (JQuery, Generated graph or report, Validator, Popup)
+- Javascript (JQuery, Generated graph or report, Validator, Popup, Ajax)

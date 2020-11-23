@@ -1,4 +1,4 @@
-## Welcome to Sejarasakura car renting group project
+## Welcome to car renting group project
 
 
 ### What is it 

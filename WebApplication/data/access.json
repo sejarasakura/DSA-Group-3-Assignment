@@ -239,7 +239,7 @@
             "auto_inc": false
           }
         ],
-        "index": 5
+        "index": 6
       }
     },
     {
@@ -291,9 +291,16 @@
             "display": true,
             "update": true,
             "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "title",
+            "display": true,
+            "update": true,
+            "auto_inc": false
           }
         ],
-        "index": 6
+        "index": 7
       }
     },
     {
@@ -545,7 +552,7 @@
           },
           {
             "type": "double",
-            "name": "amout",
+            "name": "amount",
             "display": true,
             "update": true,
             "auto_inc": false

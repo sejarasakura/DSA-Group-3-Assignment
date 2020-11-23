@@ -72,7 +72,7 @@ public class Customer extends User<Customer> {
 
     @Override
     public boolean isNotNull() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.isNotNull();
     }
 
     @Override

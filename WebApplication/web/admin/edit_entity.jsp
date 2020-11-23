@@ -26,7 +26,7 @@
     <script>
         $(document).ready(function () {
             var input2 = $("<input>").attr("name", "edit").val("${param.edit}");
-            $(".glyphicon-plus").click(function () {
+            $("#add-btn").click(function () {
                 $.showConfirm({
                     title: "Confirm add",
                     body: "Do you sure want to add ? ",
@@ -84,15 +84,11 @@
             });
             $('#dtBasicExample').DataTable({
                 "scrollX": true,
-                "scrollY": '80vh',
+                "scrollY": '60vh',
                 "fixedColumns": {
                     leftColumns: 1
                 },
-                "fixedRows": {
-                    topRows: 1
-                },
                 "orderFixed": [0, 'asc'],
-                "ordering": false,
                 "paging": false,
                 "topSplit": 2,
                 "fixedHeader": {

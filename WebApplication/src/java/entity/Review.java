@@ -35,8 +35,19 @@ public class Review extends AbstractEntity {
     private int driverRating;
 
     @CsvBindByName
-    @CsvDate("dd.MM.yyyy.hh.mm.ss")
+    @CsvDate(main.WebConfig.saving_date_format)
     private Date reviewDate;
+
+    @CsvBindByName
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getDriverUserName() {
         return driverUserName;

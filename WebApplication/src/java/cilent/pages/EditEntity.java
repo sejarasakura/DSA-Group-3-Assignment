@@ -42,6 +42,8 @@ public class EditEntity {
     public static EditEntity getNewEditEntity(String class_name, String ids) {
         EditEntity result = null;
         try {
+
+            class_name = class_name.substring(0, 1).toUpperCase() + class_name.substring(1);
             Class<?> cls = Class.forName("entity." + class_name);
             Constructor c = cls.getConstructor();
             AbstractEntity x = (AbstractEntity) c.newInstance();
@@ -59,7 +61,7 @@ public class EditEntity {
             System.out.println(xenum.OutputColor.TEXT_RED + refence.getClass() + xenum.OutputColor.TEXT_RESET);
             return;
         }
-        stringBuilder.append("<form method='post' id='updateform'　name='updateform' action='updateEntity'>");
+        stringBuilder.append("<form method='post' id='updateform'　name='updateform' action='/WebApplication/admin/updateEntity'>");
         this.parameter_id = parameter_id;
         stringBuilder.append("<h2 class='mb-3'>").append(refence.getClass()).append("</h2><br><table id=\"dtBasicExample\" class=\"table\" width=\"100%\">");
         generateHeader(refence);
@@ -83,7 +85,7 @@ public class EditEntity {
             stringBuilder.append("<tr>");
             stringBuilder.append("<td>");
             if (this.classSaving.isAdd()) {
-                submitIcon("glyphicon-plus", "");
+                submitIcon("glyphicon-plus", "id='add-btn'");
             }
             stringBuilder.append("</td>");
             for (j = 0; j < classSaving.getFields().size(); j++) {
@@ -151,8 +153,8 @@ public class EditEntity {
     private void displayIcon(String _edit, String _id, String _class, String _atribute) {
         stringBuilder
                 .append("<a href=\"")
-                .append("?edit=").append(_edit)
-                .append("&id=").append(_id)
+                .append("/WebApplication/admin/edit/").append(_edit)
+                .append("?id=").append(_id)
                 .append("\"> <span class=\"glyphicon ")
                 .append(_class)
                 .append("\" ").append(_atribute).append("></span> </a>");
@@ -160,7 +162,7 @@ public class EditEntity {
 
     private void displayIcon(String _edit, String _class) {
         stringBuilder.append("<a href=\"")
-                .append("?edit=").append(_edit)
+                .append("/WebApplication/admin/edit/").append(_edit)
                 .append("\"> <span class=\"glyphicon ")
                 .append(_class)
                 .append("\"></span> </a>");
@@ -235,7 +237,7 @@ public class EditEntity {
             case "boolean":
                 write_type = "checkbox";
                 value = data == null ? "false" : (boolean) data ? "true" : "false";
-                write_query += data == "true" ? "checked " : " ";
+                write_query += "true".equals(data.toString()) ? "checked " : " ";
                 break;
             default:
                 if (fb.getType().contains("xenum.")) {

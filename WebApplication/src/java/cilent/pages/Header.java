@@ -7,15 +7,12 @@ package cilent.pages;
 
 import adt.ArrList;
 import adt.XStack;
-import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import entity.Customer;
-import entity.Driver;
 import entity.User;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import javax.servlet.http.Cookie;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -38,31 +35,15 @@ public class Header {
         this.user = user;
     }
 
-    private void get_user_data(String uid) {
-        switch (uid.charAt(0)) {
-            case 'C':
-                Customer.readDataFormCsv(new Customer());
-                break;
-            case 'D':
-                Customer.readDataFormCsv(new Driver());
-                break;
-            case 'A':
-                Customer.readDataFormCsv(new Customer());
-                break;
-            default:
-                break;
-        }
-    }
-
     public ArrList get_menu() throws FileNotFoundException {
-        if(main.Datas.settings.getValue("nav") == null)
+        if (main.Datas.settings.getValue("nav") == null) {
             return get_new_menu();
-        else{
+        } else {
             return get_pre_menu((Map) main.Datas.settings.getValue("nav"));
         }
-        
+
     }
-    
+
     private ArrList get_new_menu() throws FileNotFoundException {
 
         String x = System.getProperty("user.dir") + "/data/navigationBar.json";
@@ -72,7 +53,7 @@ public class Header {
         map = (Map) map.get("nav");
         main.Datas.settings.add("nav", map);
         return get_pre_menu(map);
-        
+
     }
 
     private String build_html(Map data) {
@@ -106,8 +87,8 @@ public class Header {
                 + "\">" + data.get("t") + "</a></li>";
     }
 
-    private ArrList get_pre_menu(Map map){
-        
+    private ArrList get_pre_menu(Map map) {
+
         ArrList<String> result = new ArrList<String>();
         boolean author_user = true;
         // all user
@@ -120,26 +101,23 @@ public class Header {
         // all authorise
         if (user != null) {
 
-            String role = user.getRole();
+            String role = user.getRole().toUpperCase();
 
             switch (role) {
                 case "A":
-                    all_user = new XStack((Iterable) map.get("admin"));
-                    while (!all_user.isEmpty()) {
-                        result.add(build_html((Map) all_user.pop()));
-                    }
-                    break;
-                // all authorise end
                 case "C":
-                    all_user = new XStack((Iterable) map.get("customer"));
-                    while (!all_user.isEmpty()) {
-                        result.add(build_html((Map) all_user.pop()));
-                    }
-                    break;
                 case "D":
-                    all_user = new XStack((Iterable) map.get("driver"));
-                    while (!all_user.isEmpty()) {
-                        result.add(build_html((Map) all_user.pop()));
+                    if (role.equals("A") || role.equals("C")) {
+                        all_user = new XStack((Iterable) map.get("customer"));
+                        while (!all_user.isEmpty()) {
+                            result.add(build_html((Map) all_user.pop()));
+                        }
+                    }
+                    if (role.equals("A") || role.equals("D")) {
+                        all_user = new XStack((Iterable) map.get("driver"));
+                        while (!all_user.isEmpty()) {
+                            result.add(build_html((Map) all_user.pop()));
+                        }
                     }
                     break;
                 default:

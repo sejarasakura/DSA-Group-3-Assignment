@@ -31,7 +31,7 @@ public class Admin extends User {
 
     @Override
     public boolean isNotNull() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.isNotNull();
     }
 
     @Override

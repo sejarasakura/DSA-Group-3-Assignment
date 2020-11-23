@@ -85,16 +85,17 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
         table = new TableEntry[capacity];
     }
 
-    public XHashedDictionary(Map data) {
-        this(data.size(), DEFAULT_LOAD_FACTOR);
-        data.keySet().forEach((_item) -> {
-            this.add((K) _item, (V) data.get(_item));
-        });
+    public XHashedDictionary(Map<K, V> data) {
+        this(Math.max((int) (data.size() / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_SIZE), DEFAULT_LOAD_FACTOR);
+        putAllForCreate(data);
+    }
+
+    public XHashedDictionary(Object data) {
+        this((Map) data);
     }
 
     @Override
     public V add(K key, V value) {
-
         if (key == null) {
             return putForNullKey(value);
         }
@@ -159,6 +160,31 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
         } else {
             return index;
         }
+    }
+
+    public final void addAll(Map<? extends K, ? extends V> m) {
+        int numKeysToBeAdded = m.size();
+        if (numKeysToBeAdded == 0) {
+            return;
+        }
+
+        if (numKeysToBeAdded > threshold) {
+            int targetCapacity = (int) (numKeysToBeAdded / loadFactor + 1);
+            if (targetCapacity > MAXIMUM_CAPACITY) {
+                targetCapacity = MAXIMUM_CAPACITY;
+            }
+            int newCapacity = table.length;
+            while (newCapacity < targetCapacity) {
+                newCapacity <<= 1;
+            }
+            if (newCapacity > table.length) {
+                resize(newCapacity);
+            }
+        }
+
+        m.entrySet().forEach((e) -> {
+            add(e.getKey(), e.getValue());
+        });
     }
 
     @Override
@@ -371,15 +397,48 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
         return false;
     }
 
-    Iterator<K> newKeyIterator() {
+    private void putForCreate(K key, V value) {
+        int hash = (key == null) ? 0 : hash(key.hashCode());
+        int i = indexFor(hash, table.length);
+
+        /**
+         * Look for preexisting entry for key. This will never happen for clone
+         * or deserialize. It will only happen for construction if the input Map
+         * is a sorted map whose ordering is inconsistent w/ equals.
+         */
+        for (TableEntry<K, V> e = table[i]; e != null; e = e.next) {
+            Object k;
+            if (e.hash == hash
+                    && ((k = e.key) == key || (key != null && key.equals(k)))) {
+                e.value = value;
+                return;
+            }
+        }
+
+        createEntry(hash, key, value, i);
+    }
+
+    private void putAllForCreate(Map<? extends K, ? extends V> m) {
+        for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) {
+            putForCreate(e.getKey(), e.getValue());
+        }
+    }
+
+    void createEntry(int hash, K key, V value, int bucketIndex) {
+        TableEntry<K, V> e = table[bucketIndex];
+        table[bucketIndex] = new TableEntry<>(hash, key, value, e);
+        size++;
+    }
+
+    public Iterator<K> newKeyIterator() {
         return new KeyIterator();
     }
 
-    Iterator<V> newValueIterator() {
+    public Iterator<V> newValueIterator() {
         return new ValueIterator();
     }
 
-    Iterator<TableEntry<K, V>> newEntryIterator() {
+    public Iterator<TableEntry<K, V>> newEntryIterator() {
         return new EntryIterator();
     }
 

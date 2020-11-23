@@ -13,38 +13,38 @@ import com.opencsv.bean.CsvBindByName;
  * @author ITSUKA KOTORI
  * @param <T>
  */
-public abstract class User<T> extends AbstractEntity<User>{
-    
+public abstract class User<T> extends AbstractEntity<User> {
+
     /**
-     * User Id primary key 
+     * User Id primary key
      */
     @CsvBindByName
     private String user_id;
-    
+
     /**
      * User IC if have
      */
     @CsvBindByName
     private String ic;
-    
+
     /**
      * User Registered name
      */
     @CsvBindByName
     private String name;
-    
+
     /**
      * User register email
      */
     @CsvBindByName
     private String email;
-    
+
     /**
-     * User phone number 
+     * User phone number
      */
     @CsvBindByName
     private String phoneNumber;
-    
+
     /**
      * User role
      */
@@ -52,8 +52,7 @@ public abstract class User<T> extends AbstractEntity<User>{
     private String role;
 
     /**
-     * User username
-     * User profile picture will save by the ${username}.png
+     * User username User profile picture will save by the ${username}.png
      */
     @CsvBindByName
     private String username;
@@ -65,13 +64,14 @@ public abstract class User<T> extends AbstractEntity<User>{
     private String password;
 
     /**
-     * Constructor 
+     * Constructor
      */
     public User() {
     }
 
     /**
      * Parameter constructor
+     *
      * @param user_id
      * @param ic
      * @param name
@@ -91,18 +91,21 @@ public abstract class User<T> extends AbstractEntity<User>{
         this.username = username;
         this.password = password;
     }
-    
+
     /**
      * User login functions that will return user or null for not found
+     *
      * @param data
-     * @return 
+     * @return
      */
     public abstract User login(User data);
-    
+
     /**
-     * User registration function that success will return user and null for fail
+     * User registration function that success will return user and null for
+     * fail
+     *
      * @param data
-     * @return 
+     * @return
      */
     public abstract User register(User data);
 
@@ -121,7 +124,7 @@ public abstract class User<T> extends AbstractEntity<User>{
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public String getRole() {
         return role;
     }
@@ -129,7 +132,7 @@ public abstract class User<T> extends AbstractEntity<User>{
     public void setRole(String role) {
         this.role = role;
     }
-    
+
     public String getUser_id() {
         return user_id;
     }
@@ -169,18 +172,21 @@ public abstract class User<T> extends AbstractEntity<User>{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
-    public static boolean searchUsername(ArrList<? extends User> users, String data){
-        for(User user: users){
-            if(user.username == null ? data == null : user.username.equals(data))
+
+    public static boolean searchUsername(ArrList<? extends User> users, String data) {
+        for (User user : users) {
+            if (user.username == null ? data == null : user.username.equals(data)) {
                 return true;
+            }
         }
         return false;
     }
-    public static boolean searchEmail(ArrList<? extends User> users, String data){
-        for(User user: users){
-            if(user.email == null ? data == null : user.email.equals(data))
+
+    public static boolean searchEmail(ArrList<? extends User> users, String data) {
+        for (User user : users) {
+            if (user.email == null ? data == null : user.email.equals(data)) {
                 return true;
+            }
         }
         return false;
     }
@@ -189,10 +195,14 @@ public abstract class User<T> extends AbstractEntity<User>{
     public String toString() {
         return "User{" + "id=" + user_id + ", ic=" + ic + ", name=" + name + ", email=" + email + ", phoneNumber=" + phoneNumber + '}';
     }
-    
+
     @Override
     public boolean isNotNull() {
-        return this.user_id != null;
+        if (this.user_id == null) {
+            return false;
+        }
+
+        return this.role != null;
     }
 
     @Override
@@ -202,7 +212,7 @@ public abstract class User<T> extends AbstractEntity<User>{
 
     @Override
     public boolean id_equals(Object obj) {
-        return this.user_id.equals(((User)obj).user_id);
+        return this.user_id.equals(((User) obj).user_id);
     }
 
     @Override

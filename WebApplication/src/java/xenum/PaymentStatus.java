@@ -69,6 +69,12 @@ public enum PaymentStatus implements AbstractEnum {
     }
 
     public static PaymentStatus getValue(String value) {
+        if (value == null) {
+            return PaymentStatus.Voided;
+        }
+        if (value.length() <= 0) {
+            return PaymentStatus.Voided;
+        }
         return getValue(Integer.parseInt(value));
     }
 

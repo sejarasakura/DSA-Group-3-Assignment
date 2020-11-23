@@ -8,6 +8,7 @@ package main;
 import adt.ArrList;
 import adt.XHashedDictionary;
 import adt.XQueue;
+import entity.Admin;
 import entity.Booking;
 import entity.Customer;
 import entity.Driver;
@@ -49,6 +50,12 @@ public class Datas {
 
     /**
      *
+     * @author ITSUKA KOTORI all the online admin
+     */
+    public static ArrList<Admin> admins;
+
+    /**
+     *
      * @author ITSUKA KOTORI all the online customer
      */
     public static ArrList<Customer> customers;
@@ -70,5 +77,11 @@ public class Datas {
      * @author ITSUKA KOTORI doing start up
      */
     public static int stsrtUp = main.Functions.startUpInitialData();
+
+    /**
+     *
+     * @author Lim sai keat admin bar status
+     */
+    public static ArrList<Boolean> admin_bar_status;
 
 }

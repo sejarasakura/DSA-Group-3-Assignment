@@ -34,6 +34,7 @@ public class updateEntity extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String jsp_action = request.getParameter("jsp-action");
         String edit = request.getParameter("edit");
+        edit = edit.substring(0, 1).toUpperCase() + edit.substring(1);
 
         switch (jsp_action.toLowerCase()) {
             case "delete":
@@ -44,8 +45,10 @@ public class updateEntity extends HttpServlet {
             case "update":
                 UpdateEntityListCilent x = new UpdateEntityListCilent(edit, request, response);
                 break;
+            default:
+                System.out.println("Error not doing something");
         }
-        response.sendRedirect(main.WebConfig.ADMIN_URL + "edit_entity.jsp?edit=" + edit);
+        response.sendRedirect(main.WebConfig.ADMIN_URL + "edit/" + edit.toLowerCase());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

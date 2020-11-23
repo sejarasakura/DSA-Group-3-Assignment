@@ -85,16 +85,13 @@ public class MapConverter<K, V> implements Map<K, V> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    Set entrySet;
-
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
         return entrySet0();
     }
 
     private Set<Map.Entry<K, V>> entrySet0() {
-        Set<Map.Entry<K, V>> es = entrySet;
-        return es != null ? es : (entrySet = new EntrySet());
+        return new EntrySet();
     }
 
     private final class EntrySet extends AbstractSet<Map.Entry<K, V>> {

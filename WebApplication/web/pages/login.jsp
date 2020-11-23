@@ -4,9 +4,22 @@
     Author     : ITSUKA KOTORI
 --%>
 
+<%@page import="entity.User"%>
+<%@page import="cilent.Login"%>
 <%@page import="main.Datas"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
+<%
+    Login login = new Login(request);
+    if (login.getUser() != null) {
+        response.sendRedirect((String) main.Datas.settings.getValue("pages/account"));
+    } else {
+        User u = main.Functions.getUserSession(request);
+        if (u != null) {
+            response.sendRedirect((String) main.Datas.settings.getValue("pages/account"));
+        }
+    }
+%>
 <html>
     <head>
         <jsp:include page="<%= main.WebConfig.META_URL%>">
@@ -20,7 +33,7 @@
             <h1 class="text-center">Login to rent car</h1>
             <br>
             <div class="login"> 
-                <form id="mainForm" method="post">
+                <form submit="login.jsp" id="mainForm" method="post">
                     <img src="<%= main.Functions.getProfileUrl(request)%>" alt="Users" class="img-circle img-login center-block" width="200" height="200"> 
                     <div class="form-group row">
                         <div class="col-sm-12">
@@ -29,7 +42,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <input placeholder="Email/Username" type="text" class="form-control" id="username" name="username" autofocus>
+                            <input placeholder="Email/Username" value="${param.username}" type="text" class="form-control" id="username" name="username" autofocus>
                         </div>
                     </div>
                     <div class="form-group row">

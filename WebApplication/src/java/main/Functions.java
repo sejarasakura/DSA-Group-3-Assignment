@@ -138,17 +138,17 @@ public class Functions {
             File temp;
             try {
                 temp = File.createTempFile(url, ".png");
-                _exists = temp.exists();
+                _exists = temp.canRead();
                 if (_exists) {
                     return url + ".png";
                 }
                 temp = File.createTempFile(url, ".jpeg");
-                _exists = temp.exists();
+                _exists = temp.canRead();
                 if (_exists) {
                     return url + ".jpeg";
                 }
                 temp = File.createTempFile(url, ".jpg");
-                _exists = temp.exists();
+                _exists = temp.canRead();
                 if (_exists) {
                     return url + ".jpg";
                 }
@@ -219,14 +219,22 @@ public class Functions {
         return new String(new char[count]).replace("\0", str);
     }
 
-    public static void checkLogin(HttpServletResponse response, User user) throws IOException {
+    public static boolean checkLogin(HttpServletResponse response, User user) throws IOException {
+        ArrList u = null;
         if (user == null) {
             response.sendRedirect((String) Datas.settings.getValue("pages/login"));
-            return;
+            return false;
         }
         if (!user.isNotNull()) {
             response.sendRedirect((String) Datas.settings.getValue("pages/login"));
+            return false;
         }
+
+        if (user.getRole().isEmpty()) {
+            response.sendRedirect((String) Datas.settings.getValue("pages/login"));
+            return false;
+        }
+        return true;
     }
 
     public static String getProjectDir() {
@@ -250,8 +258,21 @@ public class Functions {
         return TYPE_SWITCH.contains(type);
     }
 
-    public static String list_id(AbstractEntity e) {
-        return "";
+    public static ArrList<Boolean> getAdminBarStatus(HttpServletRequest request) {
+        return main.Datas.admin_bar_status;
+    }
+
+    public static ArrList<Boolean> createAdminBarStatus(HttpServletRequest request, int x) {
+        ArrList<Boolean> status = new ArrList<Boolean>();
+        for (int i = 0; i < x; i++) {
+            status.add(Boolean.FALSE);
+        }
+        setAdminBarStatus(request, status);
+        return status;
+    }
+
+    public static void setAdminBarStatus(HttpServletRequest request, ArrList<Boolean> v) {
+        main.Datas.admin_bar_status = v;
     }
 
 }

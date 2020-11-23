@@ -167,7 +167,7 @@ public class WithdrawTest {
         System.out.println("getAmout");
         Withdraw instance = new Withdraw();
         double expResult = 0.0;
-        double result = instance.getAmout();
+        double result = instance.getAmount();
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -181,7 +181,7 @@ public class WithdrawTest {
         System.out.println("setAmout");
         double amout = 0.0;
         Withdraw instance = new Withdraw();
-        instance.setAmout(amout);
+        instance.setAmount(amout);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

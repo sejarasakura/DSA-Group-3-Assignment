@@ -34,13 +34,13 @@ public class Withdraw extends AbstractEntity<Withdraw> {
      * amount
      */
     @CsvBindByName
-    private double amout;
+    private double amount;
 
     /**
      * date
      */
     @CsvBindByName
-    @CsvDate("dd.MM.yyyy.hh.mm.ss")
+    @CsvDate(main.WebConfig.saving_date_format)
     private Date date;
 
     /**
@@ -84,12 +84,12 @@ public class Withdraw extends AbstractEntity<Withdraw> {
         this.user_id = user_id;
     }
 
-    public double getAmout() {
-        return amout;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setAmout(double amout) {
-        this.amout = amout;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public Date getDate() {
@@ -141,7 +141,7 @@ public class Withdraw extends AbstractEntity<Withdraw> {
 
     @Override
     public String toString() {
-        return "Withdraw{" + "withdraw_id=" + withdraw_id + ", user_id=" + user_id + ", amout=" + amout + ", date=" + date + ", status=" + status + ", note=" + note + '}';
+        return "Withdraw{" + "withdraw_id=" + withdraw_id + ", user_id=" + user_id + ", amout=" + amount + ", date=" + date + ", status=" + status + ", note=" + note + '}';
     }
 
     @Override

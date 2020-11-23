@@ -34,7 +34,6 @@
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/validator/additional-methods.min.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/Master.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<script src='https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js'></script>
 <script src='https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js'></script>
 
 <link rel="icon" href="<%= getServletContext().getInitParameter("DomainName")%>img/sm-logo.png" type="image/x-icon">

@@ -150,7 +150,7 @@ public class EditAdmin {
         sb.append("<form action=\"/WebApplication/admin/EditElement\" method=\"post\">").append("<div class=\"panel panel-default\">")
                 .append("<div class=\"panel-heading\">").append("<div class=\"row\"> <div class=\"col-sm-6\"> ")
                 .append(title).append(" </div> <div class=\"col-sm-6\"> <button type=\"button\" class=\"btn btn-default pull-right\" id=\"p-h-")
-                .append(key).append("\"> <span class=\"glyphicon glyphicon-plus\"></span> show </button> </div> </div>")
+                .append(key).append("\"> <span id='add-btn' class=\"glyphicon glyphicon-plus\"></span> show </button> </div> </div>")
                 .append("</div>").append("<div class=\"panel-body\" id=\"p-b-")
                 .append(key).append("\">");
         int count = 0;

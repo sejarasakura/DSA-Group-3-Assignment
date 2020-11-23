@@ -5,28 +5,26 @@
  */
 package entity;
 
-import adt.XQueue;
-import adt.ArrList;
 import com.opencsv.bean.CsvBindByName;
 
 /**
  *
  * @author ITSUKA KOTORI
  */
-public class Driver extends User<Driver>{
-    
+public class Driver extends User<Driver> {
+
     /*
     * Driver accepted booking
-    */
+     */
     @CsvBindByName
     private String driver_license;
-    
+
     public Driver() {
         super();
     }
 
-    public Driver(String driver_license, String user_id, String ic, 
-            String name, String email, String phoneNumber, 
+    public Driver(String driver_license, String user_id, String ic,
+            String name, String email, String phoneNumber,
             String username, String password) {
         super(user_id, ic, name, email, phoneNumber, "d", username, password);
         this.driver_license = driver_license;
@@ -42,14 +40,14 @@ public class Driver extends User<Driver>{
 
     @Override
     public boolean isNotNull() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.isNotNull();
     }
-    
+
     @Override
     public boolean id_equals(Object obj) {
-        return this.getUser_id().equals(((Driver)obj).getUser_id());
+        return this.getUser_id().equals(((Driver) obj).getUser_id());
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -75,5 +73,4 @@ public class Driver extends User<Driver>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }

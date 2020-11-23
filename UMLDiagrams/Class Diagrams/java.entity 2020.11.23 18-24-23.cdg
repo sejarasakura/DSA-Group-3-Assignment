@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="java.entity">
+  <ClassDiagramComponents>
+    <Class name="AbstractEntity" package="entity" visibility="public" isAbstract="true" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="STORING_DIR" type="String" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="isNotNull" returnType="boolean" visibility="public" isAbstract="true"/>
+        <Method name="equals" returnType="boolean" visibility="public" isAbstract="true">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="id_equals" returnType="boolean" visibility="public" isAbstract="true">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public" isAbstract="true"/>
+        <Method name="compareTo" returnType="int" visibility="public" isAbstract="true">
+          <Argument type="Object" name="t"/>
+        </Method>
+        <Method name="getStorageFile" returnType="String" visibility="public"/>
+        <Method name="addDataToCsv" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="ArrList&lt;? extends AbstractEntity&gt;" name="datas"/>
+        </Method>
+        <Method name="addDataToCsv" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="Iterable&lt;? extends AbstractEntity&gt;" name="datas"/>
+        </Method>
+        <Method name="readDataFormCsv" returnType="Iterator&lt;? extends AbstractEntity&gt;" visibility="public" isStatic="true">
+          <Argument type="AbstractEntity" name="reference"/>
+        </Method>
+        <Method name="privateReadDataFormCsv" returnType="Iterator&lt;? extends AbstractEntity&gt;" visibility="private" isStatic="true">
+          <Argument type="AbstractEntity" name="c"/>
+          <Argument type="boolean" name="show_e"/>
+        </Method>
+        <Method name="reWriteAllDataToCsv" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="ArrList&lt;? extends AbstractEntity&gt;" name="datas"/>
+        </Method>
+        <Method name="privateReWriteAllDataToCsv" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="ArrList&lt;? extends AbstractEntity&gt;" name="it"/>
+          <Argument type="boolean" name="show_e"/>
+        </Method>
+        <Method name="reWriteAllDataToCsv" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="Iterable&lt;? extends AbstractEntity&gt;" name="datas"/>
+        </Method>
+        <Method name="updateDataToCsv" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="ArrList&lt;? extends AbstractEntity&gt;" name="datas"/>
+        </Method>
+        <Method name="updateDataToCsv" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="Iterable&lt;? extends AbstractEntity&gt;" name="datas"/>
+        </Method>
+        <Method name="deleteDataToCsv" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="ArrList&lt;? extends AbstractEntity&gt;" name="datas"/>
+        </Method>
+        <Method name="deleteDataToCsv" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="Iterable&lt;? extends AbstractEntity&gt;" name="datas"/>
+        </Method>
+        <Method name="updateThisToCsv" returnType="boolean" visibility="public"/>
+        <Method name="addThisToCsv" returnType="boolean" visibility="public"/>
+        <Method name="deleteThisToCsv" returnType="boolean" visibility="public"/>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Admin" package="entity" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="user_id"/>
+          <Argument type="String" name="ic"/>
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="phoneNumber"/>
+          <Argument type="String" name="role"/>
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="login" returnType="User" visibility="public">
+          <Argument type="User" name="data"/>
+        </Method>
+        <Method name="register" returnType="User" visibility="public">
+          <Argument type="User" name="data"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Booking" package="entity" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="booking_id" type="String" visibility="private"/>
+        <Field name="booking_description" type="String" visibility="private"/>
+        <Field name="booking_type" type="String" visibility="private"/>
+        <Field name="booking_date" type="Date" visibility="private"/>
+        <Field name="driver_id" type="String" visibility="private"/>
+        <Field name="customer_id" type="String" visibility="private"/>
+        <Field name="chats_id" type="String" visibility="private"/>
+        <Field name="mapping_id" type="String" visibility="private"/>
+        <Field name="paymentNumber" type="String" visibility="private"/>
+        <Field name="bookingStatus" type="BookingStatus" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getBooking_id" returnType="String" visibility="public"/>
+        <Method name="setBooking_id" returnType="void" visibility="public">
+          <Argument type="String" name="booking_id"/>
+        </Method>
+        <Method name="getBooking_description" returnType="String" visibility="public"/>
+        <Method name="setBooking_description" returnType="void" visibility="public">
+          <Argument type="String" name="booking_description"/>
+        </Method>
+        <Method name="getBooking_type" returnType="String" visibility="public"/>
+        <Method name="setBooking_type" returnType="void" visibility="public">
+          <Argument type="String" name="booking_type"/>
+        </Method>
+        <Method name="getBooking_date" returnType="Date" visibility="public"/>
+        <Method name="setBooking_date" returnType="void" visibility="public">
+          <Argument type="Date" name="booking_date"/>
+        </Method>
+        <Method name="getDriver_id" returnType="String" visibility="public"/>
+        <Method name="setDriver_id" returnType="void" visibility="public">
+          <Argument type="String" name="driver_id"/>
+        </Method>
+        <Method name="getCustomer_id" returnType="String" visibility="public"/>
+        <Method name="setCustomer_id" returnType="void" visibility="public">
+          <Argument type="String" name="customer_id"/>
+        </Method>
+        <Method name="getChats_id" returnType="String" visibility="public"/>
+        <Method name="setChats_id" returnType="void" visibility="public">
+          <Argument type="String" name="chats_id"/>
+        </Method>
+        <Method name="getMapping_id" returnType="String" visibility="public"/>
+        <Method name="setMapping_id" returnType="void" visibility="public">
+          <Argument type="String" name="mapping_id"/>
+        </Method>
+        <Method name="getPaymentNumber" returnType="String" visibility="public"/>
+        <Method name="setPaymentNumber" returnType="void" visibility="public">
+          <Argument type="String" name="paymentNumber"/>
+        </Method>
+        <Method name="getBookingStatus" returnType="BookingStatus" visibility="public"/>
+        <Method name="setBookingStatus" returnType="void" visibility="public">
+          <Argument type="BookingStatus" name="bookingStatus"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Car" package="entity" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="plate_id" type="String" visibility="private"/>
+        <Field name="license" type="String" visibility="private"/>
+        <Field name="regDate" type="Date" visibility="private"/>
+        <Field name="carType" type="CarType" visibility="private"/>
+        <Field name="driver_id" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="plate_id"/>
+          <Argument type="String" name="license"/>
+          <Argument type="Date" name="regDate"/>
+          <Argument type="CarType" name="carType"/>
+          <Argument type="String" name="driver_id"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCarType" returnType="CarType" visibility="public"/>
+        <Method name="setCarType" returnType="void" visibility="public">
+          <Argument type="CarType" name="carType"/>
+        </Method>
+        <Method name="getString" returnType="String" visibility="public"/>
+        <Method name="setString" returnType="void" visibility="public">
+          <Argument type="String" name="driver_id"/>
+        </Method>
+        <Method name="getPlate_id" returnType="String" visibility="public"/>
+        <Method name="setPlate_id" returnType="void" visibility="public">
+          <Argument type="String" name="plate_id"/>
+        </Method>
+        <Method name="getLicense" returnType="Object" visibility="public"/>
+        <Method name="setLicense" returnType="void" visibility="public">
+          <Argument type="String" name="license"/>
+        </Method>
+        <Method name="getRegDate" returnType="Date" visibility="public"/>
+        <Method name="setRegDate" returnType="void" visibility="public">
+          <Argument type="Date" name="regDate"/>
+        </Method>
+        <Method name="getDriver_id" returnType="String" visibility="public"/>
+        <Method name="setDriver_id" returnType="void" visibility="public">
+          <Argument type="String" name="driver_id"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Chat" package="entity" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="chat_details_id" type="String" visibility="private"/>
+        <Field name="message" type="String" visibility="private"/>
+        <Field name="send_date" type="Date" visibility="private"/>
+        <Field name="read" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="chat_details_id"/>
+          <Argument type="String" name="message"/>
+          <Argument type="Date" name="send_date"/>
+          <Argument type="boolean" name="read"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getChat_details_id" returnType="String" visibility="public"/>
+        <Method name="setChat_details_id" returnType="void" visibility="public">
+          <Argument type="String" name="chat_details_id"/>
+        </Method>
+        <Method name="getMessage" returnType="String" visibility="public"/>
+        <Method name="setMessage" returnType="void" visibility="public">
+          <Argument type="String" name="message"/>
+        </Method>
+        <Method name="getSend_date" returnType="Date" visibility="public"/>
+        <Method name="setSend_date" returnType="void" visibility="public">
+          <Argument type="Date" name="send_date"/>
+        </Method>
+        <Method name="getRead" returnType="boolean" visibility="public"/>
+        <Method name="setRead" returnType="void" visibility="public">
+          <Argument type="boolean" name="read"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Chats" package="entity" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="chats_id" type="String" visibility="private"/>
+        <Field name="chats_details_id" type="ArrList&lt;String&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getChats_id" returnType="String" visibility="public"/>
+        <Method name="setChats_id" returnType="void" visibility="public">
+          <Argument type="String" name="chats_id"/>
+        </Method>
+        <Method name="getChats_details_id" returnType="ArrList&lt;String&gt;" visibility="public"/>
+        <Method name="setChats_details_id" returnType="void" visibility="public">
+          <Argument type="ArrList&lt;String&gt;" name="chats_details_id"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Customer" package="entity" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="current_booking_id" type="String" visibility="private"/>
+        <Field name="memberType" type="MemberShip" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="current_booking_id"/>
+          <Argument type="String" name="memberType_id"/>
+          <Argument type="String" name="user_id"/>
+          <Argument type="String" name="ic"/>
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="phoneNumber"/>
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCurrent_booking_id" returnType="String" visibility="public"/>
+        <Method name="setCurrent_booking_id" returnType="void" visibility="public">
+          <Argument type="String" name="current_booking_id"/>
+        </Method>
+        <Method name="getMemberType" returnType="MemberShip" visibility="public"/>
+        <Method name="setMemberType" returnType="void" visibility="public">
+          <Argument type="MemberShip" name="memberType"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+        <Method name="main3" returnType="void" visibility="public" isStatic="true">
+          <Argument type="Class" name="cls"/>
+        </Method>
+        <Method name="main2" returnType="void" visibility="public" isStatic="true"/>
+        <Method name="login" returnType="User" visibility="public">
+          <Argument type="User" name="user"/>
+        </Method>
+        <Method name="register" returnType="User" visibility="public">
+          <Argument type="User" name="user"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Driver" package="entity" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="driver_license" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="driver_license"/>
+          <Argument type="String" name="user_id"/>
+          <Argument type="String" name="ic"/>
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="phoneNumber"/>
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getDriver_license" returnType="String" visibility="public"/>
+        <Method name="setDriver_license" returnType="void" visibility="public">
+          <Argument type="String" name="driver_license"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+        <Method name="login" returnType="User" visibility="public">
+          <Argument type="User" name="data"/>
+        </Method>
+        <Method name="register" returnType="User" visibility="public">
+          <Argument type="User" name="data"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="InfoMessage" package="entity" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="code" type="String" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="decription" type="String" visibility="private"/>
+        <Field name="cssClass" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="code"/>
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="decription"/>
+          <Argument type="String" name="cssClass"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCode" returnType="String" visibility="public"/>
+        <Method name="setCode" returnType="void" visibility="public">
+          <Argument type="String" name="code"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getDecription" returnType="String" visibility="public"/>
+        <Method name="setDecription" returnType="void" visibility="public">
+          <Argument type="String" name="decription"/>
+        </Method>
+        <Method name="getCssClass" returnType="String" visibility="public"/>
+        <Method name="setCssClass" returnType="void" visibility="public">
+          <Argument type="String" name="cssClass"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ClassSaving" package="entity.json" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="classname" type="String" visibility="private"/>
+        <Field name="extension" type="String" visibility="private"/>
+        <Field name="identifier" type="String" visibility="private"/>
+        <Field name="add" type="boolean" visibility="private"/>
+        <Field name="delete" type="boolean" visibility="private"/>
+        <Field name="fields" type="ArrList&lt;FeildAccessbility&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="classname"/>
+          <Argument type="String" name="extension"/>
+          <Argument type="ArrList&lt;FeildAccessbility&gt;" name="fields"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIdentifier" returnType="String" visibility="public"/>
+        <Method name="setIdentifier" returnType="void" visibility="public">
+          <Argument type="String" name="identifier"/>
+        </Method>
+        <Method name="getClassname" returnType="String" visibility="public"/>
+        <Method name="setClassname" returnType="void" visibility="public">
+          <Argument type="String" name="classname"/>
+        </Method>
+        <Method name="getExtension" returnType="String" visibility="public"/>
+        <Method name="setExtension" returnType="void" visibility="public">
+          <Argument type="String" name="extension"/>
+        </Method>
+        <Method name="getFields" returnType="ArrList&lt;FeildAccessbility&gt;" visibility="public"/>
+        <Method name="setFields" returnType="void" visibility="public">
+          <Argument type="ArrList&lt;FeildAccessbility&gt;" name="fields"/>
+        </Method>
+        <Method name="isAdd" returnType="boolean" visibility="public"/>
+        <Method name="setAdd" returnType="void" visibility="public">
+          <Argument type="boolean" name="add"/>
+        </Method>
+        <Method name="isDelete" returnType="boolean" visibility="public"/>
+        <Method name="setDelete" returnType="void" visibility="public">
+          <Argument type="boolean" name="delete"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CreateDisplayClassJson" package="entity.json" visibility="public" xPosition="620.0" yPosition="420.0">
+      <Fields>
+        <Field name="class_s" type="ArrList&lt;Class&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+        <Method name="generateJsonFile" returnType="void" visibility="public"/>
+        <Method name="readData" returnType="ArrList&lt;ClassSaving&gt;" visibility="public">
+          <Argument type="String" name="dir"/>
+        </Method>
+        <Method name="addAllClassToList" returnType="void" visibility="public"/>
+        <Method name="getCS" returnType="ClassSaving" visibility="public">
+          <Argument type="Class" name="cls"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FeildAccessbility" package="entity.json" visibility="public" xPosition="920.0" yPosition="420.0">
+      <Fields>
+        <Field name="type" type="String" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="display" type="boolean" visibility="private"/>
+        <Field name="update" type="boolean" visibility="private"/>
+        <Field name="auto_inc" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="type"/>
+          <Argument type="String" name="name"/>
+          <Argument type="boolean" name="display"/>
+          <Argument type="boolean" name="update"/>
+          <Argument type="boolean" name="auto_inc"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getType" returnType="String" visibility="public"/>
+        <Method name="setType" returnType="void" visibility="public">
+          <Argument type="String" name="type"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="isDisplay" returnType="boolean" visibility="public"/>
+        <Method name="setDisplay" returnType="void" visibility="public">
+          <Argument type="boolean" name="display"/>
+        </Method>
+        <Method name="isUpdate" returnType="boolean" visibility="public"/>
+        <Method name="setUpdate" returnType="void" visibility="public">
+          <Argument type="boolean" name="update"/>
+        </Method>
+        <Method name="isAuto_inc" returnType="boolean" visibility="public"/>
+        <Method name="setAuto_inc" returnType="void" visibility="public">
+          <Argument type="boolean" name="auto_inc"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Mapping" package="entity" visibility="public" xPosition="1220.0" yPosition="420.0">
+      <Fields>
+        <Field name="map_id" type="String" visibility="private"/>
+        <Field name="source_id" type="String" visibility="private"/>
+        <Field name="destination_id" type="String" visibility="private"/>
+        <Field name="fetch_date" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="map_id"/>
+          <Argument type="String" name="source_id"/>
+          <Argument type="String" name="destination_id"/>
+          <Argument type="Date" name="fetch_date"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getMap_id" returnType="String" visibility="public"/>
+        <Method name="setMap_id" returnType="void" visibility="public">
+          <Argument type="String" name="map_id"/>
+        </Method>
+        <Method name="getSource_id" returnType="String" visibility="public"/>
+        <Method name="setSource_id" returnType="void" visibility="public">
+          <Argument type="String" name="source_id"/>
+        </Method>
+        <Method name="getDestination_id" returnType="String" visibility="public"/>
+        <Method name="setDestination_id" returnType="void" visibility="public">
+          <Argument type="String" name="destination_id"/>
+        </Method>
+        <Method name="getFetch_date" returnType="Date" visibility="public"/>
+        <Method name="setFetch_date" returnType="void" visibility="public">
+          <Argument type="Date" name="fetch_date"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+        <Method name="loadGoogleMap" returnType="String" visibility="public"/>
+        <Method name="getDestination" returnType="Map" visibility="public"/>
+        <Method name="cleanMap" returnType="void" visibility="public" isStatic="true"/>
+      </Methods>
+    </Class>
+    <Class name="Payment" package="entity" visibility="public" xPosition="1520.0" yPosition="420.0">
+      <Fields>
+        <Field name="df" type="DecimalFormat" visibility="package"/>
+        <Field name="payment_id" type="String" visibility="private"/>
+        <Field name="payment_status" type="PaymentStatus" visibility="private"/>
+        <Field name="payment_method" type="PaymentMethodType" visibility="private"/>
+        <Field name="payment_date" type="Date" visibility="private"/>
+        <Field name="payment_due_date" type="Date" visibility="private"/>
+        <Field name="payment_amount" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="payment_id"/>
+          <Argument type="PaymentStatus" name="payment_status"/>
+          <Argument type="PaymentMethodType" name="payment_method"/>
+          <Argument type="Date" name="payment_date"/>
+          <Argument type="Date" name="payment_due_date"/>
+          <Argument type="double" name="payment_amount"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getPayment_id" returnType="String" visibility="public"/>
+        <Method name="setPayment_id" returnType="void" visibility="public">
+          <Argument type="String" name="payment_id"/>
+        </Method>
+        <Method name="getPayment_status" returnType="PaymentStatus" visibility="public"/>
+        <Method name="setPayment_status" returnType="void" visibility="public">
+          <Argument type="PaymentStatus" name="payment_status"/>
+        </Method>
+        <Method name="getPayment_method" returnType="PaymentMethodType" visibility="public"/>
+        <Method name="setPayment_method" returnType="void" visibility="public">
+          <Argument type="PaymentMethodType" name="payment_method"/>
+        </Method>
+        <Method name="getPayment_date" returnType="Date" visibility="public"/>
+        <Method name="setPayment_date" returnType="void" visibility="public">
+          <Argument type="Date" name="payment_date"/>
+        </Method>
+        <Method name="getPayment_amount" returnType="double" visibility="public"/>
+        <Method name="setPayment_amount" returnType="void" visibility="public">
+          <Argument type="double" name="payment_amount"/>
+        </Method>
+        <Method name="getPayment_due_date" returnType="Date" visibility="public"/>
+        <Method name="setPayment_due_date" returnType="void" visibility="public">
+          <Argument type="Date" name="payment_due_date"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Plate" package="entity" visibility="public" xPosition="1820.0" yPosition="420.0">
+      <Fields>
+        <Field name="plate_id" type="String" visibility="private"/>
+        <Field name="plateAlpha" type="String" visibility="private"/>
+        <Field name="plateNumber" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="plateAlpha"/>
+          <Argument type="String" name="plateNumber"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getPlate_id" returnType="String" visibility="public"/>
+        <Method name="setPlate_id" returnType="void" visibility="public">
+          <Argument type="String" name="plate_id"/>
+        </Method>
+        <Method name="getPlateAlpha" returnType="String" visibility="public"/>
+        <Method name="setPlateAlpha" returnType="void" visibility="public">
+          <Argument type="String" name="plateAlpha"/>
+        </Method>
+        <Method name="getPlateNumber" returnType="String" visibility="public"/>
+        <Method name="setPlateNumber" returnType="void" visibility="public">
+          <Argument type="String" name="plateNumber"/>
+        </Method>
+        <Method name="getFullPlateNumber" returnType="String" visibility="public"/>
+        <Method name="getPlate" returnType="Plate" visibility="public" isStatic="true">
+          <Argument type="String" name="full_plate"/>
+          <Argument type="String" name="seperator"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Review" package="entity" visibility="public" xPosition="2120.0" yPosition="420.0">
+      <Fields>
+        <Field name="driverUserName" type="String" visibility="private"/>
+        <Field name="customerUserName" type="String" visibility="private"/>
+        <Field name="paymentNumber" type="String" visibility="private"/>
+        <Field name="comments" type="ArrList&lt;String&gt;" visibility="private"/>
+        <Field name="driverRating" type="int" visibility="private"/>
+        <Field name="reviewDate" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getDriverUserName" returnType="String" visibility="public"/>
+        <Method name="setDriverUserName" returnType="void" visibility="public">
+          <Argument type="String" name="driverUserName"/>
+        </Method>
+        <Method name="getCustomerUserName" returnType="String" visibility="public"/>
+        <Method name="setCustomerUserName" returnType="void" visibility="public">
+          <Argument type="String" name="customerUserName"/>
+        </Method>
+        <Method name="getPaymentNumber" returnType="String" visibility="public"/>
+        <Method name="setPaymentNumber" returnType="void" visibility="public">
+          <Argument type="String" name="paymentNumber"/>
+        </Method>
+        <Method name="getComments" returnType="ArrList&lt;String&gt;" visibility="public"/>
+        <Method name="setComments" returnType="void" visibility="public">
+          <Argument type="ArrList&lt;String&gt;" name="comments"/>
+        </Method>
+        <Method name="getDriverRating" returnType="int" visibility="public"/>
+        <Method name="setDriverRating" returnType="void" visibility="public">
+          <Argument type="int" name="driverRating"/>
+        </Method>
+        <Method name="getReviewDate" returnType="Date" visibility="public"/>
+        <Method name="setReviewDate" returnType="void" visibility="public">
+          <Argument type="Date" name="reviewDate"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Taxi" package="entity" visibility="public" xPosition="20.0" yPosition="820.0">
+      <Fields>
+        <Field name="taxiId" type="String" visibility="private"/>
+        <Field name="taxiLicense" type="String" visibility="private"/>
+        <Field name="taxiCompany" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="taxiId"/>
+          <Argument type="String" name="taxiLicense"/>
+          <Argument type="String" name="taxiComapany"/>
+          <Argument type="String" name="plate_id"/>
+          <Argument type="String" name="license"/>
+          <Argument type="Date" name="regDate"/>
+          <Argument type="CarType" name="carType"/>
+          <Argument type="String" name="driver_id"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getTaxiLicense" returnType="String" visibility="public"/>
+        <Method name="setTaxiLicense" returnType="void" visibility="public">
+          <Argument type="String" name="taxiLicense"/>
+        </Method>
+        <Method name="getTaxiCompany" returnType="String" visibility="public"/>
+        <Method name="setTaxiCompany" returnType="void" visibility="public">
+          <Argument type="String" name="taxiCompany"/>
+        </Method>
+        <Method name="getTaxiId" returnType="String" visibility="public"/>
+        <Method name="setTaxiId" returnType="void" visibility="public">
+          <Argument type="String" name="taxiId"/>
+        </Method>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="User" package="entity" visibility="public" isAbstract="true" xPosition="320.0" yPosition="820.0">
+      <Fields>
+        <Field name="user_id" type="String" visibility="private"/>
+        <Field name="ic" type="String" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="email" type="String" visibility="private"/>
+        <Field name="phoneNumber" type="String" visibility="private"/>
+        <Field name="role" type="String" visibility="private"/>
+        <Field name="username" type="String" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="user_id"/>
+          <Argument type="String" name="ic"/>
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="phoneNumber"/>
+          <Argument type="String" name="role"/>
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="login" returnType="User" visibility="public" isAbstract="true">
+          <Argument type="User" name="data"/>
+        </Method>
+        <Method name="register" returnType="User" visibility="public" isAbstract="true">
+          <Argument type="User" name="data"/>
+        </Method>
+        <Method name="getUsername" returnType="String" visibility="public"/>
+        <Method name="setUsername" returnType="void" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="setPassword" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getRole" returnType="String" visibility="public"/>
+        <Method name="setRole" returnType="void" visibility="public">
+          <Argument type="String" name="role"/>
+        </Method>
+        <Method name="getUser_id" returnType="String" visibility="public"/>
+        <Method name="getIc" returnType="String" visibility="public"/>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="getEmail" returnType="String" visibility="public"/>
+        <Method name="getPhoneNumber" returnType="String" visibility="public"/>
+        <Method name="setUser_id" returnType="void" visibility="public">
+          <Argument type="String" name="user_id"/>
+        </Method>
+        <Method name="setIc" returnType="void" visibility="public">
+          <Argument type="String" name="ic"/>
+        </Method>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="setEmail" returnType="void" visibility="public">
+          <Argument type="String" name="email"/>
+        </Method>
+        <Method name="setPhoneNumber" returnType="void" visibility="public">
+          <Argument type="String" name="phoneNumber"/>
+        </Method>
+        <Method name="searchUsername" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="ArrList&lt;? extends User&gt;" name="users"/>
+          <Argument type="String" name="data"/>
+        </Method>
+        <Method name="searchEmail" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="ArrList&lt;? extends User&gt;" name="users"/>
+          <Argument type="String" name="data"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Withdraw" package="entity" visibility="public" xPosition="620.0" yPosition="820.0">
+      <Fields>
+        <Field name="withdraw_id" type="String" visibility="private"/>
+        <Field name="user_id" type="String" visibility="private"/>
+        <Field name="amout" type="double" visibility="private"/>
+        <Field name="date" type="Date" visibility="private"/>
+        <Field name="status" type="PaymentStatus" visibility="private"/>
+        <Field name="driver_id" type="String" visibility="private"/>
+        <Field name="note" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="withdraw_id"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getWithdraw_id" returnType="String" visibility="public"/>
+        <Method name="setWithdraw_id" returnType="void" visibility="public">
+          <Argument type="String" name="withdraw_id"/>
+        </Method>
+        <Method name="getUser_id" returnType="String" visibility="public"/>
+        <Method name="setUser_id" returnType="void" visibility="public">
+          <Argument type="String" name="user_id"/>
+        </Method>
+        <Method name="getAmout" returnType="double" visibility="public"/>
+        <Method name="setAmout" returnType="void" visibility="public">
+          <Argument type="double" name="amout"/>
+        </Method>
+        <Method name="getDate" returnType="Date" visibility="public"/>
+        <Method name="setDate" returnType="void" visibility="public">
+          <Argument type="Date" name="date"/>
+        </Method>
+        <Method name="getStatus" returnType="PaymentStatus" visibility="public"/>
+        <Method name="setStatus" returnType="void" visibility="public">
+          <Argument type="PaymentStatus" name="status"/>
+        </Method>
+        <Method name="getNote" returnType="String" visibility="public"/>
+        <Method name="getDriver_id" returnType="String" visibility="public"/>
+        <Method name="setDriver_id" returnType="void" visibility="public">
+          <Argument type="String" name="driver_id"/>
+        </Method>
+        <Method name="setNote" returnType="void" visibility="public">
+          <Argument type="String" name="note"/>
+        </Method>
+        <Method name="isNotNull" returnType="boolean" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="t"/>
+        </Method>
+        <Method name="id_equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="entity.Booking" target="entity.AbstractEntity"/>
+    <IsRelation name="is" source="entity.Taxi" target="entity.Car"/>
+    <UseRelation source="entity.Withdraw" target="entity.Payment" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="entity.Car" target="entity.AbstractEntity"/>
+    <UseRelation source="entity.Payment" target="entity.Payment" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="entity.AbstractEntity" target="entity.AbstractEntity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="entity.Customer" target="entity.User" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="entity.Driver" target="entity.User"/>
+    <UseRelation source="entity.Admin" target="entity.User" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="entity.Chats" target="entity.AbstractEntity"/>
+    <UseRelation source="entity.Driver" target="entity.User" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="fields" source="entity.json.ClassSaving" target="entity.json.FeildAccessbility" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrList&lt;FeildAccessbility&gt;"/>
+    <UseRelation source="entity.json.ClassSaving" target="entity.json.FeildAccessbility" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="entity.Plate" target="entity.Plate" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="entity.Review" target="entity.AbstractEntity"/>
+    <UseRelation source="entity.User" target="entity.User" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="entity.Customer" target="entity.User"/>
+    <IsRelation name="is" source="entity.InfoMessage" target="entity.AbstractEntity"/>
+    <IsRelation name="is" source="entity.Plate" target="entity.AbstractEntity"/>
+    <IsRelation name="is" source="entity.Admin" target="entity.User"/>
+    <IsRelation name="is" source="entity.Mapping" target="entity.AbstractEntity"/>
+    <IsRelation name="is" source="entity.Payment" target="entity.AbstractEntity"/>
+    <UseRelation source="entity.Car" target="entity.Car" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="entity.User" target="entity.AbstractEntity"/>
+    <IsRelation name="is" source="entity.Withdraw" target="entity.AbstractEntity"/>
+    <UseRelation source="entity.Booking" target="entity.Booking" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="entity.json.CreateDisplayClassJson" target="entity.json.ClassSaving" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="entity.Chat" target="entity.AbstractEntity"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

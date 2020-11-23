@@ -8,6 +8,7 @@ package adt.node;
 /**
  *
  * @author ITSUKA KOTORI
+ * @param <T>
  */
 public class DoubleNode<T> {
 
@@ -18,5 +19,10 @@ public class DoubleNode<T> {
     public DoubleNode(final T value) {
         this.value = value;
         this.prev = this.next = null;
+    }
+
+    public void clear() {
+        prev = null;
+        next = null;
     }
 }

@@ -357,4 +357,10 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         return AbstractEntity.deleteDataToCsv(ref);
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
 }

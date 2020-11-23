@@ -16,12 +16,12 @@ import java.util.NoSuchElementException;
  * @module Chatting, Booking
  * @param <T>
  */
-public class XQueue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, java.io.Serializable{
+public class XQueue<T> implements InterfaceQuene<T>, Iterable<T>, Cloneable, java.io.Serializable {
 
     private final DoubleNode<T> head;
     private final DoubleNode<T> tail;
     private int size;
-    
+
     public XQueue() {
         head = new DoubleNode<T>(null);
         tail = new DoubleNode<T>(null);
@@ -29,26 +29,26 @@ public class XQueue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, ja
         tail.prev = head;
         size = 0;
     }
-    
+
     public XQueue(Iterable<T> ib) {
         this(ib.iterator());
     }
-    
+
     public XQueue(Iterator<T> is) {
         this();
         XStack s = new XStack();
-        while(is.hasNext()){
-            try{
+        while (is.hasNext()) {
+            try {
                 s.push(is.next());
-            }catch(Exception ex){
-                
+            } catch (Exception ex) {
+
             }
         }
-        while(!s.isEmpty()){
+        while (!s.isEmpty()) {
             this.enqueue((T) s.pop());
         }
     }
-        
+
     @Override
     public boolean isEmpty() {
         return size == 0;
@@ -61,7 +61,7 @@ public class XQueue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, ja
 
     @Override
     public final void enqueue(T item) {
-        
+
         DoubleNode<T> newNode = new DoubleNode<>(item);
 
         newNode.next = head.next;
@@ -76,8 +76,8 @@ public class XQueue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, ja
     @Override
     public final T dequeue() {
 
-        if(tail.prev == null) {
-                return null;
+        if (tail.prev == null) {
+            return null;
         }
 
         DoubleNode<T> last = tail.prev;
@@ -95,8 +95,8 @@ public class XQueue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, ja
 
     @Override
     public T peek() {
-        if(isEmpty()) {
-                return null;
+        if (isEmpty()) {
+            return null;
         }
 
         return head.next.value;
@@ -106,7 +106,7 @@ public class XQueue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, ja
     public Iterator<T> iterator() {
         return new QueueIterator();
     }
-        
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -116,25 +116,28 @@ public class XQueue<T>  implements InterfaceQuene<T>, Iterable<T>, Cloneable, ja
         }
         return s.toString();
     }
-    
+
     private class QueueIterator implements Iterator<T> {
-        
+
         private DoubleNode<T> current = head;
-        
+
         @Override
-        public boolean hasNext() { 
-            return current.next != tail;                     
+        public boolean hasNext() {
+            return current.next != tail;
         }
+
         @Override
         public void remove() {
-            throw new UnsupportedOperationException();  
+            throw new UnsupportedOperationException();
         }
 
         @Override
         public T next() {
-            if (!hasNext()) throw new NoSuchElementException();
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             T item = current.next.value;
-            current = current.next; 
+            current = current.next;
             return item;
         }
     }

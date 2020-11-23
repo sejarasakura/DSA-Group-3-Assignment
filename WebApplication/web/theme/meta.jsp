@@ -20,6 +20,7 @@
 <link href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/datatable/datatables.min_1.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/bootstrap/css/toogle-switch.css">
+<link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.7.94/css/materialdesignicons.css" type="text/css" charset="utf-8">
 
 <%-- CSS --%>
 <link href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/Master.css" rel="stylesheet"/>
@@ -33,5 +34,7 @@
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/validator/additional-methods.min.js"></script>
 <script src="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/Master.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src='https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js'></script>
+<script src='https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js'></script>
 
 <link rel="icon" href="<%= getServletContext().getInitParameter("DomainName")%>img/sm-logo.png" type="image/x-icon">

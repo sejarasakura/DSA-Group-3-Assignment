@@ -84,13 +84,21 @@
             });
             $('#dtBasicExample').DataTable({
                 "scrollX": true,
+                "scrollY": '80vh',
                 "fixedColumns": {
                     leftColumns: 1
                 },
                 "fixedRows": {
-                    topColumns: 1
+                    topRows: 1
                 },
                 "orderFixed": [0, 'asc'],
+                "ordering": false,
+                "paging": false,
+                "topSplit": 2,
+                "fixedHeader": {
+                    header: true,
+                    footer: true
+                }
             });
             $('.dataTables_length').addClass('bs-select');
         });

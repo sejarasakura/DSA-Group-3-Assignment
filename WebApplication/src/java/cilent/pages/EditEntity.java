@@ -64,12 +64,12 @@ public class EditEntity {
         stringBuilder.append("<h2 class='mb-3'>").append(refence.getClass()).append("</h2><br><table id=\"dtBasicExample\" class=\"table\" width=\"100%\">");
         generateHeader(refence);
         stringBuilder.append("<tbody>");
+        generateFooter(refence);
         Iterator obj = AbstractEntity.readDataFormCsv(refence);
         datas = (obj == null) ? new ArrList() : new ArrList(obj);
         for (int i = 0; i < datas.size(); i++) {
             generateBody(datas.get(i));
         }
-        generateFooter(refence);
         stringBuilder.append("</tbody>");
         stringBuilder.append(" </table> </form>");
     }
@@ -98,7 +98,7 @@ public class EditEntity {
     private void generateHeader(AbstractEntity ref) {
         try {
             stringBuilder.append("<thead><tr>");
-            stringBuilder.append("<th class=\"th-sm\">====</th>");
+            stringBuilder.append("<th class=\"th-sm\">=======</th>");
             for (j = 0; j < classSaving.getFields().size(); j++) {
                 feilds.add(ref.getClass().getMethod(main.Functions.fieldToGetter(classSaving.getFields().get(j).getName())));
                 stringBuilder.append("<th class=\"th-sm\">").append(classSaving.getFields().get(j).getName()).append("</th>");
@@ -167,21 +167,19 @@ public class EditEntity {
     }
 
     private void printDisplayBody(AbstractEntity entity) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        Object data;
         for (j = 0; j < feilds.size(); j++) {
+            data = feilds.get(j).invoke(entity);
             if (classSaving.getFields().get(j).isDisplay()) {
-                if (classSaving.getFields().get(j).getType().contains(".xenum")) {
-                    stringBuilder.append("<td>").append(((AbstractEnum) feilds.get(j).invoke(entity)).getName()).append("</td>");
-                } else if (classSaving.getFields().get(j).getType().equals("java.util.Date")) {
-                    stringBuilder.append("<td>").append(main.WebConfig.LOCAL_DATETIME_FORMAT.format(
-                            feilds.get(j).invoke(entity))).append("</td>");
+                if (data instanceof AbstractEnum) {
+                    stringBuilder.append("<td>").append(((AbstractEnum) data).getName()).append("</td>");
+                } else if (data instanceof Date) {
+                    stringBuilder.append("<td>").append(main.WebConfig.LOCAL_DATETIME_FORMAT.format(data)).append("</td>");
                 } else {
-                    stringBuilder.append("<td>").append(feilds.get(j).invoke(entity)).append("</td>");
+                    stringBuilder.append("<td>").append(data).append("</td>");
                 }
-
             } else {
-                stringBuilder.append("<td>")
-                        .append(main.Functions.repeat(enchar, ((String) feilds.get(j).invoke(entity)).length()))
-                        .append("</td>");
+                stringBuilder.append("<td>").append(main.Functions.repeat(enchar, ((String) data).length())).append("</td>");
             }
         }
     }

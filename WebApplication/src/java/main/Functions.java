@@ -250,4 +250,8 @@ public class Functions {
         return TYPE_SWITCH.contains(type);
     }
 
+    public static String list_id(AbstractEntity e) {
+        return "";
+    }
+
 }

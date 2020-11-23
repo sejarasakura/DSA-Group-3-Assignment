@@ -6,7 +6,6 @@
 package adt;
 
 import adt.interfaces.InterfaceHashDictionary;
-import adt.node.TableEntry;
 import java.util.*;
 
 /**
@@ -37,7 +36,7 @@ public class XHashedDictionaryBackup<K, V> implements InterfaceHashDictionary<K,
     public XHashedDictionaryBackup(Map data) {
         this(data.size());
         data.keySet().forEach((_item) -> {
-            this.add((K)_item, (V)data.get(_item));
+            this.add((K) _item, (V) data.get(_item));
         });
     }
 
@@ -97,8 +96,8 @@ public class XHashedDictionaryBackup<K, V> implements InterfaceHashDictionary<K,
         return null;
 
     }
-    
-    public Map getMap(){
+
+    public Map getMap() {
         Map map = new HashMap();
         for (TableEntry<K, V> hashTable1 : hashTable) {
             if ((hashTable1 != null) && hashTable1.isIn()) {
@@ -191,4 +190,53 @@ public class XHashedDictionaryBackup<K, V> implements InterfaceHashDictionary<K,
         outputStr += "\n";
         return outputStr;
     }
+
+    private class TableEntry<K, V> implements Map.Entry<K, V> {
+
+        private K key;
+        private V value;
+        private boolean inTable; // true if entry is in table
+
+        public TableEntry(K searchKey, V dataValue) {
+            key = searchKey;
+            value = dataValue;
+            inTable = true;
+        } // end constructor
+
+        public K getKey() {
+            return key;
+        } // end getKey
+
+        public V getValue() {
+            return value;
+        } // end getValue
+
+        public boolean isIn() {
+            return inTable;
+        } // end isIn
+
+        public boolean isRemoved() { // opposite of isIn
+            return !inTable;
+        } // end isRemoved
+
+        // state = true means entry in use; false means entry not in use, ie deleted
+        public void setToRemoved() {
+            key = null;
+            value = null;
+            inTable = false;
+        } // end setToRemoved
+
+        public void setToIn() { // not used
+            inTable = true;
+        } // end setToIn
+
+        @Override
+        public Object setValue(Object v) {
+            V oldValue = value;
+            value = (V) v;
+            return oldValue;
+        }
+
+    }
+
 }

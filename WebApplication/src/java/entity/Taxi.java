@@ -22,7 +22,7 @@ public class Taxi extends Car {
     private String taxiLicense;
 
     @CsvBindByName
-    private String taxiComapany;
+    private String taxiCompany;
 
     public String getTaxiLicense() {
         return taxiLicense;
@@ -32,12 +32,12 @@ public class Taxi extends Car {
         this.taxiLicense = taxiLicense;
     }
 
-    public String getTaxiComapany() {
-        return taxiComapany;
+    public String getTaxiCompany() {
+        return taxiCompany;
     }
 
-    public void setTaxiComapany(String taxiComapany) {
-        this.taxiComapany = taxiComapany;
+    public void setTaxiCompany(String taxiCompany) {
+        this.taxiCompany = taxiCompany;
     }
 
     public String getTaxiId() {
@@ -55,7 +55,7 @@ public class Taxi extends Car {
         super(plate_id, license, regDate, carType, driver_id);
         this.taxiId = taxiId;
         this.taxiLicense = taxiLicense;
-        this.taxiComapany = taxiComapany;
+        this.taxiCompany = taxiComapany;
     }
 
     @Override

@@ -1,0 +1,176 @@
+run:
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.string.TestStringAddingSpeed.plus_string
+# Parameters: (N = 1000)
+
+# Run progress: 0.00% complete, ETA 00:08:20
+# Fork: 1 of 1
+# Warmup Iteration   1: 1250722.684 ns/op
+# Warmup Iteration   2: 1151822.322 ns/op
+# Warmup Iteration   3: 1148269.434 ns/op
+# Warmup Iteration   4: 1170335.155 ns/op
+# Warmup Iteration   5: 1158484.086 ns/op
+Iteration   1: 1153120.602 ns/op
+Iteration   2: 1148910.257 ns/op
+Iteration   3: 1151767.304 ns/op
+Iteration   4: 1148221.396 ns/op
+Iteration   5: 1201972.720 ns/op
+
+
+Result "com.test.string.TestStringAddingSpeed.plus_string":
+  1160798.456 ±(99.9%) 88968.685 ns/op [Average]
+  (min, avg, max) = (1148221.396, 1160798.456, 1201972.720), stdev = 23104.885
+  CI (99.9%): [1071829.770, 1249767.141] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.string.TestStringAddingSpeed.string_buffer
+# Parameters: (N = 1000)
+
+# Run progress: 20.00% complete, ETA 00:06:42
+# Fork: 1 of 1
+# Warmup Iteration   1: 14774.090 ns/op
+# Warmup Iteration   2: 14465.324 ns/op
+# Warmup Iteration   3: 14870.783 ns/op
+# Warmup Iteration   4: 15067.198 ns/op
+# Warmup Iteration   5: 14897.614 ns/op
+Iteration   1: 15496.483 ns/op
+Iteration   2: 15423.956 ns/op
+Iteration   3: 14992.951 ns/op
+Iteration   4: 14933.787 ns/op
+Iteration   5: 14894.875 ns/op
+
+
+Result "com.test.string.TestStringAddingSpeed.string_buffer":
+  15148.410 ±(99.9%) 1108.677 ns/op [Average]
+  (min, avg, max) = (14894.875, 15148.410, 15496.483), stdev = 287.920
+  CI (99.9%): [14039.734, 16257.087] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.string.TestStringAddingSpeed.string_builder
+# Parameters: (N = 1000)
+
+# Run progress: 40.00% complete, ETA 00:05:01
+# Fork: 1 of 1
+# Warmup Iteration   1: 15016.288 ns/op
+# Warmup Iteration   2: 14638.597 ns/op
+# Warmup Iteration   3: 14948.643 ns/op
+# Warmup Iteration   4: 14994.388 ns/op
+# Warmup Iteration   5: 14916.875 ns/op
+Iteration   1: 16684.948 ns/op
+Iteration   2: 15188.508 ns/op
+Iteration   3: 15376.419 ns/op
+Iteration   4: 14977.274 ns/op
+Iteration   5: 14908.850 ns/op
+
+
+Result "com.test.string.TestStringAddingSpeed.string_builder":
+  15427.200 ±(99.9%) 2798.416 ns/op [Average]
+  (min, avg, max) = (14908.850, 15427.200, 16684.948), stdev = 726.740
+  CI (99.9%): [12628.783, 18225.616] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.string.TestStringAddingSpeed.string_concate
+# Parameters: (N = 1000)
+
+# Run progress: 60.00% complete, ETA 00:03:20
+# Fork: 1 of 1
+# Warmup Iteration   1: 1184356.673 ns/op
+# Warmup Iteration   2: 1158292.624 ns/op
+# Warmup Iteration   3: 1166149.090 ns/op
+# Warmup Iteration   4: 1154160.831 ns/op
+# Warmup Iteration   5: 1155924.500 ns/op
+Iteration   1: 1184890.381 ns/op
+Iteration   2: 1166564.073 ns/op
+Iteration   3: 1152938.658 ns/op
+Iteration   4: 1151971.565 ns/op
+Iteration   5: 1164794.992 ns/op
+
+
+Result "com.test.string.TestStringAddingSpeed.string_concate":
+  1164231.934 ±(99.9%) 51315.594 ns/op [Average]
+  (min, avg, max) = (1151971.565, 1164231.934, 1184890.381), stdev = 13326.497
+  CI (99.9%): [1112916.340, 1215547.528] (assumes normal distribution)
+
+
+# JMH version: 1.26
+# VM version: JDK 1.8.0_111, Java HotSpot(TM) 64-Bit Server VM, 25.111-b14
+# VM invoker: C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.exe
+# VM options: -Xms2G -Xmx2G
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.test.string.TestStringAddingSpeed.string_format
+# Parameters: (N = 1000)
+
+# Run progress: 80.00% complete, ETA 00:01:40
+# Fork: 1 of 1
+# Warmup Iteration   1: 4789222.834 ns/op
+# Warmup Iteration   2: 4677321.599 ns/op
+# Warmup Iteration   3: 4790895.354 ns/op
+# Warmup Iteration   4: 4724579.688 ns/op
+# Warmup Iteration   5: 4521359.331 ns/op
+Iteration   1: 4656652.607 ns/op
+Iteration   2: 5762947.523 ns/op
+Iteration   3: 6279441.933 ns/op
+Iteration   4: 5955206.488 ns/op
+Iteration   5: 5755717.089 ns/op
+
+
+Result "com.test.string.TestStringAddingSpeed.string_format":
+  5681993.128 ±(99.9%) 2354018.216 ns/op [Average]
+  (min, avg, max) = (4656652.607, 5681993.128, 6279441.933), stdev = 611331.055
+  CI (99.9%): [3327974.913, 8036011.344] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:08:22
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                              (N)  Mode  Cnt        Score         Error  Units
+TestStringAddingSpeed.plus_string     1000  avgt    5  1160798.456 ±   88968.685  ns/op
+TestStringAddingSpeed.string_buffer   1000  avgt    5    15148.410 ±    1108.677  ns/op
+TestStringAddingSpeed.string_builder  1000  avgt    5    15427.200 ±    2798.416  ns/op
+TestStringAddingSpeed.string_concate  1000  avgt    5  1164231.934 ±   51315.594  ns/op
+TestStringAddingSpeed.string_format   1000  avgt    5  5681993.128 ± 2354018.216  ns/op
+BUILD SUCCESSFUL (total time: 8 minutes 23 seconds)

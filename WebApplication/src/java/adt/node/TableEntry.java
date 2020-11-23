@@ -5,52 +5,98 @@
  */
 package adt.node;
 
+import adt.XHashedDictionary;
+import java.util.Map;
+
 /**
  *
  * @author ITSUKA KOTORI
+ * @param <K>
+ * @param <V>
  */
+public class TableEntry<K, V> implements Entry<K, V>, Map.Entry<K, V> {
 
-public class TableEntry<S, T> {
+    public final K key;
+    public V value;
+    public TableEntry<K, V> next;
+    public final int hash;
 
-    private S key;
-    private T value;
-    private boolean inTable; // true if entry is in table
+    /**
+     * Creates new entry.
+     *
+     * @param h
+     * @param k
+     * @param v
+     * @param n
+     */
+    public TableEntry(int h, K k, V v, TableEntry<K, V> n) {
+        value = v;
+        next = n;
+        key = k;
+        hash = h;
+    }
 
-    public TableEntry(S searchKey, T dataValue) {
-      key = searchKey;
-      value = dataValue;
-      inTable = true;
-    } // end constructor
+    @Override
+    public final K getKey() {
+        return key;
+    }
 
-    public S getKey() {
-      return key;
-    } // end getKey
+    @Override
+    public final V getValue() {
+        return value;
+    }
 
-    public T getValue() {
-      return value;
-    } // end getValue
+    @Override
+    public final V setValue(V newValue) {
+        V oldValue = value;
+        value = newValue;
+        return oldValue;
+    }
 
-    public void setValue(T newValue) {
-      value = newValue;
-    } // end setValue
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof TableEntry)) {
+            return false;
+        }
+        TableEntry e = (TableEntry) o;
+        Object k1 = getKey();
+        Object k2 = e.getKey();
+        if (k1 == k2 || (k1 != null && k1.equals(k2))) {
+            Object v1 = getValue();
+            Object v2 = e.getValue();
+            if (v1 == v2 || (v1 != null && v1.equals(v2))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    public boolean isIn() {
-      return inTable;
-    } // end isIn
+    @Override
+    public final int hashCode() {
+        return (key == null ? 0 : key.hashCode())
+                ^ (value == null ? 0 : value.hashCode());
+    }
 
-    public boolean isRemoved() { // opposite of isIn
-      return !inTable;
-    } // end isRemoved
+    @Override
+    public final String toString() {
+        return getKey() + "=" + getValue();
+    }
 
-    // state = true means entry in use; false means entry not in use, ie deleted
-    public void setToRemoved() {
-      key = null;
-      value = null;
-      inTable = false;
-    } // end setToRemoved
+    /**
+     * This method is invoked whenever the value in an entry is overwritten by
+     * an invocation of put(k,v) for a key k that's already in the
+     * XHashedDictionary.
+     *
+     * @param m
+     */
+    public void recordAccess(XHashedDictionary<K, V> m) {
+    }
 
-    public void setToIn() { // not used
-      inTable = true;
-    } // end setToIn
-    
+    /**
+     * This method is invoked whenever the entry is removed from the table.
+     *
+     * @param m
+     */
+    public void recordRemoval(XHashedDictionary<K, V> m) {
+    }
 }

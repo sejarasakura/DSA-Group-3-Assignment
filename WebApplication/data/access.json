@@ -686,7 +686,14 @@
           },
           {
             "type": "java.lang.String",
-            "name": "taxiComapany",
+            "name": "driver_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "taxiCompany",
             "display": true,
             "update": true,
             "auto_inc": false
@@ -720,7 +727,7 @@
             "auto_inc": false
           }
         ],
-        "index": 7
+        "index": 8
       }
     },
     {

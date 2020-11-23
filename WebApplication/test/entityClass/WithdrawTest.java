@@ -5,30 +5,26 @@
  */
 package entityClass;
 
+import adt.ArrList;
 import entity.AbstractEntity;
 import entity.Withdraw;
-import adt.ArrList;
-import xenum.PaymentStatus;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author ITSUKA KOTORI
  */
 public class WithdrawTest {
-    
+
     public WithdrawTest() {
         Map map = new Map() {
             @Override
@@ -92,19 +88,19 @@ public class WithdrawTest {
             }
         };
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -213,33 +209,6 @@ public class WithdrawTest {
         Date date = null;
         Withdraw instance = new Withdraw();
         instance.setDate(date);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getStatus method, of class Withdraw.
-     */
-    @Test
-    public void testGetStatus() {
-        System.out.println("getStatus");
-        Withdraw instance = new Withdraw();
-        int expResult = 0;
-        int result = instance.getStatus();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setStatus method, of class Withdraw.
-     */
-    @Test
-    public void testSetStatus() {
-        System.out.println("setStatus");
-        int status = 0;
-        Withdraw instance = new Withdraw();
-        instance.setStatus(status);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -357,15 +326,14 @@ public class WithdrawTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
     @Test
     private static void testing_one() {
 
         Withdraw x = new Withdraw();
 
         ArrList<Withdraw> employees = new ArrList(AbstractEntity.readDataFormCsv(x));
-        
-        
+
     }
 
     @Test
@@ -374,7 +342,6 @@ public class WithdrawTest {
         // name of generated csv
         //Withdraw x = new Withdraw("WINISBEST", "HAII PEI", 7.88, new Date(), PaymentStatus.Completed.getCode(), "Note");
         //Withdraw x2 = new Withdraw("HAHAAAA", "HAHA GG", 9.99, new Date(), PaymentStatus.Completed.getCode(), "Note");
-            
-    } 
+    }
 
 }

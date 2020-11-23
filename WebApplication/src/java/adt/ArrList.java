@@ -398,8 +398,8 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     }
 
     private ArrList<String> notsecure_concateField(String field1, String field2, Class<?> _class, String seperator) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        Field f1 = _class.getDeclaredField(field1);
-        Field f2 = _class.getDeclaredField(field2);
+        Field f1 = _class.getField(field1);
+        Field f2 = _class.getField(field2);
         Method m1 = null;
         Method m2 = null;
         String s1, s2;
@@ -423,10 +423,17 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
     public ArrList<String> getField(String field, String class_name) {
         try {
             Class<?> _class = Class.forName(class_name);
-            Field f = _class.getDeclaredField(field);
-            return this.notsecure_getField(f, _class);
-        } catch (NoSuchFieldException | NoSuchMethodException | ClassNotFoundException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Field f = _class.getField(field);
+            return this.notsecure_getField(null, f, _class);
+        } catch (NoSuchFieldException x) {
+            try {
+                Class<?> _class = Class.forName(class_name);
+                Method f = _class.getMethod(main.Functions.fieldToGetter(field));
+                return this.notsecure_getField(f, null, _class);
+            } catch (ClassNotFoundException | SecurityException | NoSuchMethodException | IllegalArgumentException | NoSuchFieldException | IllegalAccessException | InvocationTargetException ex) {
+                Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -434,7 +441,7 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
 
     public ArrList<String> getField(Field f, Class<?> _class) {
         try {
-            return this.notsecure_getField(f, _class);
+            return this.notsecure_getField(null, f, _class);
         } catch (NoSuchFieldException | NoSuchMethodException | ClassNotFoundException
                 | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
@@ -442,12 +449,8 @@ public class ArrList<T> implements InterfaceArrayList<T>, Iterable<T>, Cloneable
         return null;
     }
 
-    private ArrList<String> notsecure_getField(Field f, Class<?> _class) throws NoSuchFieldException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        Method m = null;
+    private ArrList<String> notsecure_getField(Method m, Field f, Class<?> _class) throws NoSuchFieldException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ArrList<String> r = new ArrList<>();
-        if (!f.isAccessible()) {
-            m = _class.getDeclaredMethod(main.Functions.fieldToGetter(f.getName()));
-        }
 
         for (int i = 0; i < index; i++) {
             r.add((m != null ? m.invoke(data[i]).toString() : f.get(data[i]).toString()));

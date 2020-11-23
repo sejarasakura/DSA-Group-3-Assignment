@@ -15,7 +15,7 @@
 <html>
 <head>
     <jsp:include page="<%= main.WebConfig.META_URL%>">
-        <jsp:param name="title" value="Apprearance"/>
+        <jsp:param name="title" value="Edit ${param.edit}"/>
     </jsp:include>
 </head>
 <body>

@@ -9,7 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%
     EditAdmin editadmin = new EditAdmin(request);
-    ArrList<String> view = editadmin.generateHtml();
+    ArrList<String> view = editadmin.getHtmls();
 %>
 <!DOCTYPE html>
 <html>

@@ -13,17 +13,20 @@ import entity.User;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author ITSUKA KOTORI
  */
-public class Header {
+public class Header extends AbstractPage {
 
     private User user = null;
 
     public Header(HttpServletRequest request) {
+        super(request);
         this.user = main.Functions.getUserSession(request);
     }
 
@@ -35,12 +38,18 @@ public class Header {
         this.user = user;
     }
 
-    public ArrList get_menu() throws FileNotFoundException {
+    @Override
+    public ArrList<String> getHtmls() {
         if (main.Datas.settings.getValue("nav") == null) {
-            return get_new_menu();
+            try {
+                return get_new_menu();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Header.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             return get_pre_menu((Map) main.Datas.settings.getValue("nav"));
         }
+        return (new ArrList<String>());
 
     }
 
@@ -139,5 +148,10 @@ public class Header {
             }
         }
         return result;
+    }
+
+    @Override
+    public String getHtml() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

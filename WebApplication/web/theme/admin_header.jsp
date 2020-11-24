@@ -16,7 +16,7 @@
             <img class="" src="<%= Datas.settings.getValue("image/logo")%>" alt="Rent Car" width="64" height="50">
         </a>
     </center>
-    <%ArrList<String> lists = new AdminHeader(request).get_admin_nav();%>
+    <%ArrList<String> lists = new AdminHeader(request).getHtmls();%>
     <% for (String list : lists) {
         out.write(list);
     }%>

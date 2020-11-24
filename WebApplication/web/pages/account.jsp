@@ -20,7 +20,7 @@
     </head>
     <body>
         <jsp:include page="<%= main.WebConfig.HEADER_URL%>"/>
-        <h1>Haha</h1>
+        
         <jsp:include page="<%= main.WebConfig.FOOTER_URL%>"/>
     </body>
 </html>

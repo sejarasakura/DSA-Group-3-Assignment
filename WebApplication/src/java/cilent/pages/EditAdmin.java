@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author ITSUKA KOTORI
  */
-public class EditAdmin {
+public class EditAdmin extends AbstractPage {
 
     public static String ERROR = "<h1>Error found</h1>";
     private String json_data = "";
@@ -32,6 +32,7 @@ public class EditAdmin {
     private Map map;
 
     public EditAdmin(HttpServletRequest request) {
+        super(request);
         edit = request.getParameter("edit");
         t = request.getParameter("t");
         json_data = System.getProperty("user.dir") + "/data/"
@@ -50,7 +51,8 @@ public class EditAdmin {
         }
     }
 
-    public ArrList<String> generateHtml() {
+    @Override
+    public ArrList<String> getHtmls() {
         ArrList<String> result = new ArrList<String>();
         result.add(ERROR);
         if (base == null) {
@@ -350,6 +352,11 @@ public class EditAdmin {
 
     private String display_group(String title, String url, String html) {
         return String.format("<div class=\"form-group row\"> <div class=\"col-sm-4\"> %s </div> <div class=\"col-sm-4\"> %s </div> <div class=\"col-sm-4\"> %s </div> </div>", title, url, html);
+    }
+
+    @Override
+    public String getHtml() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

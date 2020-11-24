@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cilent.pages;
+package cilent;
 
 import adt.ArrList;
-import cilent.Graph_allocation;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.Random;
 
 /**
@@ -15,28 +15,35 @@ import java.util.Random;
  * @author ITSUKA KOTORI
  */
 public class AdminCreateGraph {
-    
-    
-    public String getSampleData(){
 
-        Gson gsonObj = new Gson();
+    public ArrList<String> getSampleData() {
+
+        Gson gsonObj = new GsonBuilder().setPrettyPrinting().create();
         Graph_allocation map = null;
-        ArrList<Graph_allocation> list = new ArrList<Graph_allocation>();
+        ArrList<Graph_allocation>[] list = new ArrList[3];
+        ArrList<String> result = new ArrList<String>();
 
-        int count = 1000;
+        int count = 100;
         int yVal = 100;
         Random rand = new Random();
 
-        for (int i = 0; i < count; i++) {
-            yVal += rand.nextInt(11) - 5;
-            map = new Graph_allocation(i + 1, yVal);
-            list.add(map);
+        for (int j = 0; j < 3; j++) {
+            list[j] = new ArrList<Graph_allocation>();
+            for (int i = 0; i < count; i++) {
+                yVal += rand.nextInt(11) - 5;
+                map = new Graph_allocation(i + 1, yVal);
+                list[j].add(map);
+            }
+            result.add(gsonObj.toJson(list[j].toArray()));
         }
-
-        return gsonObj.toJson(list.toArray());
+        return result;
     }
-    
-    public String getSampleData2(){
+
+    public static void main(String args[]) {
+        new AdminCreateGraph().getSampleData();
+    }
+
+    public String getSampleData2() {
 
         Gson gsonObj2 = new Gson();
         ArrList<Graph_allocation> list2 = new ArrList<Graph_allocation>();
@@ -54,7 +61,7 @@ public class AdminCreateGraph {
         list2.add(new Graph_allocation(110, 21, "Lowest"));
         list2.add(new Graph_allocation(120, 49));
         list2.add(new Graph_allocation(130, 41));
-        
+
         return gsonObj2.toJson(list2.toArray());
     }
 }

@@ -5,7 +5,6 @@
  */
 package com.test.adt.exe;
 
-import adt.MapConverter;
 import adt.XHashedDictionary;
 import adt.node.TableEntry;
 import com.google.gson.Gson;
@@ -15,7 +14,6 @@ import com.google.gson.stream.JsonReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -33,9 +31,10 @@ public class HashTest {
         String x = System.getProperty("user.dir") + "/data/adminNav.json";
         JsonReader reader = new JsonReader(new FileReader(x));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Map map = gson.fromJson(reader, MapConverter.class);
-        map = (Map) map.get("admin-nav");
+        XHashedDictionary map = new XHashedDictionary((Map) gson.fromJson(reader, Map.class));
+        map = new XHashedDictionary(map.getValue("admin-nav"));
         System.out.print(map);
+        System.out.print(new XHashedDictionary(map));
     }
 
     public static void main2(String[] args) {
@@ -67,18 +66,13 @@ public class HashTest {
     /**
      * @param args the command line arguments
      */
-    public static void main3(String[] args) {
+    public static void main2f(String[] args) {
         StringBuilder sb = new StringBuilder();
-        Map<String, String> test = new HashMap<String, String>();
+        XHashedDictionary<String, String> test = new XHashedDictionary<String, String>();
         for (int i = 0; i < 100; i++) {
-            test.put("" + i, "" + i + "v");
+            test.add("" + i, "" + i + "v");
+            System.out.print(test.toString() + "\n\n");
         }
-        Iterator i = test.keySet().iterator();
-        while (i.hasNext()) {
-            String x = (String) i.next();
-            sb.append(x).append(',').append(test.get(x)).append('\n');
-        }
-        System.out.print(sb.toString());
     }
 
 }

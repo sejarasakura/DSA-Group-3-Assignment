@@ -23,10 +23,9 @@ import xenum.AbstractEnum;
  *
  * @author ITSUKA KOTORI
  */
-public class EditEntity {
+public class EditEntity extends AbstractPage {
 
     private final String enchar = "\u2022";
-    private final StringBuilder stringBuilder;
     private final ClassSaving classSaving;
     private ArrList<AbstractEntity> datas;
     private final ArrList<Method> feilds = new ArrList<Method>();
@@ -42,20 +41,21 @@ public class EditEntity {
     public static EditEntity getNewEditEntity(String class_name, String ids) {
         EditEntity result = null;
         try {
-
             class_name = class_name.substring(0, 1).toUpperCase() + class_name.substring(1);
             Class<?> cls = Class.forName("entity." + class_name);
             Constructor c = cls.getConstructor();
             AbstractEntity x = (AbstractEntity) c.newInstance();
             result = new EditEntity(x, ids);
-        } catch (ClassNotFoundException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
+        } catch (ClassNotFoundException | SecurityException | InstantiationException
+                | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | NoSuchMethodException ex) {
             Logger.getLogger(EditEntity.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
 
     public EditEntity(AbstractEntity refence, String parameter_id) {
-        stringBuilder = new StringBuilder();
+        super(null);
         classSaving = main.Functions.getSavingClass(refence.getClass());
         if (classSaving == null) {
             System.out.println(xenum.OutputColor.TEXT_RED + refence.getClass() + xenum.OutputColor.TEXT_RESET);
@@ -63,7 +63,9 @@ public class EditEntity {
         }
         stringBuilder.append("<form method='post' id='updateform'　name='updateform' action='/WebApplication/admin/updateEntity'>");
         this.parameter_id = parameter_id;
-        stringBuilder.append("<h2 class='mb-3'>").append(refence.getClass()).append("</h2><br><table id=\"dtBasicExample\" class=\"table\" width=\"100%\">");
+        stringBuilder.append("<h2 class='mb-3'>");
+        stringBuilder.append(refence.getClass());
+        stringBuilder.append("</h2><br><table id=\"dtBasicExample\" class=\"table\" width=\"100%\">");
         generateHeader(refence);
         stringBuilder.append("<tbody>");
         generateFooter(refence);
@@ -76,6 +78,7 @@ public class EditEntity {
         stringBuilder.append(" </table> </form>");
     }
 
+    @Override
     public String getHtml() {
         return stringBuilder.toString();
     }
@@ -285,5 +288,10 @@ public class EditEntity {
                     .append("value='").append(value).append("' ")
                     .append(write_query).append("></div></td>");
         }
+    }
+
+    @Override
+    public ArrList<String> getHtmls() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

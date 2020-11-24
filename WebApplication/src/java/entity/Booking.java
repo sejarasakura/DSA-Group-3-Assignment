@@ -9,6 +9,7 @@ import com.opencsv.bean.*;
 import csv.converter.BookingStatusConverter;
 import java.util.Date;
 import xenum.BookingStatus;
+import xenum.CarType;
 
 /**
  *
@@ -23,10 +24,10 @@ public class Booking extends AbstractEntity<Booking> {
     private String booking_description;
 
     @CsvBindByName
-    private String booking_type;
+    private CarType booking_type;
 
     @CsvBindByName
-    @CsvDate("dd.MM.yyyy.hh.mm.ss")
+    @CsvDate(main.WebConfig.saving_date_format)
     private Date booking_date;
 
     @CsvBindByName
@@ -66,11 +67,11 @@ public class Booking extends AbstractEntity<Booking> {
         this.booking_description = booking_description;
     }
 
-    public String getBooking_type() {
+    public CarType getBooking_type() {
         return booking_type;
     }
 
-    public void setBooking_type(String booking_type) {
+    public void setBooking_type(CarType booking_type) {
         this.booking_type = booking_type;
     }
 

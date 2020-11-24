@@ -263,16 +263,14 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
             updated = false;
             for (int i = 0; i < allrecord.size() && !updated; i++) {
                 if (data.id_equals(allrecord.get(i))) {
-                    System.out.println(OutputColor.TEXT_GREEN
-                            + "updated record :" + data + OutputColor.TEXT_RESET);
+                    System.out.println(OutputColor.TEXT_GREEN + "updated record :" + data + OutputColor.TEXT_RESET);
                     allrecord.set(i, data);
                     updated = true;
                 }
             }
             allUpdate &= updated;
             if (updated == false) {
-                System.out.println(OutputColor.TEXT_RED
-                        + "fail updated :" + data + OutputColor.TEXT_RESET);
+                System.out.println(OutputColor.TEXT_RED + "fail updated :" + data + OutputColor.TEXT_RESET);
             }
         }
         allUpdate &= privateReWriteAllDataToCsv(allrecord, false);

@@ -87,6 +87,23 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
 
     public XHashedDictionary(Map<K, V> data) {
         this(Math.max((int) (data.size() / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_SIZE), DEFAULT_LOAD_FACTOR);
+        TableEntry<K, V> current = null;
+        for (Map.Entry<K, V> x : data.entrySet()) {
+            this.add(x.getKey(), x.getValue());
+        }
+    }
+
+    private TableEntry<K, V> addMap(Map.Entry<K, V> x, TableEntry<K, V> n) {
+        if (x.getKey() == null) {
+            return null;
+        }
+        int hash = hash(x.getKey().hashCode());
+        int i = indexFor(hash, table.length);
+        return new TableEntry<K, V>(hash, x.getKey(), x.getValue(), n);
+    }
+
+    public XHashedDictionary(XHashedDictionary<K, V> data) {
+        this(Math.max((int) (data.size / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_SIZE), DEFAULT_LOAD_FACTOR);
         putAllForCreate(data);
     }
 
@@ -127,7 +144,6 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
 
     @Override
     public V getValue(K key) {
-
         if (key == null) {
             return getForNullKey();
         }
@@ -141,7 +157,6 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
             }
         }
         return null;
-
     }
 
     public MapConverter getMap() {
@@ -222,12 +237,18 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
     @Override
     public String toString() {
         StringBuilder outputStr = new StringBuilder();
+        TableEntry[] tab = table;
         for (int index = 0; index < table.length; index++) {
-
-            if (table[index] == null) {
-            } else {
-                outputStr.append(index).append(table[index].getKey()).append(" ")
-                        .append(table[index].getValue()).append("\n");
+            if (tab[index] != null) {
+                for (TableEntry e = tab[index]; e != null; e = e.next) {
+                    outputStr.append("index: ").append(index).append(" value: ")
+                            .append(e.getKey()).append(' ')
+                            .append(e.getValue());
+                    if (e.next != null) {
+                        outputStr.append("\n\t >> ");
+                    }
+                }
+                outputStr.append("\n");
             }
         } // end for
         outputStr.append("\n");
@@ -401,11 +422,6 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
         int hash = (key == null) ? 0 : hash(key.hashCode());
         int i = indexFor(hash, table.length);
 
-        /**
-         * Look for preexisting entry for key. This will never happen for clone
-         * or deserialize. It will only happen for construction if the input Map
-         * is a sorted map whose ordering is inconsistent w/ equals.
-         */
         for (TableEntry<K, V> e = table[i]; e != null; e = e.next) {
             Object k;
             if (e.hash == hash
@@ -418,9 +434,12 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
         createEntry(hash, key, value, i);
     }
 
-    private void putAllForCreate(Map<? extends K, ? extends V> m) {
-        for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) {
-            putForCreate(e.getKey(), e.getValue());
+    private void putAllForCreate(XHashedDictionary<? extends K, ? extends V> m) {
+        TableEntry<? extends K, ? extends V> e = null;
+        Iterator<? extends TableEntry<? extends K, ? extends V>> es
+                = m.newEntryIterator();
+        for (int i = 0; i < m.size; i++) {
+
         }
     }
 

@@ -32,7 +32,7 @@ public class Chat extends AbstractEntity {
     * Sending date
      */
     @CsvBindByName
-    @CsvDate("dd.MM.yyyy.hh.mm.ss")
+    @CsvDate(main.WebConfig.saving_date_format)
     private Date send_date;
 
     /*
@@ -40,6 +40,12 @@ public class Chat extends AbstractEntity {
      */
     @CsvBindByName
     private boolean read;
+
+    /*
+    * reading status
+     */
+    @CsvBindByName
+    private boolean send_by_u1;
 
     /*
     * No param construstor
@@ -59,6 +65,14 @@ public class Chat extends AbstractEntity {
         this.message = message;
         this.send_date = send_date;
         this.read = read;
+    }
+
+    public boolean getSend_by_u1() {
+        return send_by_u1;
+    }
+
+    public void setSend_by_u1(boolean send_by_u1) {
+        this.send_by_u1 = send_by_u1;
     }
 
     public String getChat_details_id() {

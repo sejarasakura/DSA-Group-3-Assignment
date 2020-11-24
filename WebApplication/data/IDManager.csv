@@ -5,7 +5,7 @@ entity.Mapping,java.lang.String,M%09d,map_id,100000102
 entity.Plate,java.lang.String,P%05d,plate_id,10081
 entity.Withdraw,java.lang.String,W%09d,withdraw_id,2
 entity.Admin,java.lang.String,A%05d,user_id,10021
-entity.Payment,java.lang.String,P%09d,paymentNumber,100000052
+entity.Payment,java.lang.String,P%09d,paymentNumber,100000051
 entity.Booking,java.lang.Integer,%d,booking_id,9
 entity.Chats,java.lang.String,CS-%09d,chats_id,7
 entity.Chat,java.lang.String,CD-%09d,chat_details_id,6

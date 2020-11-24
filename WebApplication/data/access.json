@@ -35,9 +35,16 @@
             "display": true,
             "update": true,
             "auto_inc": false
+          },
+          {
+            "type": "boolean",
+            "name": "send_by_u1",
+            "display": true,
+            "update": true,
+            "auto_inc": false
           }
         ],
-        "index": 4
+        "index": 5
       }
     },
     {
@@ -56,6 +63,20 @@
             "auto_inc": true
           },
           {
+            "type": "java.lang.String",
+            "name": "user_id_1",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "user_id_2",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
             "type": "adt.ArrList",
             "name": "chats_details_id",
             "display": true,
@@ -63,7 +84,7 @@
             "auto_inc": false
           }
         ],
-        "index": 2
+        "index": 4
       }
     },
     {

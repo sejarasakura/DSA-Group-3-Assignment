@@ -19,8 +19,30 @@ public class Chats extends AbstractEntity {
     @CsvBindByName
     private String chats_id;
 
+    @CsvBindByName
+    private String user_id_1;
+
+    @CsvBindByName
+    private String user_id_2;
+
     @CsvCustomBindByName(converter = ArrListConverter.class)
     private ArrList<String> chats_details_id;
+
+    public String getUser_id_1() {
+        return user_id_1;
+    }
+
+    public void setUser_id_1(String user_id_1) {
+        this.user_id_1 = user_id_1;
+    }
+
+    public String getUser_id_2() {
+        return user_id_2;
+    }
+
+    public void setUser_id_2(String user_id_2) {
+        this.user_id_2 = user_id_2;
+    }
 
     public String getChats_id() {
         return chats_id;

@@ -5,8 +5,6 @@
  */
 package adt;
 
-import adt.interfaces.InterfaceArrayList;
-import adt.interfaces.InterfaceSortingElements;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
@@ -14,6 +12,8 @@ import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import adt.interfaces.InterArrayList;
+import adt.interfaces.InterSortingElements;
 
 /**
  *
@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @param <T>
  *
  */
-public class XArraySortList<T extends Comparable<T>> implements InterfaceSortingElements<T>, InterfaceArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable {
+public class XArraySortList<T extends Comparable<T>> implements InterSortingElements<T>, InterArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable {
 
     final private static int INITIAL_CAPACITY = 0;
     protected T[] data;

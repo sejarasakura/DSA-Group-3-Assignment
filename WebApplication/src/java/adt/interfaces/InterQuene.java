@@ -10,7 +10,7 @@ package adt.interfaces;
  * @author ITSUKA KOTORI
  * @param <T>
  */
-public interface InterfaceQuene<T> {
+public interface InterQuene<T> {
     
     /**
      * Returns true if the Queue contains no elements, otherwise false.

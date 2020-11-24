@@ -5,13 +5,17 @@
  */
 package adt.interfaces;
 
+import adt.ArrList;
+import adt.node.Entry;
+import java.util.Iterator;
+
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  * @param <K>
  * @param <V>
  */
-public interface InterfaceHashDictionary<K, V> {
+public interface InterDictionary<K, V> {
 
     /**
      * Task: Adds a new entry to the dictionary. If the given search key already
@@ -76,4 +80,46 @@ public interface InterfaceHashDictionary<K, V> {
      * Task: Removes all entries from the dictionary.
      */
     void clear();
+
+    /**
+     * Task: return all key in general format
+     *
+     * @return keys
+     */
+    public Iterator<K> newKeyIterator();
+
+    /**
+     * Task: return all value in general format
+     *
+     * @return values
+     */
+    public Iterator<V> newValueIterator();
+
+    /**
+     * Task: return all entry in general format
+     *
+     * @return table entry
+     */
+    public Iterator<? extends Entry<K, V>> newEntryIterator();
+
+    /**
+     * Task: return all key in general format
+     *
+     * @return keys
+     */
+    public ArrList<K> getKeyList();
+
+    /**
+     * Task: return all value in general format
+     *
+     * @return values
+     */
+    public ArrList<V> getValueList();
+
+    /**
+     * Task: return all entry in general format
+     *
+     * @return table entry
+     */
+    public ArrList<? extends Entry<K, V>> getEntryList();
 }

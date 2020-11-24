@@ -34,7 +34,7 @@ public class Car extends AbstractEntity<Car> {
     * To calculate the year using the car?
      */
     @CsvBindByName
-    @CsvDate(main.WebConfig.saving_date_format)
+    @CsvDate(main.WebConfig.SAVING_DATE_FORMAT)
     private Date regDate;
 
     /*

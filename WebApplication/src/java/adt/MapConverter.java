@@ -17,13 +17,13 @@ import java.util.*;
  */
 public class MapConverter<K, V> implements Map<K, V> {
 
-    XHashedDictionary ref;
+    XOrderedDictionary ref;
 
     public MapConverter() {
-        ref = new XHashedDictionary();
+        ref = new XOrderedDictionary();
     }
 
-    public MapConverter(XHashedDictionary dic) {
+    public MapConverter(XOrderedDictionary dic) {
         ref = dic;
     }
 
@@ -44,7 +44,7 @@ public class MapConverter<K, V> implements Map<K, V> {
 
     @Override
     public boolean containsValue(Object o) {
-        return ref.containsValue(o);
+        return ref.getValue(o) != null;
     }
 
     @Override
@@ -75,6 +75,7 @@ public class MapConverter<K, V> implements Map<K, V> {
         ref.clear();
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Unused Functions">
     @Override
     public Set keySet() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -96,14 +97,17 @@ public class MapConverter<K, V> implements Map<K, V> {
 
     private final class EntrySet extends AbstractSet<Map.Entry<K, V>> {
 
+        @Override
         public Iterator iterator() {
             return ref.newEntryIterator();
         }
 
+        @Override
         public boolean contains(Object o) {
             return ref.contains(o);
         }
 
+        @Override
         public boolean remove(Object o) {
             return MapConverter.this.remove(o) != null;
         }
@@ -119,4 +123,5 @@ public class MapConverter<K, V> implements Map<K, V> {
         }
     }
 
+    //</editor-fold>
 }

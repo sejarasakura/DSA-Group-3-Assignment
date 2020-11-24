@@ -10,7 +10,7 @@ package adt.interfaces;
  * @author Lim Sai Keat
  * @param <T>
  */
-public interface InterfaceArrayList<T> {
+public interface InterArrayList<T> {
 
     /**
      * add the value

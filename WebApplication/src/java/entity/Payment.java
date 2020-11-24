@@ -33,11 +33,11 @@ public class Payment extends AbstractEntity<Payment> {
     private PaymentMethodType payment_method;
 
     @CsvBindByName
-    @CsvDate(main.WebConfig.saving_date_format)
+    @CsvDate(main.WebConfig.SAVING_DATE_FORMAT)
     private Date payment_date;
 
     @CsvBindByName
-    @CsvDate(main.WebConfig.saving_date_format)
+    @CsvDate(main.WebConfig.SAVING_DATE_FORMAT)
     private Date payment_due_date;
 
     @CsvBindByName

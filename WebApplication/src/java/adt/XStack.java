@@ -5,7 +5,7 @@
  */
 package adt;
 
-import adt.interfaces.InterfaceStack;
+import adt.interfaces.InterStack;
 import adt.node.SingleNode;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -13,36 +13,37 @@ import java.util.NoSuchElementException;
 /**
  * @author ITSUKA KOTORI
  * @param <T>
+ * @paraimport adt.interfaces.InterStack;
  */
-public final class XStack<T> implements InterfaceStack<T>, Iterable<T>, Cloneable, java.io.Serializable{
-    
+public final class XStack<T> implements InterStack<T>, Iterable<T>, Cloneable, java.io.Serializable {
+
     private int n;
     private SingleNode<T> first;
-    
+
     public XStack() {
         first = null;
         n = 0;
     }
-    
+
     public XStack(Iterable<T> ib) {
         this(ib.iterator());
     }
-    
+
     public XStack(Iterator<T> is) {
         this();
         XStack s = new XStack();
-        while(is.hasNext()){
-            try{
+        while (is.hasNext()) {
+            try {
                 s.push(is.next());
-            }catch(Exception ex){
-                
+            } catch (Exception ex) {
+
             }
         }
-        while(!s.isEmpty()){
+        while (!s.isEmpty()) {
             this.push((T) s.pop());
         }
     }
-    
+
     @Override
     public void push(T item) {
         SingleNode oldfirst = first;
@@ -51,36 +52,38 @@ public final class XStack<T> implements InterfaceStack<T>, Iterable<T>, Cloneabl
         first.next = oldfirst;
         n++;
     }
-    
+
     @Override
     public T pop() {
-        if (isEmpty()) 
+        if (isEmpty()) {
             throw new NoSuchElementException("Stack underflow");
-        
-        T item = first.item;       
+        }
+
+        T item = first.item;
         first = first.next;
         n--;
         return item;
     }
-    
+
     @Override
     public T peek() {
-        if (isEmpty()) 
+        if (isEmpty()) {
             throw new NoSuchElementException("Stack underflow");
-        
+        }
+
         return first.item;
     }
-    
+
     @Override
     public int size() {
         return n;
     }
-    
+
     @Override
     public boolean isEmpty() {
         return first == null;
     }
-    
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -90,33 +93,36 @@ public final class XStack<T> implements InterfaceStack<T>, Iterable<T>, Cloneabl
         }
         return s.toString();
     }
-    
+
     @Override
     public Iterator<T> iterator() {
-        return new StackIterator(); 
+        return new StackIterator();
     }
-    
+
     // an iterator, doesn't implement remove() since it's optional
     private class StackIterator implements Iterator<T> {
-        
+
         private SingleNode<T> current = first;
-        
+
         @Override
-        public boolean hasNext() { 
-            return current != null;                     
+        public boolean hasNext() {
+            return current != null;
         }
+
         @Override
         public void remove() {
-            throw new UnsupportedOperationException();  
+            throw new UnsupportedOperationException();
         }
 
         @Override
         public T next() {
-            if (!hasNext()) throw new NoSuchElementException();
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             T item = current.item;
-            current = current.next; 
+            current = current.next;
             return item;
         }
     }
-    
+
 }

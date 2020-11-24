@@ -102,7 +102,12 @@ public class WebConfig {
     public static boolean DEBUG_MODE = true;
 
     /**
+     * Saving date format in csv file
+     */
+    public final static String SAVING_DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
+
+    /**
      * Debug mode to false to prevent multiple reload
      */
-    public final static String saving_date_format = "yyyy-MM-dd hh:mm:ss";
+    public static Class<?> WRITING_CLASS = java.util.Map.class;
 }

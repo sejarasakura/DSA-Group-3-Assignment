@@ -13,7 +13,7 @@ import java.util.*;
  * @param <K>
  * @param <V>
  */
-public interface InterfaceMap<K, V> extends Map<K, V> {
+public interface InterMap<K, V> extends Map<K, V> {
 
     /**
      * @return the number of key-value mappings in this map
@@ -68,7 +68,7 @@ public interface InterfaceMap<K, V> extends Map<K, V> {
     /**
      * @param m mappings to be stored in this map
      */
-    void putAll(InterfaceMap<? extends K, ? extends V> m);
+    void putAll(InterMap<? extends K, ? extends V> m);
 
     /**
      * Removes all of the mappings from this map (optional operation). The map

@@ -27,7 +27,7 @@ public class Booking extends AbstractEntity<Booking> {
     private CarType booking_type;
 
     @CsvBindByName
-    @CsvDate(main.WebConfig.saving_date_format)
+    @CsvDate(main.WebConfig.SAVING_DATE_FORMAT)
     private Date booking_date;
 
     @CsvBindByName

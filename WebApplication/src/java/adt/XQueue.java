@@ -5,10 +5,10 @@
  */
 package adt;
 
-import adt.interfaces.InterfaceQuene;
 import adt.node.DoubleNode;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import adt.interfaces.InterQuene;
 
 /**
  *
@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
  * @module Chatting, Booking
  * @param <T>
  */
-public class XQueue<T> implements InterfaceQuene<T>, Iterable<T>, Cloneable, java.io.Serializable {
+public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io.Serializable {
 
     private final DoubleNode<T> head;
     private final DoubleNode<T> tail;

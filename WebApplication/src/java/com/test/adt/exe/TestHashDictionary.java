@@ -6,7 +6,6 @@
 package com.test.adt.exe;
 
 import adt.XHashedDictionary;
-import adt.XHashedDictionaryBackup;
 import java.util.Random;
 
 /**
@@ -29,11 +28,6 @@ public class TestHashDictionary {
     }
 
     public static void main(String[] args) {
-        XHashedDictionaryBackup<String, String> test = new XHashedDictionaryBackup<String, String>();
-        for (int i = 0; i < 100; i++) {
-            test.add("" + i, "" + i + "v");
-        }
-        System.out.println(test);
     }
 
 }

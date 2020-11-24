@@ -6,15 +6,16 @@
 package cilent.pages;
 
 import adt.ArrList;
+import adt.XOrderedDictionary;
 import adt.XStack;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import main.WebConfig;
 
 /**
  *
@@ -37,16 +38,18 @@ public class AdminHeader extends AbstractPage {
             String x = System.getProperty("user.dir") + "/data/adminNav.json";
             JsonReader reader = new JsonReader(new FileReader(x));
             Gson gson = new Gson();
-            Map map = gson.fromJson(reader, Map.class);
-            map = (Map) map.get("admin-nav");
-            XStack data = new XStack(map.keySet().iterator());
+            XOrderedDictionary map = new XOrderedDictionary(
+                    gson.fromJson(reader, WebConfig.WRITING_CLASS)
+            );
+            map = new XOrderedDictionary(map.getValue("admin-nav"));
+            XStack data = new XStack(map.newKeyIterator());
             String key;
             if (arrlist == null) {
                 arrlist = main.Functions.createAdminBarStatus(request, data.size());
             }
             while (!data.isEmpty()) {
                 key = (String) data.pop();
-                result.add(get_html((Map) map.get(key), key));
+                result.add(get_html(new XOrderedDictionary(map.getValue(key)), key));
             }
             result.add(getJQuery());
             return result;
@@ -69,31 +72,31 @@ public class AdminHeader extends AbstractPage {
         return stringBuilder.toString();
     }
 
-    private String get_html(Map map, String key) {
+    private String get_html(XOrderedDictionary map, String key) {
         stringBuilder.setLength(0);
         stringBuilder.append("<div class=\"panel panel-default\" style=\"margin: 0px\">");
         stringBuilder.append("<div class=\"panel-heading\">");
         stringBuilder.append("<h4 class=\"panel-title\">");
         stringBuilder.append("<a data-toggle=\"collapse\" class=\" admin-menu \" href=\"#").append(key);
         stringBuilder.append("\" ").append(" datatype='").append(i).append('\'');
-        stringBuilder.append("><b>").append(map.get("t")).append("</b></a>");
+        stringBuilder.append("><b>").append(map.getValue("t")).append("</b></a>");
         stringBuilder.append("</h4></div>");
-        if (map.get("child") == null) {
+        if (map.getValue("child") == null) {
             stringBuilder.append("</div>");
             return stringBuilder.toString();
         }
-        XStack childQueue = new XStack((Iterable) map.get("child"));
+        XStack childQueue = new XStack((Iterable) map.getValue("child"));
         stringBuilder.append("<div id=\"").append(key).append("\" class=\"panel-collapse collapse ");
         stringBuilder.append((!arrlist.get(i) ? "" : "in")).append("\" style=\"padding-left: 10px\"");
         stringBuilder.append(">");
         stringBuilder.append("<ul class=\"list-group\">");
-        Map ref;
+        XOrderedDictionary ref;
         while (!childQueue.isEmpty()) {
-            ref = (Map) childQueue.pop();
+            ref = new XOrderedDictionary(childQueue.pop());
             stringBuilder.append("<li class=\"list-group-item\"><a href=\"");
-            stringBuilder.append(ref.get("l"));
+            stringBuilder.append(ref.getValue("l"));
             stringBuilder.append("\">");
-            stringBuilder.append(ref.get("t"));
+            stringBuilder.append(ref.getValue("t"));
             stringBuilder.append("</a></li>");
         }
         stringBuilder.append("</ul>");

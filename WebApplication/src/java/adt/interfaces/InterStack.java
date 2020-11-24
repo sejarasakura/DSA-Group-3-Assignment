@@ -10,7 +10,7 @@ package adt.interfaces;
  * @author ITSUKA KOTORI
  * @param <T>
  */
-public interface InterfaceStack<T> {
+public interface InterStack<T> {
 
     /**
      * Adds the given item to the top of the stack.

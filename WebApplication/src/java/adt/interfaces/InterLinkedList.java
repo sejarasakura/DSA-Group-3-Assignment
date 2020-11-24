@@ -7,10 +7,10 @@ package adt.interfaces;
 
 /**
  *
- * @author none
+ * @author ITSUKA KOTORI
  * @param <T>
  */
-public interface InterfaceCircularList<T> {
+public interface InterLinkedList<T> {
 
     /**
      * Teacher is golden

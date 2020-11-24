@@ -32,7 +32,7 @@ public class Chat extends AbstractEntity {
     * Sending date
      */
     @CsvBindByName
-    @CsvDate(main.WebConfig.saving_date_format)
+    @CsvDate(main.WebConfig.SAVING_DATE_FORMAT)
     private Date send_date;
 
     /*

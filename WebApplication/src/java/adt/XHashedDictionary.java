@@ -5,9 +5,13 @@
  */
 package adt;
 
-import adt.interfaces.InterfaceHashDictionary;
+import adt.interfaces.InterDictionary;
+import adt.node.Entry;
 import adt.node.TableEntry;
-import java.util.*;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -15,7 +19,7 @@ import java.util.*;
  * @param <K> Key
  * @param <V> Value
  */
-public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, Cloneable, java.io.Serializable {
+public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable, java.io.Serializable {
 
     /**
      * The table, resized as necessary. Length MUST Always be a power of two.
@@ -55,42 +59,42 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
     /**
      * The number of times this HashMap has been structurally
      */
-    transient int modCount;
+    transient int hashModCount;
 
     public XHashedDictionary() {
         this(DEFAULT_SIZE, DEFAULT_LOAD_FACTOR);
     }
 
-    public XHashedDictionary(int initialCapacity, float loadFactor) {
+    public XHashedDictionary(int initCapacity, float load) {
 
-        if (initialCapacity < 0) {
+        if (initCapacity < 0) {
             throw new IllegalArgumentException("Illegal initial capacity: "
-                    + initialCapacity);
+                    + initCapacity);
         }
-        if (initialCapacity > MAXIMUM_CAPACITY) {
-            initialCapacity = MAXIMUM_CAPACITY;
+        if (initCapacity > MAXIMUM_CAPACITY) {
+            initCapacity = MAXIMUM_CAPACITY;
         }
-        if (loadFactor <= 0 || Float.isNaN(loadFactor)) {
+        if (load <= 0 || Float.isNaN(load)) {
             throw new IllegalArgumentException("Illegal load factor: "
-                    + loadFactor);
+                    + load);
         }
 
         int capacity = 1;
-        while (capacity < initialCapacity) {
+        while (capacity < initCapacity) {
             capacity <<= 1;
         }
 
-        this.loadFactor = loadFactor;
-        threshold = (int) (capacity * loadFactor);
+        this.loadFactor = load;
+        threshold = (int) (capacity * load);
         table = new TableEntry[capacity];
     }
 
     public XHashedDictionary(Map<K, V> data) {
         this(Math.max((int) (data.size() / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_SIZE), DEFAULT_LOAD_FACTOR);
         TableEntry<K, V> current = null;
-        for (Map.Entry<K, V> x : data.entrySet()) {
+        data.entrySet().forEach((x) -> {
             this.add(x.getKey(), x.getValue());
-        }
+        });
     }
 
     private TableEntry<K, V> addMap(Map.Entry<K, V> x, TableEntry<K, V> n) {
@@ -128,7 +132,7 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
             }
         }
 
-        modCount++;
+        hashModCount++;
         addEntry(hash, key, value, i);
         return null;
 
@@ -161,9 +165,9 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
 
     public MapConverter getMap() {
         MapConverter x = new MapConverter();
-        for (int i = 0; i < table.length; i++) {
-            if (table[i] != null) {
-                x.put(table[i].key, table[i].value);
+        for (TableEntry<K, V> table1 : table) {
+            if (table1 != null) {
+                x.put(table1.key, table1.value);
             }
         }
         return x;
@@ -203,12 +207,6 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
     }
 
     @Override
-    public boolean contains(K key) {
-
-        return getEntry(key) != null;
-    }
-
-    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -225,7 +223,7 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
 
     @Override
     public void clear() {
-        modCount++;
+        hashModCount++;
         TableEntry[] tab = table;
         for (int i = 0; i < tab.length; i++) {
             tab[i] = null;
@@ -255,7 +253,8 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
         return outputStr.toString();
     }
 
-    public boolean containsValue(Object value) {
+    @Override
+    public boolean contains(Object value) {
         if (value == null) {
             return containsNullValue();
         }
@@ -269,6 +268,21 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
             }
         }
         return false;
+    }
+
+    @Override
+    public ArrList<K> getKeyList() {
+        return new ArrList<K>(this.newKeyIterator());
+    }
+
+    @Override
+    public ArrList<V> getValueList() {
+        return new ArrList<V>(this.newValueIterator());
+    }
+
+    @Override
+    public ArrList<? extends Entry<K, V>> getEntryList() {
+        return new ArrList<TableEntry<K, V>>(this.newEntryIterator());
     }
 
     /**
@@ -285,7 +299,7 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
             TableEntry<K, V> next = e.next;
             Object k;
             if (e.hash == hash && ((k = e.key) == key || (key != null && key.equals(k)))) {
-                modCount++;
+                hashModCount++;
                 size--;
                 if (prev == e) {
                     table[i] = next;
@@ -305,7 +319,7 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
     /**
      * Subclass overrides this to alter the behavior of put method.
      */
-    void addEntry(int hash, K key, V value, int bucketIndex) {
+    private void addEntry(int hash, K key, V value, int bucketIndex) {
         TableEntry<K, V> e = table[bucketIndex];
         table[bucketIndex] = new TableEntry<>(hash, key, value, e);
         if (size++ >= threshold) {
@@ -313,7 +327,7 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
         }
     }
 
-    void resize(int newCapacity) {
+    private void resize(int newCapacity) {
         TableEntry[] oldTable = table;
         int oldCapacity = oldTable.length;
         if (oldCapacity == MAXIMUM_CAPACITY) {
@@ -339,7 +353,7 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
                 return oldValue;
             }
         }
-        modCount++;
+        hashModCount++;
         addEntry(0, null, value, 0);
         return null;
     }
@@ -347,7 +361,7 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
     /**
      * Transfers all entries from current table to newTable.
      */
-    void transfer(TableEntry[] newTable) {
+    private void transfer(TableEntry[] newTable) {
         TableEntry[] src = table;
         int newCapacity = newTable.length;
         for (int j = 0; j < src.length; j++) {
@@ -438,25 +452,29 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
         TableEntry<? extends K, ? extends V> e = null;
         Iterator<? extends TableEntry<? extends K, ? extends V>> es
                 = m.newEntryIterator();
-        for (int i = 0; i < m.size; i++) {
-
+        while (es.hasNext()) {
+            e = es.next();
+            putForCreate(e.getKey(), e.getValue());
         }
     }
 
-    void createEntry(int hash, K key, V value, int bucketIndex) {
+    private void createEntry(int hash, K key, V value, int bucketIndex) {
         TableEntry<K, V> e = table[bucketIndex];
         table[bucketIndex] = new TableEntry<>(hash, key, value, e);
         size++;
     }
 
+    @Override
     public Iterator<K> newKeyIterator() {
         return new KeyIterator();
     }
 
+    @Override
     public Iterator<V> newValueIterator() {
         return new ValueIterator();
     }
 
+    @Override
     public Iterator<TableEntry<K, V>> newEntryIterator() {
         return new EntryIterator();
     }
@@ -494,7 +512,7 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
 
         @SuppressWarnings("empty-statement")
         HashedIterator() {
-            expectedModCount = modCount;
+            expectedModCount = hashModCount;
             if (size > 0) { // advance to first entry
                 TableEntry[] t = table;
                 while (index < t.length && (next = t[index++]) == null)
@@ -509,7 +527,7 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
 
         @SuppressWarnings("empty-statement")
         final TableEntry<K, V> nextEntry() {
-            if (modCount != expectedModCount) {
+            if (hashModCount != expectedModCount) {
                 throw new ConcurrentModificationException();
             }
             TableEntry<K, V> e = next;
@@ -531,13 +549,13 @@ public class XHashedDictionary<K, V> implements InterfaceHashDictionary<K, V>, C
             if (current == null) {
                 throw new IllegalStateException();
             }
-            if (modCount != expectedModCount) {
+            if (hashModCount != expectedModCount) {
                 throw new ConcurrentModificationException();
             }
             Object k = current.key;
             current = null;
             XHashedDictionary.this.removeEntryForKey(k);
-            expectedModCount = modCount;
+            expectedModCount = hashModCount;
         }
 
     }

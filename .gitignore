@@ -36,4 +36,4 @@ nbdist/
 
 /maven/WebApplication/target/
 
-!server/webapps/
+git add /server/webapps/web/*

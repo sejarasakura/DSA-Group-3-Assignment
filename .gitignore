@@ -35,3 +35,5 @@ nbdist/
 .nb-gradle/
 
 /maven/WebApplication/target/
+
+!server/webapps/

@@ -92,4 +92,9 @@ public enum ErrorDetails implements AbstractEnum {
     public AbstractEnum setMyValue(Object string) {
         return getValue((int) string);
     }
+
+    @Override
+    public int compare(AbstractEnum x) {
+        return Integer.compare(((ErrorDetails) x).code, code);
+    }
 }

@@ -12,7 +12,7 @@ package com.test.adt.exe;
 public class NewMain {
 
     public static void main(String[] args) {
-        System.out.println(gcd(24, 18));
+        System.out.println(xenum.MemberShip.GOLD.getDiscount());
     }
 
     public static int gcd(int num1, int num2) {

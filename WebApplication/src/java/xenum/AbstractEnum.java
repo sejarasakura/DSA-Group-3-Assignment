@@ -17,4 +17,6 @@ public interface AbstractEnum {
 
     public AbstractEnum setMyValue(Object string);
 
+    public int compare(AbstractEnum x);
+
 }

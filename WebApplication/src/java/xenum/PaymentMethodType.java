@@ -101,4 +101,9 @@ public enum PaymentMethodType implements AbstractEnum {
     public AbstractEnum setMyValue(Object string) {
         return getValue(string);
     }
+
+    @Override
+    public int compare(AbstractEnum x) {
+        return this.code.compareTo(((PaymentMethodType) x).code);
+    }
 }

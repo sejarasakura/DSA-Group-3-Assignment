@@ -61,14 +61,15 @@ public class Functions {
 
     public static String getApiKey() {
         String api_key = null;
-        try {
-            FileInputStream fileIn = new FileInputStream(WebConfig.API_KEY_URL);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            api_key = (String) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, null, ex);
+        if (WebConfig.API_KEY_URL != null) {
+            try {
+                FileInputStream fileIn = new FileInputStream(WebConfig.API_KEY_URL);
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                api_key = (String) in.readObject();
+                in.close();
+                fileIn.close();
+            } catch (IOException | ClassNotFoundException ex) {
+            }
         }
         return api_key;
     }

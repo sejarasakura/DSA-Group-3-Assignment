@@ -105,4 +105,9 @@ public enum PaymentStatus implements AbstractEnum {
     public String getName() {
         return this.title;
     }
+
+    @Override
+    public int compare(AbstractEnum x) {
+        return Integer.compare(((PaymentStatus) x).code, code);
+    }
 }

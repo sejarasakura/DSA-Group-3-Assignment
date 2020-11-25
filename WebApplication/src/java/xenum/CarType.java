@@ -126,4 +126,9 @@ public enum CarType implements AbstractEnum {
     public AbstractEnum setMyValue(Object string) {
         return getValue(string);
     }
+
+    @Override
+    public int compare(AbstractEnum x) {
+        return this.code.compareTo(((CarType) x).code);
+    }
 }

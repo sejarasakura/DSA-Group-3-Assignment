@@ -86,4 +86,9 @@ public enum BookingStatus implements AbstractEnum {
     public AbstractEnum setMyValue(Object string) {
         return getValue(string);
     }
+
+    @Override
+    public int compare(AbstractEnum x) {
+        return this.code.compareTo(((BookingStatus) x).code);
+    }
 }

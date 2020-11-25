@@ -5,6 +5,7 @@
  */
 package adt;
 
+import adt.interfaces.InterArrayList;
 import entity.AbstractEntity;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -15,7 +16,6 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.Functions;
-import adt.interfaces.InterArrayList;
 
 /**
  *
@@ -24,12 +24,23 @@ import adt.interfaces.InterArrayList;
  */
 public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable {
 
+    /**
+     * Starting capacity
+     */
     final private static int INITIAL_CAPACITY = 1;
+
+    /**
+     * Data inside
+     */
     protected T[] data;
+
+    /**
+     * Index
+     */
     protected int index = -1;
 
     /**
-     * constructor
+     * Constructor
      */
     public ArrList() {
         this(1);
@@ -58,7 +69,8 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
     /**
      * constructor
      *
-     * @param iterable
+     * @param iterable to make good integrate to other Iterable object
+     * eg.(Arrlist, Queue, Stack, ..)
      */
     public ArrList(Iterable<T> iterable) {
         this(iterable.iterator());
@@ -67,7 +79,7 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
     /**
      * constructor
      *
-     * @param iterator
+     * @param iterator to make to integrate to other Iterable.iterator object
      */
     public ArrList(Iterator<T> iterator) {
         this();
@@ -82,18 +94,36 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         }
     }
 
+    /**
+     * iterator() function
+     *
+     * @return back this Iterator reference of this class
+     */
     @Override
     public Iterator<T> iterator() {
         return new ListIterator();
     }
 
+    /**
+     * adding function at last
+     *
+     * @param e pass the object need to add to array list it must match the T
+     * type
+     */
     @Override
     public final void add(T e) {
         add(index, e);
     }
 
+    /**
+     * adding in index x function
+     *
+     * @param _index of adding
+     * @param e pass the object need to add to array list it must match the T
+     * type
+     */
     @Override
-    public void add(int _index, T element) {
+    public void add(int _index, T e) {
 
         if (data.length == index) {
             expandCapacity(index + 1);
@@ -101,10 +131,15 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         for (int i = index; i > _index; i--) {
             data[i] = data[i - 1];
         }
-        data[_index] = element;
+        data[_index] = e;
         index++;
     }
 
+    /**
+     * adding all function
+     *
+     * @parma e all the elements
+     */
     @Override
     public void addAll(T[] c) {
         for (T x : c) {
@@ -112,6 +147,11 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         }
     }
 
+    /**
+     * adding all form index function
+     *
+     * @parma e all the elements
+     */
     @Override
     public void addAll(int _index, T[] c) {
         int count = 0;

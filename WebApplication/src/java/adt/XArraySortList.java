@@ -5,6 +5,8 @@
  */
 package adt;
 
+import adt.interfaces.InterArrayList;
+import adt.interfaces.InterSortingElements;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
@@ -12,8 +14,7 @@ import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import adt.interfaces.InterArrayList;
-import adt.interfaces.InterSortingElements;
+import xenum.AbstractEnum;
 
 /**
  *
@@ -196,6 +197,14 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
         return r;
     }
 
+    public String toHtml() {
+        String r = "";
+        for (T d : (data)) {
+            r += "" + d + "<br> ";
+        }
+        return r;
+    }
+
     private void CheckRange(int _index) {
         if (_index < 0 || _index >= index) {
             throw new IndexOutOfBoundsException();
@@ -333,18 +342,24 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
     private boolean sort(Method methods) {
         Class<?> cls = methods.getReturnType();
         try {
-            if (cls != int.class) {
-                Method m = cls.getDeclaredMethod("compareTo", cls);
+            if (cls.getName().contains("xenum.")) {
+                Method m = cls.getMethod("compare", AbstractEnum.class);
                 if (m.getReturnType() != int.class) {
                     return false;
                 }
                 this.sort_m(data, 0, this.index - 1, m, methods);
-                return true;
+            } else if (cls != int.class) {
+                Method m = cls.getMethod("compareTo", cls);
+                if (m.getReturnType() != int.class) {
+                    return false;
+                }
+                this.sort_m(data, 0, this.index - 1, m, methods);
+            } else {
+                this.sort_m(data, 0, this.index - 1, null, methods);
             }
-            this.sort_m(data, 0, this.index - 1, null, methods);
+            return true;
         } catch (NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(XArraySortList.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         }
         return false;
     }

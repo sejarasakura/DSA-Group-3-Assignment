@@ -12,7 +12,7 @@ import java.util.Arrays;
  *
  * @author ITSUKA KOTORI
  */
-public enum MemberShip implements AbstractEnum {
+public enum MemberShip implements AbstractEnum, Comparable<MemberShip> {
     /*Example  (code, seq_code/power, name, decription)*/
     NORMAL("NO", 0, "Normals", "Normal membership is all the defualt registered customer.", 0),
     PREMIUM("PE", 1, "Premium", "Premium membershiip is all the normal paid member", 0.08),
@@ -113,5 +113,10 @@ public enum MemberShip implements AbstractEnum {
     @Override
     public AbstractEnum setMyValue(Object string) {
         return getValue(string);
+    }
+
+    @Override
+    public int compare(AbstractEnum x) {
+        return this.code.compareTo(((MemberShip) x).code);
     }
 }

@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import main.WebConfig;
 
 /**
@@ -45,7 +43,7 @@ public class CreateDisplayClassJson {
         for (Class cs : class_s) {
             data.add(getCS(cs));
         }
-        
+
         Gson gson = new Gson();
         String json = gson.toJson(data);
         System.out.print(json);
@@ -61,13 +59,14 @@ public class CreateDisplayClassJson {
     public ArrList<ClassSaving> readData(String dir) {
         try {
             Gson gson = new Gson();
-            Type typeMyType = new TypeToken<ArrList<ClassSaving>>(){}.getType();
+            Type typeMyType = new TypeToken<ArrList<ClassSaving>>() {
+            }.getType();
             ArrList<ClassSaving> data;
             JsonReader reader = new JsonReader(new FileReader(dir));
             data = gson.fromJson(reader, typeMyType);
             return data;
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(CreateDisplayClassJson.class.getName()).log(Level.SEVERE, null, ex);
+
         }
         return null;
     }

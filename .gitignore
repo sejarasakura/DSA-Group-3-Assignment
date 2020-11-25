@@ -34,3 +34,4 @@ dist/
 nbdist/
 .nb-gradle/
 
+/maven/WebApplication/target/

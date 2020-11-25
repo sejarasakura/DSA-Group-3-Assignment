@@ -1,0 +1,105 @@
+﻿
+.fa-master {
+    padding: 10px;
+    font-size: 20px !important;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-google {
+    background: #dd4b39;
+    color: white;
+}
+
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+.f_a_link {
+    color: white !important;
+}
+
+.f_a_link:hover {
+    color: #DCDCDC !important;
+}
+
+.login{
+    width: 400px;
+    border-radius: 20px;
+    border: 1px #999 solid;
+    padding: 30px;
+    margin: auto;
+}
+.register{
+    width: 700px;
+    border-radius: 20px;
+    border: 1px #999 solid;
+    padding: 30px;
+    margin: auto;
+}
+.img-login{
+    margin: 30px auto;
+}
+.toggle-password{
+    cursor: pointer!important;
+}
+.error{
+    color: red!important;
+}
+.glyphicon-plus, .glyphicon-circle-arrow-up{
+    color: #09b83e!important;
+}
+.glyphicon-plus:hover, .glyphicon-circle-arrow-up:hover{
+    color: #00c300!important;
+}
+.glyphicon-trash{
+    color: #df2029!important;
+}
+.glyphicon-trash:hover{
+    color: #cd201f!important;
+}
+#customer-footer{
+    margin-top: 50px;
+}
+.btn-rent{
+    background-color: #ff1a4b;
+    color: #fff;
+}
+.btn-rent:hover{
+    background-color: #d5243e;
+    color: #fff;
+}
+.btn-rent:disabled{
+    background-color: #d5243e;
+    color: #fff;
+    opacity: 0.5;
+}

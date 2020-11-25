@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cilent.pages;
+package com.test.adt.exe;
 
 import adt.ArrList;
-import adt.XOrderedDictionary;
+import cilent.pages.AbstractPage;
+import cilent.pages.EditAdmin;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +23,7 @@ import main.WebConfig;
  *
  * @author ITSUKA KOTORI
  */
-public class EditAdmin extends AbstractPage {
+public class EditAdminBAckUp extends AbstractPage {
 
     public static String ERROR = "<h1>Error found</h1>";
     private String json_data = "";
@@ -30,9 +32,9 @@ public class EditAdmin extends AbstractPage {
     private final String edit;
     private final String t;
     private boolean status = false;
-    private XOrderedDictionary map;
+    private Map map;
 
-    public EditAdmin(HttpServletRequest request) {
+    public EditAdminBAckUp(HttpServletRequest request) {
         super(request);
         edit = request.getParameter("edit");
         t = request.getParameter("t");
@@ -42,19 +44,17 @@ public class EditAdmin extends AbstractPage {
         try {
             reader = new JsonReader(new FileReader(json_data));
             Gson gson = new Gson();
-            map = new XOrderedDictionary(
-                    gson.fromJson(reader, WebConfig.WRITING_CLASS)
-            );
-            e_title = (String) map.getValue("e-title");
-            base = (String) map.getValue("base");
-            map = new XOrderedDictionary(map.getValue(base));
+            map = gson.fromJson(reader, WebConfig.WRITING_CLASS);
+            e_title = (String) map.get("e-title");
+            base = (String) map.get("base");
+            map = (Map) map.get(base);
             status = true;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(EditAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public EditAdmin() {
+    public EditAdminBAckUp() {
         super(null);
         edit = "adminNav";
         t = "";
@@ -64,12 +64,10 @@ public class EditAdmin extends AbstractPage {
         try {
             reader = new JsonReader(new FileReader(json_data));
             Gson gson = new Gson();
-            map = new XOrderedDictionary(
-                    gson.fromJson(reader, WebConfig.WRITING_CLASS)
-            );
-            e_title = (String) map.getValue("e-title");
-            base = (String) map.getValue("base");
-            map = new XOrderedDictionary(map.getValue(base));
+            map = gson.fromJson(reader, WebConfig.WRITING_CLASS);
+            e_title = (String) map.get("e-title");
+            base = (String) map.get("base");
+            map = (Map) map.get(base);
             status = true;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(EditAdmin.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,11 +95,11 @@ public class EditAdmin extends AbstractPage {
 
     private ArrList<String> generateAdminNav() {
         ArrList<String> result = new ArrList<String>();
-        map.getKeyList().forEach((m) -> {
+        map.keySet().forEach((m) -> {
             if (m.equals(t)) {
-                result.add(editProperties(new XOrderedDictionary(map.getValue(m)), (String) m));
+                result.add(editProperties((Map) map.get(m), (String) m));
             } else {
-                result.add(displayProperties(new XOrderedDictionary(map.getValue(m)), (String) m));
+                result.add(displayProperties((Map) map.get(m), (String) m));
             }
         });
         result.add("<div class=\"form-group row\"> <div class=\"col-sm-12\"> <button type=\"button\" class=\"btn btn-success form-control\" data-toggle=\"modal\" data-target=\"#myModal\"> <i class='fas fa-plus'></i> Add new element </button> </div> </div>");
@@ -112,15 +110,15 @@ public class EditAdmin extends AbstractPage {
 
     private ArrList<String> generateAdminNor() {
         ArrList<String> result = new ArrList<String>();
-        map.getKeyList().forEach((m) -> {
+        map.keySet().forEach((m) -> {
             if (m.equals(t)) {
-                result.add(editProperties((Iterable) map.getValue(m), (String) m));
+                result.add(editProperties((Iterable) map.get(m), (String) m));
             } else {
-                result.add(displayProperties((Iterable) map.getValue(m), (String) m));
+                result.add(displayProperties((Iterable) map.get(m), (String) m));
             }
         });
         result.add("<script>$(document).ready(function(){");
-        map.getKeyList().forEach((m) -> {
+        map.keySet().forEach((m) -> {
             result.add(jquery_generate((String) m));
         });
         result.add("});</script>");
@@ -143,21 +141,20 @@ public class EditAdmin extends AbstractPage {
                 .append(key).append("\">");
         int count = 0;
         boolean header = false;
-        XOrderedDictionary x;
         for (Iterator it = prop.iterator(); it.hasNext();) {
-            x = new XOrderedDictionary(it.next());
-            if (x.getValue("child") == null) {
-                if (x.getValue("show") != null) {
-                    sb.append(display_group((String) x.getValue("t"), (String) x.getValue("l"), (String) x.getValue("show")));
-                } else if (x.getValue("s") != null) {
-                    sb.append(display_group((String) x.getValue("t"), (String) x.getValue("l"), (String) x.getValue("s")));
+            Map x = (Map) it.next();
+            if (x.get("child") == null) {
+                if (x.get("show") != null) {
+                    sb.append(display_group((String) x.get("t"), (String) x.get("l"), (String) x.get("show")));
+                } else if (x.get("s") != null) {
+                    sb.append(display_group((String) x.get("t"), (String) x.get("l"), (String) x.get("s")));
                 } else {
-                    sb.append(display_group((String) x.getValue("t"), (String) x.getValue("l")));
+                    sb.append(display_group((String) x.get("t"), (String) x.get("l")));
                 }
             } else {
-                ArrList ar = new ArrList((Iterable) x.getValue("child"));
+                ArrList ar = new ArrList((Iterable) x.get("child"));
                 if (ar.isEmpty()) {
-                    sb.append(display_group((String) x.getValue("t"), (String) x.getValue("l")));
+                    sb.append(display_group((String) x.get("t"), (String) x.get("l")));
                 }
                 sb.append(displayChildProp(x));
             }
@@ -183,21 +180,20 @@ public class EditAdmin extends AbstractPage {
                 .append(key).append("\">");
         int count = 0;
         String header = "";
-        XOrderedDictionary x;
         for (Iterator it = prop.iterator(); it.hasNext();) {
-            x = new XOrderedDictionary(it.next());
-            if (x.getValue("child") == null) {
-                if (x.getValue("show") != null) {
+            Map x = (Map) it.next();
+            if (x.get("child") == null) {
+                if (x.get("show") != null) {
                     header = "show";
-                    sb.append(form_group_S(base + "." + key + ".child[" + count + "]", (String) x.getValue("t"), (String) x.getValue("l"), (String) x.getValue("c"), (String) x.getValue("show")));
-                } else if (x.getValue("s") != null) {
+                    sb.append(form_group_S(base + "." + key + ".child[" + count + "]", (String) x.get("t"), (String) x.get("l"), (String) x.get("c"), (String) x.get("show")));
+                } else if (x.get("s") != null) {
                     header = "s";
-                    sb.append(form_group(base + "." + key + ".child[" + count + "]", (String) x.getValue("t"), (String) x.getValue("l"), (String) x.getValue("s")));
+                    sb.append(form_group(base + "." + key + ".child[" + count + "]", (String) x.get("t"), (String) x.get("l"), (String) x.get("s")));
                 } else {
-                    sb.append(form_group(base + "." + key + ".child[" + count + "]", (String) x.getValue("t"), (String) x.getValue("l")));
+                    sb.append(form_group(base + "." + key + ".child[" + count + "]", (String) x.get("t"), (String) x.get("l")));
                 }
             } else {
-                ArrList ar = new ArrList((Iterable) x.getValue("child"));
+                ArrList ar = new ArrList((Iterable) x.get("child"));
                 sb.append(editChildProp(x, base + "." + key + ".child[" + count + "]"));
             }
             count++;
@@ -231,42 +227,40 @@ public class EditAdmin extends AbstractPage {
         return sb.toString();
     }
 
-    private String displayChildProp(XOrderedDictionary prop) {
-        ArrList datas = new ArrList((Iterable) prop.getValue("child"));
+    private String displayChildProp(Map prop) {
+        ArrList datas = new ArrList((Iterable) prop.get("child"));
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"form-group row\" style=\"margin: 10px 0px\">").
                 append("<div class=\"panel panel-default\">")
                 .append("<div class=\"panel-heading\">")
                 .append("<div class=\"row\">")
-                .append("<div class=\"col-sm-6\"> ").append(prop.getValue("t")).append("</div>")
-                .append("<div class=\"col-sm-6\"> ").append(prop.getValue("l")).append("</div>")
+                .append("<div class=\"col-sm-6\"> ").append(prop.get("t")).append("</div>")
+                .append("<div class=\"col-sm-6\"> ").append(prop.get("l")).append("</div>")
                 .append("</div></div>")
                 .append("<div class=\"panel-body\">");
         int count = 0;
-        XOrderedDictionary x;
         for (Iterator it = datas.iterator(); it.hasNext();) {
-            x = new XOrderedDictionary(it.next());
-            sb.append(display_group((String) x.getValue("t"), (String) x.getValue("l")));
+            Map x = (Map) it.next();
+            sb.append(display_group((String) x.get("t"), (String) x.get("l")));
             count++;
         }
         sb.append("</div></div></div>");
         return sb.toString();
     }
 
-    private String editChildProp(XOrderedDictionary prop, String id) {
-        ArrList datas = new ArrList((Iterable) prop.getValue("child"));
+    private String editChildProp(Map prop, String id) {
+        ArrList datas = new ArrList((Iterable) prop.get("child"));
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"form-group row\" style=\"margin: 10px 0px\">").
                 append("<div class=\"panel panel-default\">")
                 .append("<div class=\"panel-heading\">")
-                .append(form_group(id, (String) prop.getValue("t"), (String) prop.getValue("l")))
+                .append(form_group(id, (String) prop.get("t"), (String) prop.get("l")))
                 .append("</div>")
                 .append("<div class=\"panel-body\">");
         int count = 0;
-        XOrderedDictionary x;
         for (Iterator it = datas.iterator(); it.hasNext();) {
-            x = new XOrderedDictionary(it.next());
-            sb.append(form_group(id + "." + count, (String) x.getValue("t"), (String) x.getValue("l")));
+            Map x = (Map) it.next();
+            sb.append(form_group(id + "." + count, (String) x.get("t"), (String) x.get("l")));
             count++;
         }
         sb.append(form_group(id + "." + count, "", ""));
@@ -275,22 +269,20 @@ public class EditAdmin extends AbstractPage {
         return sb.toString();
     }
 
-    private String displayProperties(XOrderedDictionary prop, String key) {
+    private String displayProperties(Map prop, String key) {
         String title = main.Functions.friendlyJsonTitle(key);
-        ArrList datas = prop.getValue("child") == null ? new ArrList() : new ArrList((Iterable) prop.getValue("child"));
+        ArrList datas = prop.get("child") == null ? new ArrList() : new ArrList((Iterable) prop.get("child"));
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"panel panel-default\">")
                 .append("<div class=\"panel-heading\">")
                 .append("<h2>").append(title).append("</h2><br>")
-                .append(display_group((String) prop.getValue("t"), (String) prop.getValue("l")))
+                .append(display_group((String) prop.get("t"), (String) prop.get("l")))
                 .append("</div>")
                 .append("<div class=\"panel-body\">");
         int count = 0;
-
-        XOrderedDictionary x;
         for (Iterator it = datas.iterator(); it.hasNext();) {
-            x = new XOrderedDictionary(it.next());
-            sb.append(display_group((String) x.getValue("t"), (String) x.getValue("l")));
+            Map x = (Map) it.next();
+            sb.append(display_group((String) x.get("t"), (String) x.get("l")));
             count++;
         }
         sb.append("<div class=\"form-group row\">")
@@ -304,23 +296,22 @@ public class EditAdmin extends AbstractPage {
         return sb.toString();
     }
 
-    private String editProperties(XOrderedDictionary prop, String key) {
+    private String editProperties(Map prop, String key) {
         String title = main.Functions.friendlyJsonTitle(key);
-        ArrList datas = prop.getValue("child") == null ? new ArrList() : new ArrList((Iterable) prop.getValue("child"));
+        ArrList datas = prop.get("child") == null ? new ArrList() : new ArrList((Iterable) prop.get("child"));
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"panel panel-default\">")
                 .append("<form action=\"/WebApplication/admin/update-ele\" method=\"post\">")
                 .append("<div class=\"panel-heading\">")
                 .append("<h2>").append(title).append("</h2><br>")
-                .append(form_group(base + "." + key, (String) prop.getValue("t"), (String) prop.getValue("l")))
+                .append(form_group(base + "." + key, (String) prop.get("t"), (String) prop.get("l")))
                 .append("</div>")
                 .append("<div class=\"panel-body\">");
         int count = 0;
-        XOrderedDictionary x;
         for (Iterator it = datas.iterator(); it.hasNext();) {
-            x = new XOrderedDictionary(it.next());
+            Map x = (Map) it.next();
             sb.append(form_group(base + "." + key + ".child[" + count + "]",
-                    (String) x.getValue("t"), (String) x.getValue("l")));
+                    (String) x.get("t"), (String) x.get("l")));
             count++;
         }
         sb.append("<div class=\"form-group row\">")

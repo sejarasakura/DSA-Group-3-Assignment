@@ -13,6 +13,6 @@ package adt.interfaces;
 public interface InterCircularList<T> {
 
     /**
-     * Teacher is golden
+     * Silence is golden
      */
 }

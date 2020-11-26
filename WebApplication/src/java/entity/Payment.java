@@ -17,7 +17,7 @@ import xenum.PaymentStatus;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat, Lai Hong Wah
  */
 public class Payment extends AbstractEntity<Payment> {
 

@@ -14,7 +14,7 @@ import xenum.CarType;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lai Hong Wah
  */
 public class Booking extends AbstractEntity<Booking> {
 

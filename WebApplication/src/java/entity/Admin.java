@@ -7,14 +7,26 @@ package entity;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class Admin extends User {
-
+    /**
+     * constructor
+     */
     public Admin() {
         this.setRole("a");
     }
-
+    /**
+     * constructor
+     * @param user_id
+     * @param ic
+     * @param name
+     * @param email
+     * @param phoneNumber
+     * @param role
+     * @param username
+     * @param password 
+     */
     public Admin(String user_id, String ic, String name, String email, String phoneNumber, String role, String username, String password) {
         super(user_id, ic, name, email, phoneNumber, "a", username, password);
     }

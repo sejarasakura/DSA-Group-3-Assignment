@@ -1,6 +1,6 @@
 CLASSNAME,DATATYPE,FORMATSTRING,IDENTITYNAME,LASTSEQNUMBER
 entity.Customer,java.lang.String,C%05d,user_id,10051
-entity.Driver,java.lang.String,D%05d,user_id,10052
+entity.Driver,java.lang.String,D%05d,user_id,10053
 entity.Mapping,java.lang.String,M%09d,map_id,100000102
 entity.Plate,java.lang.String,P%05d,plate_id,10081
 entity.Withdraw,java.lang.String,W%09d,withdraw_id,2
@@ -10,4 +10,4 @@ entity.Booking,java.lang.Integer,%d,booking_id,9
 entity.Chats,java.lang.String,CS-%09d,chats_id,7
 entity.Chat,java.lang.String,CD-%09d,chat_details_id,6
 entity.Taxi,java.lang.String,T-%05d,taxiId,10031
-entity.InfoMessage,java.lang.String,I-%04d,code,9
+entity.InfoMessage,java.lang.String,I-%04d,code,6

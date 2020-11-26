@@ -12,7 +12,7 @@ import csv.converter.ArrListConverter;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lai Hong Wah
  */
 public class Chats extends AbstractEntity {
 

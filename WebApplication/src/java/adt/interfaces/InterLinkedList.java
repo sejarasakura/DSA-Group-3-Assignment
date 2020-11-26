@@ -13,6 +13,6 @@ package adt.interfaces;
 public interface InterLinkedList<T> {
 
     /**
-     * Teacher is golden
+     * Silence is golden
      */
 }

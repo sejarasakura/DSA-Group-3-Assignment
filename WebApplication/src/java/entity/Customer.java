@@ -27,7 +27,7 @@ import xenum.MemberShip;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lai Hong Wah
  */
 public class Customer extends User<Customer> {
 

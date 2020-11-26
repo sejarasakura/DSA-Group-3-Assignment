@@ -15,7 +15,8 @@ import java.util.Objects;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
+ * @author Lai Hong Wah
  */
 public class Review extends AbstractEntity {
 

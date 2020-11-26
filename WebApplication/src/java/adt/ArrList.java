@@ -397,7 +397,7 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
      * find a abstract entity that is id match one
      *
      * @param x
-     * @return boolean
+     * @return Boolean
      */
     public boolean find_AbstractEntity(AbstractEntity x) {
 
@@ -412,7 +412,7 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
     /**
      * check is empty or not
      *
-     * @return boolean
+     * @return Boolean
      */
     public boolean isEmpty() {
         return index <= 0;

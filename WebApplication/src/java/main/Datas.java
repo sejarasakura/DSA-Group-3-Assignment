@@ -27,7 +27,8 @@ public class Datas {
     public static XHashedDictionary<String, Object> settings;
 
     // That's right.
-    public static final XHashedDictionary<String, Class> TYPE_SWITCH = new XHashedDictionary<String, Class>();
+    public static final XHashedDictionary<String, Class> TYPE_SWITCH
+            = new XHashedDictionary<String, Class>();
 
     static {
         TYPE_SWITCH.add("int", Integer.TYPE);

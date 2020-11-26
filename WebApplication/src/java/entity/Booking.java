@@ -17,19 +17,30 @@ import xenum.CarType;
  */
 public class Booking extends AbstractEntity<Booking> {
 
+    /**
+     * customer booking id
+     */
     @CsvBindByName
     private String booking_id;
-
+    /**
+     * customer booking_description
+     */
     @CsvBindByName
     private String booking_description;
-
+    /**
+     * customer booking type
+     */
     @CsvBindByName
     private CarType booking_type;
-
+    /**
+     * customer booking date
+     */
     @CsvBindByName
     @CsvDate(main.WebConfig.SAVING_DATE_FORMAT)
     private Date booking_date;
-
+    /**
+     * driver id
+     */
     @CsvBindByName
     private String driver_id;
 

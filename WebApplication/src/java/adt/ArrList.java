@@ -150,6 +150,7 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
     /**
      * adding all form index function
      *
+     * @param _index
      * @parma e all the elements
      */
     @Override
@@ -161,11 +162,23 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         }
     }
 
+    /**
+     * get in index
+     *
+     * @param _index
+     * @return elements
+     */
     @Override
     public T get(int _index) {
         return data[_index];
     }
 
+    /**
+     * remove element in the list
+     *
+     * @param _index
+     * @return elements
+     */
     @Override
     public T remove(int _index) {
         CheckRange(_index);
@@ -177,12 +190,24 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         return (T) x;
     }
 
+    /**
+     * Set in index x
+     *
+     * @param _index
+     * @param element
+     */
     @Override
     public void set(int _index, T element) {
         CheckRange(_index);
         data[_index] = element;
     }
 
+    /**
+     * get index by value
+     *
+     * @param o
+     * @return
+     */
     @Override
     public int indexOf(T o) {
         for (int i = 0; i < index; i++) {
@@ -193,16 +218,31 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         return -1;
     }
 
+    /**
+     * get the size of list
+     *
+     * @return
+     */
     @Override
     public int size() {
         return index;
     }
 
+    /**
+     * convert this to array
+     *
+     * @return
+     */
     @Override
     public T[] toArray() {
         return data.clone();
     }
 
+    /**
+     * clear this list
+     *
+     * @return array data back
+     */
     public T[] clear() {
         T[] x = data.clone();
         data = (T[]) new Object[INITIAL_CAPACITY];
@@ -427,6 +467,13 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         this.index = data.length;
     }
 
+    /**
+     *
+     * @param field1
+     * @param field2
+     * @param _class
+     * @return ArrayList of concat field
+     */
     public ArrList<String> concateField(String field1, String field2, Class<?> _class) {
         try {
             return notsecure_concateField(field1, field2, _class, "%");

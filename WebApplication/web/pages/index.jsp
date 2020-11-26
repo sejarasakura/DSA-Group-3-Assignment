@@ -16,7 +16,6 @@
     <body>
         <jsp:include page="<%= main.WebConfig.HEADER_URL%>"/>
         
-        
         <jsp:include page="<%= main.WebConfig.FOOTER_URL%>"/>
     </body>
 </html>

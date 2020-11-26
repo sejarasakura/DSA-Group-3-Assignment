@@ -181,14 +181,16 @@ public class Functions {
             Datas.allMessage = new ArrList<InfoMessage>((Iterator<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage()));
         }
         InfoMessage result = Datas.allMessage.searchByField("code", e, InfoMessage.class).get(0);
-
+        if (result == null) {
+            return "<div class=\"alert alert-danger alert-dismissible fade in\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a> <strong>Error code not found!</strong> This alert code <a href='#" + e + "'><b>" + e + "</b></a> is dose not excite </div>";
+        }
         return new StringBuilder()
                 .append("<div class=\"container\">")
                 .append("<div class=\"alert ")
                 .append(result.getCssClass())
                 .append(" alert-dismissible fade in\">")
                 .append("<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>")
-                .append("<strong> ")
+                .append("<strong> Alert ")
                 .append(result.getCode())
                 .append(" ")
                 .append(result.getName())

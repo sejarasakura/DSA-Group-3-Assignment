@@ -33,7 +33,7 @@ public enum ErrorDetails implements AbstractEnum {
     E018(18, "The username is registered", "The username is currentlly using by other user"),
     E019(19, "The password not match", "Password not match error, please reenter agian"),
     E020(20, "The email is registed", "The email account hasbean registed by other user"),
-    E021(21, "", ""),
+    E021(21, "User is not found", "No user found please try agian."),
     E022(22, "", ""),
     E023(23, "", "");
 

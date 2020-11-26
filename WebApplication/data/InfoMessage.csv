@@ -2,3 +2,7 @@ CODE,CSSCLASS,DECRIPTION,NAME
 I-0002,alert-success,Hello user you have sucessful login to rentcar.com !!,Login sucessful !!
 I-0003,alert-danger,The id generate due to some problem it is not found in current system please contact admin to fix it,ID Generator not found
 I-0004,alert-warning,cxxx,gg
+I-0005,alert-success,The record is sucessful added to csv file.,Sucessful add record.
+I-0006,alert-danger,The record is not sucessful add to the csv file please try agian later!,Fail to add record
+I-0007,alert-danger,The record is not sucessful update to the csv file please try agian later !!,Fail to update record
+I-0008,alert-success,The record is sucessful update to the csv file !,Sucessful update record

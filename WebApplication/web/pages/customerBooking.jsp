@@ -63,9 +63,9 @@
             Confirm Location
         </button>
 
-        <form method="post" onsubmit="">
-            <input type="hidden" id="form-latlng" name="form-latlng" value="null"/>
-            <input type="hidden" id="to-latlng" name="to-latlng" value="null"/>
+            <form method="post" action="<%= WebConfig.WEB_URL%>start/booking/now">
+            <input type="hidden" id="form-latlng" name="form-latlng" value=""/>
+            <input type="hidden" id="to-latlng" name="to-latlng" value=""/>
 
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
@@ -233,25 +233,163 @@
                 setFocusBtn(focus_form);
             }
 
+            function calculateAll() {
+                const dist_map = document.getElementById("map-distance");
+                const time_map = document.getElementById("map-time");
+                <%for (int i = 0; i < types.size(); i++) {%>
+                    calculatePrice('price_<%=i%>', <%= types.get(i).getBase_fair_price()%>, <%= types.get(i).getMinimum_price()%>,
+                <%= types.get(i).getPrice_per_km()%>, <%= types.get(i).getPrice_per_min()%>, dist_map, time_map) + "\n";
+                <%}%>
+            }
+            function calculatePrice(element_id, base_fare, min_fare, per_km, per_min, dist_map, time_map) {
+                const output = document.getElementById(element_id);
+                var price_no_base = (dist_map.value * per_km / 1000) + (time_map.value * per_min / 60);
+                var price = (dist_map.value * per_km / 1000) + (time_map.value * per_min / 60) + base_fare;
+                price = price >= min_fare ? price : min_fare;
+                price_no_base = price_no_base >= min_fare ? price_no_base : min_fare;
+                if (price_no_base.toFixed() == price.toFixed())
+                    document.getElementById(element_id).innerHTML = "<b class='text-success'>RM " +
+                            price.toFixed(2) + "</b>";
+                else
+                    document.getElementById(element_id).innerHTML = "<b class='text-success'>RM " +
+                            price_no_base.toFixed(2) + " - " + price.toFixed(2) + "</b>";
+            }
+
+            function distanceMatricApix(origin, destination, service, dist_map, time_map, outputDiv) {
+
+                service.getDistanceMatrix({
+                    origins: [origin.getPosition()],
+                    destinations: [destination.getPosition()],
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    unitSystem: google.maps.UnitSystem.METRIC,
+                    avoidHighways: false,
+                    avoidTolls: false
+                }, (response, status) => {
+                    if (status !== "OK") {
+                        alert("Error was: " + status);
+                    }
+                    dist_map.value = 0;
+                    time_map.value = 0;
+                    outputDiv.innerHTML = "";
+                    const originList = response.originAddresses;
+                    const destinationList = response.destinationAddresses;
+                    for (let i = 0; i < originList.length; i++) {
+                        const results = response.rows[i].elements;
+                        for (let j = 0; j < results.length; j++) {
+                            if (results[j].status !== "OK") {
+                                alert("Error was: " + status);
+                            }
+                            dist_map.value += results[j].distance.value;
+                            time_map.value += results[j].duration.value;
+                            outputDiv.innerHTML += "<p>From <span style='color:#1a71ff'>" +
+                                    originList[i] +
+                                    "</span> to <span style='color:#ff1a4b'>" +
+                                    destinationList[j] +
+                                    "</span></p>distance: <i>" +
+                                    results[j].distance.text +
+                                    "</i><span class='pull-right'><b>time estimate: " +
+                                    results[j].duration.text +
+                                    "</b><br></span>";
+                        }
+                    }
+                    calculateAll();
+                });
+            }
+
+            function handleLocationError(browserHasGeolocation, infoWindow, pos, map) {
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(
+                        browserHasGeolocation
+                        ? "Error: The Geolocation service failed."
+                        : "Error: Your browser doesn't support geolocation."
+                        );
+                infoWindow.open(map);
+            }
+
+            function calculateAndDisplayRoute(directionsService, directionsRenderer, origin_p, destination_p) {
+                directionsService.route(
+                        {
+                            origin: origin_p,
+                            destination: destination_p,
+                            travelMode: google.maps.TravelMode['DRIVING'],
+                        },
+                        (response, status) => {
+                    if (status == "OK") {
+                        directionsRenderer.setDirections(response);
+                    } else {
+                        window.alert("Directions request failed due to " + status);
+                    }
+                }
+                );
+            }
+
+            function setFocusBtn(focus_form) {
+                const input_form_btn = document.getElementById("form-btn");
+                const input_to_btn = document.getElementById("to-btn");
+                if (focus_form) {
+                    input_form_btn.disabled = false;
+                    input_to_btn.disabled = true;
+                } else {
+                    input_form_btn.disabled = true;
+                    input_to_btn.disabled = false;
+                }
+            }
+            function writeToInput(position, input_latlng) {
+                input_latlng.value = JSON.stringify(position.toJSON(), null, 2);
+            }
+            function reverseLatLng(geocoder, input, marker, map) {
+                const position = marker.getPosition();
+                geocoder.geocode({location: position}, (results, status) => {
+                    if (status === "OK") {
+                        if (results[0]) {
+                            input.value = results[0].formatted_address;
+                        } else {
+                            window.alert("No results found");
+                        }
+                    } else {
+                        window.alert("Geocoder failed due to: " + status);
+                    }
+                });
+            }
+            function fitCurrentBound(form, to, map) {
+                var bounds = new google.maps.LatLngBounds();
+                bounds.extend(form);
+                bounds.extend(to);
+                map.fitBounds(bounds);
+            }
+            function search(searchBox, marker, map) {
+                const places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+                // For each place, get the icon, name and location.
+                const bounds = new google.maps.LatLngBounds();
+                places.forEach((place) => {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    marker.setPosition(place.geometry.location);
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            }
+
             $(document).ready(function () {
                 $("#pac-input-to").click(function () {
                     setFocusBtn(false);
                 });
                 $("#pac-input-form").click(function () {
-                setFocusBtn(true);
+                    setFocusBtn(true);
                 });
-                });
-
-            function calculateAll() {
-                const dist_map = document.getElementById("map-distance");
-                const time_map = document.getElementById("map-time");
-            <%for (int i = 0; i < types.size(); i++) {%>
-                calculatePrice('price_<%= i%>
-                        ', <%= types.get(i).getBase_fair_price()%>, <%= types.get(i).getMinimum_price()%>,
-            <%= types.get(i).getPrice_per_km()%>, <%= types.get(i).getPrice_per_min()%>, dist_map, time_map
-                ) + "\n";
-            <%}%>
-            }
+            });
         </script>
     </body>
 </html>

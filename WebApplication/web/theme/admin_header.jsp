@@ -33,3 +33,5 @@
 
 
     <div class="w3-container">
+
+    <%= main.Functions.displayErrorMessage(request)%>

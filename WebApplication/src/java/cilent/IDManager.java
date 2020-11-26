@@ -166,4 +166,9 @@ public class IDManager extends AbstractEntity {
         im.add(new IDManager(Chat.class.getName(), "CD-%09d", String.class.getName(), 1, "chat_details_id"));
         AbstractEntity.addDataToCsv(im);
     }
+
+    @Override
+    public String getId() {
+        return this.className;
+    }
 }

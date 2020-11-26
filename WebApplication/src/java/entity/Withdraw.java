@@ -153,4 +153,9 @@ public class Withdraw extends AbstractEntity<Withdraw> {
     public boolean id_equals(Object obj) {
         return this.withdraw_id.equals(((Withdraw) obj).withdraw_id);
     }
+
+    @Override
+    public String getId() {
+        return this.withdraw_id;
+    }
 }

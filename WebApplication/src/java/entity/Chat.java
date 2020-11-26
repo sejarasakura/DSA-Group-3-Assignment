@@ -148,4 +148,8 @@ public class Chat extends AbstractEntity {
         return Objects.equals(this.send_date, other.send_date);
     }
 
+    @Override
+    public String getId() {
+        return this.chat_details_id;
+    }
 }

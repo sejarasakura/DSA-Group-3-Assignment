@@ -259,15 +259,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             return containsNullValue();
         }
 
-        TableEntry[] tab = table;
-        for (int i = 0; i < tab.length; i++) {
-            for (TableEntry e = tab[i]; e != null; e = e.next) {
-                if (value.equals(e.value)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return this.getValue((K) value) != null;
     }
 
     @Override

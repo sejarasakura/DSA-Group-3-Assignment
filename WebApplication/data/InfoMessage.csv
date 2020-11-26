@@ -6,3 +6,5 @@ I-0005,alert-success,The record is sucessful added to csv file.,Sucessful add re
 I-0006,alert-danger,The record is not sucessful add to the csv file please try agian later!,Fail to add record
 I-0007,alert-danger,The record is not sucessful update to the csv file please try agian later !!,Fail to update record
 I-0008,alert-success,The record is sucessful update to the csv file !,Sucessful update record
+I-0009,alert-danger,The record is not sucessful delete to the csv file please try agian later !!,Fail to delete record
+I-0010,alert-success,The record is sucessful delete to the csv file !,Sucessful delete record	

@@ -39,6 +39,13 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     }
 
     /**
+     * get the id of entity
+     *
+     * @return
+     */
+    public abstract String getId();
+
+    /**
      * Check is null or not
      *
      * @return

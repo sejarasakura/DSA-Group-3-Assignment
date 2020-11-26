@@ -222,4 +222,9 @@ public abstract class User<T> extends AbstractEntity<User> {
     public int compareTo(Object t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String getId() {
+        return this.user_id;
+    }
 }

@@ -103,4 +103,8 @@ public class InfoMessage extends AbstractEntity {
         return this.code.compareTo(((InfoMessage) t).code);
     }
 
+    @Override
+    public String getId() {
+        return this.code;
+    }
 }

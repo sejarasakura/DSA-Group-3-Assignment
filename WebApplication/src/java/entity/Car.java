@@ -133,4 +133,8 @@ public class Car extends AbstractEntity<Car> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public String getId() {
+        return this.plate_id;
+    }
 }

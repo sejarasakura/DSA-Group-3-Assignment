@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static main.Datas.TYPE_SWITCH;
 import main.Functions;
-import static main.WebConfig.LOCAL_DATETIME_FORMAT;
 
 /**
  *

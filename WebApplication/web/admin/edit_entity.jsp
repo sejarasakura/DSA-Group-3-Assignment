@@ -65,14 +65,17 @@
                 });
             });
             $(".glyphicon-trash").click(function () {
+                
+                var id_input = $("<input>").attr("name", "id").val( $(this).data('id'));
                 $.showConfirm({
                     title: "Please confirm",
                     body: "Do you sure want to delete ? the record is no backup. ",
                     onSubmit: function (result) {
                         if (result) {
-                            var input = $("<input>").attr("name", "jsp-action").val("add");
+                            var input = $("<input>").attr("name", "jsp-action").val("delete");
                             $('#updateform').append(input);
                             $('#updateform').append(input2);
+                            $('#updateform').append(id_input);
                             $('#updateform').submit();
                         } else {
                         }

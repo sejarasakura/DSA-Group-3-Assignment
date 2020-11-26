@@ -298,4 +298,8 @@ public class Booking extends AbstractEntity<Booking> {
         return this.booking_id.equals(((Booking) obj).booking_id);
     }
 
+    @Override
+    public String getId() {
+        return this.booking_id;
+    }
 }

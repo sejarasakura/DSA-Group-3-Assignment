@@ -156,4 +156,9 @@ public class Mapping extends AbstractEntity<Mapping> {
         }
         Mapping.reWriteAllDataToCsv(new_list);
     }
+
+    @Override
+    public String getId() {
+        return this.map_id;
+    }
 }

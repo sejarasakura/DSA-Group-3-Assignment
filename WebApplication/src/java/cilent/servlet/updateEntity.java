@@ -38,7 +38,13 @@ public class updateEntity extends HttpServlet {
 
         switch (jsp_action.toLowerCase()) {
             case "delete":
-                break;
+                DeleteEntityListCilent z = new DeleteEntityListCilent(edit, request, response);
+                if (z.status) {
+                    response.sendRedirect(main.WebConfig.ADMIN_URL + "edit/" + edit + "?I=I-0010");
+                } else {
+                    response.sendRedirect(main.WebConfig.ADMIN_URL + "edit/" + edit + "?I=I-0009");
+                }
+                return;
             case "add":
                 AddEntityListCilent y = new AddEntityListCilent(edit, request, response);
                 if (y.status) {

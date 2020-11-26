@@ -123,7 +123,7 @@ public class EditEntity extends AbstractPage {
                 stringBuilder.append("<tr>");
                 stringBuilder.append("<td>");
                 if (this.classSaving.isDelete()) {
-                    submitIcon("glyphicon-trash", "");
+                    submitIcon("glyphicon-trash", " data-id='" + entity.getId() + "' ");
                 }
                 displayIcon(entity.getClass().getSimpleName(), "glyphicon-remove");
                 submitIcon("glyphicon-circle-arrow-up", "");
@@ -134,7 +134,7 @@ public class EditEntity extends AbstractPage {
                 stringBuilder.append("<tr>");
                 stringBuilder.append("<td>");
                 if (this.classSaving.isDelete()) {
-                    submitIcon("glyphicon-trash", "");
+                    submitIcon("glyphicon-trash", " data-id='" + entity.getId() + "' ");
                 }
                 displayIcon(entity.getClass().getSimpleName(), (String) feilds.get(identifier_index).invoke(entity), "glyphicon-pencil", "");
                 stringBuilder.append("</td>");
@@ -150,7 +150,7 @@ public class EditEntity extends AbstractPage {
         stringBuilder
                 .append("<a href='#'><span class=\"glyphicon ")
                 .append(_class)
-                .append("\" ").append(_att).append("></span></a>");
+                .append("\" ").append(_att).append(" ></span></a>");
     }
 
     private void displayIcon(String _edit, String _id, String _class, String _atribute) {

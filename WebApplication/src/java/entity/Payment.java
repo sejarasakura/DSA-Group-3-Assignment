@@ -21,6 +21,7 @@ import xenum.PaymentStatus;
  * @author Lai Hong Wah
  */
 public class Payment extends AbstractEntity<Payment> {
+
     /**
      * Default decimal format
      */
@@ -142,4 +143,8 @@ public class Payment extends AbstractEntity<Payment> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public String getId() {
+        return this.payment_id;
+    }
 }

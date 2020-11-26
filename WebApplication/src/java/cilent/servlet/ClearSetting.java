@@ -6,12 +6,12 @@
 package cilent.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import main.Datas;
 
 /**
  *
@@ -21,8 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ClearSetting extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Reload the header and footer result and recorded to
      *
      * @param request servlet request
      * @param response servlet response
@@ -31,9 +30,19 @@ public class ClearSetting extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String key = request.getParameter("key");
         response.setContentType("text/html;charset=UTF-8");
-        main.Datas.settings.remove(request.getParameter("key"));
-        response.sendRedirect( request.getHeader("referer"));
+        main.Datas.settings.remove(key);
+        if (key == null) {
+            response.sendRedirect(request.getHeader("referer"));
+            return;
+        }
+        if ("admin-nav".equals(key)) {
+            Datas.admin_header = null;
+        } else if ("footer".equals(key)) {
+            Datas.pages_footer = null;
+        }
+        response.sendRedirect(request.getHeader("referer"));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

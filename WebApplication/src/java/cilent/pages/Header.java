@@ -50,7 +50,6 @@ public class Header extends AbstractPage {
             return get_pre_menu((Map) main.Datas.settings.getValue("nav"));
         }
         return (new ArrList<String>());
-
     }
 
     private ArrList get_new_menu() throws FileNotFoundException {

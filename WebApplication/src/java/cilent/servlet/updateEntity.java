@@ -44,7 +44,7 @@ public class updateEntity extends HttpServlet {
                 if (y.status) {
                     response.sendRedirect(main.WebConfig.ADMIN_URL + "edit/" + edit + "?I=I-0005");
                 } else {
-                    response.sendRedirect(main.WebConfig.ADMIN_URL + "edit/" + edit + "?I=I0006");
+                    response.sendRedirect(main.WebConfig.ADMIN_URL + "edit/" + edit + "?I=I-0006");
                 }
                 return;
             case "update":

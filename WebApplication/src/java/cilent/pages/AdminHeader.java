@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import main.Datas;
 import main.WebConfig;
 
 /**
@@ -38,9 +39,13 @@ public class AdminHeader extends AbstractPage {
             String x = System.getProperty("user.dir") + "/data/adminNav.json";
             JsonReader reader = new JsonReader(new FileReader(x));
             Gson gson = new Gson();
-            XOrderedDictionary map = new XOrderedDictionary(
-                    gson.fromJson(reader, WebConfig.WRITING_CLASS)
-            );
+            XOrderedDictionary map = null;
+            if (Datas.settings.getValue("admin-nav") == null) {
+                map = new XOrderedDictionary(gson.fromJson(reader, WebConfig.WRITING_CLASS));
+                Datas.settings.add("admin-nav", map);
+            } else {
+                map = (XOrderedDictionary) Datas.settings.getValue("admin-nav");
+            }
             map = new XOrderedDictionary(map.getValue("admin-nav"));
             XStack data = new XStack(map.newKeyIterator());
             String key;

@@ -17,8 +17,8 @@
         </a>
     </center>
     <%
-        ArrList<String> lists = new AdminHeader(request).getHtmls();
-        for (String list : lists) {
+        Datas.admin_header = new AdminHeader(request).getHtmls();
+        for (String list : Datas.admin_header) {
             out.write(list);
         }
     %>

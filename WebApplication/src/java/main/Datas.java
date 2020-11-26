@@ -16,13 +16,13 @@ import entity.InfoMessage;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class Datas {
 
     /**
      *
-     * @author ITSUKA KOTORI web page setting in the dictionary
+     * @author Lim Sai Keat web page setting in the dictionary
      */
     public static XHashedDictionary<String, Object> settings;
 
@@ -41,41 +41,42 @@ public class Datas {
         TYPE_SWITCH.add("byte", Byte.TYPE);
         TYPE_SWITCH.add("void", Void.TYPE);
         TYPE_SWITCH.add("short", Short.TYPE);
+        TYPE_SWITCH.add("short", Short.TYPE);
     }
 
     /**
      *
-     * @author ITSUKA KOTORI all the online driver
+     * @author Lim Sai Keat all the online driver
      */
     public static ArrList<Driver> drivers;
 
     /**
      *
-     * @author ITSUKA KOTORI all the online admin
+     * @author Lim Sai Keat all the online admin
      */
     public static ArrList<Admin> admins;
 
     /**
      *
-     * @author ITSUKA KOTORI all the online customer
+     * @author Lim Sai Keat all the online customer
      */
     public static ArrList<Customer> customers;
 
     /**
      *
-     * @author ITSUKA KOTORI all the current request booking
+     * @author Lim Sai Keat all the current request booking
      */
     public static XQueue<Booking> currentBooking;
 
     /**
      *
-     * @author ITSUKA KOTORI all the current request booking
+     * @author Lim Sai Keat all the current request booking
      */
     public static ArrList<InfoMessage> allMessage;
 
     /**
      *
-     * @author ITSUKA KOTORI doing start up
+     * @author Lim Sai Keat doing start up
      */
     public static int stsrtUp = main.Functions.startUpInitialData();
 
@@ -85,7 +86,18 @@ public class Datas {
      */
     public static ArrList<Boolean> admin_bar_status;
 
+    /**
+     * Prevent too many time of reload array
+     *
+     * @author Lim sai keat use pages footer is fixed
+     */
     public static ArrList<String> pages_footer;
+
+    /**
+     * Prevent to many reload of array list
+     *
+     * @author Lim sai keat admin header is fixed
+     */
     public static ArrList<String> admin_header;
 
 }

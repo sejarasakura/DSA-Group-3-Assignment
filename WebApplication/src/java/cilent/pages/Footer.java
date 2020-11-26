@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import main.Datas;
 import main.WebConfig;
 
 /**
@@ -28,7 +29,7 @@ public class Footer extends AbstractPage {
 
     public ArrList get_footer() throws FileNotFoundException {
         if (main.Datas.settings.getValue("footer") != null) {
-            return this.get_old_footer(new XOrderedDictionary(main.Datas.settings.getValue("footer")));
+            return this.get_old_footer((XOrderedDictionary) main.Datas.settings.getValue("footer"));
         }
 
         return this.get_new_footer();
@@ -67,6 +68,7 @@ public class Footer extends AbstractPage {
         Gson gson = new Gson();
         XOrderedDictionary map = new XOrderedDictionary(gson.fromJson(reader, Map.class));
         map = new XOrderedDictionary(map.getValue("footer"));
+        Datas.settings.add("footer", map);
         return get_old_footer(map);
     }
 

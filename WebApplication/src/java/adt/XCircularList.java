@@ -11,7 +11,7 @@ package adt;
  * @param <T>
  */
 public class XCircularList<T> {
-      /**
+    /**
      * Silence is golden
      */
 }

@@ -43,114 +43,180 @@ public class Booking extends AbstractEntity<Booking> {
      */
     @CsvBindByName
     private String driver_id;
-
+    /**
+     * customer id
+     */
     @CsvBindByName
     private String customer_id;
-
+    /**
+     * chats id
+     */
     @CsvBindByName
     private String chats_id;
-
+    /**
+     * mapping id
+     */
     @CsvBindByName
     private String mapping_id;
-
+    /**
+     * customer payment number 
+     */
     @CsvBindByName
     private String paymentNumber;
-
+    /**
+     * booking status
+     */
     @CsvCustomBindByName(converter = BookingStatusConverter.class, column = "booking_status_code")
     private BookingStatus bookingStatus;
-
+    
     public Booking() {
     }
-
+    /**
+     * booking id
+     * @return 
+     */
     public String getBooking_id() {
         return booking_id;
     }
-
+    /**
+     * 
+     * @param booking_id 
+     */
     public void setBooking_id(String booking_id) {
         this.booking_id = booking_id;
     }
-
+    /**
+     * booking description
+     * @return 
+     */
     public String getBooking_description() {
         return booking_description;
     }
-
+    /**
+     * 
+     * @param booking_description 
+     */
     public void setBooking_description(String booking_description) {
         this.booking_description = booking_description;
     }
-
+    /**
+     * booking type
+     * @return 
+     */
     public CarType getBooking_type() {
         return booking_type;
     }
-
+    /**
+     * 
+     * @param booking_type 
+     */
     public void setBooking_type(CarType booking_type) {
         this.booking_type = booking_type;
     }
-
+    /**
+     * booking date
+     * @return 
+     */
     public Date getBooking_date() {
         return booking_date;
     }
-
+    /**
+     * 
+     * @param booking_date 
+     */
     public void setBooking_date(Date booking_date) {
         this.booking_date = booking_date;
     }
-
+    /**
+     * driver id
+     * @return 
+     */
     public String getDriver_id() {
         return driver_id;
     }
-
+    /**
+     * 
+     * @param driver_id 
+     */
     public void setDriver_id(String driver_id) {
         this.driver_id = driver_id;
     }
-
+    /**
+     * customer id
+     * @return 
+     */
     public String getCustomer_id() {
         return customer_id;
     }
-
+    /**
+     * 
+     * @param customer_id 
+     */
     public void setCustomer_id(String customer_id) {
         this.customer_id = customer_id;
     }
-
+    /**
+     * chats id
+     * @return 
+     */
     public String getChats_id() {
         return chats_id;
     }
-
+    /**
+     * 
+     * @param chats_id 
+     */
     public void setChats_id(String chats_id) {
         this.chats_id = chats_id;
     }
-
+    /**
+     * mapping id
+     * @return 
+     */
     public String getMapping_id() {
         return mapping_id;
     }
-
+    /**
+     * 
+     * @param mapping_id 
+     */
     public void setMapping_id(String mapping_id) {
         this.mapping_id = mapping_id;
     }
-
+    /**
+     * customer payment number
+     * @return 
+     */
     public String getPaymentNumber() {
         return paymentNumber;
     }
-
+    /**
+     * 
+     * @param paymentNumber 
+     */
     public void setPaymentNumber(String paymentNumber) {
         this.paymentNumber = paymentNumber;
     }
-
+    /**
+     * customer booking status
+     * @return 
+     */
     public BookingStatus getBookingStatus() {
         return bookingStatus;
     }
-
+    /**
+     * 
+     * @param bookingStatus 
+     */
     public void setBookingStatus(BookingStatus bookingStatus) {
         this.bookingStatus = bookingStatus;
     }
-
+    
     @Override
     public boolean isNotNull() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public String toString() {
@@ -159,7 +225,8 @@ public class Booking extends AbstractEntity<Booking> {
 
     @Override
     public int compareTo(Object t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Booking b = (Booking) t;
+        return this.booking_id.compareTo(b.booking_id);
     }
 
     @Override

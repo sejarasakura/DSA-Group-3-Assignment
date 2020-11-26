@@ -15,7 +15,7 @@ import java.util.*;
  * and fetch date
  *
  * @Mapping
- * @author ITSUKA KOTORI
+ * @author lIM SAI KEAT
  */
 public class Mapping extends AbstractEntity<Mapping> {
 

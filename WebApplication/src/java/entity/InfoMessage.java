@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author lIM SAI KEAT
  */
 public class InfoMessage extends AbstractEntity {
 

@@ -12,7 +12,7 @@ import java.util.Objects;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lai Hong Wah
  */
 public class Chat extends AbstractEntity {
 

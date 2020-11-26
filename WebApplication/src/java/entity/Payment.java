@@ -17,25 +17,38 @@ import xenum.PaymentStatus;
 
 /**
  *
- * @author Lim Sai Keat, Lai Hong Wah
+ * @author Lim Sai Keat
+ * @author Lai Hong Wah
  */
 public class Payment extends AbstractEntity<Payment> {
-
+    /**
+     * Default decimal format
+     */
     DecimalFormat df = new DecimalFormat("###.##");
-
+    /**
+     * customer payment id
+     */
     @CsvBindByName
     private String payment_id;
-
+    /**
+     * customer payment status
+     */
     @CsvCustomBindByName(converter = PaymentStatusConverter.class, column = "payment_status_code")
     private PaymentStatus payment_status;
-
+    /**
+     * customer payment method
+     */
     @CsvCustomBindByName(converter = PaymentMethodTypeConverter.class, column = "payment_method_code")
     private PaymentMethodType payment_method;
-
+    /**
+     * customer payment date
+     */
     @CsvBindByName
     @CsvDate(main.WebConfig.SAVING_DATE_FORMAT)
     private Date payment_date;
-
+    /**
+     * customer payment due date
+     */
     @CsvBindByName
     @CsvDate(main.WebConfig.SAVING_DATE_FORMAT)
     private Date payment_due_date;

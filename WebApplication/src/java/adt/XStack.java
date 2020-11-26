@@ -19,16 +19,24 @@ public final class XStack<T> implements InterStack<T>, Iterable<T>, Cloneable, j
 
     private int n;
     private SingleNode<T> first;
-
+    /**
+     * constructor
+     */
     public XStack() {
         first = null;
         n = 0;
     }
-
+    /**
+     * constructor
+     * @param ib iterator
+     */
     public XStack(Iterable<T> ib) {
         this(ib.iterator());
     }
-
+    /**
+    * constructor
+    * @param is iterator
+    */
     public XStack(Iterator<T> is) {
         this();
         XStack s = new XStack();

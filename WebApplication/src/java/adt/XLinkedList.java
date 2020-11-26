@@ -11,5 +11,7 @@ package adt;
  * @param <T>
  */
 public class XLinkedList<T> implements java.io.Serializable {
-
+    /**
+     * Silence is golden
+     */
 }

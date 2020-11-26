@@ -14,13 +14,19 @@ import xenum.CarType;
  * @author ITSUKA KOTORI
  */
 public class Taxi extends Car {
-
+    /**
+     * driver taxi id
+     */
     @CsvBindByName
     private String taxiId;
-
+    /**
+     * driver taxi license
+     */
     @CsvBindByName
     private String taxiLicense;
-
+    /**
+     * driver taxi company
+     */
     @CsvBindByName
     private String taxiCompany;
 

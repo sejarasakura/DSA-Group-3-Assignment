@@ -34,7 +34,7 @@ dist/
 nbdist/
 .nb-gradle/
 
-project-root-directory/
+DSA-Group-3-Assignment/
 + nbproject/
   build-impl.xml
   + private/

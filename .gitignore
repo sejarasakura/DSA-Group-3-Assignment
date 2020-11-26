@@ -34,6 +34,16 @@ dist/
 nbdist/
 .nb-gradle/
 
+project-root-directory/
++ nbproject/
+  build-impl.xml
+  + private/
+  + project.properties
+  + project.xml
++ src/
++ test/
++ build.xml
+
 /maven/WebApplication/target/
 
 git add /server/webapps/web/*

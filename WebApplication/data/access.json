@@ -150,7 +150,7 @@
             "auto_inc": false
           },
           {
-            "type": "java.lang.String",
+            "type": "xenum.CarType",
             "name": "booking_type",
             "display": true,
             "update": true,

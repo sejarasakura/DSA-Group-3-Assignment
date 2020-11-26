@@ -50,3 +50,5 @@ DSA-Group-3-Assignment/
 /maven/WebApplication/target/
 
 git add /server/webapps/web/*
+WebApplication/nbproject/build-impl.xml
+WebApplication/nbproject/build-impl.xml~

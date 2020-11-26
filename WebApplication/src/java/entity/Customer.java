@@ -51,7 +51,7 @@ public class Customer extends User<Customer> {
             String phoneNumber, String username, String password) {
         super(user_id, ic, name, email, phoneNumber, "c", username, password);
         this.current_booking_id = current_booking_id;
-        this.memberType = MemberShip.valueOf(memberType_id);
+        this.memberType = MemberShip.getValue(memberType_id);
     }
 
     public String getCurrent_booking_id() {

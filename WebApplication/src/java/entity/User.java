@@ -201,6 +201,9 @@ public abstract class User<T> extends AbstractEntity<User> {
         if (this.user_id == null) {
             return false;
         }
+        if (user_id.isEmpty()) {
+            return false;
+        }
 
         return this.role != null;
     }

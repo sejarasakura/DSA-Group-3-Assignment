@@ -43,6 +43,7 @@ public class AddEntityListCilent {
     protected ArrList<Method> setter = new ArrList<Method>();
     protected adt.XHashedDictionary<String, String> parameter_data
             = new adt.XHashedDictionary<String, String>();
+    public boolean status = false;
 
     /**
      * constructor
@@ -157,7 +158,7 @@ public class AddEntityListCilent {
         sb.append(xenum.OutputColor.TEXT_PURPLE).append('\n').append(parameter_data);
 
         // update a record to csv
-        entity.addThisToCsv();
+        status = entity.addThisToCsv();
 
         // reset console color and return
         sb.append(xenum.OutputColor.TEXT_RESET);

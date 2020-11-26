@@ -36,10 +36,10 @@ nbdist/
 
 nbactions.xml
 nb-configuration.xml
+build-impl.xml
 
 DSA-Group-3-Assignment/
 + nbproject/
-  build-impl.xml
   + private/
   + project.properties
   + project.xml

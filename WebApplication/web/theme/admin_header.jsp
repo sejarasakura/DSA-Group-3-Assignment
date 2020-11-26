@@ -16,10 +16,12 @@
             <img class="" src="<%= Datas.settings.getValue("image/logo")%>" alt="Rent Car" width="64" height="50">
         </a>
     </center>
-    <%ArrList<String> lists = new AdminHeader(request).getHtmls();%>
-    <% for (String list : lists) {
-        out.write(list);
-    }%>
+    <%
+        ArrList<String> lists = new AdminHeader(request).getHtmls();
+        for (String list : lists) {
+            out.write(list);
+        }
+    %>
 </div>
 
 <!-- Page Content -->
@@ -34,4 +36,4 @@
 
     <div class="w3-container">
 
-    <%= main.Functions.displayErrorMessage(request)%>
+        <%= main.Functions.displayErrorMessage(request)%>

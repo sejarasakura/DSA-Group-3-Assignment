@@ -84,4 +84,7 @@ public class Datas {
      */
     public static ArrList<Boolean> admin_bar_status;
 
+    public static ArrList<String> pages_footer;
+    public static ArrList<String> admin_header;
+
 }

@@ -73,7 +73,7 @@ public class Footer extends AbstractPage {
     public String get_wiget_3(XStack data) {
         String result = "";
         while (!data.isEmpty()) {
-            result += build_html((XOrderedDictionary) data.pop());
+            result += build_html(new XOrderedDictionary(data.pop()));
         }
         return result;
     }
@@ -81,7 +81,7 @@ public class Footer extends AbstractPage {
     public String get_wiget_6(XStack data) {
         String result = "";
         while (!data.isEmpty()) {
-            result += build_right_html((XOrderedDictionary) data.pop());
+            result += build_right_html(new XOrderedDictionary(data.pop()));
         }
         return result;
     }

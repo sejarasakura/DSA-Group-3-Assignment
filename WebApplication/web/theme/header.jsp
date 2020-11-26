@@ -8,17 +8,15 @@
 <%@page import="cilent.pages.Header" %>
 <%@page import="adt.ArrList" %>
 <%@page import="entity.User" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
-<% User u = main.Functions.getUserSession(request); %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<% User u = main.Functions.getUserSession(request);%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <nav id="customer-header" class="navbar navbar-default" style="padding-top: 10px; padding-bottom: 10px;">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="" href="<%= getServletContext().getInitParameter("DomainName")%>">
-                <img class="pull-left" src="<%= Datas.settings.getValue("image/logo")%>" alt="Rent Car" width="64"
-                     height="50">
+                <img class="pull-left" src="<%= Datas.settings.getValue("image/logo")%>" alt="Rent Car" width="64" height="50">
             </a>
             <a class="navbar-brand" href="<%= getServletContext().getInitParameter("DomainName")%>"
                style="padding-left: 30px">
@@ -26,10 +24,12 @@
             </a>
         </div>
         <ul class="nav navbar-nav">
-            <%ArrList<String> lists = new Header(request).getHtmls();%>
-            <% for (String list : lists) {
-                out.write(list);
-            }%>
+            <%
+                ArrList<String> lists = new Header(request).getHtmls();
+                for (String list : lists) {
+                    out.write(list);
+                }
+            %>
         </ul>
 
         <div class="navbar-header pull-right">

@@ -20,6 +20,7 @@ import java.lang.reflect.Type;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import static jdk.nashorn.internal.codegen.CompilerConstants.__DIR__;
 import main.WebConfig;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -61,6 +62,11 @@ public class HashTest {
     private int N;
 
     public static void main(String[] args) throws RunnerException {
+
+        System.out.println(__DIR__.toString());
+    }
+
+    public static void mainx(String[] args) throws RunnerException {
 
         Options opt = new OptionsBuilder()
                 .include(HashTest.class.getSimpleName())

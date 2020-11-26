@@ -15,7 +15,7 @@
     </head>
     <body>
         <jsp:include page="<%= main.WebConfig.HEADER_URL%>"/>
-        
+        <h1>Change Here!</h1>
         <jsp:include page="<%= main.WebConfig.FOOTER_URL%>"/>
     </body>
 </html>

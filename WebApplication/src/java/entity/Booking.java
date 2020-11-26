@@ -8,6 +8,7 @@ package entity;
 import com.opencsv.bean.*;
 import csv.converter.BookingStatusConverter;
 import java.util.Date;
+import java.util.Objects;
 import xenum.BookingStatus;
 import xenum.CarType;
 
@@ -214,10 +215,38 @@ public class Booking extends AbstractEntity<Booking> {
     
     @Override
     public boolean isNotNull() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.booking_id == null)
+            return false;
+        if(this.booking_id.isEmpty())
+            return false;
+        
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Booking other = (Booking) obj;
+        if (!Objects.equals(this.booking_id, other.booking_id)) {
+            return false;
+        }
+        return true;
     }
     
-
     @Override
     public String toString() {
         return "Booking{" + "booking_id=" + booking_id + ", booking_description=" + booking_description + ", booking_type=" + booking_type + ", booking_date=" + booking_date + ", driver_id=" + driver_id + ", customer_id=" + customer_id + ", chats_id=" + chats_id + ", mapping_id=" + mapping_id + ", paymentNumber=" + paymentNumber + ", bookingStatus=" + bookingStatus + '}';

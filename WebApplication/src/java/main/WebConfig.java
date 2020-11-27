@@ -110,4 +110,9 @@ public class WebConfig {
      * Debug mode to false to prevent multiple reload
      */
     public static Class<?> WRITING_CLASS = java.util.Map.class;
+
+    /**
+     * Image Byte of the file
+     */
+    public static byte[] default_image = Functions.getDefaultImage();
 }

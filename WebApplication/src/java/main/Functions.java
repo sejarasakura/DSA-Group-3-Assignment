@@ -12,6 +12,8 @@ import entity.AbstractEntity;
 import entity.InfoMessage;
 import entity.User;
 import entity.json.ClassSaving;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,6 +24,7 @@ import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static main.Datas.TYPE_SWITCH;
@@ -276,6 +279,18 @@ public class Functions {
 
     public static void setAdminBarStatus(HttpServletRequest request, ArrList<Boolean> v) {
         main.Datas.admin_bar_status = v;
+    }
+
+    static byte[] getDefaultImage() {
+        try {
+            BufferedImage bImage = ImageIO.read(new File(WebConfig.IMG_URL + "user.png"));
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(bImage, "png", bos);
+            return bos.toByteArray();
+        } catch (IOException ex) {
+            Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

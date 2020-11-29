@@ -192,7 +192,7 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
     public String toString() {
         String r = "";
         for (T d : (data)) {
-            r += "" + d + ", ";
+            r += "" + d + ",";
         }
         return r;
     }

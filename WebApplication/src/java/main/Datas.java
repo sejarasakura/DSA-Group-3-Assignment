@@ -15,6 +15,7 @@ import entity.Driver;
 import entity.InfoMessage;
 
 /**
+ * To store the environment data
  *
  * @author Lim Sai Keat
  */

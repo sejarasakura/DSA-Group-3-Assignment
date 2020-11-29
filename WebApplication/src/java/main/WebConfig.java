@@ -12,6 +12,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 /**
+ * To store the environment configuration variable
  *
  * @author ITSUKA KOTORI
  */
@@ -31,6 +32,11 @@ public class WebConfig {
      * Web Site Admin URL
      */
     public final static String ADMIN_URL = (WebConfig.WEB_URL + "admin/");
+
+    /**
+     * Web Site Load Image URL
+     */
+    public final static String IMG_RETRIVE_URL = (WebConfig.WEB_URL + "imageRetrive");
 
     /**
      * Web Site Header URL

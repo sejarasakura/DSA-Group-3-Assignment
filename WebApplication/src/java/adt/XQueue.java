@@ -21,6 +21,7 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
     private final DoubleNode<T> head;
     private final DoubleNode<T> tail;
     private int size;
+
     /**
      * constructor
      */
@@ -31,15 +32,19 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
         tail.prev = head;
         size = 0;
     }
+
     /**
      * constructor
+     *
      * @param ib iterator
      */
     public XQueue(Iterable<T> ib) {
         this(ib.iterator());
     }
+
     /**
      * constructor
+     *
      * @param is iterator
      */
     public XQueue(Iterator<T> is) {

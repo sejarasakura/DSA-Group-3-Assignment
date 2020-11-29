@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import main.Functions;
 import main.WebConfig;
 
 /**
@@ -37,8 +38,18 @@ public class imageRetrive extends HttpServlet {
         response.setContentType("image/gif");
         String id = request.getParameter("id");
         String displayType = request.getParameter("type");
-        String path = WebConfig.IMG_URL + "/" + displayType + "/" + id + ".png";
+        String defaultI = request.getParameter("default");
+        String defaultT = request.getParameter("defaulttype");
+        id = id == null ? "" : id;
+        displayType = displayType == null ? "" : displayType;
+        defaultI = defaultI == null ? "" : defaultI;
+        defaultT = defaultT == null ? "" : defaultT;
+        String path = WebConfig.PROJECT_URL + "/web/img/" + displayType + "/" + id + ".png";
         File file = new File(path);
+        if (!file.exists()) {
+            path = WebConfig.PROJECT_URL + "/web/img/" + defaultT + "/" + defaultI + ".png";
+            file = new File(path);
+        }
         if (file.exists()) {
             RandomAccessFile f;
             f = new RandomAccessFile(path, "r");
@@ -46,7 +57,10 @@ public class imageRetrive extends HttpServlet {
             f.read(bytes);
             response.getOutputStream().write(bytes);
         } else {
-
+            if (WebConfig.default_image == null) {
+                WebConfig.default_image = Functions.getDefaultImage();
+            }
+            response.getOutputStream().write(WebConfig.default_image);
         }
     }
 

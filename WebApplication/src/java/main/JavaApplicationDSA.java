@@ -13,6 +13,7 @@ import java.awt.Point;
  * and open the template in the editor.
  */
 /**
+ * Main class of this program useless now for testing only
  *
  * @author ITSUKA KOTORI
  */

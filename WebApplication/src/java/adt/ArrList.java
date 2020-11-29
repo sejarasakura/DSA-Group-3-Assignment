@@ -484,6 +484,14 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         return null;
     }
 
+    /**
+     *
+     * @param field1
+     * @param field2
+     * @param _class
+     * @param seperator
+     * @return ArrayList of concat field with seperator
+     */
     private ArrList<String> notsecure_concateField(String field1, String field2, Class<?> _class, String seperator) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Field f1 = _class.getField(field1);
         Field f2 = _class.getField(field2);
@@ -507,6 +515,12 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         return ar;
     }
 
+    /**
+     *
+     * @param field Field name
+     * @param class_name Class name
+     * @return The field list in side the class
+     */
     public ArrList<String> getField(String field, String class_name) {
         try {
             Class<?> _class = Class.forName(class_name);
@@ -526,6 +540,12 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         return null;
     }
 
+    /**
+     *
+     * @param f Field type
+     * @param _class Class type
+     * @return The field list in side the class
+     */
     public ArrList<String> getField(Field f, Class<?> _class) {
         try {
             return this.notsecure_getField(null, f, _class);

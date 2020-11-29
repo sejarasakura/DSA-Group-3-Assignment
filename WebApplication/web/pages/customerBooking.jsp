@@ -63,7 +63,7 @@
             Confirm Location
         </button>
 
-            <form method="post" action="<%= WebConfig.WEB_URL%>start/booking/now">
+        <form method="post" action="<%= WebConfig.WEB_URL%>start/booking/now">
             <input type="hidden" id="form-latlng" name="form-latlng" value=""/>
             <input type="hidden" id="to-latlng" name="to-latlng" value=""/>
 
@@ -237,8 +237,14 @@
                 const dist_map = document.getElementById("map-distance");
                 const time_map = document.getElementById("map-time");
                 <%for (int i = 0; i < types.size(); i++) {%>
-                    calculatePrice('price_<%=i%>', <%= types.get(i).getBase_fair_price()%>, <%= types.get(i).getMinimum_price()%>,
-                <%= types.get(i).getPrice_per_km()%>, <%= types.get(i).getPrice_per_min()%>, dist_map, time_map) + "\n";
+                calculatePrice(
+                        'price_<%=i%>',
+                        <%= types.get(i).getBase_fair_price()%>,
+                        <%= types.get(i).getMinimum_price()%>,
+                        <%= types.get(i).getPrice_per_km()%>, 
+                        <%= types.get(i).getPrice_per_min()%>,
+                        dist_map, 
+                        time_map) + "\n";
                 <%}%>
             }
             function calculatePrice(element_id, base_fare, min_fare, per_km, per_min, dist_map, time_map) {

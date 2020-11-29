@@ -12,19 +12,10 @@ import entity.AbstractEntity;
 import entity.InfoMessage;
 import entity.User;
 import entity.json.ClassSaving;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import java.util.logging.*;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static main.Datas.TYPE_SWITCH;
@@ -43,7 +34,8 @@ public class Functions {
     public static int startUpInitialData() {
         Datas.settings = new XHashedDictionary<String, Object>();
         Datas.settings.add("image/logo", WebConfig.IMG_URL + "logo.png");
-        Datas.settings.add("image/user", WebConfig.IMG_URL + "user.png");
+        Datas.settings.add("image/user", WebConfig.WEB_URL + "imageRetrive?type=profile&id=user");
+        Datas.settings.add("image/upload", WebConfig.WEB_URL + "imageRetrive?type=&id=upload");
         Datas.settings.add("text/title", "Rentcars.com");
         Datas.settings.add("pages/login", WebConfig.WEB_URL + "pages/login.jsp");
         Datas.settings.add("pages/register", WebConfig.WEB_URL + "pages/register.jsp");
@@ -137,26 +129,10 @@ public class Functions {
     public static String getProfileUrl(HttpServletRequest request) {
         User u = getUserSession(request);
         if (u != null) {
-            boolean _exists;
-            String url = WebConfig.PROFILE_IMG_URL + u.getUsername();
-            File temp;
-            try {
-                temp = File.createTempFile(url, ".png");
-                _exists = temp.canRead();
-                if (_exists) {
-                    return url + ".png";
-                }
-                temp = File.createTempFile(url, ".jpeg");
-                _exists = temp.canRead();
-                if (_exists) {
-                    return url + ".jpeg";
-                }
-                temp = File.createTempFile(url, ".jpg");
-                _exists = temp.canRead();
-                if (_exists) {
-                    return url + ".jpg";
-                }
-            } catch (IOException e) {
+            if (u.getId() != null) {
+                return (String) WebConfig.WEB_URL + "/imageRetrive?type=profile&id=" + u.getId() + "&default=upload";
+            } else {
+                return (String) WebConfig.WEB_URL + "/imageRetrive?type=profile&id=" + u.getId();
             }
         }
         return (String) Datas.settings.getValue("image/user");
@@ -281,16 +257,26 @@ public class Functions {
         main.Datas.admin_bar_status = v;
     }
 
-    static byte[] getDefaultImage() {
+    public static byte[] getDefaultImage() {
         try {
-            BufferedImage bImage = ImageIO.read(new File(WebConfig.IMG_URL + "user.png"));
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ImageIO.write(bImage, "png", bos);
-            return bos.toByteArray();
+            RandomAccessFile f;
+            String path = WebConfig.PROJECT_URL + "/web/img/error.png";
+            f = new RandomAccessFile(path, "r");
+            byte[] bytes = new byte[(int) f.length()];
+            f.read(bytes);
+            return bytes;
         } catch (IOException ex) {
             Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public static boolean isEmail(String email) {
+        final String reg_exp
+                = "^([a-z0-9])(([-a-z0-9._])*([a-z0-9]))*@([a-z0-9])"
+                + "(([a-z0-9-])*([a-z0-9]))+(.([a-z0-9])([-a-z0-9_-])?"
+                + "([a-z0-9])+)+$";
+        return Pattern.matches(reg_exp, email);
     }
 
 }

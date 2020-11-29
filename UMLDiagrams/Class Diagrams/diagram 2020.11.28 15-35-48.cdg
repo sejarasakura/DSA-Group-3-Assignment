@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="diagram">
+  <ClassDiagramComponents>
+    <Class name="Check" package="diagram" visibility="public" xPosition="554.0" yPosition="613.0">
+      <Fields>
+        <Field name="bankName" type="String" visibility="private"/>
+        <Field name="accType" type="String" visibility="private"/>
+        <Field name="acNo" type="String" visibility="private"/>
+        <Field name="bankNo" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="validate" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Creadit" package="diagram" visibility="public" xPosition="275.0" yPosition="613.0">
+      <Fields>
+        <Field name="cardNo" type="int" visibility="private"/>
+        <Field name="cardType" type="boolean" visibility="private"/>
+        <Field name="date" type="Date" visibility="private"/>
+        <Field name="CCID" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="authenticate" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Cudtomer" package="diagram" visibility="public" xPosition="56.0" yPosition="160.0">
+      <Fields>
+        <Field name="custID" type="String" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="address" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="addNewCustomer" returnType="void" visibility="public"/>
+        <Method name="getCustomerDetail" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Item" package="diagram" visibility="public" xPosition="813.0" yPosition="401.0">
+      <Fields>
+        <Field name="itemNo" type="String" visibility="private"/>
+        <Field name="description" type="String" visibility="private"/>
+        <Field name="shippingWeight" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getPrice" returnType="void" visibility="public"/>
+        <Method name="getWeight" returnType="void" visibility="public"/>
+        <Method name="getAvailability" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Order" package="diagram" visibility="public" xPosition="422.0" yPosition="69.0">
+      <Fields>
+        <Field name="orderID" type="String" visibility="private"/>
+        <Field name="date" type="Date" visibility="private"/>
+        <Field name="totalAmount" type="double" visibility="private"/>
+        <Field name="amountDue" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="calcTax" returnType="void" visibility="public"/>
+        <Method name="calcTotalWeight" returnType="void" visibility="public"/>
+        <Method name="calcShippingCost" returnType="void" visibility="public"/>
+        <Method name="calcDeliveryDate" returnType="void" visibility="public"/>
+        <Method name="calcTotal" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="OrderDetials" package="diagram" visibility="public" xPosition="813.0" yPosition="143.0">
+      <Fields>
+        <Field name="quantity" type="int" visibility="private"/>
+        <Field name="taxStatus" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="calcSubTotal" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PaymentInfo" package="diagram" visibility="public" xPosition="372.0" yPosition="423.0">
+      <Fields>
+        <Field name="amount" type="double" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="verifyPaymentMethod" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="" source="diagram.Check" target="diagram.PaymentInfo"/>
+    <HasRelation name="" source="diagram.Order" target="diagram.OrderDetials" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="" source="diagram.Creadit" target="diagram.PaymentInfo"/>
+    <HasRelation name="." source="diagram.OrderDetials" target="diagram.Item" type="Aggregation" sourceCardinality="0..1" targetCardinality="0..1"/>
+    <HasRelation name="" source="diagram.Cudtomer" target="diagram.Order" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="." source="diagram.Order" target="diagram.PaymentInfo" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

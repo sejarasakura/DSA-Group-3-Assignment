@@ -66,12 +66,20 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
     public boolean isEmpty() {
         return size == 0;
     }
-
+    /**
+     * Returns the number of elements contained in the Queue.
+     *
+     * @return the number of elements contained in the Queue
+     */
     @Override
     public int size() {
         return size;
     }
-
+    /**
+     * Inserts the item to the back of the Queue.
+     *
+     * @param item, the item to be inserted
+     */
     @Override
     public final void enqueue(T item) {
 

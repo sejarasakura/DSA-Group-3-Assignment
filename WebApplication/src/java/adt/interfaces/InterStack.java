@@ -14,31 +14,36 @@ public interface InterStack<T> {
 
     /**
      * Adds the given item to the top of the stack.
+     *
      * @param item
      */
     void push(T item);
 
     /**
      * Removes the top item from the stack and returns it.
-     * @return 
+     *
+     * @return
      */
     T pop();
 
     /**
      * Returns the top item from the stack without popping it.
-     * @return 
+     *
+     * @return
      */
     T peek();
 
     /**
      * Returns the number of items currently in the stack.
-     * @return 
+     *
+     * @return
      */
     int size();
 
     /**
      * Returns whether the stack is empty or not.
-     * @return 
+     *
+     * @return
      */
     boolean isEmpty();
 

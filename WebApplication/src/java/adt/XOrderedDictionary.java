@@ -21,9 +21,24 @@ import java.util.NoSuchElementException;
  */
 public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
 
+    /**
+     *
+     */
     Comparator<? super K> compare;
+
+    /**
+     *
+     */
     Node<K, V> rootNode;
+
+    /**
+     *
+     */
     int dictionarySize = 0;
+
+    /**
+     *
+     */
     int xModCount = 0;
 
     // Used to preserve iteration order

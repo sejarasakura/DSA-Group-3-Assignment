@@ -93,7 +93,11 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
 
         size++;
     }
-
+    /**
+     * Removes the item at the front of the Queue, and returns it.
+     *
+     * @return the item at the front of the Queue
+     */
     @Override
     public final T dequeue() {
 
@@ -113,7 +117,11 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
 
         return value;
     }
-
+    /**
+     * Returns the item at the front of the Queue.
+     *
+     * @return the item at the front of the Queue
+     */
     @Override
     public T peek() {
         if (isEmpty()) {
@@ -122,12 +130,18 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
 
         return head.next.value;
     }
-
+    /**
+     * Return new queue iterator
+     * @return 
+     */
     @Override
     public Iterator<T> iterator() {
         return new QueueIterator();
     }
-
+    /**
+     * List string concatenation
+     * @return 
+     */
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -137,7 +151,9 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
         }
         return s.toString();
     }
-
+    /**
+     * Queue item iterator
+     */
     private class QueueIterator implements Iterator<T> {
 
         private DoubleNode<T> current = head;

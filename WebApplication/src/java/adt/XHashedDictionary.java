@@ -60,11 +60,17 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
      * The number of times this HashMap has been structurally
      */
     transient int hashModCount;
-
+    /**
+     * Constructor
+     */
     public XHashedDictionary() {
         this(DEFAULT_SIZE, DEFAULT_LOAD_FACTOR);
     }
-
+    /**
+     * Constructor
+     * @param initCapacity
+     * @param load 
+     */
     public XHashedDictionary(int initCapacity, float load) {
 
         if (initCapacity < 0) {
@@ -88,7 +94,10 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         threshold = (int) (capacity * load);
         table = new TableEntry[capacity];
     }
-
+    /**
+     * Constructor
+     * @param data 
+     */
     public XHashedDictionary(Map<K, V> data) {
         this(Math.max((int) (data.size() / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_SIZE), DEFAULT_LOAD_FACTOR);
         TableEntry<K, V> current = null;
@@ -96,7 +105,12 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             this.add(x.getKey(), x.getValue());
         });
     }
-
+    /**
+     * 
+     * @param x
+     * @param n
+     * @return 
+     */
     private TableEntry<K, V> addMap(Map.Entry<K, V> x, TableEntry<K, V> n) {
         if (x.getKey() == null) {
             return null;
@@ -105,16 +119,27 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         int i = indexFor(hash, table.length);
         return new TableEntry<K, V>(hash, x.getKey(), x.getValue(), n);
     }
-
+    /**
+     * Constructor
+     * @param data 
+     */
     public XHashedDictionary(XHashedDictionary<K, V> data) {
         this(Math.max((int) (data.size / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_SIZE), DEFAULT_LOAD_FACTOR);
         putAllForCreate(data);
     }
-
+    /**
+     * Constructor
+     * @param data 
+     */
     public XHashedDictionary(Object data) {
         this((Map) data);
     }
-
+    /**
+     * Add new key and v
+     * @param key
+     * @param value
+     * @return 
+     */
     @Override
     public V add(K key, V value) {
         if (key == null) {
@@ -137,7 +162,11 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         return null;
 
     }
-
+    /**
+     * remove value with key
+     * @param key
+     * @return 
+     */
     @Override
     public V remove(K key) {
 
@@ -145,7 +174,11 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         return (e == null ? null : e.value);
 
     }
-
+    /**
+     * Get value with key
+     * @param key
+     * @return 
+     */
     @Override
     public V getValue(K key) {
         if (key == null) {

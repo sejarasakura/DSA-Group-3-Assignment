@@ -84,7 +84,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input id="booking-btn" type="submit" class="btn btn-rent" value="Book Just Rent">
+                            <input id="booking-btn" name="booking-btn" type="submit" class="btn btn-rent" value="Just Rent">
                         </div>
                     </div>
 

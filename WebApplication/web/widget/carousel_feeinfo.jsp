@@ -41,7 +41,6 @@
     </style>
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-
         <%for (int i = 0; i < types.size(); i++) {%>
         <div class="well item <%= i == 0 ? "active" : ""%>">
 
@@ -78,7 +77,6 @@
         </div>
         <%}%>
     </div>
-
 </div>
 
 
@@ -88,7 +86,7 @@
         $('#ride-type').on('change', function () {
             $('.carousel').carousel(parseInt($(this).children("option:selected").data('valueb')));
             $('.carousel').carousel('pause');
-            $('#booking-btn').val("Book " + $(this).children("option:selected").data('valuea'));
+            $('#booking-btn').val($(this).children("option:selected").data('valuea'));
         });
     });
 </script>

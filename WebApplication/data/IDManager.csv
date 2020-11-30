@@ -1,5 +1,5 @@
 CLASSNAME,DATATYPE,FORMATSTRING,IDENTITYNAME,LASTSEQNUMBER
-entity.Customer,java.lang.String,C%05d,user_id,10052
+entity.Customer,java.lang.String,C%05d,user_id,10053
 entity.Driver,java.lang.String,D%05d,user_id,10053
 entity.Mapping,java.lang.String,M%09d,map_id,100000102
 entity.Plate,java.lang.String,P%05d,plate_id,10081

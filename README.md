@@ -5,7 +5,7 @@
 This project has been done by my collage life on B'S in software development year 2 semester 1, In this project has using many dinamic coding skill and data structure to design a web base assignment. This system is deploment by 3 to 4 person is simulate Car and Taxi transport system and it will be usable for administrative staff, customers, and drivers. The functionality of this system is include driver module, administrative module, customer module and booking module.
 
 ### Running and Installation
-refer to [Installation and running Instrustion.pdf](https://drive.google.com/file/d/1cwcSaQTB2Mz-i54R7sKKTwfgYOChIPyL/view?usp=sharing)
+refer to [Installation and running Instrustion.pdf](https://drive.google.com/file/d/1L2Kq7WBlY6FZtLk_R2mDjkx8nvNT7G7K/view?usp=sharing)
 
 ### Driver module
 In driver module is include the function of request to register as a driver. After approved by admin they can add their car and taxi detials. The driver able to accept booking form customer when have some one online. after done the job the paid amount need to be calculate by dairy for part time and monthly salary for full time driver.

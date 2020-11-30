@@ -16,6 +16,8 @@ Administrative module habe offer admin to update menubar items, footer and admin
 ### Booking module
 Booking module is the core module of this system with sub-module of payment. booking module should offer customer to having a booking to choose pick and drop location and show price estimation. Driver able to accept the booking and the price estimation range will prompt out to driver to choose the price range. the Booking is first come first serve base, in booking time they able to chating and payment will be maked instantly.
 
+### Running and Installation
+refer to Installation and running Instrustion.pdf
 
 ### Technical Skill used 
 - Java (Abstract data type, Generic type, Collection type, Enum, Implementation, read write Json and csv)

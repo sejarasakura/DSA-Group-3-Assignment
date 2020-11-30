@@ -320,12 +320,26 @@ public class XArraySortList<T extends Comparable<? super T>> implements
         return r;
     }
 
+    @Override
     public String toHtml() {
         String r = "";
         for (T d : (data)) {
             r += "" + d + "<br> ";
         }
         return r;
+    }
+
+    @Override
+    public T[] clear() {
+        T[] x = data.clone();
+        data = (T[]) new Object[INITIAL_CAPACITY];
+        index = 0;
+        return x;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return index <= 0;
     }
 
     /**

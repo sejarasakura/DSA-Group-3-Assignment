@@ -87,4 +87,33 @@ public interface InterList<T> {
      * @return
      */
     T[] toArray();
+
+    /**
+     * Clear all the element in the list
+     *
+     * @return
+     */
+    public abstract T[] clear();
+
+    /**
+     * Check is empty or not
+     *
+     * @return
+     */
+    public abstract boolean isEmpty();
+
+    /**
+     * display in html format
+     *
+     * @return String
+     */
+    public abstract String toHtml();
+
+    /**
+     * display in console format
+     *
+     * @return String
+     */
+    @Override
+    public abstract String toString();
 }

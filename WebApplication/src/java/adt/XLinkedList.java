@@ -188,12 +188,7 @@ public class XLinkedList<E> implements InterList<E>, Iterable<E> {
 
     @Override
     public E[] toArray() {
-        Object[] r = new Object[size];
-        int i = 0;
-        for (DoubleNode<E> x = first; x != null; x = x.next) {
-            r[i++] = x.value;
-        }
-        return (E[]) r;
+        return new ArrList<E>(this).toArray();
     }
 
     @Override
@@ -211,7 +206,8 @@ public class XLinkedList<E> implements InterList<E>, Iterable<E> {
     }
 
     public static void main(String args[]) {
-        InterList list = new XLinkedList();
+        InterList<Integer> list = new XLinkedList<Integer>();
+        Object[] data;
         list.add(1);
         list.add(12);
         list.add(3);
@@ -219,7 +215,33 @@ public class XLinkedList<E> implements InterList<E>, Iterable<E> {
         list.add(12);
         list.add(20);
         list.add(9);
-        System.out.print(list);
+        data = list.toArray();
+        System.out.print(data[0]);
+    }
+
+    @Override
+    public E[] clear() {
+        for (DoubleNode<E> x = first; x != null;) {
+            DoubleNode<E> next = x.next;
+            x.value = null;
+            x.next = null;
+            x.prev = null;
+            x = next;
+        }
+        first = last = null;
+        size = 0;
+        modCount++;
+        return null;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toHtml() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private class LinkedListIterator implements Iterator<E> {

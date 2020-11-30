@@ -5,6 +5,7 @@
  */
 package adt;
 
+import adt.interfaces.InterAdvanceList;
 import entity.AbstractEntity;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -22,8 +23,15 @@ import adt.interfaces.InterList;
  * @author Lim sai keat
  * @param <T>
  */
-public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io.Serializable {
+public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T>, Cloneable, java.io.Serializable {
 
+    /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     *
+     * =========================== Field declaration ===========================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
     /**
      * Starting capacity
      */
@@ -39,6 +47,13 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      */
     protected int index = -1;
 
+    /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     *
+     * ============================== Constructor ==============================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
     /**
      * Constructor
      */
@@ -94,6 +109,13 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
         }
     }
 
+    /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     *
+     * ======================= InterList Override Method =======================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
     /**
      * iterator() function
      *
@@ -243,6 +265,7 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      *
      * @return array data back
      */
+    @Override
     public T[] clear() {
         T[] x = data.clone();
         data = (T[]) new Object[INITIAL_CAPACITY];
@@ -251,10 +274,65 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
     }
 
     /**
+     * to string method
+     *
+     * @return string
+     */
+    @Override
+    public String toString() {
+        if (index <= 0) {
+            return "Empty";
+        }
+        String r = "";
+        for (int i = 0; i < (index - 1); i++) {
+            r += "" + data[i] + ", ";
+        }
+        r += "" + data[index - 1];
+        return r;
+    }
+
+    /**
+     * check is empty or not
+     *
+     * @return Boolean
+     */
+    @Override
+    public boolean isEmpty() {
+        return index <= 0;
+    }
+
+    /**
+     * display in html format
+     *
+     * @return String
+     */
+    @Override
+    public String toHtml() {
+        System.out.println(this);
+        if (index <= 0) {
+            return "";
+        }
+        String r = "";
+        for (int i = 0; i < (index - 1); i++) {
+            r += "" + data[i] + "<br/>";
+        }
+        r += "" + data[index - 1];
+        return r;
+    }
+
+    /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     *
+     * ==================== InterAdvanceList Override Method ===================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
+    /**
      * search item
      *
      * @return ture that if list no same element
      */
+    @Override
     public boolean removeSameElement() {
         if (index == 0 || index == 1) {
             return true;
@@ -279,9 +357,10 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      * @param element
      * @return Array List
      */
-    public ArrList<Integer> search(T element) {
+    @Override
+    public InterList<Integer> search(T element) {
 
-        ArrList<Integer> result = new ArrList<Integer>();
+        InterList<Integer> result = new ArrList<Integer>();
 
         for (int i = 0; i < index - 1; i++) {
             if (data[i].equals(data[i + 1])) {
@@ -298,8 +377,9 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      * @param element
      * @return Same item or null
      */
+    @Override
     public T searchItem(T element) {
-        ArrList<Integer> r = search(element);
+        InterList<Integer> r = search(element);
         if (r.isEmpty()) {
             return null;
         }
@@ -313,7 +393,8 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      * @param element
      * @return Array List
      */
-    public ArrList<T> searchByMethod(Method method, Object element) {
+    @Override
+    public InterList<T> searchByMethod(Method method, Object element) {
         ArrList<T> result = new ArrList<T>();
         try {
             for (T d : data) {
@@ -336,7 +417,8 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      * @param element
      * @return Array List
      */
-    public ArrList<T> searchByField(Field field, Object element) {
+    @Override
+    public InterList<T> searchByField(Field field, Object element) {
         ArrList<T> result = new ArrList<T>();
         try {
             for (T d : data) {
@@ -359,7 +441,8 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      * @param _class
      * @return Array List
      */
-    public ArrList<T> searchByField(String field, Object element, Class<?> _class) {
+    @Override
+    public InterList<T> searchByField(String field, Object element, Class<?> _class) {
         ArrList<T> result = new ArrList<T>();
         try {
             Field f = _class.getDeclaredField(field);
@@ -369,28 +452,11 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
                 Method m = _class.getDeclaredMethod(Functions.fieldToGetter(field));
                 return searchByMethod(m, element);
             }
-        } catch (NoSuchMethodException | SecurityException | IllegalArgumentException | NoSuchFieldException ex) {
+        } catch (NoSuchMethodException | SecurityException | IllegalArgumentException
+                | NoSuchFieldException ex) {
             Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
-    }
-
-    /**
-     * to string method
-     *
-     * @return string
-     */
-    @Override
-    public String toString() {
-        if (index <= 0) {
-            return "Empty";
-        }
-        String r = "";
-        for (int i = 0; i < (index - 1); i++) {
-            r += "" + data[i] + ", ";
-        }
-        r += "" + data[index - 1];
-        return r;
     }
 
     /**
@@ -399,6 +465,7 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      * @param x
      * @return Boolean
      */
+    @Override
     public boolean find_AbstractEntity(AbstractEntity x) {
 
         for (int i = 0; i < index; i++) {
@@ -410,37 +477,11 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
     }
 
     /**
-     * check is empty or not
-     *
-     * @return Boolean
-     */
-    public boolean isEmpty() {
-        return index <= 0;
-    }
-
-    /**
-     * display in html format
-     *
-     * @return String
-     */
-    public String toHtml() {
-        System.out.println(this);
-        if (index <= 0) {
-            return "";
-        }
-        String r = "";
-        for (int i = 0; i < (index - 1); i++) {
-            r += "" + data[i] + "<br/>";
-        }
-        r += "" + data[index - 1];
-        return r;
-    }
-
-    /**
      * For support writing to CSV -> string
      *
      * @return String
      */
+    @Override
     public String toInput() {
         if (index <= 0) {
             return "";
@@ -458,6 +499,7 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      *
      * @param input
      */
+    @Override
     public void formInput(String input) {
         this.clear();
         if (!input.contains("%")) {
@@ -475,7 +517,8 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      * @param _class
      * @return ArrayList of concat field
      */
-    public ArrList<String> concateField(String field1, String field2, Class<?> _class) {
+    @Override
+    public InterList<String> concateField(String field1, String field2, Class<?> _class) {
         try {
             return notsecure_concateField(field1, field2, _class, "%");
         } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException
@@ -486,49 +529,14 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
     }
 
     /**
-     * get the string list that had concat two field in class not remove throws
-     *
-     * @param field1
-     * @param field2
-     * @param _class
-     * @param seperator
-     * @return ArrayList of concat field with seperator
-     * @throws NoSuchFieldException
-     * @throws NoSuchMethodException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
-     */
-    private ArrList<String> notsecure_concateField(String field1, String field2, Class<?> _class, String seperator) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        Field f1 = _class.getField(field1);
-        Field f2 = _class.getField(field2);
-        Method m1 = null;
-        Method m2 = null;
-        String s1, s2;
-        StringBuilder sb = new StringBuilder();
-        ArrList<String> ar = new ArrList<String>();
-        if (!f1.isAccessible()) {
-            m1 = _class.getDeclaredMethod(main.Functions.fieldToGetter(field1));
-        }
-        if (!f2.isAccessible()) {
-            m2 = _class.getDeclaredMethod(main.Functions.fieldToGetter(field2));
-        }
-        for (int i = 0; i < this.index; i++) {
-            sb.setLength(0);
-            s1 = m1 != null ? m1.invoke(data[i]).toString() : f1.get(data[i]).toString();
-            s2 = m2 != null ? m2.invoke(data[i]).toString() : f2.get(data[i]).toString();
-            ar.add(sb.append(s1).append(seperator).append(s2).toString());
-        }
-        return ar;
-    }
-
-    /**
+     * removed throws class
      *
      * @param field Field name
      * @param class_name Class name
      * @return The field list in side the class
      */
-    public ArrList<String> getField(String field, String class_name) {
+    @Override
+    public InterList<String> getField(String field, String class_name) {
         try {
             Class<?> _class = Class.forName(class_name);
             Field f = _class.getField(field);
@@ -538,7 +546,9 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
                 Class<?> _class = Class.forName(class_name);
                 Method f = _class.getMethod(main.Functions.fieldToGetter(field));
                 return this.notsecure_getField(f, null, _class);
-            } catch (ClassNotFoundException | SecurityException | NoSuchMethodException | IllegalArgumentException | NoSuchFieldException | IllegalAccessException | InvocationTargetException ex) {
+            } catch (ClassNotFoundException | SecurityException | NoSuchMethodException
+                    | IllegalArgumentException | NoSuchFieldException
+                    | IllegalAccessException | InvocationTargetException ex) {
                 Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
@@ -553,39 +563,25 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
      * @param _class Class type
      * @return The field list in side the class
      */
-    public ArrList<String> getField(Field f, Class<?> _class) {
+    @Override
+    public InterList<String> getField(Field f, Class<?> _class) {
         try {
             return this.notsecure_getField(null, f, _class);
         } catch (NoSuchFieldException | NoSuchMethodException | ClassNotFoundException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException ex) {
             Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      *
-     * @param m
-     * @param f
-     * @param _class
-     * @return
-     * @throws NoSuchFieldException
-     * @throws NoSuchMethodException
-     * @throws ClassNotFoundException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
+     * ============================= Iterator Class ============================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
-    private ArrList<String> notsecure_getField(Method m, Field f, Class<?> _class) throws NoSuchFieldException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ArrList<String> r = new ArrList<>();
-
-        for (int i = 0; i < index; i++) {
-            r.add((m != null ? m.invoke(data[i]).toString() : f.get(data[i]).toString()));
-        }
-
-        return r;
-    }
-
     private class ListIterator implements Iterator<T> {
 
         private int iteratorIndex = -1;
@@ -616,6 +612,13 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
 
     }
 
+    /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     *
+     * ============================= private Method ============================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
     @SuppressWarnings("unchecked")
     private void expandCapacity(int minCapacity) {
         if (index >= minCapacity) {
@@ -633,5 +636,65 @@ public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io
         if (_index < 0 || _index >= index) {
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    /**
+     *
+     * @param m
+     * @param f
+     * @param _class
+     * @return
+     * @throws NoSuchFieldException
+     * @throws NoSuchMethodException
+     * @throws ClassNotFoundException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException
+     */
+    private InterList<String> notsecure_getField(Method m, Field f, Class<?> _class) throws NoSuchFieldException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        ArrList<String> r = new ArrList<>();
+
+        for (int i = 0; i < index; i++) {
+            r.add((m != null ? m.invoke(data[i]).toString() : f.get(data[i]).toString()));
+        }
+
+        return r;
+    }
+
+    /**
+     * get the string list that had concat two field in class not remove throws
+     *
+     * @param field1
+     * @param field2
+     * @param _class
+     * @param seperator
+     * @return ArrayList of concat field with seperator
+     * @throws NoSuchFieldException
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException
+     */
+    private InterList<String> notsecure_concateField(String field1, String field2, Class<?> _class, String seperator) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        Field f1 = _class.getField(field1);
+        Field f2 = _class.getField(field2);
+        Method m1 = null;
+        Method m2 = null;
+        String s1, s2;
+        StringBuilder sb = new StringBuilder();
+        ArrList<String> ar = new ArrList<String>();
+        if (!f1.isAccessible()) {
+            m1 = _class.getDeclaredMethod(main.Functions.fieldToGetter(field1));
+        }
+        if (!f2.isAccessible()) {
+            m2 = _class.getDeclaredMethod(main.Functions.fieldToGetter(field2));
+        }
+        for (int i = 0; i < this.index; i++) {
+            sb.setLength(0);
+            s1 = m1 != null ? m1.invoke(data[i]).toString() : f1.get(data[i]).toString();
+            s2 = m2 != null ? m2.invoke(data[i]).toString() : f2.get(data[i]).toString();
+            ar.add(sb.append(s1).append(seperator).append(s2).toString());
+        }
+        return ar;
     }
 }

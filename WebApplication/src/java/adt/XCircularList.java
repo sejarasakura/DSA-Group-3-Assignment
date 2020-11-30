@@ -7,7 +7,7 @@ package adt;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Woo wei qian
  * @param <T>
  */
 public class XCircularList<T> {

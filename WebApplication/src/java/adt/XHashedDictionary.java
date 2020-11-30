@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 
 /**
  *
- * @author Lim sai keat
+ * @author Lai Hong Wah
  * @param <K> Key
  * @param <V> Value
  */
@@ -60,16 +60,19 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
      * The number of times this HashMap has been structurally
      */
     transient int hashModCount;
+
     /**
      * Constructor
      */
     public XHashedDictionary() {
         this(DEFAULT_SIZE, DEFAULT_LOAD_FACTOR);
     }
+
     /**
      * Constructor
+     *
      * @param initCapacity
-     * @param load 
+     * @param load
      */
     public XHashedDictionary(int initCapacity, float load) {
 
@@ -94,9 +97,11 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         threshold = (int) (capacity * load);
         table = new TableEntry[capacity];
     }
+
     /**
      * Constructor
-     * @param data 
+     *
+     * @param data
      */
     public XHashedDictionary(Map<K, V> data) {
         this(Math.max((int) (data.size() / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_SIZE), DEFAULT_LOAD_FACTOR);
@@ -105,11 +110,12 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             this.add(x.getKey(), x.getValue());
         });
     }
+
     /**
-     * 
+     *
      * @param x
      * @param n
-     * @return 
+     * @return
      */
     private TableEntry<K, V> addMap(Map.Entry<K, V> x, TableEntry<K, V> n) {
         if (x.getKey() == null) {
@@ -119,26 +125,32 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         int i = indexFor(hash, table.length);
         return new TableEntry<K, V>(hash, x.getKey(), x.getValue(), n);
     }
+
     /**
      * Constructor
-     * @param data 
+     *
+     * @param data
      */
     public XHashedDictionary(XHashedDictionary<K, V> data) {
         this(Math.max((int) (data.size / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_SIZE), DEFAULT_LOAD_FACTOR);
         putAllForCreate(data);
     }
+
     /**
      * Constructor
-     * @param data 
+     *
+     * @param data
      */
     public XHashedDictionary(Object data) {
         this((Map) data);
     }
+
     /**
      * Add new key and v
+     *
      * @param key
      * @param value
-     * @return 
+     * @return
      */
     @Override
     public V add(K key, V value) {
@@ -162,10 +174,12 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         return null;
 
     }
+
     /**
      * remove value with key
+     *
      * @param key
-     * @return 
+     * @return
      */
     @Override
     public V remove(K key) {
@@ -174,10 +188,12 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         return (e == null ? null : e.value);
 
     }
+
     /**
      * Get value with key
+     *
      * @param key
-     * @return 
+     * @return
      */
     @Override
     public V getValue(K key) {
@@ -195,9 +211,11 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         }
         return null;
     }
+
     /**
      * Convert map to XOrderedDictionary
-     * @return 
+     *
+     * @return
      */
     public MapConverter getMap() {
         MapConverter x = new MapConverter();
@@ -208,11 +226,12 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         }
         return x;
     }
+
     /**
-     * 
+     *
      * @param index
      * @param key
-     * @return 
+     * @return
      */
     private int locate(int index, K key) {
         if (table[index] == null || !key.equals(table[index].getKey())) {
@@ -221,9 +240,11 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             return index;
         }
     }
+
     /**
      * Add all the elements to XOrderedDictionary
-     * @param m 
+     *
+     * @param m
      */
     public final void addAll(Map<? extends K, ? extends V> m) {
         int numKeysToBeAdded = m.size();
@@ -249,7 +270,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             add(e.getKey(), e.getValue());
         });
     }
-    
+
     @Override
     public boolean isEmpty() {
         return size == 0;
@@ -264,7 +285,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
     public int getSize() {
         return size;
     }
-    
+
     @Override
     public void clear() {
         hashModCount++;
@@ -362,9 +383,10 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             resize(2 * table.length);
         }
     }
+
     /**
-     * 
-     * @param newCapacity 
+     *
+     * @param newCapacity
      */
     private void resize(int newCapacity) {
         TableEntry[] oldTable = table;
@@ -441,10 +463,12 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         }
         return null;
     }
+
     /**
      * Get table entity
+     *
      * @param key
-     * @return 
+     * @return
      */
     final TableEntry<K, V> getEntry(Object key) {
         int hash = (key == null) ? 0 : hash(key.hashCode());
@@ -474,10 +498,12 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
         }
         return false;
     }
+
     /**
      * Put dictionary to create table
+     *
      * @param key
-     * @param value 
+     * @param value
      */
     private void putForCreate(K key, V value) {
         int hash = (key == null) ? 0 : hash(key.hashCode());
@@ -494,9 +520,11 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
 
         createEntry(hash, key, value, i);
     }
+
     /**
      * Put all dictionary to create table
-     * @param m 
+     *
+     * @param m
      */
     private void putAllForCreate(XHashedDictionary<? extends K, ? extends V> m) {
         TableEntry<? extends K, ? extends V> e = null;
@@ -507,12 +535,14 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             putForCreate(e.getKey(), e.getValue());
         }
     }
+
     /**
      * Create table entry
+     *
      * @param hash
      * @param key
      * @param value
-     * @param bucketIndex 
+     * @param bucketIndex
      */
     private void createEntry(int hash, K key, V value, int bucketIndex) {
         TableEntry<K, V> e = table[bucketIndex];
@@ -534,6 +564,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
     public Iterator<TableEntry<K, V>> newEntryIterator() {
         return new EntryIterator();
     }
+
     /**
      * next entry with value iterator
      */
@@ -544,6 +575,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             return nextEntry().value;
         }
     }
+
     /**
      * Key iterator
      */
@@ -554,6 +586,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             return nextEntry().getKey();
         }
     }
+
     /**
      * Table entry iterator
      */
@@ -564,9 +597,11 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             return nextEntry();
         }
     }
+
     /**
      * XHashedDictionary iterator
-     * @param <E> 
+     *
+     * @param <E>
      */
     private abstract class HashedIterator<E> implements Iterator<E> {
 
@@ -584,17 +619,21 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
                     ;
             }
         }
+
         /**
          * Check hasNext value or not
-         * @return 
+         *
+         * @return
          */
         @Override
         public final boolean hasNext() {
             return next != null;
         }
+
         /**
          * Get next table entry value
-         * @return 
+         *
+         * @return
          */
         @SuppressWarnings("empty-statement")
         final TableEntry<K, V> nextEntry() {
@@ -614,6 +653,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable
             current = e;
             return e;
         }
+
         /**
          * Remove table entry
          */

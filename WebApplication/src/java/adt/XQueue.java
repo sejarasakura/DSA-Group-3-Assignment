@@ -16,7 +16,7 @@ import adt.interfaces.InterQuene;
  * @module Chatting, Booking
  * @param <T>
  */
-public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io.Serializable {
+public class XQueue<T> implements InterQuene<T>, Iterable<T> {
 
     private final DoubleNode<T> head;
     private final DoubleNode<T> tail;
@@ -66,6 +66,7 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
     public boolean isEmpty() {
         return size == 0;
     }
+
     /**
      * Returns the number of elements contained in the Queue.
      *
@@ -75,6 +76,7 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
     public int size() {
         return size;
     }
+
     /**
      * Inserts the item to the back of the Queue.
      *
@@ -93,6 +95,7 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
 
         size++;
     }
+
     /**
      * Removes the item at the front of the Queue, and returns it.
      *
@@ -117,6 +120,7 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
 
         return value;
     }
+
     /**
      * Returns the item at the front of the Queue.
      *
@@ -130,17 +134,21 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
 
         return head.next.value;
     }
+
     /**
      * Return new queue iterator
-     * @return 
+     *
+     * @return
      */
     @Override
     public Iterator<T> iterator() {
         return new QueueIterator();
     }
+
     /**
      * List string concatenation
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
@@ -151,6 +159,7 @@ public class XQueue<T> implements InterQuene<T>, Iterable<T>, Cloneable, java.io
         }
         return s.toString();
     }
+
     /**
      * Queue item iterator
      */

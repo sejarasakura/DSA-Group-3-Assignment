@@ -5,7 +5,6 @@
  */
 package adt;
 
-import adt.interfaces.InterArrayList;
 import entity.AbstractEntity;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -16,13 +15,14 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.Functions;
+import adt.interfaces.InterList;
 
 /**
  *
  * @author Lim sai keat
  * @param <T>
  */
-public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable {
+public class ArrList<T> implements InterList<T>, Iterable<T>, Cloneable, java.io.Serializable {
 
     /**
      * Starting capacity

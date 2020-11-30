@@ -12,13 +12,19 @@ package adt.node;
  */
 public class DoubleNode<T> {
 
-    public final T value;
+    public T value;
     public DoubleNode<T> prev;
     public DoubleNode<T> next;
 
     public DoubleNode(final T value) {
         this.value = value;
         this.prev = this.next = null;
+    }
+
+    public DoubleNode(DoubleNode<T> prev, T value, DoubleNode<T> next) {
+        this.value = value;
+        this.prev = prev;
+        this.next = next;
     }
 
     public void clear() {

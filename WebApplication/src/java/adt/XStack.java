@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * @author ITSUKA KOTORI
+ * @author Chun Phang Chew
  * @param <T>
  * @paraimport adt.interfaces.InterStack;
  */
@@ -19,6 +19,7 @@ public final class XStack<T> implements InterStack<T>, Iterable<T>, Cloneable, j
 
     private int n;
     private SingleNode<T> first;
+
     /**
      * constructor
      */
@@ -26,17 +27,21 @@ public final class XStack<T> implements InterStack<T>, Iterable<T>, Cloneable, j
         first = null;
         n = 0;
     }
+
     /**
      * constructor
+     *
      * @param ib iterator
      */
     public XStack(Iterable<T> ib) {
         this(ib.iterator());
     }
+
     /**
-    * constructor
-    * @param is iterator
-    */
+     * constructor
+     *
+     * @param is iterator
+     */
     public XStack(Iterator<T> is) {
         this();
         XStack s = new XStack();

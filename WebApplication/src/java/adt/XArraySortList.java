@@ -5,7 +5,6 @@
  */
 package adt;
 
-import adt.interfaces.InterArrayList;
 import adt.interfaces.InterSortingElements;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -15,6 +14,7 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import xenum.AbstractEnum;
+import adt.interfaces.InterList;
 
 /**
  *
@@ -22,8 +22,16 @@ import xenum.AbstractEnum;
  * @param <T>
  *
  */
-public class XArraySortList<T extends Comparable<T>> implements InterSortingElements<T>, InterArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable {
+public class XArraySortList<T extends Comparable<? super T>> implements
+        InterSortingElements<T>, InterList<T>, Iterable<T> {
 
+    /**
+     * *********************************************************************
+     *
+     * Public Method
+     *
+     *********************************************************************
+     */
     /**
      * Initial capacity of the list
      */
@@ -285,6 +293,13 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
         }
     }
 
+    /**
+     * sort the element in the List descending to the field name
+     *
+     * @param field
+     * @param _class
+     * @return
+     */
     @Override
     public boolean sortDesc(String field, Class _class) {
         try {
@@ -313,6 +328,13 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
         return r;
     }
 
+    /**
+     * *********************************************************************
+     *
+     * Private Method
+     *
+     *********************************************************************
+     */
     private void CheckRange(int _index) {
         if (_index < 0 || _index >= index) {
             throw new IndexOutOfBoundsException();

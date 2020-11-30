@@ -30,7 +30,8 @@
 	
 	REM Build nessesary enviroment variable
 	echo Building nessesary enviroment variable JAVA_HOME with value "%ProgramFiles%\Java\jdk*"
-	setx JAVA_HOME "%ProgramFiles%\Java\jdk1*\bin"
+	setx JAVA_HOME "%ProgramFiles%\Java\jdk*\bin"
+	setx JRE_HOME "%ProgramFiles%\Java\jre*\bin"
 
 	REM start config tomcat
 	echo start up aphache tomcat server now

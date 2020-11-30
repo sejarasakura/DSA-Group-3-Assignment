@@ -13,37 +13,49 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * This dictionary is to make the Dictionary arrange properly
+ * This dictionary is to make the Dictionary arrange by the key<br>
  *
  * @author Lim sai keat
  * @param <K>
  * @param <V>
  */
-public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
+public final class XOrderedDictionary<K, V> implements InterDictionary<K, V>, Cloneable, java.io.Serializable {
 
     /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      *
+     * =========================== Field declaration ===========================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
+    /**
+     * Comparator
      */
     Comparator<? super K> compare;
 
     /**
-     *
+     * The first/root node
      */
     Node<K, V> rootNode;
 
     /**
-     *
+     * Sizes of the index
      */
     int dictionarySize = 0;
 
     /**
-     *
+     * Modify count
      */
     int xModCount = 0;
 
-    // Used to preserve iteration order
+    /**
+     * Used to preserve iteration order
+     */
     final Node<K, V> startNode = new Node<K, V>();
 
+    /**
+     * To prevent nested comparator
+     */
     private static final Comparator<Comparable> NATURAL_ORDER_NUM = new Comparator<Comparable>() {
         @Override
         public int compare(Comparable a, Comparable b) {
@@ -51,20 +63,46 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         }
     };
 
+    /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     *
+     * ============================== Constructor ==============================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
+    /**
+     * No argument constructor
+     */
     public XOrderedDictionary() {
         this((Comparator<? super K>) NATURAL_ORDER_NUM, true);
     }
 
+    /**
+     * Argument constructor
+     *
+     * @param comparator
+     * @param convert
+     */
     public XOrderedDictionary(Comparator<? super K> comparator, boolean convert) {
         this.compare = comparator != null
                 ? comparator
                 : (Comparator) NATURAL_ORDER_NUM;
     }
 
+    /**
+     * Convert object to map
+     *
+     * @param map
+     */
     public XOrderedDictionary(Object map) {
         this((java.util.Map) map);
     }
 
+    /**
+     * Convert java.util.map to my own adt type
+     *
+     * @param map
+     */
     public XOrderedDictionary(java.util.Map<K, V> map) {
         this();
         map.keySet().forEach((s) -> {
@@ -72,22 +110,54 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         });
     }
 
+    /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     *
+     * ======================= InterList Override Method =======================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
+    /**
+     * Get the sizes of the dictionary
+     *
+     * @return
+     */
     @Override
     public int getSize() {
         return dictionarySize;
     }
 
+    /**
+     * Get the value by using key
+     *
+     * @param key K
+     * @return
+     */
     @Override
     public V getValue(Object key) {
         Node<K, V> node = findByObject(key);
         return node != null ? node.value : null;
     }
 
+    /**
+     * see in the map contain the particular value or not
+     *
+     * @param key K
+     * @return
+     */
     @Override
     public boolean contains(Object key) {
         return findByObject(key) != null;
     }
 
+    /**
+     * add new value and the key<br>
+     * if key excite change value
+     *
+     * @param key
+     * @param value
+     * @return
+     */
     @Override
     public V add(K key, V value) {
         if (key == null) {
@@ -99,6 +169,9 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         return result;
     }
 
+    /**
+     * Clear the record in the map
+     */
     @Override
     public void clear() {
         rootNode = null;
@@ -110,22 +183,44 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         header.next = header.prev = header;
     }
 
+    /**
+     * Remove the value by using the key
+     *
+     * @param key
+     * @return
+     */
     @Override
     public V remove(Object key) {
         Node<K, V> node = removeInternalByKey(key);
         return node != null ? node.value : null;
     }
 
+    /**
+     * Track the dictionary is empty or not
+     *
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         return this.dictionarySize == 0;
     }
 
+    /**
+     * check the map is full or not <br>
+     * for linked tree map is not
+     *
+     * @return
+     */
     @Override
     public boolean isFull() {
         return false;
     }
 
+    /**
+     * return the key iterator group
+     *
+     * @return
+     */
     @Override
     public Iterator<K> newKeyIterator() {
         return new XOrderedDictionaryIterator<K>() {
@@ -136,6 +231,11 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         };
     }
 
+    /**
+     * return the value iterator group
+     *
+     * @return
+     */
     @Override
     public Iterator<V> newValueIterator() {
         return new XOrderedDictionaryIterator<V>() {
@@ -146,6 +246,11 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         };
     }
 
+    /**
+     * return the entry iterator value
+     *
+     * @return
+     */
     @Override
     public Iterator<Node<K, V>> newEntryIterator() {
         return new XOrderedDictionaryIterator<Node<K, V>>() {
@@ -155,6 +260,11 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         };
     }
 
+    /**
+     * Convert the linked ordered dictionary string value
+     *
+     * @return
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -164,10 +274,62 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         return sb.toString();
     }
 
+    /**
+     * Return true if both is same
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public boolean equal(Object a, Object b) {
         return a == b || (a != null && a.equals(b));
     }
 
+    /**
+     * Get the key list
+     *
+     * @return
+     */
+    @Override
+    public ArrList<K> getKeyList() {
+        return new ArrList<K>(this.newKeyIterator());
+    }
+
+    /**
+     * get the values list
+     *
+     * @return
+     */
+    @Override
+    public ArrList<V> getValueList() {
+        return new ArrList<V>(this.newValueIterator());
+    }
+
+    /**
+     * get the entry list
+     *
+     * @return
+     */
+    @Override
+    public ArrList<? extends Entry<K, V>> getEntryList() {
+        return new ArrList<Node<K, V>>(this.newEntryIterator());
+    }
+
+    /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     *
+     * ============================= private Method ============================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
+    /**
+     * find the key <br>
+     * Check create to true will create new entry
+     *
+     * @param key
+     * @param create
+     * @return
+     */
     private Node<K, V> find(K key, boolean create) {
         Comparator<? super K> comparator = this.compare;
         Node<K, V> nearest = rootNode;
@@ -230,6 +392,13 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         return created;
     }
 
+    /**
+     * Remove the node<br>
+     * Check unlink to true will stop linking to the value
+     *
+     * @param node
+     * @param unlink
+     */
     private void removeInternal(Node<K, V> node, boolean unlink) {
         if (unlink) {
             node.prev.next = node.next;
@@ -241,13 +410,10 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         Node<K, V> originalParent = node.parent;
         if (left != null && right != null) {
 
-            /*
-       * To remove a node with both left and right subtrees, move an
-       * adjacent node from one of those subtrees into this node's place.
-       *
-       * Removing the adjacent node may change this node's subtrees. This
-       * node may no longer have two subtrees once the adjacent node is
-       * gone!
+            /**
+             * Removing the adjacent node may change this node's subtrees. This
+             * node may no longer have two subtrees once the adjacent node is
+             * gone!
              */
             Node<K, V> adjacent = (left.height > right.height) ? left.last() : right.first();
             removeInternal(adjacent, false); // takes care of rebalance and dictionarySize--
@@ -288,6 +454,12 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         xModCount++;
     }
 
+    /**
+     * Remove internal by the key value
+     *
+     * @param key
+     * @return
+     */
     Node<K, V> removeInternalByKey(Object key) {
         Node<K, V> node = findByObject(key);
         if (node != null) {
@@ -296,6 +468,12 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         return node;
     }
 
+    /**
+     * Find the node by using object key
+     *
+     * @param key
+     * @return
+     */
     private Node<K, V> findByObject(Object key) {
         try {
             return key != null ? find((K) key, false) : null;
@@ -304,6 +482,12 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         }
     }
 
+    /**
+     * replace in parent
+     *
+     * @param node
+     * @param replacement
+     */
     private void replaceInParent(Node<K, V> node, Node<K, V> replacement) {
         Node<K, V> parent = node.parent;
         node.parent = null;
@@ -323,6 +507,12 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
         }
     }
 
+    /**
+     * Rebalances the tree by making AVL rotation
+     *
+     * @param unbalanced
+     * @param insert -> true unbalance by insert
+     */
     private void rebalance(Node<K, V> unbalanced, boolean insert) {
         OUTER:
         for (Node<K, V> node = unbalanced; node != null; node = node.parent) {
@@ -441,21 +631,13 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V> {
                 pivotLeft != null ? pivotLeft.height : 0) + 1;
     }
 
-    @Override
-    public ArrList<K> getKeyList() {
-        return new ArrList<K>(this.newKeyIterator());
-    }
-
-    @Override
-    public ArrList<V> getValueList() {
-        return new ArrList<V>(this.newValueIterator());
-    }
-
-    @Override
-    public ArrList<? extends Entry<K, V>> getEntryList() {
-        return new ArrList<Node<K, V>>(this.newEntryIterator());
-    }
-
+    /**
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     *
+     * ============================= Private Class =============================
+     *
+     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
     static final class Node<K, V> implements adt.node.Entry<K, V>, java.util.Map.Entry<K, V> {
 
         Node<K, V> parent;

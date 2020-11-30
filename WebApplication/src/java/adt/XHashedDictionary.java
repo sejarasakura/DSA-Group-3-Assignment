@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
  * @param <K> Key
  * @param <V> Value
  */
-public class XHashedDictionary<K, V> implements InterDictionary<K, V>, Cloneable, java.io.Serializable {
+public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
 
     /**
      * The table, resized as necessary. Length MUST Always be a power of two.

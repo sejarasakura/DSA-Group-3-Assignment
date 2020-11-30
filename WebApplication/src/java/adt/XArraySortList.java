@@ -26,13 +26,6 @@ public class XArraySortList<T extends Comparable<? super T>> implements
         InterSortingElements<T>, InterList<T>, Iterable<T> {
 
     /**
-     * *********************************************************************
-     *
-     * Public Method
-     *
-     *********************************************************************
-     */
-    /**
      * Initial capacity of the list
      */
     final private static int INITIAL_CAPACITY = 0;

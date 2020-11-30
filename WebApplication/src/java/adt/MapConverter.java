@@ -15,7 +15,7 @@ import java.util.*;
  * @param <K>
  * @param <V>
  */
-public class MapConverter<K, V> implements Map<K, V> {
+public class MapConverter<K, V> implements Map<K, V>, Cloneable, java.io.Serializable {
 
     XOrderedDictionary ref;
 

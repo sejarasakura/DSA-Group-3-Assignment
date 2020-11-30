@@ -7,7 +7,7 @@ package adt.interfaces;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Chew chun pang
  * @param <T>
  */
 public interface InterSortingElements<T> {

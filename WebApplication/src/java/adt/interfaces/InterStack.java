@@ -7,7 +7,7 @@ package adt.interfaces;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Chun Phang Chew
  * @param <T>
  */
 public interface InterStack<T> {

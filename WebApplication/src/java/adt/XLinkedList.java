@@ -44,7 +44,7 @@ public class XLinkedList<E> implements InterList<E>, Iterable<E> {
      * list
      * @throws NullPointerException if the specified collection is null
      */
-    public XLinkedList(Iterable<? extends E> datas) {
+    public XLinkedList(Iterable<E> datas) {
         this();
         for (Object x : datas) {
             add((E) x);

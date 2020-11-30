@@ -24,19 +24,43 @@ import xenum.AbstractEnum;
  */
 public class XArraySortList<T extends Comparable<T>> implements InterSortingElements<T>, InterArrayList<T>, Iterable<T>, Cloneable, java.io.Serializable {
 
+    /**
+     * Initial capacity of the list
+     */
     final private static int INITIAL_CAPACITY = 0;
+
+    /**
+     * The comparable data
+     */
     protected T[] data;
+
+    /**
+     * the sizes of the dynamic list
+     */
     protected int index = -1;
 
+    /**
+     * Constructor
+     */
     public XArraySortList() {
         this((T[]) new Comparable[INITIAL_CAPACITY]);
     }
 
+    /**
+     * Constructor
+     *
+     * @param array
+     */
     public XArraySortList(T[] array) {
         this.data = array;
         this.index = array.length;
     }
 
+    /**
+     * Constructor
+     *
+     * @param arrList
+     */
     public XArraySortList(Iterator<T> arrList) {
         this();
         while (arrList.hasNext()) {
@@ -44,20 +68,41 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
         }
     }
 
+    /**
+     * Constructor
+     *
+     * @param arrList
+     */
     public XArraySortList(Iterable<T> arrList) {
         this(arrList.iterator());
     }
 
+    /**
+     * iterator
+     *
+     * @return
+     */
     @Override
     public Iterator<T> iterator() {
         return new ListIterator();
     }
 
+    /**
+     * add new
+     *
+     * @param e
+     */
     @Override
     public final void add(T e) {
         add(index, e);
     }
 
+    /**
+     * add new in index _index
+     *
+     * @param _index
+     * @param element
+     */
     @Override
     public void add(int _index, T element) {
         CheckRangeForAdd(_index);
@@ -72,6 +117,11 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
         index++;
     }
 
+    /**
+     * add all element to the dynamic list
+     *
+     * @param c
+     */
     @Override
     public void addAll(T[] c) {
         for (T x : c) {
@@ -79,6 +129,12 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
         }
     }
 
+    /**
+     * add all in index _index
+     *
+     * @param _index
+     * @param c
+     */
     @Override
     public void addAll(int _index, T[] c) {
         int count = 0;
@@ -88,11 +144,23 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
         }
     }
 
+    /**
+     * get the element _index
+     *
+     * @param _index
+     * @return
+     */
     @Override
     public T get(int _index) {
         return data[_index];
     }
 
+    /**
+     * Remove the index at _index
+     *
+     * @param _index
+     * @return
+     */
     @Override
     public T remove(int _index) {
         CheckRange(_index);
@@ -104,12 +172,24 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
         return x;
     }
 
+    /**
+     * Set the value in index _index
+     *
+     * @param _index
+     * @param element
+     */
     @Override
     public void set(int _index, T element) {
         CheckRange(_index);
         data[_index] = element;
     }
 
+    /**
+     * get the element index
+     *
+     * @param o
+     * @return
+     */
     @Override
     public int indexOf(T o) {
         for (int i = 0; i < index; i++) {
@@ -120,16 +200,31 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
         return -1;
     }
 
+    /**
+     * get the element size
+     *
+     * @return
+     */
     @Override
     public int size() {
         return index;
     }
 
+    /**
+     * return the array element
+     *
+     * @return
+     */
     @Override
     public T[] toArray() {
         return data.clone();
     }
 
+    /**
+     * to fix the capacity problem
+     *
+     * @param minCapacity
+     */
     @SuppressWarnings("unchecked")
     public void ensureCapacity(int minCapacity) {
         if (index >= minCapacity) {
@@ -143,6 +238,9 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
 
     }
 
+    /**
+     * sort the element in the List
+     */
     @Override
     public void sort() {
         this.sort(data, 0, this.index - 1);
@@ -154,11 +252,21 @@ public class XArraySortList<T extends Comparable<T>> implements InterSortingElem
         }
     }
 
+    /**
+     * sort desc order the element in the List
+     */
     @Override
     public void sortDesc() {
         this.sort(data, 0, this.index - 1);
     }
 
+    /**
+     * sort the element in the List according to the field name
+     *
+     * @param field
+     * @param _class
+     * @return success sort or not
+     */
     @Override
     public boolean sort(String field, Class _class) {
         try {

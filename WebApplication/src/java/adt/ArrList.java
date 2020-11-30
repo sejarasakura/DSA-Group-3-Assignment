@@ -468,6 +468,7 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
     }
 
     /**
+     * get the string list that had concat two field in class
      *
      * @param field1
      * @param field2
@@ -483,8 +484,10 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         }
         return null;
     }
+
     /**
-     * 
+     * get the string list that had concat two field in class not remove throws
+     *
      * @param field1
      * @param field2
      * @param _class
@@ -494,7 +497,7 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
      * @throws NoSuchMethodException
      * @throws IllegalAccessException
      * @throws IllegalArgumentException
-     * @throws InvocationTargetException 
+     * @throws InvocationTargetException
      */
     private ArrList<String> notsecure_concateField(String field1, String field2, Class<?> _class, String seperator) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Field f1 = _class.getField(field1);
@@ -559,8 +562,9 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
         }
         return null;
     }
+
     /**
-     * 
+     *
      * @param m
      * @param f
      * @param _class
@@ -570,7 +574,7 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
      * @throws ClassNotFoundException
      * @throws IllegalAccessException
      * @throws IllegalArgumentException
-     * @throws InvocationTargetException 
+     * @throws InvocationTargetException
      */
     private ArrList<String> notsecure_getField(Method m, Field f, Class<?> _class) throws NoSuchFieldException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ArrList<String> r = new ArrList<>();
@@ -581,7 +585,7 @@ public class ArrList<T> implements InterArrayList<T>, Iterable<T>, Cloneable, ja
 
         return r;
     }
-    
+
     private class ListIterator implements Iterator<T> {
 
         private int iteratorIndex = -1;

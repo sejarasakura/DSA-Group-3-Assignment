@@ -105,7 +105,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         //<editor-fold defaultstate="collapsed" desc="add record">
         boolean result = true;
 
-        /* block lenght less than */
+        /* block lenght less than equal zero */
         if (datas.size() <= 0) {
             return false;
         }
@@ -118,14 +118,18 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         /* add new data to array list */
         for (AbstractEntity x : datas) {
 
+            /* find have depucate record or not using adt */
             depucate_record = data.find_AbstractEntity(x);
             all_d_r &= depucate_record;
 
             if (depucate_record) {
+                /* if depucate record denyed access */
                 System.out.println(OutputColor.TEXT_YELLOW
                         + "[adding the depucate record] is denyed"
                         + OutputColor.TEXT_RESET);
+
             } else {
+                /* only add record if not same */
                 data.add(x);
                 System.out.println(OutputColor.TEXT_GREEN
                         + "added record : " + x
@@ -133,8 +137,10 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
             }
         }
 
+        /* rewrite all the data in file */
         result &= AbstractEntity.privateReWriteAllDataToCsv(data, false);
 
+        /* check success or not */
         if (result && !all_d_r) {
             System.out.println(OutputColor.TEXT_GREEN
                     + "added record to file : " + datas.get(0).getStorageFile()

@@ -227,4 +227,25 @@ public abstract class User<T> extends AbstractEntity<User> {
     public String getId() {
         return this.user_id;
     }
+
+    public boolean isCustomer() {
+        if (role == null) {
+            return false;
+        }
+        return "c".equals(this.role.toLowerCase());
+    }
+
+    public boolean isDriver() {
+        if (role == null) {
+            return false;
+        }
+        return "d".equals(this.role.toLowerCase());
+    }
+
+    public boolean isAdmin() {
+        if (role == null) {
+            return false;
+        }
+        return "a".equals(this.role.toLowerCase());
+    }
 }

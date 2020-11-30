@@ -5,9 +5,12 @@
  */
 package cilent.servlet;
 
-import entity.User;
+import adt.ArrList;
+import cilent.IDManager;
+import entity.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import main.Functions;
 import main.WebConfig;
+import xenum.BookingStatus;
+import xenum.CarType;
 
 /**
  *
@@ -36,17 +41,56 @@ public class StartBookingNow extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+
+            /*Get login user*/
             User user = Functions.getUserSession(request);
+
+            /*Create a;; object need to add*/
+            Booking booking = new Booking();
+            Chats chats = new Chats();
+            Mapping mapping = new Mapping();
+            Payment payment = new Payment();
+
+            /*Get all hte input*/
             String form = request.getParameter("form-latlng");
             String to = request.getParameter("to-latlng");
+            String booking_type = request.getParameter("ride-type");
+            String ride_note = request.getParameter("ride-note");
+
+            out.print(form + "<br>");
+            out.print(to + "<br>");
+            out.print(booking_type + "<br>");
+            out.print(ride_note + "<br>");
+
+            /*Validation*/
             if (user == null ? true : !user.isNotNull()) {
                 response.sendRedirect(WebConfig.WEB_URL + "pages/login.jsp?E=21");
+                return;
+            }
+            if (!user.isCustomer()) {
+                response.sendRedirect(WebConfig.WEB_URL + "pages/index.jsp?I=I-0011");
                 return;
             }
             if (form == null || to == null ? false : form.isEmpty() || to.isEmpty()) {
                 response.sendRedirect(WebConfig.WEB_URL + "pages/login.jsp");
                 return;
             }
+
+            /*generate ID*/
+            String booking_id = (String) IDManager.generateId(booking);
+            String chats_id = (String) IDManager.generateId(chats);
+            String mapping_id = (String) IDManager.generateId(mapping);
+            String payment_id = (String) IDManager.generateId(payment);
+
+            booking = new Booking(booking_id, ride_note, CarType.getValue(booking_type), new Date(), "",
+                    user.getId(), chats_id, mapping_id, payment_id, BookingStatus.WATING_ACCEPTED);
+
+            chats = new Chats(chats_id, null, null, new ArrList());
+
+            mapping = new Mapping();
+
+            chats.addThisToCsv();
+            booking.addThisToCsv();
         }
 
     }

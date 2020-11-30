@@ -10,12 +10,17 @@
 <% ArrList<CarType> types = new ArrList(xenum.CarType.values()); %>
 
 
-<div class="form-group">
-    <select class="form-control" id="ride-type" name="ride-type">
-        <%for (int i = 0; i < types.size(); i++) {%>
-        <option data-valuea="<%= types.get(i).getName()%>" data-valueb="<%= i%>" value="<%= types.get(i).getCode()%>"><b><%= types.get(i).getName()%></b></option>
-            <%}%>
-    </select>
+<div class="form-group row">
+    <div class="col-sm-6">
+        <select class="form-control" id="ride-type" name="ride-type">
+            <%for (int i = 0; i < types.size(); i++) {%>
+            <option data-valuea="<%= types.get(i).getName()%>" data-valueb="<%= i%>" value="<%= types.get(i).getCode()%>"><b><%= types.get(i).getName()%></b></option>
+                <%}%>
+        </select>
+    </div>
+    <div class="col-sm-6">
+        <input  class="form-control" id="ride-note" name="ride-note" placeholder="Note to driver" value=""/>
+    </div>
 </div>
 <div id = "map-note">
 

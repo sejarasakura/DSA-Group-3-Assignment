@@ -133,32 +133,26 @@ public class Mapping extends AbstractEntity<Mapping> {
         return ((Mapping) t).map_id.compareTo(this.map_id);
     }
 
+    @Override
+    public String getId() {
+        return this.map_id;
+    }
+
     public String loadGoogleMap() {
         return null;
     }
 
-    public Map getDestination() {
-        Map map = new HashMap();
-        return map;
+    public void extractSourceJson(String json) {
+        this.source_id = extractJson(json).getLatlng();
     }
 
-    /**
-     * clean up mapping data in mapping.csv
-     *
-     */
-    public static void cleanMap() {
-        ArrList<Mapping> ar = new ArrList(Mapping.readDataFormCsv(new Mapping()));
-        ArrList<Mapping> new_list = new ArrList<Mapping>();
-        for (Mapping a : ar) {
-            if (!a.destination_id.equals(a.source_id)) {
-                new_list.add(a);
-            }
-        }
-        Mapping.reWriteAllDataToCsv(new_list);
+    public void extractDestinationJson(String json) {
+        this.destination_id = extractJson(json).getLatlng();
     }
 
-    @Override
-    public String getId() {
-        return this.map_id;
+    private LatLng extractJson(String json) {
+        LatLng data = new LatLng();
+        data.extractJSON(json);
+        return data;
     }
 }

@@ -14,8 +14,10 @@ import cilent.filter.*;
 import cilent.pages.*;
 import cilent.servlet.*;
 import entity.*;
+import adt.*;
 import adt.node.*;
 import adt.interfaces.*;
+import com.google.gson.Gson;
 import csv.converter.*;
 import java.lang.reflect.Array;
 import java.util.Scanner;
@@ -90,9 +92,32 @@ public class LatLng {
             return false;
         }
         String[] x = latlng.split("%");
+        this.latlng = latlng;
         this.lat = Double.parseDouble(x[0]);
         this.lng = Double.parseDouble(x[1]);
         return true;
+    }
+
+    public boolean extractJSON(String latlng) {
+
+        Gson gson = new Gson();
+
+        InterDictionary result = new XHashedDictionary(
+                gson.fromJson(latlng, WebConfig.WRITING_CLASS)
+        );
+        try {
+
+            this.lat = (double) result.getValue("lat");
+            this.lng = (double) result.getValue("lng");
+            this.latlng = lat + "%" + lng;
+
+            return true;
+
+        } catch (Exception e) {
+
+            return false;
+
+        }
     }
 
 }

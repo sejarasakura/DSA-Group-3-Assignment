@@ -247,6 +247,7 @@
                         time_map) + "\n";
                 <%}%>
             }
+            
             function calculatePrice(element_id, base_fare, min_fare, per_km, per_min, dist_map, time_map) {
                 const output = document.getElementById(element_id);
                 var price_no_base = (dist_map.value * per_km / 1000) + (time_map.value * per_min / 60);
@@ -260,7 +261,7 @@
                     document.getElementById(element_id).innerHTML = "<b class='text-success'>RM " +
                             price_no_base.toFixed(2) + " - " + price.toFixed(2) + "</b>";
             }
-
+            
             function distanceMatricApix(origin, destination, service, dist_map, time_map, outputDiv) {
 
                 service.getDistanceMatrix({
@@ -301,7 +302,7 @@
                     calculateAll();
                 });
             }
-
+            
             function handleLocationError(browserHasGeolocation, infoWindow, pos, map) {
                 infoWindow.setPosition(pos);
                 infoWindow.setContent(
@@ -311,7 +312,7 @@
                         );
                 infoWindow.open(map);
             }
-
+            
             function calculateAndDisplayRoute(directionsService, directionsRenderer, origin_p, destination_p) {
                 directionsService.route(
                         {
@@ -328,7 +329,7 @@
                 }
                 );
             }
-
+            
             function setFocusBtn(focus_form) {
                 const input_form_btn = document.getElementById("form-btn");
                 const input_to_btn = document.getElementById("to-btn");
@@ -340,9 +341,11 @@
                     input_to_btn.disabled = false;
                 }
             }
+            
             function writeToInput(position, input_latlng) {
                 input_latlng.value = JSON.stringify(position.toJSON(), null, 2);
             }
+            
             function reverseLatLng(geocoder, input, marker, map) {
                 const position = marker.getPosition();
                 geocoder.geocode({location: position}, (results, status) => {
@@ -357,12 +360,14 @@
                     }
                 });
             }
+            
             function fitCurrentBound(form, to, map) {
                 var bounds = new google.maps.LatLngBounds();
                 bounds.extend(form);
                 bounds.extend(to);
                 map.fitBounds(bounds);
             }
+            
             function search(searchBox, marker, map) {
                 const places = searchBox.getPlaces();
 
@@ -387,7 +392,7 @@
                 });
                 map.fitBounds(bounds);
             }
-
+            
             $(document).ready(function () {
                 $("#pac-input-to").click(function () {
                     setFocusBtn(false);

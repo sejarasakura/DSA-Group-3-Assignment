@@ -26,47 +26,56 @@ public class Booking extends AbstractEntity<Booking> {
      */
     @CsvBindByName
     private String booking_id;
+
     /**
-     * customer booking_description
+     * customer note
      */
     @CsvBindByName
     private String booking_description;
+
     /**
      * customer booking type
      */
     @CsvBindByName
     private CarType booking_type;
+
     /**
      * customer booking date
      */
     @CsvBindByName
     @CsvDate(main.WebConfig.SAVING_DATE_FORMAT)
     private Date booking_date;
+
     /**
      * driver id
      */
     @CsvBindByName
     private String driver_id;
+
     /**
      * customer id
      */
     @CsvBindByName
     private String customer_id;
+
     /**
      * chats id
      */
     @CsvBindByName
     private String chats_id;
+
     /**
      * mapping id
      */
     @CsvBindByName
     private String mapping_id;
+
     /**
      * customer payment number
      */
     @CsvBindByName
     private String paymentNumber;
+
     /**
      * booking status
      */
@@ -74,6 +83,22 @@ public class Booking extends AbstractEntity<Booking> {
     private BookingStatus bookingStatus;
 
     public Booking() {
+    }
+
+    public Booking(String booking_id, String booking_description,
+            CarType booking_type, Date booking_date, String driver_id,
+            String customer_id, String chats_id, String mapping_id,
+            String paymentNumber, BookingStatus bookingStatus) {
+        this.booking_id = booking_id;
+        this.booking_description = booking_description;
+        this.booking_type = booking_type;
+        this.booking_date = booking_date;
+        this.driver_id = driver_id;
+        this.customer_id = customer_id;
+        this.chats_id = chats_id;
+        this.mapping_id = mapping_id;
+        this.paymentNumber = paymentNumber;
+        this.bookingStatus = bookingStatus;
     }
 
     /**

@@ -26,7 +26,7 @@ public interface InterDictionary<K, V> {
      * @return either null if the new entry was added to the dictionary or the
      * value that was associated with key if that value was replaced
      */
-    V add(K key, V value);
+    public abstract V add(K key, V value);
 
     /**
      * Task: Removes a specific entry from the dictionary.
@@ -35,7 +35,7 @@ public interface InterDictionary<K, V> {
      * @return either the value that was associated with the search key or null
      * if no such object exists
      */
-    V remove(K key);
+    public abstract V remove(K key);
 
     /**
      * Task: Retrieves the value associated with a given search key.
@@ -44,7 +44,7 @@ public interface InterDictionary<K, V> {
      * @return either the value that is associated with the search key or null
      * if no such object exists
      */
-    V getValue(K key);
+    public abstract V getValue(K key);
 
     /**
      * Task: Sees whether a specific entry is in the dictionary.
@@ -52,21 +52,21 @@ public interface InterDictionary<K, V> {
      * @param key an object search key of the desired entry
      * @return true if key is associated with an entry in the dictionary
      */
-    boolean contains(K key);
+    public abstract boolean contains(K key);
 
     /**
      * Task: Sees whether the dictionary is empty.
      *
      * @return true if the dictionary is empty
      */
-    boolean isEmpty();
+    public abstract boolean isEmpty();
 
     /**
      * Task: Sees whether the dictionary is full.
      *
      * @return true if the dictionary is full
      */
-    boolean isFull();
+    public abstract boolean isFull();
 
     /**
      * Task: Gets the size of the dictionary.
@@ -74,52 +74,52 @@ public interface InterDictionary<K, V> {
      * @return the number of entries (key-value pairs) currently in the
      * dictionary
      */
-    int getSize();
+    public abstract int getSize();
 
     /**
      * Task: Removes all entries from the dictionary.
      */
-    void clear();
+    public abstract void clear();
 
     /**
      * Task: return all key in general format
      *
      * @return keys
      */
-    public Iterator<K> newKeyIterator();
+    public abstract Iterator<K> newKeyIterator();
 
     /**
      * Task: return all value in general format
      *
      * @return values
      */
-    public Iterator<V> newValueIterator();
+    public abstract Iterator<V> newValueIterator();
 
     /**
      * Task: return all entry in general format
      *
      * @return table entry
      */
-    public Iterator<? extends Entry<K, V>> newEntryIterator();
+    public abstract Iterator<? extends Entry<K, V>> newEntryIterator();
 
     /**
      * Task: return all key in general format
      *
      * @return keys
      */
-    public ArrList<K> getKeyList();
+    public abstract InterList<K> getKeyList();
 
     /**
      * Task: return all value in general format
      *
      * @return values
      */
-    public ArrList<V> getValueList();
+    public abstract InterList<V> getValueList();
 
     /**
      * Task: return all entry in general format
      *
      * @return table entry
      */
-    public ArrList<? extends Entry<K, V>> getEntryList();
+    public abstract InterList<? extends Entry<K, V>> getEntryList();
 }

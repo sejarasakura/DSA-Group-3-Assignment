@@ -6,7 +6,9 @@
 package cilent.servlet;
 
 import adt.ArrList;
+import adt.MapConverter;
 import adt.XHashedDictionary;
+import adt.XTreeDictionary;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.File;
@@ -20,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import main.WebConfig;
 
 /**
  *
@@ -48,10 +51,12 @@ public class EditElementOther extends HttpServlet {
         String dir = System.getProperty("user.dir") + "/data/" + edit + ".json";
         JsonReader reader = new JsonReader(new FileReader(dir));
         Gson gson = new Gson();
-        Map map = gson.fromJson(reader, Map.class);
+        MapConverter map = new MapConverter(new XTreeDictionary(
+                gson.fromJson(reader, WebConfig.WRITING_CLASS)
+        ));
         String base = (String) map.get("base");
         String front_id = new StringBuilder().append(base).append(".").append(t).append(".").toString();
-        Map base_map = (Map) map.get(base);
+        MapConverter base_map = new MapConverter(new XTreeDictionary(map.get(base)));
         ArrList new_detias_map = new ArrList();
         ArrList child;
         File jsonFile = new File(dir);
@@ -124,25 +129,25 @@ public class EditElementOther extends HttpServlet {
         response.sendRedirect(str.toString());
     }
 
-    private Map getDataS(String title, String url, String s) {
-        XHashedDictionary map = new XHashedDictionary();
+    private MapConverter getDataS(String title, String url, String s) {
+        XTreeDictionary map = new XTreeDictionary();
         map.add("l", url);
         map.add("t", title);
         map.add("s", s);
-        return map.getMap();
+        return new MapConverter(map);
     }
 
-    private Map getDataShow(String title, String url, String show, String c) {
-        XHashedDictionary map = new XHashedDictionary();
+    private MapConverter getDataShow(String title, String url, String show, String c) {
+        XTreeDictionary map = new XTreeDictionary();
         map.add("l", url);
         map.add("t", title);
         map.add("show", show);
         map.add("c", c);
-        return map.getMap();
+        return new MapConverter(map);
     }
 
-    private Map getData(String title, String url) {
-        XHashedDictionary map = new XHashedDictionary();
+    private MapConverter getData(String title, String url) {
+        XTreeDictionary map = new XTreeDictionary();
         if (title.contains(".child")) {
             ArrList al = new ArrList();
             al.add(getData("new", "#"));
@@ -151,15 +156,15 @@ public class EditElementOther extends HttpServlet {
         }
         map.add("l", url);
         map.add("t", title);
-        return map.getMap();
+        return new MapConverter(map);
     }
 
-    private Map getDataChild(String title, String url, ArrList x) {
-        XHashedDictionary map = new XHashedDictionary();
+    private MapConverter getDataChild(String title, String url, ArrList x) {
+        XTreeDictionary map = new XTreeDictionary();
         map.add("child", x.toArray());
         map.add("l", url);
         map.add("t", title);
-        return map.getMap();
+        return new MapConverter(map);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

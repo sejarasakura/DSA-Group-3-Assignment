@@ -10,14 +10,14 @@ package adt.interfaces;
  * @author Lim Sai Keat
  * @param <T>
  */
-public interface InterList<T> {
+public interface InterList<T> extends Iterable<T> {
 
     /**
      * add the value
      *
-     * @param e
+     * @param element
      */
-    void add(T e);
+    void add(T element);
 
     /**
      * add the value in index n
@@ -30,17 +30,17 @@ public interface InterList<T> {
     /**
      * add the all value
      *
-     * @param c
+     * @param element
      */
-    void addAll(T[] c);
+    void addAll(T[] element);
 
     /**
      * add the all value to index n
      *
      * @param index
-     * @param c
+     * @param element
      */
-    void addAll(int index, T[] c) throws IndexOutOfBoundsException;
+    void addAll(int index, T[] element) throws IndexOutOfBoundsException;
 
     /**
      * get the value of index n
@@ -69,10 +69,10 @@ public interface InterList<T> {
     /**
      * get the index of in value
      *
-     * @param o
+     * @param element
      * @return
      */
-    int indexOf(T o);
+    int indexOf(T element);
 
     /**
      * get the size of array

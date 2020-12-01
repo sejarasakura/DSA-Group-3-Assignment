@@ -216,7 +216,7 @@ public class XLinkedList<E> implements InterList<E>, Iterable<E> {
         list.add(20);
         list.add(9);
         data = list.toArray();
-        System.out.print(data[0]);
+        System.out.print(list);
     }
 
     @Override

@@ -6,6 +6,7 @@
 package adt;
 
 import adt.interfaces.InterDictionary;
+import adt.interfaces.InterList;
 import adt.node.Entry;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
@@ -14,12 +15,14 @@ import java.util.NoSuchElementException;
 
 /**
  * This dictionary is to make the Dictionary arrange by the key<br>
+ * Unlike hashed dictionary is no ordered <br>
+ * For storing data and reading data in JSON file purpose
  *
  * @author Lim sai keat
  * @param <K>
  * @param <V>
  */
-public final class XOrderedDictionary<K, V> implements InterDictionary<K, V>, Cloneable, java.io.Serializable {
+public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, java.io.Serializable {
 
     /**
      * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -73,7 +76,7 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V>, Cl
     /**
      * No argument constructor
      */
-    public XOrderedDictionary() {
+    public XTreeDictionary() {
         this((Comparator<? super K>) NATURAL_ORDER_NUM, true);
     }
 
@@ -83,7 +86,7 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V>, Cl
      * @param comparator
      * @param convert
      */
-    public XOrderedDictionary(Comparator<? super K> comparator, boolean convert) {
+    public XTreeDictionary(Comparator<? super K> comparator, boolean convert) {
         this.compare = comparator != null
                 ? comparator
                 : (Comparator) NATURAL_ORDER_NUM;
@@ -94,7 +97,7 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V>, Cl
      *
      * @param map
      */
-    public XOrderedDictionary(Object map) {
+    public XTreeDictionary(Object map) {
         this((java.util.Map) map);
     }
 
@@ -103,7 +106,7 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V>, Cl
      *
      * @param map
      */
-    public XOrderedDictionary(java.util.Map<K, V> map) {
+    public XTreeDictionary(java.util.Map<K, V> map) {
         this();
         map.keySet().forEach((s) -> {
             add((K) s, (V) map.get(s));
@@ -254,6 +257,7 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V>, Cl
     @Override
     public Iterator<Node<K, V>> newEntryIterator() {
         return new XOrderedDictionaryIterator<Node<K, V>>() {
+            @Override
             public Node<K, V> next() {
                 return nextNode();
             }
@@ -291,7 +295,7 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V>, Cl
      * @return
      */
     @Override
-    public ArrList<K> getKeyList() {
+    public InterList<K> getKeyList() {
         return new ArrList<K>(this.newKeyIterator());
     }
 
@@ -301,7 +305,7 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V>, Cl
      * @return
      */
     @Override
-    public ArrList<V> getValueList() {
+    public InterList<V> getValueList() {
         return new ArrList<V>(this.newValueIterator());
     }
 
@@ -311,7 +315,7 @@ public final class XOrderedDictionary<K, V> implements InterDictionary<K, V>, Cl
      * @return
      */
     @Override
-    public ArrList<? extends Entry<K, V>> getEntryList() {
+    public InterList<? extends Entry<K, V>> getEntryList() {
         return new ArrList<Node<K, V>>(this.newEntryIterator());
     }
 

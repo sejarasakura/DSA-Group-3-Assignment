@@ -14,7 +14,8 @@ import java.util.*;
  * Mapping class to store mapping details include booking destination and source
  * and fetch date
  *
- * @Mapping
+ * Mapping
+ *
  * @author lIM SAI KEAT
  */
 public class Mapping extends AbstractEntity<Mapping> {

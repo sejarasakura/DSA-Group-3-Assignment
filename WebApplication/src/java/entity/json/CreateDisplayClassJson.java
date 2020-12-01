@@ -29,14 +29,10 @@ public class CreateDisplayClassJson {
 
     private final ArrList<Class> class_s = new ArrList<Class>();
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        ClassSaving c = new ClassSaving();
-        new CreateDisplayClassJson().readData(WebConfig.PROJECT_URL + "data/access.json");
-    }
-
+//    public static void main(String[] args) {
+//        ClassSaving c = new ClassSaving();
+//        new CreateDisplayClassJson().readData(WebConfig.PROJECT_URL + "data/access.json");
+//    }
     public void generateJsonFile() throws IOException {
         ArrList<ClassSaving> data = new ArrList<ClassSaving>();
         addAllClassToList();

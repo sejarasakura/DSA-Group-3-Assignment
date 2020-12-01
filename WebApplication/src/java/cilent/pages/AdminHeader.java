@@ -6,7 +6,7 @@
 package cilent.pages;
 
 import adt.ArrList;
-import adt.XOrderedDictionary;
+import adt.XTreeDictionary;
 import adt.XStack;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -39,14 +39,14 @@ public class AdminHeader extends AbstractPage {
             String x = System.getProperty("user.dir") + "/data/adminNav.json";
             JsonReader reader = new JsonReader(new FileReader(x));
             Gson gson = new Gson();
-            XOrderedDictionary map = null;
+            XTreeDictionary map = null;
             if (Datas.settings.getValue("admin-nav") == null) {
-                map = new XOrderedDictionary(gson.fromJson(reader, WebConfig.WRITING_CLASS));
+                map = new XTreeDictionary(gson.fromJson(reader, WebConfig.WRITING_CLASS));
                 Datas.settings.add("admin-nav", map);
             } else {
-                map = (XOrderedDictionary) Datas.settings.getValue("admin-nav");
+                map = (XTreeDictionary) Datas.settings.getValue("admin-nav");
             }
-            map = new XOrderedDictionary(map.getValue("admin-nav"));
+            map = new XTreeDictionary(map.getValue("admin-nav"));
             XStack data = new XStack(map.newKeyIterator());
             String key;
             if (arrlist == null) {
@@ -54,7 +54,7 @@ public class AdminHeader extends AbstractPage {
             }
             while (!data.isEmpty()) {
                 key = (String) data.pop();
-                result.add(get_html(new XOrderedDictionary(map.getValue(key)), key));
+                result.add(get_html(new XTreeDictionary(map.getValue(key)), key));
             }
             result.add(getJQuery());
             return result;
@@ -77,7 +77,7 @@ public class AdminHeader extends AbstractPage {
         return stringBuilder.toString();
     }
 
-    private String get_html(XOrderedDictionary map, String key) {
+    private String get_html(XTreeDictionary map, String key) {
         stringBuilder.setLength(0);
         stringBuilder.append("<div class=\"panel panel-default\" style=\"margin: 0px\">");
         stringBuilder.append("<div class=\"panel-heading\">");
@@ -95,9 +95,9 @@ public class AdminHeader extends AbstractPage {
         stringBuilder.append((!arrlist.get(i) ? "" : "in")).append("\" style=\"padding-left: 10px\"");
         stringBuilder.append(">");
         stringBuilder.append("<ul class=\"list-group\">");
-        XOrderedDictionary ref;
+        XTreeDictionary ref;
         while (!childQueue.isEmpty()) {
-            ref = new XOrderedDictionary(childQueue.pop());
+            ref = new XTreeDictionary(childQueue.pop());
             stringBuilder.append("<li class=\"list-group-item\"><a href=\"");
             stringBuilder.append(ref.getValue("l"));
             stringBuilder.append("\">");

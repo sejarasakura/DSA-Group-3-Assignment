@@ -5,17 +5,15 @@
  */
 package adt.interfaces;
 
-import adt.ArrList;
 import entity.AbstractEntity;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
- *
  * @author Lim sai keat
  * @param <T>
  */
-public interface InterAdvanceList<T> {
+public interface InterAdvanceList<T> extends InterList<T> {
 
     /**
      * Remove the duplicate element in the list
@@ -93,14 +91,14 @@ public interface InterAdvanceList<T> {
     public abstract boolean find_AbstractEntity(AbstractEntity x);
 
     /**
-     * For support reading CSV -> array list
+     * For support reading CSV to array list
      *
      * @param input from CSV file
      */
     public void formInput(String input);
 
     /**
-     * For support writing to CSV -> string
+     * For support writing to CSV to string
      *
      * @return String write to CSV
      */

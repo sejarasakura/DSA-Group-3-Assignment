@@ -6,6 +6,7 @@
 package adt;
 
 import adt.interfaces.InterDictionary;
+import adt.interfaces.InterList;
 import adt.node.Entry;
 import adt.node.TableEntry;
 import java.util.ConcurrentModificationException;
@@ -328,17 +329,17 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
     }
 
     @Override
-    public ArrList<K> getKeyList() {
+    public InterList<K> getKeyList() {
         return new ArrList<K>(this.newKeyIterator());
     }
 
     @Override
-    public ArrList<V> getValueList() {
+    public InterList<V> getValueList() {
         return new ArrList<V>(this.newValueIterator());
     }
 
     @Override
-    public ArrList<? extends Entry<K, V>> getEntryList() {
+    public InterList<? extends Entry<K, V>> getEntryList() {
         return new ArrList<TableEntry<K, V>>(this.newEntryIterator());
     }
 

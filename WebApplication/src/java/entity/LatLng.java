@@ -84,11 +84,13 @@ public class LatLng {
         return this.lat + "%" + this.lng;
     }
 
+    public static String DOUBLE_PATTERN = "^[\\+\\-]{0,1}[0-9]+[\\.]{1}[0-9]+[%]{1}[\\+\\-]{0,1}[0-9]+[\\.]{1}[0-9]+$";
+
     public boolean extract(String latlng) {
         if (!latlng.contains("%")) {
             return false;
         }
-        if (!latlng.matches("^[\\+\\-]{0,1}[0-9]+[\\.]{1}[0-9]+[%]{1}[\\+\\-]{0,1}[0-9]+[\\.]{1}[0-9]+$")) {
+        if (!latlng.matches(DOUBLE_PATTERN)) {
             return false;
         }
         String[] x = latlng.split("%");

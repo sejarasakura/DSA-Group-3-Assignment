@@ -5,6 +5,7 @@
  */
 package com.test.adt.speed;
 
+import adt.XStack;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
@@ -18,7 +19,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
  * @author ITSUKA KOTORI
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Benchmark)
 @Fork(value = 2, jvmArgs = {"-Xms2G", "-Xmx2G"})
 public class TestSortListSlotAlgorithmSpeeds {
@@ -27,6 +28,12 @@ public class TestSortListSlotAlgorithmSpeeds {
     private int N;
     int[] unsortedArray;
     int[] r;
+
+    public static void main2(String[] args) throws RunnerException {
+        Blackhole bh = null;
+        TestSortListSlotAlgorithmSpeeds gg = new TestSortListSlotAlgorithmSpeeds();
+        gg.BubberSloting(bh);
+    }
 
     public static void main(String[] args) throws RunnerException {
 
@@ -38,35 +45,58 @@ public class TestSortListSlotAlgorithmSpeeds {
         new Runner(opt).run();
     }
 
+    public TestSortListSlotAlgorithmSpeeds() {
+        unsortedArray = createArrayWithRandomInts(100);
+    }
+
     @Setup
     public void setup() {
-        unsortedArray = createArrayWithRandomInts(10000);
-        printArray(unsortedArray);
+
+    }
+
+    @Benchmark
+    public void CountSloting(Blackhole bh) {
+        countSort(unsortedArray.clone());
+    }
+
+    @Benchmark
+    public void CountSloting_1ms(Blackhole bh) {
+        countSort2_1ms(unsortedArray.clone());
     }
 
     @Benchmark
     public void BubberSloting(Blackhole bh) {
-        bubbleSort(unsortedArray);
+        bubbleSort(unsortedArray.clone());
     }
 
     @Benchmark
     public void SelectionSloting(Blackhole bh) {
-        selectionSort(unsortedArray);
+        selectionSort(unsortedArray.clone());
     }
 
     @Benchmark
     public void InsertSloting(Blackhole bh) {
-        insertionSort(unsortedArray);
+        insertionSort(unsortedArray.clone());
     }
 
     @Benchmark
     public void QuickSloting(Blackhole bh) {
-        benchmarkQuickSort(unsortedArray);
+        benchmarkQuickSort(unsortedArray.clone());
+    }
+
+    @Benchmark
+    public void QuickSloting_with_Recursion(Blackhole bh) {
+        sort_rec(unsortedArray.clone(), 0, unsortedArray.length - 1);
+    }
+
+    @Benchmark
+    public void QuickSloting_no_Recursion(Blackhole bh) {
+        sort_norec(unsortedArray.clone());
     }
 
     @Benchmark
     public void MergeSloting(Blackhole bh) {
-        benchmarkMergeSort(unsortedArray);
+        benchmarkMergeSort(unsortedArray.clone());
     }
 
     /**
@@ -226,6 +256,55 @@ public class TestSortListSlotAlgorithmSpeeds {
         return array;
     }
 
+    public int[] countSort2_1ms(int[] nums) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int num : nums) {
+            min = Math.min(min, num);
+            max = Math.max(max, num);
+        }
+
+        int[] arr = new int[max - min + 1];
+        for (int num : nums) {
+            arr[num - min]++;
+        }
+
+        int k = 0;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i]; j++) {
+                nums[k] = i + min;
+                k++;
+            }
+        }
+        return nums;
+    }
+
+    public int[] countSort(int[] nums) {
+        int min_ = Integer.MAX_VALUE, max_ = Integer.MIN_VALUE;
+        for (int ele : nums) {
+            if (min_ > ele) {
+                min_ = ele;
+            }
+            if (max_ < ele) {
+                max_ = ele;
+            }
+        }
+        int[] freq = new int[max_ - min_ + 1];
+        for (int i = 0; i < nums.length; i++) {
+            freq[nums[i] - min_]++;
+        }
+        for (int i = 1; i < freq.length; i++) {
+            freq[i] = freq[i - 1] + freq[i];
+        }
+        int[] ans = new int[nums.length];
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int idx = freq[nums[i] - min_] - 1;
+            ans[idx] = nums[i];
+            freq[nums[i] - min_]--;
+        }
+        return ans;
+    }
+
     /**
      * Merges 2 sorted arrays of ints
      *
@@ -292,5 +371,83 @@ public class TestSortListSlotAlgorithmSpeeds {
             System.out.print(array[i] + " ");
         }
         System.out.println();
+    }
+
+    int partition(int arr[], int low, int high) {
+        int pivot = arr[high];
+        int i = (low - 1); // index of smaller element
+        for (int j = low; j < high; j++) {
+            // If current element is smaller than the pivot
+            if (arr[j] < pivot) {
+                i++;
+
+                // swap arr[i] and arr[j]
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        // swap arr[i+1] and arr[high] (or pivot)
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
+    }
+
+    /**
+     * with recursion
+     *
+     * @param arr
+     * @param low
+     * @param high
+     */
+    void sort_rec(int arr[], int low, int high) {
+        if (low < high) {
+            /* pi is partitioning index, arr[pi] is
+              now at right place */
+            int pi = partition(arr, low, high);
+
+            // Recursively sort elements before
+            // partition and after partition
+            sort_rec(arr, low, pi - 1);
+            sort_rec(arr, pi + 1, high);
+        }
+    }
+
+    /**
+     * Without recursion
+     *
+     * @param arr
+     */
+    private void sort_norec(int[] arr) {
+
+        XStack<Integer> s = new XStack();
+
+        int pivotIndex = 0;
+        int low = 0;
+        int high = arr.length - 1;
+
+        s.push(pivotIndex);
+        s.push(high);
+
+        while (!s.isEmpty()) {
+            high = s.pop();
+            low = s.pop();
+
+            if (low > high) {
+                continue;
+            }
+
+            pivotIndex = partition(arr, low, high);
+
+            if (low < high) {
+                s.push(low);
+                s.push(pivotIndex - 1);
+                s.push(pivotIndex + 1);
+                s.push(high);
+            }
+        }
     }
 }

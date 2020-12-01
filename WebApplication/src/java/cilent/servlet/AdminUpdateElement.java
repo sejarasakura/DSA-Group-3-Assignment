@@ -6,6 +6,8 @@
 package cilent.servlet;
 
 import adt.ArrList;
+import adt.MapConverter;
+import adt.XTreeDictionary;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.File;
@@ -13,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,12 +47,14 @@ public class AdminUpdateElement extends HttpServlet {
         JsonReader reader = new JsonReader(new FileReader(dir));
         Gson gson = new Gson();
         // <editor-fold defaultstate="collapsed" desc="Read json data">
-        Map map = gson.fromJson(reader, Map.class);
+        MapConverter map = new MapConverter(new XTreeDictionary(
+                gson.fromJson(reader, WebConfig.WRITING_CLASS)
+        ));
         String base = (String) map.get("base");
         String front_id = new StringBuilder()
                 .append(base).append(".").append(t).append(".").toString();
-        Map base_map = (Map) map.get(base);
-        Map details_map = (Map) base_map.get(t);
+        MapConverter base_map = new MapConverter(new XTreeDictionary(map.get(base)));
+        MapConverter details_map = new MapConverter(new XTreeDictionary(base_map.get(t)));
         // </editor-fold>
         ArrList child = new ArrList();
         File jsonFile = new File(dir);
@@ -76,8 +79,9 @@ public class AdminUpdateElement extends HttpServlet {
                     child.add(getData(d_title, d_url));
                 }
             }
-            if(count > 0)
+            if (count > 0) {
                 details_map.put("child", child.toArray());
+            }
             base_map.put(t, details_map);
         }
         map.put(base, base_map);
@@ -91,11 +95,11 @@ public class AdminUpdateElement extends HttpServlet {
         response.sendRedirect(str.toString());
     }
 
-    private Map getData(String title, String url) {
-        Map map = new HashMap();
-        map.put("l", url);
-        map.put("t", title);
-        return map;
+    private MapConverter getData(String title, String url) {
+        XTreeDictionary map = new XTreeDictionary();
+        map.add("t", title);
+        map.add("l", url);
+        return new MapConverter(map);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

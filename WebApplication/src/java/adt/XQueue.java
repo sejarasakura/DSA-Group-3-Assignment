@@ -11,9 +11,9 @@ import java.util.NoSuchElementException;
 import adt.interfaces.InterQuene;
 
 /**
+ * module Chatting, Booking
  *
  * @author Lai Hong Wah
- * @module Chatting, Booking
  * @param <T>
  */
 public class XQueue<T> implements InterQuene<T>, Iterable<T> {

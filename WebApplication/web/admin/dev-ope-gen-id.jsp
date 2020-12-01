@@ -4,6 +4,7 @@
     Author     : ITSUKA KOTORI
 --%>
 
+<%@page import="adt.interfaces.InterList"%>
 <%@page import="entity.*"%>
 <%@page import="adt.*" %>
 <%@page import="cilent.pages.EditAdmin" %>
@@ -17,7 +18,7 @@
     String x_class = request.getParameter("x_class");
     AbstractEntity data;
     ArrList<AbstractEntity> raw_data;
-    ArrList<String> col_data = null;
+    InterList<String> col_data = null;
     if (x_class != null && x_field != null) {
         if (!x_class.isEmpty() && !x_field.isEmpty()) {
             Class<?> _class = Class.forName(x_class);
@@ -51,12 +52,12 @@
         <h2>Generate ID</h2>
         <form action="dev-ope-gen-id.jsp" method="post">
             <div class="form-group">
-                <label>Field :</label>
-                <input type="text" class="form-control" id="email" placeholder="Enter field" name="x_field" value="${param.x_field}">
-            </div>
-            <div class="form-group">
                 <label>Class :</label>
                 <input type="text" class="form-control" id="pwd" placeholder="Enter class" name="x_class" value="${param.x_class}">
+            </div>
+            <div class="form-group">
+                <label>Field :</label>
+                <input type="text" class="form-control" id="email" placeholder="Enter field" name="x_field" value="${param.x_field}">
             </div>
             <div class="row">
                 <div class="form-group col-sm-4">

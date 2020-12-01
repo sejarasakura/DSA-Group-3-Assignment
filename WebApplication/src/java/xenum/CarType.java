@@ -113,14 +113,14 @@ public enum CarType implements AbstractEnum {
     public String getStringCode() {
         return this.getCode();
     }
-
-    public static void main(String[] args) {
-        System.out.println(CarType.getValue("Find a nerest QuicKar now !!"));
-        System.out.println(CarType.getValue("Find a nerest QuicKar "));
-        System.out.println(CarType.getValue("Just Rent"));
-        System.out.println(CarType.getValue("FInd a nearest taxi now !!"));
-        System.out.println(CarType.getValue("Find a QuicKar now !!"));
-    }
+//
+//    public static void main(String[] args) {
+//        System.out.println(CarType.getValue("Find a nerest QuicKar now !!"));
+//        System.out.println(CarType.getValue("Find a nerest QuicKar "));
+//        System.out.println(CarType.getValue("Just Rent"));
+//        System.out.println(CarType.getValue("FInd a nearest taxi now !!"));
+//        System.out.println(CarType.getValue("Find a QuicKar now !!"));
+//    }
 
     @Override
     public AbstractEnum setMyValue(Object string) {

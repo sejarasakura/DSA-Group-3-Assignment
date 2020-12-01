@@ -7,7 +7,7 @@ package com.test.adt.exe;
 
 import adt.MapConverter;
 import adt.XHashedDictionary;
-import adt.XOrderedDictionary;
+import adt.XTreeDictionary;
 import adt.node.TableEntry;
 import cilent.pages.EditAdmin;
 import com.google.gson.Gson;
@@ -81,17 +81,12 @@ public class HashTest {
         String x = System.getProperty("user.dir") + "/data/adminNav.json";
         JsonReader reader = new JsonReader(new FileReader(x));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        XOrderedDictionary map = new XOrderedDictionary(
+        XTreeDictionary map = new XTreeDictionary(
                 gson.fromJson(reader, WebConfig.WRITING_CLASS)
         );
-        map = new XOrderedDictionary(map.getValue("admin-nav"));
+        map = new XTreeDictionary(map.getValue("admin-nav"));
         //System.out.print(map);
         MapConverter mapConverter = new MapConverter(map);
-    }
-
-    @Benchmark
-    public void testManualMap() {
-        EditAdminBAckUp x = new EditAdminBAckUp();
     }
 
     @Benchmark

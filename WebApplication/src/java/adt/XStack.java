@@ -12,8 +12,7 @@ import java.util.NoSuchElementException;
 
 /**
  * @author Chun Phang Chew
- * @param <T>
- * @paraimport adt.interfaces.InterStack;
+ * @param <T> adt.interfaces.InterStack;
  */
 public final class XStack<T> implements InterStack<T>, Iterable<T> {
 

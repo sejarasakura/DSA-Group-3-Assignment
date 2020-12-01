@@ -62,7 +62,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
     }
 
     /**
-     * constructor
+     * constructor with can set initial capacity
      *
      * @param initialCapacity
      */
@@ -160,7 +160,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
     /**
      * adding all function
      *
-     * @parma e all the elements
+     * @param c all the elements
      */
     @Override
     public void addAll(T[] c) {
@@ -173,7 +173,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      * adding all form index function
      *
      * @param _index
-     * @parma e all the elements
+     * @param c all the elements
      */
     @Override
     public void addAll(int _index, T[] c) {
@@ -185,7 +185,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
     }
 
     /**
-     * get in index
+     * get the value at index
      *
      * @param _index
      * @return elements
@@ -280,15 +280,20 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      */
     @Override
     public String toString() {
+        StringBuilder sb = new StringBuilder();
+        String prefix = ", ";
         if (index <= 0) {
-            return "Empty";
+            sb.append("Empty");
+            return sb.toString();
         }
-        String r = "";
+        if (data[0].toString().length() > 10) {
+            prefix += "\n";
+        }
         for (int i = 0; i < (index - 1); i++) {
-            r += "" + data[i] + ", ";
+            sb.append(data[i]).append(prefix);
         }
-        r += "" + data[index - 1];
-        return r;
+        sb.append(data[index - 1]);
+        return sb.toString();
     }
 
     /**
@@ -308,16 +313,20 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      */
     @Override
     public String toHtml() {
+        StringBuilder sb = new StringBuilder();
+        String prefix = ", ";
         System.out.println(this);
         if (index <= 0) {
-            return "";
+            return sb.toString();
         }
-        String r = "";
+        if (data[0].toString().length() > 10) {
+            prefix += "<br />";
+        }
         for (int i = 0; i < (index - 1); i++) {
-            r += "" + data[i] + "<br/>";
+            sb.append(data[i]).append(prefix);
         }
-        r += "" + data[index - 1];
-        return r;
+        sb.append(data[index - 1]);
+        return sb.toString();
     }
 
     /**
@@ -477,25 +486,25 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
     }
 
     /**
-     * For support writing to CSV -> string
+     * For support writing to CSV to string
      *
      * @return String
      */
     @Override
     public String toInput() {
+        StringBuilder sb = new StringBuilder();
         if (index <= 0) {
-            return "";
+            return sb.toString();
         }
-        String r = "";
         for (int i = 0; i < (index - 1); i++) {
-            r += "" + data[i] + "%";
+            sb.append(data[i]).append("%");
         }
-        r += "" + data[index - 1];
-        return r;
+        sb.append(data[index - 1]);
+        return sb.toString();
     }
 
     /**
-     * For support reading CSV -> array list
+     * For support reading CSV to array list
      *
      * @param input
      */

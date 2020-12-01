@@ -101,10 +101,6 @@ public enum MemberShip implements AbstractEnum, Comparable<MemberShip> {
     }
     //</editor-fold>
 
-    public static void main(String[] args) {
-        System.out.println(MemberShip.getValue("AU"));
-    }
-
     @Override
     public String getStringCode() {
         return this.getDatabaseCode();

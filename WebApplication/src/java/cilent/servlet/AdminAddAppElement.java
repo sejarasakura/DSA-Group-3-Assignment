@@ -6,7 +6,9 @@
 package cilent.servlet;
 
 import adt.ArrList;
+import adt.MapConverter;
 import adt.XHashedDictionary;
+import adt.XTreeDictionary;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.File;
@@ -49,17 +51,16 @@ public class AdminAddAppElement extends HttpServlet {
             return;
         }
 
-        // <editor-fold defaultstate="collapsed" desc="Modify json">
         String dir = System.getProperty("user.dir") + "/data/" + edit + ".json";
         JsonReader reader = new JsonReader(new FileReader(dir));
         Gson gson = new Gson();
-        Map map = gson.fromJson(reader, Map.class);
+        MapConverter map = new MapConverter(new XTreeDictionary(gson.fromJson(reader, Map.class)));
         base = (String) map.get("base");
-        Map base_map = (Map) map.get(base);
+        MapConverter base_map = new MapConverter(new XTreeDictionary(map.get(base)));
         if (t == null) {
             base_map.put(new_, getData(title_, url_));
         } else {
-            Map details_mp = (Map) base_map.get(t);
+            MapConverter details_mp = new MapConverter(new XTreeDictionary(base_map.get(t)));
             ArrList arr = details_mp.get("child") == null ? new ArrList()
                     : new ArrList((Iterable) details_mp.get("child"));
             arr.add(getData(title_, url_));
@@ -67,7 +68,6 @@ public class AdminAddAppElement extends HttpServlet {
             base_map.put(t, details_mp);
         }
         map.put(base, base_map);
-        // </editor-fold>
 
         // write new json string into jsonfile1.json file
         File jsonFile = new File(dir);
@@ -85,14 +85,12 @@ public class AdminAddAppElement extends HttpServlet {
         response.sendRedirect(str.toString());
     }
 
-    // <editor-fold defaultstate="collapsed" desc="Writing file function">
-    private Map getData(String title, String url) {
-        XHashedDictionary map = new XHashedDictionary();
+    private MapConverter getData(String title, String url) {
+        XTreeDictionary map = new XTreeDictionary();
         map.add("t", title);
         map.add("l", url);
-        return map.getMap();
+        return new MapConverter(map);
     }
-    // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

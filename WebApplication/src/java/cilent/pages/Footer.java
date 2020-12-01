@@ -6,13 +6,12 @@
 package cilent.pages;
 
 import adt.ArrList;
-import adt.XOrderedDictionary;
+import adt.XTreeDictionary;
 import adt.XStack;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import main.Datas;
 import main.WebConfig;
@@ -29,13 +28,13 @@ public class Footer extends AbstractPage {
 
     public ArrList get_footer() throws FileNotFoundException {
         if (main.Datas.settings.getValue("footer") != null) {
-            return this.get_old_footer((XOrderedDictionary) main.Datas.settings.getValue("footer"));
+            return this.get_old_footer((XTreeDictionary) main.Datas.settings.getValue("footer"));
         }
 
         return this.get_new_footer();
     }
 
-    private ArrList get_old_footer(XOrderedDictionary map) throws FileNotFoundException {
+    private ArrList get_old_footer(XTreeDictionary map) throws FileNotFoundException {
 
         ArrList<String> result = new ArrList<String>();
         //Load data of widget 1
@@ -66,8 +65,8 @@ public class Footer extends AbstractPage {
         String x = System.getProperty("user.dir") + "/data/footer.json";
         JsonReader reader = new JsonReader(new FileReader(x));
         Gson gson = new Gson();
-        XOrderedDictionary map = new XOrderedDictionary(gson.fromJson(reader, Map.class));
-        map = new XOrderedDictionary(map.getValue("footer"));
+        XTreeDictionary map = new XTreeDictionary(gson.fromJson(reader, WebConfig.WRITING_CLASS));
+        map = new XTreeDictionary(map.getValue("footer"));
         Datas.settings.add("footer", map);
         return get_old_footer(map);
     }
@@ -75,7 +74,7 @@ public class Footer extends AbstractPage {
     public String get_wiget_3(XStack data) {
         String result = "";
         while (!data.isEmpty()) {
-            result += build_html(new XOrderedDictionary(data.pop()));
+            result += build_html(new XTreeDictionary(data.pop()));
         }
         return result;
     }
@@ -83,7 +82,7 @@ public class Footer extends AbstractPage {
     public String get_wiget_6(XStack data) {
         String result = "";
         while (!data.isEmpty()) {
-            result += build_right_html(new XOrderedDictionary(data.pop()));
+            result += build_right_html(new XTreeDictionary(data.pop()));
         }
         return result;
     }
@@ -92,10 +91,10 @@ public class Footer extends AbstractPage {
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"row\">");
         sb.append("<div class=\"col-sm-12\">");
-        XOrderedDictionary x;
+        XTreeDictionary x;
         int show;
         while (!data.isEmpty()) {
-            x = new XOrderedDictionary(data.pop());
+            x = new XTreeDictionary(data.pop());
             show = Integer.parseInt(x.getValue("show").toString());
             if (show == 1) {
                 sb.append(String.format("<a href=\"%s\" class=\"fa %s pull-right fa-master\"></a>", x.getValue("l"), x.getValue("c")));
@@ -106,11 +105,11 @@ public class Footer extends AbstractPage {
         return sb.toString();
     }
 
-    private String build_html(XOrderedDictionary data) {
+    private String build_html(XTreeDictionary data) {
         return String.format("<%s><a class=\"f_a_link\" href=\"%s\">%s</a></%s>", data.getValue("s"), data.getValue("l"), data.getValue("t"), data.getValue("s"));
     }
 
-    private String build_right_html(XOrderedDictionary data) {
+    private String build_right_html(XTreeDictionary data) {
         return String.format("<div class=\"row\"> <div class=\"col-sm-12\"> <%s class=\"pull-right\"><a class=\"f_a_link\" href=\"%s\">%s</a></%s> </div> </div>",
                 data.getValue("s"), WebConfig.WEB_URL + data.getValue("l"), data.getValue("t"), data.getValue("s"));
     }

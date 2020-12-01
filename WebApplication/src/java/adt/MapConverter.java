@@ -17,65 +17,65 @@ import java.util.*;
  */
 public class MapConverter<K, V> implements Map<K, V>, Cloneable, java.io.Serializable {
 
-    XOrderedDictionary ref;
+    XTreeDictionary refences;
 
     public MapConverter() {
-        ref = new XOrderedDictionary();
+        refences = new XTreeDictionary();
     }
 
-    public MapConverter(XOrderedDictionary dic) {
-        ref = dic;
+    public MapConverter(XTreeDictionary dic) {
+        refences = dic;
     }
 
     @Override
     public int size() {
-        return ref.getSize();
+        return refences.getSize();
     }
 
     @Override
     public boolean isEmpty() {
-        return ref.isEmpty();
+        return refences.isEmpty();
     }
 
     @Override
     public boolean containsKey(Object o) {
-        return ref.contains((K) o);
+        return refences.contains((K) o);
     }
 
     @Override
     public boolean containsValue(Object o) {
-        return ref.getValue(o) != null;
+        return refences.getValue(o) != null;
     }
 
     @Override
     public V get(Object o) {
-        return (V) ref.getValue((K) o);
+        return (V) refences.getValue((K) o);
     }
 
     @Override
     public Object put(Object k, Object v) {
-        return ref.add(k, v);
+        return refences.add(k, v);
     }
 
     @Override
     public V remove(Object o) {
-        return (V) ref.remove((K) o);
+        return (V) refences.remove((K) o);
     }
 
     @Override
     public void putAll(Map map) {
         for (Iterator it = map.keySet().iterator(); it.hasNext();) {
             Object k = it.next();
-            ref.add(k, map.get(k));
+            refences.add(k, map.get(k));
         }
     }
 
     @Override
     public void clear() {
-        ref.clear();
+        refences.clear();
     }
 
-    //<editor-fold defaultstate="collapsed" desc="Unused Functions">
+    //<editor-fold defaultstate="collapsed" desc="useless Functions">
     @Override
     public Set keySet() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -99,12 +99,12 @@ public class MapConverter<K, V> implements Map<K, V>, Cloneable, java.io.Seriali
 
         @Override
         public Iterator iterator() {
-            return ref.newEntryIterator();
+            return refences.newEntryIterator();
         }
 
         @Override
         public boolean contains(Object o) {
-            return ref.contains(o);
+            return refences.contains(o);
         }
 
         @Override

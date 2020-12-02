@@ -170,7 +170,7 @@ public class Functions {
                 .append(" alert-dismissible fade in\">")
                 .append("<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>")
                 .append("<strong> Alert ")
-                .append(result.getCode())
+                .append(result.getCode().replace("-", ""))
                 .append(" ")
                 .append(result.getName())
                 .append("!!</strong> ")
@@ -204,16 +204,16 @@ public class Functions {
     public static boolean checkLogin(HttpServletResponse response, User user) throws IOException {
         ArrList u = null;
         if (user == null) {
-            response.sendRedirect((String) Datas.settings.getValue("pages/login"));
+            response.sendRedirect(Datas.settings.getValue("pages/login") + "?I=I-0012");
             return false;
         }
         if (!user.isNotNull()) {
-            response.sendRedirect((String) Datas.settings.getValue("pages/login"));
+            response.sendRedirect(Datas.settings.getValue("pages/login") + "?I=I-0012");
             return false;
         }
 
         if (user.getRole().isEmpty()) {
-            response.sendRedirect((String) Datas.settings.getValue("pages/login"));
+            response.sendRedirect(Datas.settings.getValue("pages/login") + "?I=I-0012");
             return false;
         }
         return true;

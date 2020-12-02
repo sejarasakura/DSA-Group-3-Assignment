@@ -23,6 +23,7 @@ public enum PaymentStatus implements AbstractEnum {
     Refunded(7, "Payment Refunded", "You refunded the payment."),
     Reversed(8, "Payment Reversed", "A payment was reversed due to a chargeback or other type of reversal. The funds have been removed from your account balance and returned to the buyer. The reason for the reversal is specified in the ReasonCode element."),
     Processed(9, "Payment Processed", "A payment has been accepted."),
+    // 付款無效
     Voided(10, "Payment Voided", "This authorization has been voided.");
 
     /**

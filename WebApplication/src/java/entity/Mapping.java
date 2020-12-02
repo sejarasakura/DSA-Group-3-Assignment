@@ -9,6 +9,7 @@ import adt.ArrList;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import java.util.*;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * Mapping class to store mapping details include booking destination and source
@@ -152,8 +153,15 @@ public class Mapping extends AbstractEntity<Mapping> {
     }
 
     private LatLng extractJson(String json) {
+        json = StringEscapeUtils.unescapeHtml3(json);
         LatLng data = new LatLng();
         data.extractJSON(json);
         return data;
+    }
+
+    public static void main(String[] arg) {
+        Mapping m = new Mapping();
+        m.extractDestinationJson("{ \"lat\": 3.114335808269884, &quot;lng&quot;: 101.68461846037636 }");
+        System.out.print(m.destination_id);
     }
 }

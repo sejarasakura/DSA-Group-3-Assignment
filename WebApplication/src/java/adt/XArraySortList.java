@@ -78,6 +78,7 @@ public class XArraySortList<T extends Comparable<? super T>> implements
         this(arrList.iterator());
     }
 
+    //=============================================================================
     /**
      * iterator
      *
@@ -201,6 +202,7 @@ public class XArraySortList<T extends Comparable<? super T>> implements
         return -1;
     }
 
+    //=============================================================================
     /**
      * get the element size
      *

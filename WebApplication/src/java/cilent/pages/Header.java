@@ -48,7 +48,7 @@ public class Header extends AbstractPage {
                 Logger.getLogger(Header.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            return get_pre_menu(new XTreeDictionary(main.Datas.settings.getValue("nav")));
+            return get_pre_menu((XTreeDictionary) main.Datas.settings.getValue("nav"));
         }
         return (new ArrList<String>());
     }

@@ -7,6 +7,7 @@ package cilent.servlet;
 
 import adt.ArrList;
 import cilent.IDManager;
+import csv.converter.PaymentMethodTypeConverter;
 import entity.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,10 +17,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import main.Datas;
 import main.Functions;
 import main.WebConfig;
 import xenum.BookingStatus;
 import xenum.CarType;
+import xenum.PaymentMethodType;
+import xenum.PaymentStatus;
 
 /**
  *
@@ -77,10 +81,10 @@ public class StartBookingNow extends HttpServlet {
             }
 
             /*generate ID*/
-            String booking_id = (String) IDManager.generateId(booking);
-            String chats_id = (String) IDManager.generateId(chats);
-            String mapping_id = (String) IDManager.generateId(mapping);
-            String payment_id = (String) IDManager.generateId(payment);
+            String booking_id = (String) IDManager.generateId(booking, true);
+            String chats_id = (String) IDManager.generateId(chats, true);
+            String mapping_id = (String) IDManager.generateId(mapping, true);
+            String payment_id = (String) IDManager.generateId(payment, true);
 
             booking = new Booking(booking_id, ride_note, CarType.getValue(booking_type), new Date(), "",
                     user.getId(), chats_id, mapping_id, payment_id, BookingStatus.WATING_ACCEPTED);
@@ -88,50 +92,43 @@ public class StartBookingNow extends HttpServlet {
             chats = new Chats(chats_id, null, null, new ArrList());
 
             mapping = new Mapping();
+            mapping.extractDestinationJson(to);
+            mapping.extractSourceJson(form);
+            mapping.setMap_id(mapping_id);
+            mapping.setFetch_date(new Date());
 
+            long date = System.currentTimeMillis() + 14 * 24 * 3600 * 1000;
+
+            payment = new Payment(payment_id, PaymentStatus.Created,
+                    PaymentMethodType.NOT_YET_PAID,
+                    new Date(), new Date(date), 0.00);
+
+            mapping.addThisToCsv();
             chats.addThisToCsv();
             booking.addThisToCsv();
+            payment.addThisToCsv();
+
+            Datas.currentBooking.enqueue(booking);
+            response.sendRedirect(WebConfig.WEB_URL + "pages/viewBooking.jsp");
         }
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

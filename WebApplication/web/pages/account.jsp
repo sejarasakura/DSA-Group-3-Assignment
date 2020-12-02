@@ -4,6 +4,9 @@
     Author     : ITSUKA KOTORI
 --%>
 
+<%@page import="adt.*"%>
+<%@page import="adt.interfaces.*"%>
+<%@page import="entity.*"%>
 <%@page import="xenum.*"%>
 <%@page import="entity.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
@@ -15,14 +18,16 @@
     main.Functions.checkLogin(response, user);
 
     // get the select option list
-    StringBuilder sb_role;
-    StringBuilder car_tpye;
+    StringBuilder sb_role = new StringBuilder();
+    StringBuilder car_tpye = new StringBuilder();
     for (MemberShip mb : MemberShip.values()) {
-        
+        sb_role.append("<option " + mb.getDatabaseCode() + " >" + mb.getName() + "</option>");
     }
-    
-    for (CarType ct : CarType.values()) {
-        
+
+    InterList<Car> cars = null;
+    if (user.isDriver()) {
+        ArrList<Car> all_car = new ArrList(AbstractEntity.readDataFormCsv(new Car()));
+        cars = all_car.searchByField("driver_id", user.getUser_id(), Car.class);
     }
 %>
 <html>
@@ -39,7 +44,7 @@
             .border-dark{border:5px solid #333;}
         </style>
         <div class="jumbotron text-center">
-            <h1>Lim sai keat</h1>
+            <h1><%= user.getName()%></h1>
         </div>
 
         <div class="container">
@@ -56,7 +61,8 @@
                             Username
                         </div>
                         <div class="col-sm-6">
-                            <input id="username" type="text" class="form-control" name="username" placeholder="Username">
+                            <input id="username" type="text" class="form-control" name="username" 
+                                   placeholder="Username" value="<%= user.getUsername()%>" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -64,7 +70,7 @@
                             Display name
                         </div>
                         <div class="col-sm-6">
-                            <input id="name" type="text" class="form-control" name="name" placeholder="Display Name">
+                            <input id="name" type="text" class="form-control" value="<%= user.getName()%>" name="name" placeholder="Display Name">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -72,7 +78,8 @@
                             Identity Card Number
                         </div>
                         <div class="col-sm-6">
-                            <input id="ic" type="text" class="form-control" name="ic" placeholder="IC Number">
+                            <input id="ic" type="text" class="form-control" name="ic" placeholder="IC Number format eg. xxxxxx-xx-xxxx" 
+                                   <%= user.getIc().length() > 12 ? "disabled" : "value=\"" + user.getIc() + "\""%>>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -80,7 +87,7 @@
                             Email
                         </div>
                         <div class="col-sm-6">
-                            <input id="email" type="email" class="form-control" name="email" placeholder="Email">
+                            <input id="email" type="email" value="<%= user.getEmail()%>" class="form-control" name="email" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -88,37 +95,49 @@
                             Phone Number
                         </div>
                         <div class="col-sm-6">
-                            <input id="phonenumber" type="text" class="form-control" name="phonenumber" placeholder="Phone number">
+                            <input id="phonenumber" type="text" value="<%= user.getPhoneNumber()%>" class="form-control" name="phonenumber" placeholder="Phone number">
                         </div>
                     </div>
+                    <%if (user.isCustomer()) {%>
                     <div class="form-group row">
                         <div class="col-sm-6">
-                            Member type/role
+                            Member type
                         </div>
                         <div class="col-sm-6">
-                            <Select class="form-control" name="role">
-                                <option></option>
+                            <Select class="form-control" name="role" value="<%= ((Customer) user).getRole()%>" >
+                                <%=sb_role.toString()%>
                             </Select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            Car type
-                        </div>
-                        <div class="col-sm-6">
-                            <Select class="form-control" name="car_type">
-                                <option></option>
-                            </Select>
-                        </div>
-                    </div>
+                    <%}%>
+                    <%if (user.isDriver()) {%>
+                    <!--                    <div class="form-group row">
+                                            <div class="col-sm-6">
+                                                Car type
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <Select class="form-control" name="car_type" value="" >
+                                                </Select>
+                                            </div>
+                                        </div>-->
                     <div class="form-group row">
                         <div class="col-sm-6">
                             Driver License
                         </div>
                         <div class="col-sm-6">
-                            <input id="license" type="text" class="form-control" name="license" placeholder="License">
+                            <input id="license" type="text" class="form-control" name="license" placeholder="License"
+                                   <%= ((Driver) user).getDriver_license().length() > 12 ? "disabled" : "value=\"" + ((Driver) user).getDriver_license() + "\""%>>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            My Cars
+                        </div>
+                        <div class="col-sm-6">
+                            <input type='button' class="form-control" value="add other car"/>
+                        </div>
+                    </div>
+                    <%}%>
                 </form>
             </div>
         </div>

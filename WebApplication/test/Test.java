@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import adt.ArrList;
+import adt.XArrayList;
 import com.google.gson.Gson;
 import java.io.*;
 import java.util.*;
@@ -17,14 +17,15 @@ public class Test {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        Integer[] intarr = {0, 4, 2, 6 ,9};
-        adt.XArraySortList_block<Integer> arrslotlist = new adt.XArraySortList_block<Integer> (intarr);
-        adt.ArrList<Integer> arrlist = new adt.ArrList<Integer> (arrslotlist);
-        adt.XQueue<Integer> qlist = new adt.XQueue<Integer> (arrslotlist);
-        adt.XStack<Integer> slist = new adt.XStack<Integer> (arrslotlist);
+        Integer[] intarr = {0, 4, 2, 6, 9};
+        adt.XArraySortList<Integer> arrslotlist = new adt.XArraySortList<Integer>(intarr);
+        XArrayList<Integer> arrlist = new XArrayList<Integer>(arrslotlist);
+        adt.XQueue<Integer> qlist = new adt.XQueue<Integer>(arrslotlist);
+        adt.XStack<Integer> slist = new adt.XStack<Integer>(arrslotlist);
         System.out.println(arrlist);
         System.out.println(arrslotlist);
         arrslotlist.sort();
@@ -38,9 +39,9 @@ public class Test {
         Gson gson = new Gson();
         Map map = gson.fromJson(jsonString, Map.class);
         Iterable<Object> ig1 = (Iterable<Object>) map.get("employee.salary");
-        adt.ArrList<Object> xlist  = new ArrList<Object>(ig1);
+        XArrayList<Object> xlist = new XArrayList<Object>(ig1);
         Map m2 = (Map) xlist.get(0);
         System.out.println(m2);
     }
-    
+
 }

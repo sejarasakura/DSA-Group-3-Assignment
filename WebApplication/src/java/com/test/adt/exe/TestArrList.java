@@ -17,7 +17,7 @@ public class TestArrList {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ArrList arrList = new ArrList();
+        XArrayList arrList = new XArrayList();
         arrList.add(2);
         arrList.add(5);
         arrList.add(90);

@@ -5,6 +5,8 @@
  */
 package cilent.pages;
 
+import adt.XArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -35,7 +37,7 @@ public abstract class AbstractPage {
      *
      * @return
      */
-    public abstract adt.ArrList<String> getHtmls();
+    public abstract XArrayList<String> getHtmls();
 
     /**
      * Constructor force user extends

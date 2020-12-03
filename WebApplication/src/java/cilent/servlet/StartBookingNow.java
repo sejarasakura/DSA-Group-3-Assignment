@@ -5,9 +5,8 @@
  */
 package cilent.servlet;
 
-import adt.ArrList;
+import adt.XArrayList;
 import cilent.IDManager;
-import csv.converter.PaymentMethodTypeConverter;
 import entity.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -89,7 +88,7 @@ public class StartBookingNow extends HttpServlet {
             booking = new Booking(booking_id, ride_note, CarType.getValue(booking_type), new Date(), "",
                     user.getId(), chats_id, mapping_id, payment_id, BookingStatus.WATING_ACCEPTED);
 
-            chats = new Chats(chats_id, null, null, new ArrList());
+            chats = new Chats(chats_id, null, null, new XArrayList());
 
             mapping = new Mapping();
             mapping.extractDestinationJson(to);

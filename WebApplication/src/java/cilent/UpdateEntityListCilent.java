@@ -5,7 +5,7 @@
  */
 package cilent;
 
-import adt.ArrList;
+import adt.XArrayList;
 import cilent.pages.EditEntity;
 import entity.AbstractEntity;
 import entity.json.ClassSaving;
@@ -38,8 +38,8 @@ public class UpdateEntityListCilent {
     protected HttpServletResponse response;
     protected AbstractEntity acture_entity;
     protected int j, identifier_index = -99;
-    protected ArrList<AbstractEntity> datas;
-    protected ArrList<Method> setter = new ArrList<Method>();
+    protected XArrayList<AbstractEntity> datas;
+    protected XArrayList<Method> setter = new XArrayList<Method>();
     protected adt.XHashedDictionary<String, String> parameter_data
             = new adt.XHashedDictionary<String, String>();
     public boolean status = false;
@@ -74,7 +74,7 @@ public class UpdateEntityListCilent {
         StringBuilder sb = new StringBuilder();
 
         // read data form file
-        datas = new ArrList(AbstractEntity.readDataFormCsv(entity));
+        datas = new XArrayList(AbstractEntity.readDataFormCsv(entity));
 
         // get class information
         classSaving = main.Functions.getSavingClass(entity.getClass());
@@ -139,7 +139,7 @@ public class UpdateEntityListCilent {
                         input = LOCAL_DATETIME_FORMAT.parse(parameter_data.getValue(pragma));
                         break;
                     case "adt.ArrList":
-                        input = new ArrList(parameter_data.getValue(pragma).split(","));
+                        input = new XArrayList(parameter_data.getValue(pragma).split(","));
                         break;
                     case "double":
                         input = Double.parseDouble(parameter_data.getValue(pragma));

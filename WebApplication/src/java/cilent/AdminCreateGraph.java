@@ -5,7 +5,7 @@
  */
 package cilent;
 
-import adt.ArrList;
+import adt.XArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.Random;
@@ -16,19 +16,19 @@ import java.util.Random;
  */
 public class AdminCreateGraph {
 
-    public ArrList<String> getSampleData() {
+    public XArrayList<String> getSampleData() {
 
         Gson gsonObj = new GsonBuilder().setPrettyPrinting().create();
         Graph_allocation map = null;
-        ArrList<Graph_allocation>[] list = new ArrList[3];
-        ArrList<String> result = new ArrList<String>();
+        XArrayList<Graph_allocation>[] list = new XArrayList[3];
+        XArrayList<String> result = new XArrayList<String>();
 
         int count = 100;
         int yVal = 100;
         Random rand = new Random();
 
         for (int j = 0; j < 3; j++) {
-            list[j] = new ArrList<Graph_allocation>();
+            list[j] = new XArrayList<Graph_allocation>();
             for (int i = 0; i < count; i++) {
                 yVal += rand.nextInt(11) - 5;
                 map = new Graph_allocation(i + 1, yVal);
@@ -46,7 +46,7 @@ public class AdminCreateGraph {
     public String getSampleData2() {
 
         Gson gsonObj2 = new Gson();
-        ArrList<Graph_allocation> list2 = new ArrList<Graph_allocation>();
+        XArrayList<Graph_allocation> list2 = new XArrayList<Graph_allocation>();
 
         list2.add(new Graph_allocation(10, 31));
         list2.add(new Graph_allocation(20, 65));

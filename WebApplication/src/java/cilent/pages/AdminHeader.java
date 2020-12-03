@@ -5,7 +5,7 @@
  */
 package cilent.pages;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.XTreeDictionary;
 import adt.XStack;
 import com.google.gson.Gson;
@@ -25,7 +25,7 @@ import main.WebConfig;
 public class AdminHeader extends AbstractPage {
 
     private int i = 0;
-    private ArrList<Boolean> arrlist = null;
+    private XArrayList<Boolean> arrlist = null;
 
     public AdminHeader(HttpServletRequest request) {
         super(request);
@@ -33,8 +33,8 @@ public class AdminHeader extends AbstractPage {
     }
 
     @Override
-    public ArrList<String> getHtmls() {
-        ArrList<String> result = new ArrList<String>();
+    public XArrayList<String> getHtmls() {
+        XArrayList<String> result = new XArrayList<String>();
         try {
             String x = System.getProperty("user.dir") + "/data/adminNav.json";
             JsonReader reader = new JsonReader(new FileReader(x));

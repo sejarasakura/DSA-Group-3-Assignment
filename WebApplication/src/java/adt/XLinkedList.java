@@ -14,7 +14,7 @@ import java.util.Iterator;
  * @author Woo Wei Qian
  * @param <E>
  */
-public class XLinkedList<E> implements InterList<E>, Iterable<E> {
+public class XLinkedList<E> implements InterList<E> {
 
     transient int size = 0, modCount = 0;
 
@@ -188,7 +188,7 @@ public class XLinkedList<E> implements InterList<E>, Iterable<E> {
 
     @Override
     public E[] toArray() {
-        return new ArrList<E>(this).toArray();
+        return new XArrayList<E>(this).toArray();
     }
 
     @Override
@@ -259,7 +259,6 @@ public class XLinkedList<E> implements InterList<E>, Iterable<E> {
             x = x.next;
             return r;
         }
-
     }
 
     /**

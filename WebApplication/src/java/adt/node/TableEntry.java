@@ -16,9 +16,24 @@ import java.util.Map;
  */
 public class TableEntry<K, V> implements Entry<K, V>, Map.Entry<K, V> {
 
+    /**
+     * Table key
+     */
     public final K key;
+
+    /**
+     * Table value
+     */
     public V value;
+
+    /**
+     * next pointer
+     */
     public TableEntry<K, V> next;
+
+    /**
+     * hash code.
+     */
     public final int hash;
 
     /**

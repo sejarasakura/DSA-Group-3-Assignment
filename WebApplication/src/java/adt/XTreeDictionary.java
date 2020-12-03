@@ -14,9 +14,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * This dictionary is to make the Dictionary arrange by the key<br>
+ * This dictionary will arrange the entry by the insertion order<br>
  * Unlike hashed dictionary is no ordered <br>
- * For storing data and reading data in JSON file purpose
+ * For writing, storing and reading data in JSON file purpose
  *
  * @author Lim sai keat
  * @param <K>
@@ -209,8 +209,8 @@ public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Clone
     }
 
     /**
-     * check the map is full or not <br>
-     * for linked tree map is not
+     * check the dictionary is full or not <br>
+     * for linked tree dictionary is full or not
      *
      * @return
      */
@@ -226,7 +226,7 @@ public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Clone
      */
     @Override
     public Iterator<K> newKeyIterator() {
-        return new XOrderedDictionaryIterator<K>() {
+        return new XTreeDictionaryIterator<K>() {
             @Override
             public K next() {
                 return nextNode().key;
@@ -241,7 +241,7 @@ public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Clone
      */
     @Override
     public Iterator<V> newValueIterator() {
-        return new XOrderedDictionaryIterator<V>() {
+        return new XTreeDictionaryIterator<V>() {
             @Override
             public V next() {
                 return nextNode().value;
@@ -255,27 +255,32 @@ public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Clone
      * @return
      */
     @Override
-    public Iterator<Node<K, V>> newEntryIterator() {
-        return new XOrderedDictionaryIterator<Node<K, V>>() {
+    public Iterator<XTreeDictionary.Node<K, V>> newEntryIterator() {
+        return new XTreeDictionaryIterator<XTreeDictionary.Node<K, V>>() {
             @Override
-            public Node<K, V> next() {
+            public XTreeDictionary.Node<K, V> next() {
                 return nextNode();
             }
         };
     }
 
     /**
-     * Convert the linked ordered dictionary string value
+     * Convert the linked ordered dictionary string output
      *
      * @return
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Iterator i = newEntryIterator(); i.hasNext();) {
-            sb.append(i.next()).append("\n");
-        }
-        return sb.toString();
+        return this.toString("\n");
+    }
+
+    /**
+     * Convert the linked ordered dictionary to HTML output
+     *
+     * @return
+     */
+    public String toHtml() {
+        return this.toString("<br />");
     }
 
     /**
@@ -296,7 +301,7 @@ public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Clone
      */
     @Override
     public InterList<K> getKeyList() {
-        return new ArrList<K>(this.newKeyIterator());
+        return new XArrayList<K>(this.newKeyIterator());
     }
 
     /**
@@ -306,7 +311,7 @@ public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Clone
      */
     @Override
     public InterList<V> getValueList() {
-        return new ArrList<V>(this.newValueIterator());
+        return new XArrayList<V>(this.newValueIterator());
     }
 
     /**
@@ -316,7 +321,7 @@ public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Clone
      */
     @Override
     public InterList<? extends Entry<K, V>> getEntryList() {
-        return new ArrList<Node<K, V>>(this.newEntryIterator());
+        return new XArrayList<Node<K, V>>(this.newEntryIterator());
     }
 
     /**
@@ -635,6 +640,14 @@ public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Clone
                 pivotLeft != null ? pivotLeft.height : 0) + 1;
     }
 
+    private String toString(String seperator) {
+        StringBuilder sb = new StringBuilder();
+        for (Iterator i = newEntryIterator(); i.hasNext();) {
+            sb.append(i.next()).append(seperator);
+        }
+        return sb.toString();
+    }
+
     /**
      * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      *
@@ -710,7 +723,7 @@ public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Clone
 
         @Override
         public String toString() {
-            return key + "=" + value;
+            return "[" + key + "] = " + value;
         }
 
         /**
@@ -740,13 +753,13 @@ public final class XTreeDictionary<K, V> implements InterDictionary<K, V>, Clone
         }
     }
 
-    private abstract class XOrderedDictionaryIterator<T> implements Iterator<T> {
+    private abstract class XTreeDictionaryIterator<T> implements Iterator<T> {
 
         Node<K, V> next = startNode.next;
         Node<K, V> lastReturned = null;
         int expectedModCount = xModCount;
 
-        XOrderedDictionaryIterator() {
+        XTreeDictionaryIterator() {
         }
 
         @Override

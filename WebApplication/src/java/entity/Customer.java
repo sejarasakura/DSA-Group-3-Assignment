@@ -6,7 +6,7 @@
  */
 package entity;
 
-import adt.ArrList;
+import adt.XArrayList;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
@@ -116,7 +116,7 @@ public class Customer extends User<Customer> {
         x.setUsername("94032523");
         x.setCurrent_booking_id("94032523");
         x.setPassword("94032523");
-        ArrList<Field> field = new ArrList(cls.getDeclaredFields());
+        XArrayList<Field> field = new XArrayList(cls.getDeclaredFields());
         Class<?> current = cls;
         Class c = Class.forName("java.lang.String");
         while (current.getSuperclass() != null) {
@@ -137,12 +137,12 @@ public class Customer extends User<Customer> {
             Customer x = new Customer();
             x.setUser_id("C0011");
             x.setUser_id("C0011");
-            ArrList<String> d = new ArrList<String>();
+            XArrayList<String> d = new XArrayList<String>();
             d.add("Haha");
             d.add("gG.COM");
             d.add("I CAN FLY");
 
-            ArrList<Customer> employees = new ArrList<>();
+            XArrayList<Customer> employees = new XArrayList<>();
             employees.add(x);
 
             Writer writer = Files.newBufferedWriter(Paths.get(x.getStorageFile()));

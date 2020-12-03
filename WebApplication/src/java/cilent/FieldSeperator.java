@@ -5,7 +5,7 @@
  */
 package cilent;
 
-import adt.ArrList;
+import adt.XArrayList;
 import entity.AbstractEntity;
 import java.lang.reflect.Field;
 
@@ -16,12 +16,12 @@ import java.lang.reflect.Field;
  */
 public class FieldSeperator<T extends AbstractEntity> {
 
-    private ArrList<Field> fields;
+    private XArrayList<Field> fields;
     private T x;
 
     public FieldSeperator() {
         Class cls = x.getClass();
-        fields = new ArrList(cls.getDeclaredFields());
+        fields = new XArrayList(cls.getDeclaredFields());
         Class<?> current = cls;
         while (current.getSuperclass() != null) {
             current = current.getSuperclass();
@@ -29,11 +29,11 @@ public class FieldSeperator<T extends AbstractEntity> {
         }
     }
 
-    public ArrList<Field> getFields() {
+    public XArrayList<Field> getFields() {
         return fields;
     }
 
-    public void setFields(ArrList<Field> fields) {
+    public void setFields(XArrayList<Field> fields) {
         this.fields = fields;
     }
 

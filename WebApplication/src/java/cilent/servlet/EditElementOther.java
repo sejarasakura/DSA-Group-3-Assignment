@@ -5,9 +5,8 @@
  */
 package cilent.servlet;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.MapConverter;
-import adt.XHashedDictionary;
 import adt.XTreeDictionary;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -16,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,8 +55,8 @@ public class EditElementOther extends HttpServlet {
         String base = (String) map.get("base");
         String front_id = new StringBuilder().append(base).append(".").append(t).append(".").toString();
         MapConverter base_map = new MapConverter(new XTreeDictionary(map.get(base)));
-        ArrList new_detias_map = new ArrList();
-        ArrList child;
+        XArrayList new_detias_map = new XArrayList();
+        XArrayList child;
         File jsonFile = new File(dir);
         StringBuilder str = new StringBuilder();
         String id, x_title, x_url, x_s, x_c, x_counts;
@@ -100,7 +98,7 @@ public class EditElementOther extends HttpServlet {
                         }
                     } else {
                         x_count = Integer.parseInt(x_counts) + 1;
-                        child = new ArrList();
+                        child = new XArrayList();
                         for (int j = 0; j < x_count; j++) {
                             x_title = request.getParameter(id + j + ".t");
                             x_url = request.getParameter(id + j + ".l");
@@ -149,7 +147,7 @@ public class EditElementOther extends HttpServlet {
     private MapConverter getData(String title, String url) {
         XTreeDictionary map = new XTreeDictionary();
         if (title.contains(".child")) {
-            ArrList al = new ArrList();
+            XArrayList al = new XArrayList();
             al.add(getData("new", "#"));
             map.add("child", al.toArray());
             title = title.split(".child")[0];
@@ -159,7 +157,7 @@ public class EditElementOther extends HttpServlet {
         return new MapConverter(map);
     }
 
-    private MapConverter getDataChild(String title, String url, ArrList x) {
+    private MapConverter getDataChild(String title, String url, XArrayList x) {
         XTreeDictionary map = new XTreeDictionary();
         map.add("child", x.toArray());
         map.add("l", url);

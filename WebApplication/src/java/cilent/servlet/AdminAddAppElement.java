@@ -5,9 +5,8 @@
  */
 package cilent.servlet;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.MapConverter;
-import adt.XHashedDictionary;
 import adt.XTreeDictionary;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -61,8 +60,8 @@ public class AdminAddAppElement extends HttpServlet {
             base_map.put(new_, getData(title_, url_));
         } else {
             MapConverter details_mp = new MapConverter(new XTreeDictionary(base_map.get(t)));
-            ArrList arr = details_mp.get("child") == null ? new ArrList()
-                    : new ArrList((Iterable) details_mp.get("child"));
+            XArrayList arr = details_mp.get("child") == null ? new XArrayList()
+                    : new XArrayList((Iterable) details_mp.get("child"));
             arr.add(getData(title_, url_));
             details_mp.put("child", arr.toArray());
             base_map.put(t, details_mp);

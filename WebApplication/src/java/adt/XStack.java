@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  * @author Chun Phang Chew
  * @param <T> adt.interfaces.InterStack;
  */
-public final class XStack<T> implements InterStack<T>, Iterable<T> {
+public final class XStack<T> implements InterStack<T> {
 
     private int n;
     private SingleNode<T> first;

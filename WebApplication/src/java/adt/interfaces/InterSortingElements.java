@@ -10,7 +10,7 @@ package adt.interfaces;
  * @author Chew chun pang
  * @param <T>
  */
-public interface InterSortingElements<T> {
+public interface InterSortingElements<T> extends InterList<T> {
 
     /**
      * The Sorting Method Only If need Array method pls implement ArrayList

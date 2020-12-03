@@ -10,9 +10,10 @@ package adt.interfaces;
  * @author Chun Phang Chew
  * @param <T>
  */
-public interface InterStack<T> {
+public interface InterStack<T> extends Iterable<T> {
 
     /**
+     * .
      * Adds the given item to the top of the stack.
      *
      * @param item

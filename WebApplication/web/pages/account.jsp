@@ -25,9 +25,21 @@
     }
 
     InterList<Car> cars = null;
+    XTreeDictionary<String,Plate> plates = null;
+    InterList<Plate> tempPlate = null;
+    // Driver special
     if (user.isDriver()) {
-        ArrList<Car> all_car = new ArrList(AbstractEntity.readDataFormCsv(new Car()));
+        XArrayList<Car> all_car = new XArrayList(AbstractEntity.readDataFormCsv(new Car()));
         cars = all_car.searchByField("driver_id", user.getUser_id(), Car.class);
+        XArrayList<Plate> all_plate = new XArrayList(AbstractEntity.readDataFormCsv(new Plate()));
+        plates = new XTreeDictionary();
+        for (Car car : cars) {
+            tempPlate = null;
+            tempPlate = all_plate.searchByField("plate_id", car.getPlate_id(), Plate.class);
+            if (tempPlate == null ? false : !tempPlate.isEmpty()) {
+                plates.add(car.getPlate_id(), tempPlate.get(0));
+            }
+        }
     }
 %>
 <html>
@@ -54,7 +66,8 @@
                 </div>
             </center>
             <div class="well well-sm">
-                <h5><b>Personal Information</b></h5>
+                <h3><b>Personal Information</b></h3>
+                <br>
                 <form>
                     <div class="form-group row">
                         <div class="col-sm-6">

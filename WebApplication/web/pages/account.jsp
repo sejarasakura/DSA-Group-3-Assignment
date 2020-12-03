@@ -25,11 +25,13 @@
     }
 
     InterList<Car> cars = null;
-    XTreeDictionary<String,Plate> plates = null;
+    XTreeDictionary<String, Plate> plates = null;
     InterList<Plate> tempPlate = null;
     // Driver special
     if (user.isDriver()) {
         XArrayList<Car> all_car = new XArrayList(AbstractEntity.readDataFormCsv(new Car()));
+        XArrayList all_taxi = new XArrayList(AbstractEntity.readDataFormCsv(new Taxi()));
+        all_car.addAll(all_taxi);
         cars = all_car.searchByField("driver_id", user.getUser_id(), Car.class);
         XArrayList<Plate> all_plate = new XArrayList(AbstractEntity.readDataFormCsv(new Plate()));
         plates = new XTreeDictionary();
@@ -124,15 +126,6 @@
                     </div>
                     <%}%>
                     <%if (user.isDriver()) {%>
-                    <!--                    <div class="form-group row">
-                                            <div class="col-sm-6">
-                                                Car type
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <Select class="form-control" name="car_type" value="" >
-                                                </Select>
-                                            </div>
-                                        </div>-->
                     <div class="form-group row">
                         <div class="col-sm-6">
                             Driver License
@@ -150,6 +143,18 @@
                             <input type='button' class="form-control" value="add other car"/>
                         </div>
                     </div>
+                        <%for (int i = 0; i < cars.size(); i++) {%>
+                        
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    
+                                </div>
+                                <div class="panel-body">
+                                    
+                                </div>
+                            </div>
+
+                        <%}%>
                     <%}%>
                 </form>
             </div>

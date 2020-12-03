@@ -108,6 +108,16 @@ public class Car extends AbstractEntity<Car> {
         this.driver_id = driver_id;
     }
 
+    public boolean isTaxi() {
+        if (this == null) {
+            return false;
+        }
+        if (this.carType == null) {
+            return false;
+        }
+        return this.carType == CarType.TAXI_RENT_6SEAT || this.carType == CarType.TAXI_rent;
+    }
+
     @Override
     public boolean isNotNull() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

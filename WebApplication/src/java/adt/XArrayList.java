@@ -88,7 +88,8 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      * eg.(Arrlist, Queue, Stack, ..)
      */
     public XArrayList(Iterable<T> iterable) {
-        this(iterable.iterator());
+        this();
+        internal_addAll(iterable.iterator());
     }
 
     /**
@@ -98,15 +99,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      */
     public XArrayList(Iterator<T> iterator) {
         this();
-        if (iterator != null) {
-            while (iterator.hasNext()) {
-                try {
-                    this.add(iterator.next());
-                } catch (Exception ex) {
-
-                }
-            }
-        }
+        internal_addAll(iterator);
     }
 
     /**
@@ -644,6 +637,26 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     private void CheckRange(int _index) {
         if (_index < 0 || _index >= index) {
             throw new IndexOutOfBoundsException();
+        }
+    }
+
+    public void addAll(Iterable<T> iterable) {
+        internal_addAll(iterable.iterator());
+    }
+
+    public void addAll(Iterator<T> iterator) {
+        internal_addAll(iterator);
+    }
+
+    private void internal_addAll(Iterator<T> iterator) {
+        if (iterator != null) {
+            while (iterator.hasNext()) {
+                try {
+                    this.add(iterator.next());
+                } catch (Exception ex) {
+
+                }
+            }
         }
     }
 

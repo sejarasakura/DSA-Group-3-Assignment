@@ -6,7 +6,7 @@
 <%@page import="main.Datas" %>
 <%@page import="main.WebConfig" %>
 <%@page import="cilent.pages.Header" %>
-<%@page import="adt.ArrList" %>
+<%@page import="adt.XArrayList" %>
 <%@page import="entity.User" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <% User u = main.Functions.getUserSession(request);%>
@@ -25,7 +25,7 @@
         </div>
         <ul class="nav navbar-nav">
             <%
-                ArrList<String> lists = new Header(request).getHtmls();
+                XArrayList<String> lists = new Header(request).getHtmls();
                 for (String list : lists) {
                     out.write(list);
                 }

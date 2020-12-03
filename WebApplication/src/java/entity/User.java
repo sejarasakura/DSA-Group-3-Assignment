@@ -5,7 +5,7 @@
  */
 package entity;
 
-import adt.ArrList;
+import adt.XArrayList;
 import com.opencsv.bean.CsvBindByName;
 
 /**
@@ -173,7 +173,7 @@ public abstract class User<T> extends AbstractEntity<User> {
         this.phoneNumber = phoneNumber;
     }
 
-    public static boolean searchUsername(ArrList<? extends User> users, String data) {
+    public static boolean searchUsername(XArrayList<? extends User> users, String data) {
         for (User user : users) {
             if (user.username == null ? data == null : user.username.equals(data)) {
                 return true;
@@ -182,7 +182,7 @@ public abstract class User<T> extends AbstractEntity<User> {
         return false;
     }
 
-    public static boolean searchEmail(ArrList<? extends User> users, String data) {
+    public static boolean searchEmail(XArrayList<? extends User> users, String data) {
         for (User user : users) {
             if (user.email == null ? data == null : user.email.equals(data)) {
                 return true;

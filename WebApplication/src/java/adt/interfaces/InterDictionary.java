@@ -5,13 +5,12 @@
  */
 package adt.interfaces;
 
-import adt.ArrList;
 import adt.node.Entry;
 import java.util.Iterator;
 
 /**
  *
- * @author Lim Sai Keat
+ * @author Lim Sai Keat, Lai hong wah
  * @param <K>
  * @param <V>
  */

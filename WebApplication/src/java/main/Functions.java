@@ -5,7 +5,7 @@
  */
 package main;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.XHashedDictionary;
 import com.univocity.parsers.csv.CsvWriterSettings;
 import entity.AbstractEntity;
@@ -41,7 +41,7 @@ public class Functions {
         Datas.settings.add("pages/register", WebConfig.WEB_URL + "pages/register.jsp");
         Datas.settings.add("pages/account", WebConfig.WEB_URL + "pages/account.jsp");
         Datas.settings.add("widget/cartype-select", "../widget/carousel_feeinfo.jsp");
-        Datas.allMessage = new ArrList(AbstractEntity.readDataFormCsv(new InfoMessage()));
+        Datas.allMessage = new XArrayList(AbstractEntity.readDataFormCsv(new InfoMessage()));
         return 1;
     }
 
@@ -86,17 +86,17 @@ public class Functions {
 
     public static String friendlyJsonTitle(String res) {
 
-        ArrList<String> data = null;
+        XArrayList<String> data = null;
         if (res.contains("-")) {
-            data = new ArrList<String>(res.split("-"));
+            data = new XArrayList<String>(res.split("-"));
         }
 
         if (res.contains("_")) {
-            data = new ArrList<String>(res.split("_"));
+            data = new XArrayList<String>(res.split("_"));
         }
 
         if (data == null) {
-            data = new ArrList<String>();
+            data = new XArrayList<String>();
             data.add(res);
         }
         StringBuilder sb = new StringBuilder();
@@ -157,7 +157,7 @@ public class Functions {
 
     private static String displayErrorMessage(String e) {
         if (main.WebConfig.DEBUG_MODE) {
-            Datas.allMessage = new ArrList<InfoMessage>((Iterator<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage()));
+            Datas.allMessage = new XArrayList<InfoMessage>((Iterator<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage()));
         }
         InfoMessage result = Datas.allMessage.searchByField("code", e, InfoMessage.class).get(0);
         if (result == null) {
@@ -202,7 +202,7 @@ public class Functions {
     }
 
     public static boolean checkLogin(HttpServletResponse response, User user) throws IOException {
-        ArrList u = null;
+        XArrayList u = null;
         if (user == null) {
             response.sendRedirect(Datas.settings.getValue("pages/login") + "?I=I-0012");
             return false;
@@ -240,12 +240,12 @@ public class Functions {
         return TYPE_SWITCH.contains(type);
     }
 
-    public static ArrList<Boolean> getAdminBarStatus(HttpServletRequest request) {
+    public static XArrayList<Boolean> getAdminBarStatus(HttpServletRequest request) {
         return main.Datas.admin_bar_status;
     }
 
-    public static ArrList<Boolean> createAdminBarStatus(HttpServletRequest request, int x) {
-        ArrList<Boolean> status = new ArrList<Boolean>();
+    public static XArrayList<Boolean> createAdminBarStatus(HttpServletRequest request, int x) {
+        XArrayList<Boolean> status = new XArrayList<Boolean>();
         for (int i = 0; i < x; i++) {
             status.add(Boolean.FALSE);
         }
@@ -253,7 +253,7 @@ public class Functions {
         return status;
     }
 
-    public static void setAdminBarStatus(HttpServletRequest request, ArrList<Boolean> v) {
+    public static void setAdminBarStatus(HttpServletRequest request, XArrayList<Boolean> v) {
         main.Datas.admin_bar_status = v;
     }
 

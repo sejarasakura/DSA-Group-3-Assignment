@@ -5,7 +5,7 @@
  */
 package entity;
 
-import adt.ArrList;
+import adt.XArrayList;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
@@ -30,7 +30,7 @@ public class Review extends AbstractEntity {
     private String paymentNumber;
 
     @CsvCustomBindByName(converter = ArrListConverter.class)
-    private ArrList<String> comments;
+    private XArrayList<String> comments;
 
     @CsvBindByName
     private int driverRating;
@@ -74,11 +74,11 @@ public class Review extends AbstractEntity {
         this.paymentNumber = paymentNumber;
     }
 
-    public ArrList<String> getComments() {
+    public XArrayList<String> getComments() {
         return comments;
     }
 
-    public void setComments(ArrList<String> comments) {
+    public void setComments(XArrayList<String> comments) {
         this.comments = comments;
     }
 

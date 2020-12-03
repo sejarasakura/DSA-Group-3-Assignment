@@ -23,7 +23,7 @@ import adt.interfaces.InterList;
  * @author Lim sai keat
  * @param <T>
  */
-public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T>, Cloneable, java.io.Serializable {
+public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Serializable {
 
     /**
      * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -57,7 +57,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
     /**
      * Constructor
      */
-    public ArrList() {
+    public XArrayList() {
         this(1);
     }
 
@@ -66,7 +66,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      *
      * @param initialCapacity
      */
-    public ArrList(int initialCapacity) {
+    public XArrayList(int initialCapacity) {
         index = 0;
         data = (T[]) new Object[initialCapacity];
     }
@@ -76,7 +76,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      *
      * @param array
      */
-    public ArrList(T[] array) {
+    public XArrayList(T[] array) {
         index = array.length;
         data = array;
     }
@@ -87,7 +87,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      * @param iterable to make good integrate to other Iterable object
      * eg.(Arrlist, Queue, Stack, ..)
      */
-    public ArrList(Iterable<T> iterable) {
+    public XArrayList(Iterable<T> iterable) {
         this(iterable.iterator());
     }
 
@@ -96,7 +96,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      *
      * @param iterator to make to integrate to other Iterable.iterator object
      */
-    public ArrList(Iterator<T> iterator) {
+    public XArrayList(Iterator<T> iterator) {
         this();
         if (iterator != null) {
             while (iterator.hasNext()) {
@@ -369,7 +369,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
     @Override
     public InterList<Integer> search(T element) {
 
-        InterList<Integer> result = new ArrList<Integer>();
+        InterList<Integer> result = new XArrayList<Integer>();
 
         for (int i = 0; i < index - 1; i++) {
             if (data[i].equals(data[i + 1])) {
@@ -404,7 +404,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      */
     @Override
     public InterList<T> searchByMethod(Method method, Object element) {
-        ArrList<T> result = new ArrList<T>();
+        XArrayList<T> result = new XArrayList<T>();
         try {
             for (T d : data) {
                 if (method.invoke(d).equals(element)) {
@@ -414,7 +414,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
         } catch (SecurityException
                 | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException ex) {
-            Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
@@ -428,7 +428,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      */
     @Override
     public InterList<T> searchByField(Field field, Object element) {
-        ArrList<T> result = new ArrList<T>();
+        XArrayList<T> result = new XArrayList<T>();
         try {
             for (T d : data) {
                 if (field.get(d).equals(element)) {
@@ -437,7 +437,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
             }
         } catch (SecurityException
                 | IllegalAccessException | IllegalArgumentException ex) {
-            Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
@@ -452,7 +452,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      */
     @Override
     public InterList<T> searchByField(String field, Object element, Class<?> _class) {
-        ArrList<T> result = new ArrList<T>();
+        XArrayList<T> result = new XArrayList<T>();
         try {
             Field f = _class.getDeclaredField(field);
             if (f.isAccessible()) {
@@ -463,7 +463,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
             }
         } catch (NoSuchMethodException | SecurityException | IllegalArgumentException
                 | NoSuchFieldException ex) {
-            Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
@@ -532,7 +532,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
             return notsecure_concateField(field1, field2, _class, "%");
         } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException
                 | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -558,10 +558,10 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
             } catch (ClassNotFoundException | SecurityException | NoSuchMethodException
                     | IllegalArgumentException | NoSuchFieldException
                     | IllegalAccessException | InvocationTargetException ex) {
-                Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -579,7 +579,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
         } catch (NoSuchFieldException | NoSuchMethodException | ClassNotFoundException
                 | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException ex) {
-            Logger.getLogger(ArrList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -661,7 +661,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
      * @throws InvocationTargetException
      */
     private InterList<String> notsecure_getField(Method m, Field f, Class<?> _class) throws NoSuchFieldException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ArrList<String> r = new ArrList<>();
+        XArrayList<String> r = new XArrayList<>();
 
         for (int i = 0; i < index; i++) {
             r.add((m != null ? m.invoke(data[i]).toString() : f.get(data[i]).toString()));
@@ -691,7 +691,7 @@ public class ArrList<T> implements InterList<T>, InterAdvanceList<T>, Iterable<T
         Method m2 = null;
         String s1, s2;
         StringBuilder sb = new StringBuilder();
-        ArrList<String> ar = new ArrList<String>();
+        XArrayList<String> ar = new XArrayList<String>();
         if (!f1.isAccessible()) {
             m1 = _class.getDeclaredMethod(main.Functions.fieldToGetter(field1));
         }

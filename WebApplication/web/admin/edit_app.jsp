@@ -4,12 +4,12 @@
     Author     : ITSUKA KOTORI
 --%>
 
-<%@page import="adt.ArrList" %>
+<%@page import="adt.XArrayList" %>
 <%@page import="cilent.pages.EditAdmin" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%
     EditAdmin editadmin = new EditAdmin(request);
-    ArrList<String> view = editadmin.getHtmls();
+    XArrayList<String> view = editadmin.getHtmls();
 %>
 <!DOCTYPE html>
 <html>

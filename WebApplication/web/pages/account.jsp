@@ -4,6 +4,7 @@
     Author     : ITSUKA KOTORI
 --%>
 
+<%@page import="main.WebConfig"%>
 <%@page import="adt.*"%>
 <%@page import="adt.interfaces.*"%>
 <%@page import="entity.*"%>
@@ -19,30 +20,12 @@
 
     // get the select option list
     StringBuilder sb_role = new StringBuilder();
-    StringBuilder car_tpye = new StringBuilder();
+    String edit = request.getParameter("edit");
+
     for (MemberShip mb : MemberShip.values()) {
         sb_role.append("<option " + mb.getDatabaseCode() + " >" + mb.getName() + "</option>");
     }
 
-    InterList<Car> cars = null;
-    XTreeDictionary<String, Plate> plates = null;
-    InterList<Plate> tempPlate = null;
-    // Driver special
-    if (user.isDriver()) {
-        XArrayList<Car> all_car = new XArrayList(AbstractEntity.readDataFormCsv(new Car()));
-        XArrayList all_taxi = new XArrayList(AbstractEntity.readDataFormCsv(new Taxi()));
-        all_car.addAll(all_taxi);
-        cars = all_car.searchByField("driver_id", user.getUser_id(), Car.class);
-        XArrayList<Plate> all_plate = new XArrayList(AbstractEntity.readDataFormCsv(new Plate()));
-        plates = new XTreeDictionary();
-        for (Car car : cars) {
-            tempPlate = null;
-            tempPlate = all_plate.searchByField("plate_id", car.getPlate_id(), Plate.class);
-            if (tempPlate == null ? false : !tempPlate.isEmpty()) {
-                plates.add(car.getPlate_id(), tempPlate.get(0));
-            }
-        }
-    }
 %>
 <html>
     <head>
@@ -56,6 +39,10 @@
         <style>
             .img-control{height:200px;width:200px;margin-top:-60px; margin-bottom:20px;}
             .border-dark{border:5px solid #333;}
+            .change-img{opacity: 0.84;position: absolute; color: #666; margin: 8px;border-radius: 50%;height: 50px; width: 50px;outline: none!important;}
+            .change-img:hover{color: #666;opacity: 0.99;}
+            .fa-camera{opacity: 1.0!important;}
+            .change-img:focus, .change-img:focused{outline: none;}
         </style>
         <div class="jumbotron text-center">
             <h1><%= user.getName()%></h1>
@@ -64,97 +51,111 @@
         <div class="container">
             <center>
                 <div class="img-control">
+                    <button type="button" class="btn btn-default change-img" data-toggle="modal" data-target="#pic_upload">
+                        <i class="fa fa-camera" style="font-size:24px"></i>
+                    </button>
+                    <jsp:include page='../widget/pic_upload_modal.jsp'/>
                     <img src="<%= main.Functions.getProfileUrl(request)%>" class="img-circle border-dark" alt="Cinque Terre" height="100%" width="100%" >
                 </div>
             </center>
-            <div class="well well-sm">
-                <h3><b>Personal Information</b></h3>
+            <div class="well well-lg">
                 <br>
                 <form>
-                    <div class="form-group row">
+                    <div class="row">
                         <div class="col-sm-6">
-                            Username
+                            <h4><b>Personal Information</b></h4>
                         </div>
                         <div class="col-sm-6">
-                            <input id="username" type="text" class="form-control" name="username" 
-                                   placeholder="Username" value="<%= user.getUsername()%>" disabled>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            Display name
-                        </div>
-                        <div class="col-sm-6">
-                            <input id="name" type="text" class="form-control" value="<%= user.getName()%>" name="name" placeholder="Display Name">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            Identity Card Number
-                        </div>
-                        <div class="col-sm-6">
-                            <input id="ic" type="text" class="form-control" name="ic" placeholder="IC Number format eg. xxxxxx-xx-xxxx" 
-                                   <%= user.getIc().length() > 12 ? "disabled" : "value=\"" + user.getIc() + "\""%>>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            Email
-                        </div>
-                        <div class="col-sm-6">
-                            <input id="email" type="email" value="<%= user.getEmail()%>" class="form-control" name="email" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            Phone Number
-                        </div>
-                        <div class="col-sm-6">
-                            <input id="phonenumber" type="text" value="<%= user.getPhoneNumber()%>" class="form-control" name="phonenumber" placeholder="Phone number">
-                        </div>
-                    </div>
-                    <%if (user.isCustomer()) {%>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            Member type
-                        </div>
-                        <div class="col-sm-6">
-                            <Select class="form-control" name="role" value="<%= ((Customer) user).getRole()%>" >
-                                <%=sb_role.toString()%>
-                            </Select>
-                        </div>
-                    </div>
-                    <%}%>
-                    <%if (user.isDriver()) {%>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            Driver License
-                        </div>
-                        <div class="col-sm-6">
-                            <input id="license" type="text" class="form-control" name="license" placeholder="License"
-                                   <%= ((Driver) user).getDriver_license().length() > 12 ? "disabled" : "value=\"" + ((Driver) user).getDriver_license() + "\""%>>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            My Cars
-                        </div>
-                        <div class="col-sm-6">
-                            <input type='button' class="form-control" value="add other car"/>
-                        </div>
-                    </div>
-                        <%for (int i = 0; i < cars.size(); i++) {%>
-                        
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Registration name
                                 </div>
-                                <div class="panel-body">
-                                    
+                                <div class="col-sm-6">
+                                    <input id="username" type="text" class="form-control" name="username" 
+                                           placeholder="Username" value="<%= user.getUsername()%>" disabled>
                                 </div>
                             </div>
-
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Public display name
+                                </div>
+                                <div class="col-sm-6">
+                                    <input id="name" type="text" class="form-control" value="<%= user.getName()%>" name="name" placeholder="Display Name">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Identity card number
+                                </div>
+                                <div class="col-sm-6">
+                                    <input id="ic" type="text" class="form-control" name="ic" placeholder="IC Number format eg. xxxxxx-xx-xxxx" 
+                                           <%= user.getIc().length() > 12 ? "disabled" : "value=\"" + user.getIc() + "\""%>>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Current email Address
+                                </div>
+                                <div class="col-sm-6">
+                                    <input id="email" type="email" value="<%= user.getEmail()%>" class="form-control" name="email" placeholder="Email">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Mobile phone-number
+                                </div>
+                                <div class="col-sm-6">
+                                    <input id="phonenumber" type="text" value="<%= user.getPhoneNumber()%>" class="form-control" name="phonenumber" placeholder="Phone number">
+                                </div>
+                            </div>
+                        </li>
+                        <%if (user.isCustomer()) {%>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Selected membership plan
+                                </div>
+                                <div class="col-sm-6">
+                                    <Select class="form-control" name="role" value="<%= ((Customer) user).getRole()%>" >
+                                        <%=sb_role.toString()%>
+                                    </Select>
+                                </div>
+                            </div>
+                        </li>
                         <%}%>
+                        <%if (user.isDriver()) {%>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Driving license
+                                </div>
+                                <div class="col-sm-6">
+                                    <input id="license" type="text" class="form-control" name="license" placeholder="License"
+                                           <%= ((Driver) user).getDriver_license().length() > 12 ? "disabled" : "value=\"" + ((Driver) user).getDriver_license() + "\""%>>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <br>
+                    <%if (edit == null ? false : edit.equals("car")) {%>
+                    <jsp:include page='../widget/my_cars.jsp'>
+                        <jsp:param name='id' value="${param.id}"/>
+                    </jsp:include>
+                    <%} else {%>
+                    <jsp:include page='../widget/my_cars.jsp'/>
+                    <%}%>
                     <%}%>
                 </form>
             </div>

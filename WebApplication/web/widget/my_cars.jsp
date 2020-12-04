@@ -22,7 +22,7 @@
     main.Functions.checkLogin(response, user);
 
     // List of cars, and plate
-    StringBuilder sb_cartype = null;
+    StringBuilder sb_cartype = new StringBuilder();
     InterList<Car> cars = null;
     InterList<Plate> tempPlate = null;
     XTreeDictionary<String, Plate> plates = null;

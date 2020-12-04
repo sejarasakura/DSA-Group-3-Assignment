@@ -128,7 +128,7 @@
                                     Selected membership plan
                                 </div>
                                 <div class="col-sm-6">
-                                    <Select class="form-control" name="role" value="<%= ((Customer) user).getRole()%>" >
+                                    <Select class="form-control" name="role" value="<%= ((Customer) user).getMemberType().getDatabaseCode()%>" >
                                         <%=sb_role.toString()%>
                                     </Select>
                                 </div>

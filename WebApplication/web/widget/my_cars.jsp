@@ -22,6 +22,7 @@
     main.Functions.checkLogin(response, user);
 
     // List of cars, and plate
+    StringBuilder sb_
     InterList<Car> cars = null;
     InterList<Plate> tempPlate = null;
     XTreeDictionary<String, Plate> plates = null;
@@ -158,13 +159,16 @@
                     <div class="row">
                         <div class="col-sm-6">Transport registered date</div>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="plate_lic" name="plate_lic" 
+                            <input type="datetime-local" class="form-control" id="reg_date" name="reg_date"
                                    value="<%= WebConfig.LOCAL_DATETIME_FORMAT.format(cars.get(i).getRegDate())%>">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">Service type provide</div>
-                        <div class="col-sm-6"><%= cars.get(i).getCarType().getName()%></div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="plate_lic" name="plate_lic" 
+                                   value="<%= cars.get(i).getCarType().getName()%>">
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">Car plate</div>

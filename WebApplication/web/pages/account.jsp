@@ -23,7 +23,7 @@
     String edit = request.getParameter("edit");
 
     for (MemberShip mb : MemberShip.values()) {
-        sb_role.append("<option ").append(mb.getDatabaseCode()).append(" >").append(mb.getName()).append("</option>");
+        sb_role.append("<option value='").append(mb.getDatabaseCode()).append("' >").append(mb.getName()).append("</option>");
     }
 %>
 <html>

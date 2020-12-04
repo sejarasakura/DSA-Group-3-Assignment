@@ -135,7 +135,7 @@ public class EditAdmin extends AbstractPage {
     private String displayProperties(Iterable prop, String key) {
         String title = main.Functions.friendlyJsonTitle(key);
         StringBuilder sb = new StringBuilder();
-        sb.append("<div class=\"panel panel-default\">")
+        sb.append("<div class=\"panel panel-default\" id=\"").append(key.replace("-", "_")).append("\">")
                 .append("<div class=\"panel-heading\">").append("<div class=\"row\"> <div class=\"col-sm-6\"> ")
                 .append(title).append(" </div> <div class=\"col-sm-6\"> <button type=\"button\" class=\"btn btn-default pull-right\" id=\"p-h-")
                 .append(key).append("\"> <span class=\"glyphicon glyphicon-plus\"></span> show </button> </div> </div>")
@@ -167,7 +167,7 @@ public class EditAdmin extends AbstractPage {
                 .append("<div class=\"form-group row\">")
                 .append("<div class=\"col-sm-12\">")
                 .append("<a href=\"edit_app.jsp?edit=").append(edit)
-                .append("&t=").append(key).append("\" class=\"btn btn-default pull-right\">Edit</a>")
+                .append("&t=").append(key).append("#").append(key.replace("-", "_")).append("\" class=\"btn btn-default pull-right\">Edit</a>")
                 .append("</div></div></div></div>");
         return sb.toString();
     }
@@ -175,7 +175,7 @@ public class EditAdmin extends AbstractPage {
     private String editProperties(Iterable prop, String key) {
         String title = main.Functions.friendlyJsonTitle(key);
         StringBuilder sb = new StringBuilder();
-        sb.append("<form action=\"/WebApplication/admin/EditElement\" method=\"post\">").append("<div class=\"panel panel-default\">")
+        sb.append("<form action=\"/WebApplication/admin/EditElement\" method=\"post\" id=\"").append(key.replace("-", "_")).append("\">").append("<div class=\"panel panel-default\">")
                 .append("<div class=\"panel-heading\">").append("<div class=\"row\"> <div class=\"col-sm-6\"> ")
                 .append(title).append(" </div> <div class=\"col-sm-6\"> <button type=\"button\" class=\"btn btn-default pull-right\" id=\"p-h-")
                 .append(key).append("\"> <span id='add-btn' class=\"glyphicon glyphicon-plus\"></span> show </button> </div> </div>")
@@ -279,7 +279,7 @@ public class EditAdmin extends AbstractPage {
         String title = main.Functions.friendlyJsonTitle(key);
         XArrayList datas = prop.getValue("child") == null ? new XArrayList() : new XArrayList((Iterable) prop.getValue("child"));
         StringBuilder sb = new StringBuilder();
-        sb.append("<div class=\"panel panel-default\">")
+        sb.append("<div class=\"panel panel-default\" id=\"").append(key.replace("-", "_")).append("\">")
                 .append("<div class=\"panel-heading\">")
                 .append("<h2>").append(title).append("</h2><br>")
                 .append(display_group((String) prop.getValue("t"), (String) prop.getValue("l")))
@@ -296,7 +296,7 @@ public class EditAdmin extends AbstractPage {
         sb.append("<div class=\"form-group row\">")
                 .append("<div class=\"col-sm-12\">")
                 .append("<a href=\"edit_app.jsp?edit=").append(edit)
-                .append("&t=").append(key).append("\" class=\"btn btn-default pull-right\">Edit</a>")
+                .append("&t=").append(key).append("#").append(key.replace("-", "_")).append("\" class=\"btn btn-default pull-right\">Edit</a>")
                 .append("</div>")
                 .append("</div>");
         sb.append("</div>")
@@ -308,7 +308,7 @@ public class EditAdmin extends AbstractPage {
         String title = main.Functions.friendlyJsonTitle(key);
         XArrayList datas = prop.getValue("child") == null ? new XArrayList() : new XArrayList((Iterable) prop.getValue("child"));
         StringBuilder sb = new StringBuilder();
-        sb.append("<div class=\"panel panel-default\">")
+        sb.append("<div class=\"panel panel-default\" id=\"").append(key.replace("-", "_")).append("\">")
                 .append("<form action=\"/WebApplication/admin/update-ele\" method=\"post\">")
                 .append("<div class=\"panel-heading\">")
                 .append("<h2>").append(title).append("</h2><br>")

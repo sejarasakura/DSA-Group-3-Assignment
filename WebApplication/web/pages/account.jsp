@@ -154,6 +154,7 @@
                 <%if (edit == null ? false : edit.equals("car") && user.isDriver()) {%>
                     <jsp:include page='../widget/my_cars.jsp'>
                         <jsp:param name='id' value="${param.id}"/>
+                        <jsp:param name='edit' value="${param.edit}"/>
                     </jsp:include>
                 <%} else {%>
                     <jsp:include page='../widget/my_cars.jsp'/>

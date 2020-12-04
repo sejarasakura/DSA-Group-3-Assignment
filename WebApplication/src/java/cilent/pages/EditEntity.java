@@ -5,7 +5,7 @@
  */
 package cilent.pages;
 
-import adt.ArrList;
+import adt.XArrayList;
 import cilent.IDManager;
 import entity.AbstractEntity;
 import entity.json.ClassSaving;
@@ -27,8 +27,8 @@ public class EditEntity extends AbstractPage {
 
     private final String enchar = "\u2022";
     private final ClassSaving classSaving;
-    private ArrList<AbstractEntity> datas;
-    private final ArrList<Method> feilds = new ArrList<Method>();
+    private XArrayList<AbstractEntity> datas;
+    private final XArrayList<Method> feilds = new XArrayList<Method>();
     private int j, identifier_index;
     private Object id;
     private String parameter_id;
@@ -70,7 +70,7 @@ public class EditEntity extends AbstractPage {
         stringBuilder.append("<tbody>");
         generateFooter(refence);
         Iterator obj = AbstractEntity.readDataFormCsv(refence);
-        datas = (obj == null) ? new ArrList() : new ArrList(obj);
+        datas = (obj == null) ? new XArrayList() : new XArrayList(obj);
         for (int i = 0; i < datas.size(); i++) {
             generateBody(datas.get(i));
         }
@@ -226,7 +226,7 @@ public class EditEntity extends AbstractPage {
                 break;
             case "adt.ArrList":
                 write_type = "text";
-                value = data == null ? "" : ((ArrList) data).toInput();
+                value = data == null ? "" : ((XArrayList) data).toInput();
                 break;
             case "double":
                 write_type = "number";
@@ -263,7 +263,7 @@ public class EditEntity extends AbstractPage {
         }
         if (fb.getType().contains("xenum.")) {
             _class_ref = Class.forName(fb.getType());
-            ArrList<AbstractEnum> enum_list = new ArrList<AbstractEnum>((AbstractEnum[]) _class_ref.getMethod("values").invoke(null));
+            XArrayList<AbstractEnum> enum_list = new XArrayList<AbstractEnum>((AbstractEnum[]) _class_ref.getMethod("values").invoke(null));
             stringBuilder.append("<td>")
                     .append("<div class=\"form-group\">")
                     .append("<select class=\"\"")
@@ -291,7 +291,7 @@ public class EditEntity extends AbstractPage {
     }
 
     @Override
-    public ArrList<String> getHtmls() {
+    public XArrayList<String> getHtmls() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

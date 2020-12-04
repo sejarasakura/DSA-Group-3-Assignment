@@ -5,7 +5,7 @@
  */
 package main;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.XHashedDictionary;
 import adt.XQueue;
 import entity.Admin;
@@ -49,19 +49,19 @@ public class Datas {
      *
      * @author Lim Sai Keat all the online driver
      */
-    public static ArrList<Driver> drivers;
+    public static XArrayList<Driver> drivers;
 
     /**
      *
      * @author Lim Sai Keat all the online admin
      */
-    public static ArrList<Admin> admins;
+    public static XArrayList<Admin> admins;
 
     /**
      *
      * @author Lim Sai Keat all the online customer
      */
-    public static ArrList<Customer> customers;
+    public static XArrayList<Customer> customers;
 
     /**
      *
@@ -73,7 +73,7 @@ public class Datas {
      *
      * @author Lim Sai Keat all the current request booking
      */
-    public static ArrList<InfoMessage> allMessage;
+    public static XArrayList<InfoMessage> allMessage;
 
     /**
      *
@@ -85,20 +85,20 @@ public class Datas {
      *
      * @author Lim sai keat admin bar status
      */
-    public static ArrList<Boolean> admin_bar_status;
+    public static XArrayList<Boolean> admin_bar_status;
 
     /**
      * Prevent too many time of reload array
      *
      * @author Lim sai keat use pages footer is fixed
      */
-    public static ArrList<String> pages_footer;
+    public static XArrayList<String> pages_footer;
 
     /**
      * Prevent to many reload of array list
      *
      * @author Lim sai keat admin header is fixed
      */
-    public static ArrList<String> admin_header;
+    public static XArrayList<String> admin_header;
 
 }

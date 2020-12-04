@@ -5,9 +5,10 @@
 --%>
 
 <%@page import="xenum.CarType"%>
-<%@page import="adt.ArrList"%>
+<%@page import="adt.XArrayList"%>
+<%@ page import="adt.XArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% ArrList<CarType> types = new ArrList(xenum.CarType.values()); %>
+<% XArrayList<CarType> types = new XArrayList(xenum.CarType.values()); %>
 
 
 <div class="form-group row">

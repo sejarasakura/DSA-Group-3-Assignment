@@ -5,7 +5,7 @@
  */
 package entity;
 
-import adt.ArrList;
+import adt.XArrayList;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import csv.converter.ArrListConverter;
@@ -26,12 +26,12 @@ public class Chats extends AbstractEntity {
     private String user_id_2;
 
     @CsvCustomBindByName(converter = ArrListConverter.class)
-    private ArrList<String> chats_details_id;
+    private XArrayList<String> chats_details_id;
 
     public Chats() {
     }
 
-    public Chats(String chats_id, String user_id_1, String user_id_2, ArrList<String> chats_details_id) {
+    public Chats(String chats_id, String user_id_1, String user_id_2, XArrayList<String> chats_details_id) {
         this.chats_id = chats_id;
         this.user_id_1 = user_id_1;
         this.user_id_2 = user_id_2;
@@ -62,11 +62,11 @@ public class Chats extends AbstractEntity {
         this.chats_id = chats_id;
     }
 
-    public ArrList<String> getChats_details_id() {
+    public XArrayList<String> getChats_details_id() {
         return chats_details_id;
     }
 
-    public void setChats_details_id(ArrList<String> chats_details_id) {
+    public void setChats_details_id(XArrayList<String> chats_details_id) {
         this.chats_details_id = chats_details_id;
     }
 

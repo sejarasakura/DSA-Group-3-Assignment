@@ -14,7 +14,6 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import xenum.AbstractEnum;
-import adt.interfaces.InterList;
 
 /**
  *
@@ -22,8 +21,7 @@ import adt.interfaces.InterList;
  * @param <T>
  *
  */
-public class XArraySortList<T extends Comparable<? super T>> implements
-        InterSortingElements<T>, InterList<T>, Iterable<T> {
+public class XArraySortList<T extends Comparable<? super T>> implements InterSortingElements<T> {
 
     /**
      * Initial capacity of the list

@@ -5,7 +5,6 @@
  */
 package entity;
 
-import adt.ArrList;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import java.util.*;

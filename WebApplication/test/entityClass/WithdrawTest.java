@@ -5,7 +5,7 @@
  */
 package entityClass;
 
-import adt.ArrList;
+import adt.XArrayList;
 import entity.AbstractEntity;
 import entity.Withdraw;
 import java.util.Collection;
@@ -332,7 +332,7 @@ public class WithdrawTest {
 
         Withdraw x = new Withdraw();
 
-        ArrList<Withdraw> employees = new ArrList(AbstractEntity.readDataFormCsv(x));
+        XArrayList<Withdraw> employees = new XArrayList(AbstractEntity.readDataFormCsv(x));
 
     }
 

@@ -5,7 +5,7 @@
  */
 package cilent.pages;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.XTreeDictionary;
 import adt.XStack;
 import com.google.gson.Gson;
@@ -40,7 +40,7 @@ public class Header extends AbstractPage {
     }
 
     @Override
-    public ArrList<String> getHtmls() {
+    public XArrayList<String> getHtmls() {
         if (main.Datas.settings.getValue("nav") == null) {
             try {
                 return get_new_menu();
@@ -50,10 +50,10 @@ public class Header extends AbstractPage {
         } else {
             return get_pre_menu((XTreeDictionary) main.Datas.settings.getValue("nav"));
         }
-        return (new ArrList<String>());
+        return (new XArrayList<String>());
     }
 
-    private ArrList get_new_menu() throws FileNotFoundException {
+    private XArrayList get_new_menu() throws FileNotFoundException {
 
         String x = System.getProperty("user.dir") + "/data/navigationBar.json";
         JsonReader reader = new JsonReader(new FileReader(x));
@@ -98,9 +98,9 @@ public class Header extends AbstractPage {
                 + "\">" + data.getValue("t") + "</a></li>";
     }
 
-    private ArrList get_pre_menu(XTreeDictionary map) {
+    private XArrayList get_pre_menu(XTreeDictionary map) {
 
-        ArrList<String> result = new ArrList<String>();
+        XArrayList<String> result = new XArrayList<String>();
         boolean author_user = true;
         // all user
         XStack all_user = new XStack((Iterable) map.getValue("all_user"));

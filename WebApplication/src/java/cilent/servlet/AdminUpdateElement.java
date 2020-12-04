@@ -5,7 +5,7 @@
  */
 package cilent.servlet;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.MapConverter;
 import adt.XTreeDictionary;
 import com.google.gson.Gson;
@@ -56,7 +56,7 @@ public class AdminUpdateElement extends HttpServlet {
         MapConverter base_map = new MapConverter(new XTreeDictionary(map.get(base)));
         MapConverter details_map = new MapConverter(new XTreeDictionary(base_map.get(t)));
         // </editor-fold>
-        ArrList child = new ArrList();
+        XArrayList child = new XArrayList();
         File jsonFile = new File(dir);
         StringBuilder str = new StringBuilder();
         String d_title, d_url;

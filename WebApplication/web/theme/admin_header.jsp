@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="cilent.pages.AdminHeader" %>
-<%@page import="adt.ArrList" %>
+<%@page import="adt.XArrayList" %>
 <%@page import="main.Datas" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 

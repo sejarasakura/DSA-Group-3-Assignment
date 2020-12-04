@@ -5,7 +5,7 @@
  */
 package cilent.pages;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.XTreeDictionary;
 import adt.XStack;
 import com.google.gson.Gson;
@@ -26,7 +26,7 @@ public class Footer extends AbstractPage {
         super(request);
     }
 
-    public ArrList get_footer() throws FileNotFoundException {
+    public XArrayList get_footer() throws FileNotFoundException {
         if (main.Datas.settings.getValue("footer") != null) {
             return this.get_old_footer((XTreeDictionary) main.Datas.settings.getValue("footer"));
         }
@@ -34,9 +34,9 @@ public class Footer extends AbstractPage {
         return this.get_new_footer();
     }
 
-    private ArrList get_old_footer(XTreeDictionary map) throws FileNotFoundException {
+    private XArrayList get_old_footer(XTreeDictionary map) throws FileNotFoundException {
 
-        ArrList<String> result = new ArrList<String>();
+        XArrayList<String> result = new XArrayList<String>();
         //Load data of widget 1
         XStack widget = new XStack((Iterable) map.getValue("widget-1"));
         result.add("<div class=\"col-sm-3\">");
@@ -61,7 +61,7 @@ public class Footer extends AbstractPage {
         return result;
     }
 
-    private ArrList get_new_footer() throws FileNotFoundException {
+    private XArrayList get_new_footer() throws FileNotFoundException {
         String x = System.getProperty("user.dir") + "/data/footer.json";
         JsonReader reader = new JsonReader(new FileReader(x));
         Gson gson = new Gson();
@@ -120,7 +120,7 @@ public class Footer extends AbstractPage {
     }
 
     @Override
-    public ArrList<String> getHtmls() {
+    public XArrayList<String> getHtmls() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

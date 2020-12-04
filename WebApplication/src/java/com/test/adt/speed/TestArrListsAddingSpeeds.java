@@ -29,7 +29,7 @@ public class TestArrListsAddingSpeeds {
     @Param({"1000000"})
     private int N;
 
-    private ArrList<Object> DATA_FOR_TESTING_1;
+    private XArrayList<Object> DATA_FOR_TESTING_1;
     private List<Object> DATA_FOR_TESTING;
     private ArrayList<Object> DATA_FOR_TESTING_5;
     private XQueue<Object> DATA_FOR_TESTING_2;
@@ -50,7 +50,7 @@ public class TestArrListsAddingSpeeds {
     public void setup() {
         DATA_FOR_TESTING = createData();
         DATA_FOR_TESTING_4 = new Object[N];
-        DATA_FOR_TESTING_1 = new ArrList<Object>();
+        DATA_FOR_TESTING_1 = new XArrayList<Object>();
         DATA_FOR_TESTING_2 = new XQueue<Object>();
         DATA_FOR_TESTING_3 = new XStack<Object>();
         DATA_FOR_TESTING_5 = new ArrayList<Object>();

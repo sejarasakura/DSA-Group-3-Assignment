@@ -5,7 +5,7 @@
 --%>
 <%@page import="main.Datas"%>
 <%@page import="cilent.pages.Footer" %>
-<%@page import="adt.ArrList" %>
+<%@page import="adt.XArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 

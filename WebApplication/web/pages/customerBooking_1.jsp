@@ -5,12 +5,13 @@
 --%>
 
 <%@page import="xenum.CarType"%>
-<%@page import="adt.ArrList"%>
+<%@page import="adt.XArrayList"%>
 <%@page import="main.Datas"%>
 <%@page import="main.WebConfig"%>
+<%@ page import="adt.XArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%String pages = (String) Datas.settings.getValue("widget/cartype-select");%>
-<% ArrList<CarType> types = new ArrList(xenum.CarType.values());%>
+<% XArrayList<CarType> types = new XArrayList(xenum.CarType.values());%>
 <!DOCTYPE html>
 
 <html>

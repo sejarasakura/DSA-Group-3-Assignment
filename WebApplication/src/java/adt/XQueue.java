@@ -16,7 +16,7 @@ import adt.interfaces.InterQuene;
  * @author Lai Hong Wah
  * @param <T>
  */
-public class XQueue<T> implements InterQuene<T>, Iterable<T> {
+public class XQueue<T> implements InterQuene<T> {
 
     private final DoubleNode<T> head;
     private final DoubleNode<T> tail;

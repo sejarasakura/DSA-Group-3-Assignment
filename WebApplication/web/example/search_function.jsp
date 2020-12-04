@@ -31,7 +31,7 @@
         </jsp:include>
 
         <%
-            ArrList list = new ArrList(AbstractEntity.readDataFormCsv(new Customer()));
+            XArrayList list = new XArrayList(AbstractEntity.readDataFormCsv(new Customer()));
             InterList list2 = list.searchByField("memberType", MemberShip.NORMAL, Customer.class);
             XArraySortList slist = new XArraySortList(list);
             slist.sort("phoneNumber", Customer.class);

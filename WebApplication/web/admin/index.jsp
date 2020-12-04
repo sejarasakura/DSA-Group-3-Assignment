@@ -5,16 +5,17 @@
 --%>
 
 <%@page import="java.util.*" %>
-<%@page import="adt.ArrList" %>
+<%@page import="adt.XArrayList" %>
 <%@page import="com.google.gson.Gson" %>
 <%@page import="cilent.AdminCreateGraph"%>
 <%@page import="cilent.Graph_allocation" %>
 <%@page import="org.apache.commons.text.StringEscapeUtils" %>
+<%@ page import="adt.XArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 
 <%
     AdminCreateGraph acg = new AdminCreateGraph();
-    ArrList<String> dataPoints = acg.getSampleData();
+    XArrayList<String> dataPoints = acg.getSampleData();
     String dataPoints2 = acg.getSampleData2();
 %>
 

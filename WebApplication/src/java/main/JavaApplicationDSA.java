@@ -1,6 +1,6 @@
 package main;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.XStack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,8 +33,8 @@ public class JavaApplicationDSA {
         stack.push(new Point(0, 9));
         stack.push(new Point(5, 7));
         stack.push(new Point(12, -4));
-        ArrList a = new ArrList(stack);
-        System.out.println(g.toJson(a, ArrList.class));
+        XArrayList a = new XArrayList(stack);
+        System.out.println(g.toJson(a, XArrayList.class));
         System.out.println(main.WebConfig.api_key);
     }
 

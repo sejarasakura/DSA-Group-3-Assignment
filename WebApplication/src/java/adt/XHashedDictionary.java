@@ -113,21 +113,6 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
     }
 
     /**
-     *
-     * @param x
-     * @param n
-     * @return
-     */
-    private TableEntry<K, V> addMap(Map.Entry<K, V> x, TableEntry<K, V> n) {
-        if (x.getKey() == null) {
-            return null;
-        }
-        int hash = hash(x.getKey().hashCode());
-        int i = indexFor(hash, table.length);
-        return new TableEntry<K, V>(hash, x.getKey(), x.getValue(), n);
-    }
-
-    /**
      * Constructor
      *
      * @param data
@@ -333,17 +318,17 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
 
     @Override
     public InterList<K> getKeyList() {
-        return new ArrList<K>(this.newKeyIterator());
+        return new XArrayList<K>(this.newKeyIterator());
     }
 
     @Override
     public InterList<V> getValueList() {
-        return new ArrList<V>(this.newValueIterator());
+        return new XArrayList<V>(this.newValueIterator());
     }
 
     @Override
     public InterList<? extends Entry<K, V>> getEntryList() {
-        return new ArrList<TableEntry<K, V>>(this.newEntryIterator());
+        return new XArrayList<TableEntry<K, V>>(this.newEntryIterator());
     }
 
     /**

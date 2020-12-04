@@ -5,7 +5,7 @@
  */
 package main;
 
-import adt.ArrList;
+import adt.XArrayList;
 import entity.json.ClassSaving;
 import entity.json.CreateDisplayClassJson;
 import java.text.DecimalFormat;
@@ -75,7 +75,7 @@ public class WebConfig {
     /**
      * Saving details
      */
-    public final static ArrList<ClassSaving> CLASS_SAVING = new CreateDisplayClassJson().readData(WebConfig.PROJECT_URL + "data/access.json");
+    public final static XArrayList<ClassSaving> CLASS_SAVING = new CreateDisplayClassJson().readData(WebConfig.PROJECT_URL + "data/access.json");
 
     /**
      * Session key details

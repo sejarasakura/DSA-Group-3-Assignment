@@ -5,7 +5,7 @@
  */
 package cilent;
 
-import adt.ArrList;
+import adt.XArrayList;
 import entity.AbstractEntity;
 import entity.Admin;
 import entity.Customer;
@@ -43,10 +43,10 @@ public class Login {
         if (username == null || password == null) {
             return;
         }
-        ArrList u;
-        main.Datas.admins = new ArrList(AbstractEntity.readDataFormCsv(new Admin()));
-        main.Datas.drivers = new ArrList(AbstractEntity.readDataFormCsv(new Driver()));
-        main.Datas.customers = new ArrList(AbstractEntity.readDataFormCsv(new Customer()));
+        XArrayList u;
+        main.Datas.admins = new XArrayList(AbstractEntity.readDataFormCsv(new Admin()));
+        main.Datas.drivers = new XArrayList(AbstractEntity.readDataFormCsv(new Driver()));
+        main.Datas.customers = new XArrayList(AbstractEntity.readDataFormCsv(new Customer()));
         user = checkUserLogin(main.Datas.customers);
         if (user == null) {
             user = checkUserLogin(main.Datas.drivers);
@@ -56,7 +56,7 @@ public class Login {
         }
     }
 
-    public User checkUserLogin(ArrList<? extends User> l) {
+    public User checkUserLogin(XArrayList<? extends User> l) {
         for (int i = 0; i < l.size(); i++) {
             if (((l.get(i).getUsername().equals(username)) || l.get(i).getEmail().equals(username))
                     && (l.get(i).getPassword() == null ? password == null : l.get(i).getPassword().equals(password))) {

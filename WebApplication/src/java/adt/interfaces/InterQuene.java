@@ -10,7 +10,7 @@ package adt.interfaces;
  * @author Lai Hong Wah
  * @param <T>
  */
-public interface InterQuene<T> {
+public interface InterQuene<T> extends Iterable<T> {
 
     /**
      * Returns true if the Queue contains no elements, otherwise false.

@@ -13,10 +13,26 @@ package adt.node;
  */
 public interface Entry<K, V> {
 
+    /**
+     * Get key
+     *
+     * @return
+     */
     K getKey();
 
+    /**
+     * get Value
+     *
+     * @return
+     */
     V getValue();
 
+    /**
+     * get value
+     *
+     * @param value
+     * @return
+     */
     V setValue(V value);
 
     @Override

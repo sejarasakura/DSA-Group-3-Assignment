@@ -7,7 +7,7 @@ package adt.interfaces;
 
 /**
  *
- * @author Lim Sai Keat
+ * @author Lim Sai Keat, Chew chun phang
  * @param <T>
  */
 public interface InterList<T> extends Iterable<T> {

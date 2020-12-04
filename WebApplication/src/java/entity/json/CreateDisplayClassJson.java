@@ -5,7 +5,7 @@
  */
 package entity.json;
 
-import adt.ArrList;
+import adt.XArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -27,14 +27,14 @@ import main.WebConfig;
  */
 public class CreateDisplayClassJson {
 
-    private final ArrList<Class> class_s = new ArrList<Class>();
+    private final XArrayList<Class> class_s = new XArrayList<Class>();
 
 //    public static void main(String[] args) {
 //        ClassSaving c = new ClassSaving();
 //        new CreateDisplayClassJson().readData(WebConfig.PROJECT_URL + "data/access.json");
 //    }
     public void generateJsonFile() throws IOException {
-        ArrList<ClassSaving> data = new ArrList<ClassSaving>();
+        XArrayList<ClassSaving> data = new XArrayList<ClassSaving>();
         addAllClassToList();
         for (Class cs : class_s) {
             data.add(getCS(cs));
@@ -52,12 +52,12 @@ public class CreateDisplayClassJson {
         }
     }
 
-    public ArrList<ClassSaving> readData(String dir) {
+    public XArrayList<ClassSaving> readData(String dir) {
         try {
             Gson gson = new Gson();
-            Type typeMyType = new TypeToken<ArrList<ClassSaving>>() {
+            Type typeMyType = new TypeToken<XArrayList<ClassSaving>>() {
             }.getType();
-            ArrList<ClassSaving> data;
+            XArrayList<ClassSaving> data;
             JsonReader reader = new JsonReader(new FileReader(dir));
             data = gson.fromJson(reader, typeMyType);
             return data;
@@ -84,8 +84,8 @@ public class CreateDisplayClassJson {
 
     public ClassSaving getCS(Class cls) {
         ClassSaving result = new ClassSaving();
-        ArrList<FeildAccessbility> fields = new ArrList<FeildAccessbility>();
-        ArrList<Field> field = new ArrList(cls.getDeclaredFields());
+        XArrayList<FeildAccessbility> fields = new XArrayList<FeildAccessbility>();
+        XArrayList<Field> field = new XArrayList(cls.getDeclaredFields());
         Class<?> current = cls;
         FeildAccessbility fieldAccess;
         while (current.getSuperclass() != null) {

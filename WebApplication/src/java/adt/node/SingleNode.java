@@ -11,8 +11,15 @@ package adt.node;
  * @param <T>
  */
 public class SingleNode<T> {
-    
+
+    /**
+     * Item
+     */
     public T item;
+
+    /**
+     * next pointer
+     */
     public SingleNode next;
-    
+
 }

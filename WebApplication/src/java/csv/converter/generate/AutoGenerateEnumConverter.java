@@ -5,6 +5,8 @@
  */
 package csv.converter.generate;
 
+import adt.XArrayList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,7 +22,7 @@ public class AutoGenerateEnumConverter {
     private String _package = "xenum.";
     private final String DIR = "C:\\Users\\ITSUKA KOTORI\\Documents\\GitHub\\DSA-Group-3-Assignment\\WebApplication\\src\\java\\xenum";
     private final String DIR_SAVE = "C:\\Users\\ITSUKA KOTORI\\Documents\\GitHub\\DSA-Group-3-Assignment\\WebApplication\\data\\code";
-    adt.ArrList<String> data = new adt.ArrList<String>();
+    XArrayList<String> data = new XArrayList<String>();
 
     /**
      * @param args the command line arguments

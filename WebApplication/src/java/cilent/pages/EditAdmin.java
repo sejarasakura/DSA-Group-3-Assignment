@@ -5,7 +5,7 @@
  */
 package cilent.pages;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.XTreeDictionary;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -77,8 +77,8 @@ public class EditAdmin extends AbstractPage {
     }
 
     @Override
-    public ArrList<String> getHtmls() {
-        ArrList<String> result = new ArrList<String>();
+    public XArrayList<String> getHtmls() {
+        XArrayList<String> result = new XArrayList<String>();
         result.add(ERROR);
         if (base == null) {
             return result;
@@ -95,8 +95,8 @@ public class EditAdmin extends AbstractPage {
         return result;
     }
 
-    private ArrList<String> generateAdminNav() {
-        ArrList<String> result = new ArrList<String>();
+    private XArrayList<String> generateAdminNav() {
+        XArrayList<String> result = new XArrayList<String>();
         map.getKeyList().forEach((m) -> {
             if (m.equals(t)) {
                 result.add(editProperties(new XTreeDictionary(map.getValue(m)), (String) m));
@@ -110,8 +110,8 @@ public class EditAdmin extends AbstractPage {
         return result;
     }
 
-    private ArrList<String> generateAdminNor() {
-        ArrList<String> result = new ArrList<String>();
+    private XArrayList<String> generateAdminNor() {
+        XArrayList<String> result = new XArrayList<String>();
         map.getKeyList().forEach((m) -> {
             if (m.equals(t)) {
                 result.add(editProperties((Iterable) map.getValue(m), (String) m));
@@ -155,7 +155,7 @@ public class EditAdmin extends AbstractPage {
                     sb.append(display_group((String) x.getValue("t"), (String) x.getValue("l")));
                 }
             } else {
-                ArrList ar = new ArrList((Iterable) x.getValue("child"));
+                XArrayList ar = new XArrayList((Iterable) x.getValue("child"));
                 if (ar.isEmpty()) {
                     sb.append(display_group((String) x.getValue("t"), (String) x.getValue("l")));
                 }
@@ -197,7 +197,7 @@ public class EditAdmin extends AbstractPage {
                     sb.append(form_group(base + "." + key + ".child[" + count + "]", (String) x.getValue("t"), (String) x.getValue("l")));
                 }
             } else {
-                ArrList ar = new ArrList((Iterable) x.getValue("child"));
+                XArrayList ar = new XArrayList((Iterable) x.getValue("child"));
                 sb.append(editChildProp(x, base + "." + key + ".child[" + count + "]"));
             }
             count++;
@@ -232,7 +232,7 @@ public class EditAdmin extends AbstractPage {
     }
 
     private String displayChildProp(XTreeDictionary prop) {
-        ArrList datas = new ArrList((Iterable) prop.getValue("child"));
+        XArrayList datas = new XArrayList((Iterable) prop.getValue("child"));
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"form-group row\" style=\"margin: 10px 0px\">").
                 append("<div class=\"panel panel-default\">")
@@ -254,7 +254,7 @@ public class EditAdmin extends AbstractPage {
     }
 
     private String editChildProp(XTreeDictionary prop, String id) {
-        ArrList datas = new ArrList((Iterable) prop.getValue("child"));
+        XArrayList datas = new XArrayList((Iterable) prop.getValue("child"));
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"form-group row\" style=\"margin: 10px 0px\">").
                 append("<div class=\"panel panel-default\">")
@@ -277,7 +277,7 @@ public class EditAdmin extends AbstractPage {
 
     private String displayProperties(XTreeDictionary prop, String key) {
         String title = main.Functions.friendlyJsonTitle(key);
-        ArrList datas = prop.getValue("child") == null ? new ArrList() : new ArrList((Iterable) prop.getValue("child"));
+        XArrayList datas = prop.getValue("child") == null ? new XArrayList() : new XArrayList((Iterable) prop.getValue("child"));
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"panel panel-default\">")
                 .append("<div class=\"panel-heading\">")
@@ -306,7 +306,7 @@ public class EditAdmin extends AbstractPage {
 
     private String editProperties(XTreeDictionary prop, String key) {
         String title = main.Functions.friendlyJsonTitle(key);
-        ArrList datas = prop.getValue("child") == null ? new ArrList() : new ArrList((Iterable) prop.getValue("child"));
+        XArrayList datas = prop.getValue("child") == null ? new XArrayList() : new XArrayList((Iterable) prop.getValue("child"));
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"panel panel-default\">")
                 .append("<form action=\"/WebApplication/admin/update-ele\" method=\"post\">")

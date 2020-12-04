@@ -5,7 +5,8 @@
  */
 package cilent.servlet;
 
-import adt.ArrList;
+import adt.XArrayList;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +44,7 @@ public class AdminBarUpdate extends HttpServlet {
             return;
         }
         int x = Integer.parseInt(count);
-        ArrList<Boolean> ref = main.Functions.getAdminBarStatus(request);
+        XArrayList<Boolean> ref = main.Functions.getAdminBarStatus(request);
         ref.set(x, !ref.get(x));
         main.Functions.setAdminBarStatus(request, ref);
         response.getWriter().write("Count is done");

@@ -5,7 +5,7 @@
  */
 package com.test.adt.exe;
 
-import adt.ArrList;
+import adt.XArrayList;
 import adt.XArraySortList;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -187,7 +187,7 @@ public class TestSortList {
         list.add(new Haha(-30, "A"));
         list.add(new Haha(10, "A"));
         System.out.println("Slot Comparable to is call the method searchByField in the class\n=================");
-        ArrList<Haha> x = new ArrList<Haha>(list);
+        XArrayList<Haha> x = new XArrayList<Haha>(list);
         System.out.println(x.searchByField("field2", "A", Haha.class));
     }
 

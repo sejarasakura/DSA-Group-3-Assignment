@@ -5,7 +5,7 @@
  */
 package cilent;
 
-import adt.ArrList;
+import adt.XArrayList;
 import com.opencsv.bean.*;
 import entity.*;
 import java.util.Iterator;
@@ -121,7 +121,7 @@ public class IDManager extends AbstractEntity {
     public static Object generateId(AbstractEntity ref, boolean update) {
         String str;
         Iterator obj = AbstractEntity.readDataFormCsv(new IDManager());
-        ArrList<IDManager> datas = (obj == null) ? new ArrList() : new ArrList(obj);
+        XArrayList<IDManager> datas = (obj == null) ? new XArrayList() : new XArrayList(obj);
         boolean job = false;
         for (int i = 0; i < datas.size(); i++) {
             if (datas.get(i).className.equals(ref.getClass().getName())) {
@@ -153,7 +153,7 @@ public class IDManager extends AbstractEntity {
     }
 
     public static void main2(String[] args) {
-        ArrList<IDManager> im = new ArrList();
+        XArrayList<IDManager> im = new XArrayList();
         im.add(new IDManager(Customer.class.getName(), "C%05d", String.class.getName(), 1, "user_id"));
         im.add(new IDManager(Driver.class.getName(), "D%05d", String.class.getName(), 1, "user_id"));
         im.add(new IDManager(Admin.class.getName(), "A%05d", String.class.getName(), 1, "user_id"));

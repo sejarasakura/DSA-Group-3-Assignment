@@ -5,7 +5,7 @@
  */
 package entity;
 
-import adt.ArrList;
+import adt.XArrayList;
 import com.opencsv.bean.CsvBindByName;
 
 /**
@@ -70,7 +70,7 @@ public class Plate extends AbstractEntity<Plate> {
 
     public static Plate getPlate(String full_plate, String seperator) {
 
-        ArrList<String> split = new ArrList(full_plate.split(seperator));
+        XArrayList<String> split = new XArrayList(full_plate.split(seperator));
         if (split.size() < 2) {
             return null;
         }

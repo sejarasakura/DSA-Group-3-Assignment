@@ -5,7 +5,7 @@
  */
 package entity.json;
 
-import adt.ArrList;
+import adt.XArrayList;
 
 /**
  *
@@ -18,9 +18,9 @@ public class ClassSaving {
     private String identifier;
     private boolean add;
     private boolean delete;
-    private ArrList<FeildAccessbility> fields;
+    private XArrayList<FeildAccessbility> fields;
 
-    public ClassSaving(String classname, String extension, ArrList<FeildAccessbility> fields) {
+    public ClassSaving(String classname, String extension, XArrayList<FeildAccessbility> fields) {
         this.classname = classname;
         this.extension = extension;
         this.fields = fields;
@@ -53,11 +53,11 @@ public class ClassSaving {
         this.extension = extension;
     }
 
-    public ArrList<FeildAccessbility> getFields() {
+    public XArrayList<FeildAccessbility> getFields() {
         return fields;
     }
 
-    public void setFields(ArrList<FeildAccessbility> fields) {
+    public void setFields(XArrayList<FeildAccessbility> fields) {
         this.fields = fields;
     }
 

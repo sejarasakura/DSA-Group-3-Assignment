@@ -29,7 +29,7 @@ public class TestArrListsSetSpeeds {
     @Param({"1000000"})
     private int N;
 
-    private ArrList<Object> DATA_FOR_TESTING_1;
+    private XArrayList<Object> DATA_FOR_TESTING_1;
     private List<Object> DATA_FOR_TESTING;
     private XQueue<Object> DATA_FOR_TESTING_2;
     private XStack<Object> DATA_FOR_TESTING_3;
@@ -49,7 +49,7 @@ public class TestArrListsSetSpeeds {
     public void setup() {
         DATA_FOR_TESTING = createData();
         DATA_FOR_TESTING_4 = DATA_FOR_TESTING.toArray();
-        DATA_FOR_TESTING_1 = new ArrList<Object>(DATA_FOR_TESTING.toArray());
+        DATA_FOR_TESTING_1 = new XArrayList<Object>(DATA_FOR_TESTING.toArray());
         DATA_FOR_TESTING_2 = new XQueue<Object>(DATA_FOR_TESTING_1);
         DATA_FOR_TESTING_3 = new XStack<Object>(DATA_FOR_TESTING_1);
     }

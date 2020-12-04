@@ -5,7 +5,7 @@
  */
 package entity;
 
-import adt.ArrList;
+import adt.XArrayList;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.StatefulBeanToCsv;
@@ -101,7 +101,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @param datas
      * @return
      */
-    public static boolean addDataToCsv(ArrList<? extends AbstractEntity> datas) {
+    public static boolean addDataToCsv(XArrayList<? extends AbstractEntity> datas) {
         //<editor-fold defaultstate="collapsed" desc="add record">
         boolean result = true;
 
@@ -112,7 +112,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
         /* read data from file */
         Object obj = AbstractEntity.privateReadDataFormCsv(datas.get(0), false);
-        ArrList<AbstractEntity> data = (obj == null) ? new ArrList() : new ArrList((Iterator) obj);
+        XArrayList<AbstractEntity> data = (obj == null) ? new XArrayList() : new XArrayList((Iterator) obj);
 
         boolean depucate_record, all_d_r = true;
         /* add new data to array list */
@@ -158,7 +158,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
     //</editor-fold>
     public static boolean addDataToCsv(Iterable<? extends AbstractEntity> datas) {
-        return addDataToCsv(new ArrList(datas));
+        return addDataToCsv(new XArrayList(datas));
     }
 
     /**
@@ -175,11 +175,11 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     private static Iterator<? extends AbstractEntity> privateReadDataFormCsv(AbstractEntity c, boolean show_e) {
         try {
 
-            ArrList<AbstractEntity> entity;
+            XArrayList<AbstractEntity> entity;
 
             FileReader fr = new FileReader(c.getStorageFile());
 
-            entity = new ArrList<AbstractEntity>(new CsvToBeanBuilder(fr).withType(c.getClass()).build().parse());
+            entity = new XArrayList<AbstractEntity>(new CsvToBeanBuilder(fr).withType(c.getClass()).build().parse());
 
             if (show_e) {
                 System.out.println(OutputColor.TEXT_GREEN
@@ -209,12 +209,12 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @param datas
      * @return
      */
-    public static boolean reWriteAllDataToCsv(ArrList<? extends AbstractEntity> datas) {
+    public static boolean reWriteAllDataToCsv(XArrayList<? extends AbstractEntity> datas) {
         //<editor-fold defaultstate="collapsed" desc="write record">
         return privateReWriteAllDataToCsv(datas, true);
     }
 
-    public static boolean privateReWriteAllDataToCsv(ArrList<? extends AbstractEntity> it, boolean show_e) {
+    public static boolean privateReWriteAllDataToCsv(XArrayList<? extends AbstractEntity> it, boolean show_e) {
 
         if (it.size() <= 0) {
             return false;
@@ -251,7 +251,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
     //</editor-fold>
     public static boolean reWriteAllDataToCsv(Iterable<? extends AbstractEntity> datas) {
-        return reWriteAllDataToCsv(new ArrList(datas));
+        return reWriteAllDataToCsv(new XArrayList(datas));
     }
 
     /**
@@ -260,7 +260,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @param datas
      * @return
      */
-    public static boolean updateDataToCsv(ArrList<? extends AbstractEntity> datas) {
+    public static boolean updateDataToCsv(XArrayList<? extends AbstractEntity> datas) {
         //<editor-fold defaultstate="collapsed" desc="update record">
 
         /* block error */
@@ -270,7 +270,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
         /* read data from file */
         Object obj = AbstractEntity.privateReadDataFormCsv(datas.get(0), false);
-        ArrList<AbstractEntity> allrecord = obj == null ? new ArrList() : new ArrList((Iterator) obj);
+        XArrayList<AbstractEntity> allrecord = obj == null ? new XArrayList() : new XArrayList((Iterator) obj);
         boolean updated, allUpdate = true;
         for (AbstractEntity data : datas) {
             updated = false;
@@ -293,7 +293,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
     //</editor-fold>
     public static boolean updateDataToCsv(Iterable<? extends AbstractEntity> datas) {
-        return updateDataToCsv(new ArrList(datas));
+        return updateDataToCsv(new XArrayList(datas));
     }
 
     /**
@@ -302,7 +302,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @param datas
      * @return
      */
-    public static boolean deleteDataToCsv(ArrList<? extends AbstractEntity> datas) {
+    public static boolean deleteDataToCsv(XArrayList<? extends AbstractEntity> datas) {
         //<editor-fold defaultstate="collapsed" desc="delete record">
 
         /* block error */
@@ -312,7 +312,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
         /* read data from file */
         Object obj = AbstractEntity.privateReadDataFormCsv(datas.get(0), false);
-        ArrList<AbstractEntity> allrecord = obj == null ? new ArrList() : new ArrList((Iterator) obj);
+        XArrayList<AbstractEntity> allrecord = obj == null ? new XArrayList() : new XArrayList((Iterator) obj);
         boolean deleted, alldelete = true;
         for (AbstractEntity data : datas) {
             deleted = false;
@@ -335,7 +335,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
     //</editor-fold>
     public static boolean deleteDataToCsv(Iterable<? extends AbstractEntity> datas) {
-        return deleteDataToCsv(new ArrList(datas));
+        return deleteDataToCsv(new XArrayList(datas));
     }
 
     /*
@@ -343,7 +343,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     * Un efficent method is need update faster use AbstractEntity.updateDataToCsv for large amount
      */
     public boolean updateThisToCsv() {
-        ArrList<AbstractEntity> ref = new ArrList<AbstractEntity>();
+        XArrayList<AbstractEntity> ref = new XArrayList<AbstractEntity>();
         ref.add(this);
         return updateDataToCsv(ref);
     }
@@ -353,7 +353,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     * Un efficent method is need read faster use AbstractEntity.addDataToCsv for large amount
      */
     public boolean addThisToCsv() {
-        ArrList<AbstractEntity> ref = new ArrList<AbstractEntity>();
+        XArrayList<AbstractEntity> ref = new XArrayList<AbstractEntity>();
         ref.add(this);
         return AbstractEntity.addDataToCsv(ref);
     }
@@ -363,7 +363,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
     * Un efficent method is need update faster use AbstractEntity.updateDataToCsv for large amount
      */
     public boolean deleteThisToCsv() {
-        ArrList<AbstractEntity> ref = new ArrList<AbstractEntity>();
+        XArrayList<AbstractEntity> ref = new XArrayList<AbstractEntity>();
         ref.add(this);
         return AbstractEntity.deleteDataToCsv(ref);
     }

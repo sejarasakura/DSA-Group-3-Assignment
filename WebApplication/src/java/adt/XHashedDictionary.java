@@ -282,7 +282,10 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
         size = 0;
 
     }
-
+    /**
+     * Change dictionary to string
+     * @return 
+     */
     @Override
     public String toString() {
         StringBuilder outputStr = new StringBuilder();
@@ -440,7 +443,10 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
     static int indexFor(int h, int length) {
         return h & (length - 1);
     }
-
+    /**
+     * Allow user to type null key
+     * @return value
+     */
     private V getForNullKey() {
         for (TableEntry<K, V> e = table[0]; e != null; e = e.next) {
             if (e.key == null) {

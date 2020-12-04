@@ -37,10 +37,12 @@
                 <h4 class="modal-title">Change profile picture</h4>
             </div>
             <div class="modal-body">
-                <form action="/WebApplication/UploadServlet" method="post"
+                <div class="text-danger">Note * kindly upload a square picture</div>
+                <form action="/WebApplication/pages/UploadServlet.jsp" method="post"
                       enctype="multipart/form-data">
+                    <img id="blah" src="<%= main.Functions.getProfileUrl(request)%>" alt="profile picture" style="margin: 20px;"height="300px" width="300px"/>
                     <div class="form-group">
-                        <input type="file" class="form-control" id="inputGroupFile01" name="profile"
+                        <input type="file" class="form-control" id="profile" name="profile"
                                aria-describedby="inputGroupFileAddon01">
                     </div>
                     <div class="form-group">
@@ -51,3 +53,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $("#profile").change(function () {
+        readURL(this);
+    });
+</script>

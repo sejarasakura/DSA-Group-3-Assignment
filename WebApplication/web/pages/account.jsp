@@ -23,15 +23,15 @@
     String edit = request.getParameter("edit");
 
     for (MemberShip mb : MemberShip.values()) {
-        sb_role.append("<option " + mb.getDatabaseCode() + " >" + mb.getName() + "</option>");
+        sb_role.append("<option ").append(mb.getDatabaseCode()).append(" >").append(mb.getName()).append("</option>");
     }
-
 %>
 <html>
     <head>
         <jsp:include page="<%= main.WebConfig.META_URL%>">
             <jsp:param name="title" value="Home"/>
         </jsp:include>
+        <link href="../theme/lib/full-page.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <jsp:include page="<%= main.WebConfig.HEADER_URL%>"/>
@@ -147,17 +147,17 @@
                                 </div>
                             </div>
                         </li>
+                        <%}%>
                     </ul>
-                    <br>
-                    <%if (edit == null ? false : edit.equals("car")) {%>
+                </form>
+                <br>
+                <%if (edit == null ? false : edit.equals("car") && user.isDriver()) {%>
                     <jsp:include page='../widget/my_cars.jsp'>
                         <jsp:param name='id' value="${param.id}"/>
                     </jsp:include>
-                    <%} else {%>
+                <%} else {%>
                     <jsp:include page='../widget/my_cars.jsp'/>
-                    <%}%>
-                    <%}%>
-                </form>
+                <%}%>
             </div>
         </div>
         <jsp:include page="<%= main.WebConfig.FOOTER_URL%>"/>

@@ -125,7 +125,7 @@ public class DeleteEntityListCilent {
         }
 
         // Console display data
-        sb.append(xenum.OutputColor.TEXT_PURPLE).append(parameter_data);
+        sb.append(xenum.OutputColor.TEXT_PURPLE).append('\n').append(parameter_data);
 
         // update a record to csv
         status = acture_entity.deleteThisToCsv();

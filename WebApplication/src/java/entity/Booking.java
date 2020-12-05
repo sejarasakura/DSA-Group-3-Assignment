@@ -37,7 +37,7 @@ public class Booking extends AbstractEntity<Booking> {
      * customer booking type
      */
     @CsvBindByName
-    private CarType booking_type;
+    private String car_id;
 
     /**
      * customer booking date
@@ -86,12 +86,12 @@ public class Booking extends AbstractEntity<Booking> {
     }
 
     public Booking(String booking_id, String booking_description,
-            CarType booking_type, Date booking_date, String driver_id,
+            String booking_type, Date booking_date, String driver_id,
             String customer_id, String chats_id, String mapping_id,
             String paymentNumber, BookingStatus bookingStatus) {
         this.booking_id = booking_id;
         this.booking_description = booking_description;
-        this.booking_type = booking_type;
+        this.car_id = booking_type;
         this.booking_date = booking_date;
         this.driver_id = driver_id;
         this.customer_id = customer_id;
@@ -140,16 +140,16 @@ public class Booking extends AbstractEntity<Booking> {
      *
      * @return
      */
-    public CarType getBooking_type() {
-        return booking_type;
+    public String getCar_id() {
+        return car_id;
     }
 
     /**
      *
-     * @param booking_type
+     * @param car_id
      */
-    public void setBooking_type(CarType booking_type) {
-        this.booking_type = booking_type;
+    public void setCar_id(String car_id) {
+        this.car_id = car_id;
     }
 
     /**
@@ -309,7 +309,7 @@ public class Booking extends AbstractEntity<Booking> {
 
     @Override
     public String toString() {
-        return "Booking{" + "booking_id=" + booking_id + ", booking_description=" + booking_description + ", booking_type=" + booking_type + ", booking_date=" + booking_date + ", driver_id=" + driver_id + ", customer_id=" + customer_id + ", chats_id=" + chats_id + ", mapping_id=" + mapping_id + ", paymentNumber=" + paymentNumber + ", bookingStatus=" + bookingStatus + '}';
+        return "Booking{" + "booking_id=" + booking_id + ", booking_description=" + booking_description + ", booking_type=" + car_id + ", booking_date=" + booking_date + ", driver_id=" + driver_id + ", customer_id=" + customer_id + ", chats_id=" + chats_id + ", mapping_id=" + mapping_id + ", paymentNumber=" + paymentNumber + ", bookingStatus=" + bookingStatus + '}';
     }
 
     @Override

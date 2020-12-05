@@ -1,0 +1,102 @@
+<?php
+
+    include("connect_quest.php");
+    $query = "SELECT table1 FROM questions;";
+    $result = mysqli_query($link,$query);
+
+    $query2 = "SELECT table2 FROM questions2;";
+    $result2 = mysqli_query($link,$query2);
+
+    $count = 11;
+    $count2 = 11;
+
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron" style="background-color: lightcoral;">
+                <h1 style="text-align: center;">
+                    <img src="icons/BSU.png" alt="BSU Logo" style="width: 115px; height: 115px; margin-right: 30px;">
+                    University Health Screening App
+                </h1>
+            </div>
+        <div class="container">
+            <h2 style="text-align: center;">Health Assessment Form</h2>
+        </div>
+        <br>
+        <div class="container">
+            <p><b>Instructions: </b>All who enter the school premises must undergo a symptom check everyday. Please answer the screening honestly. If you did not pass the screening, you may not allowed to enter the school premises.</p>
+            <form method="post" action="form_result.php">    
+                <table class="table table-hover table-bordered">
+                    <thead class="table-info">
+                        <tr>
+                            <th>Questions:</th>
+                            <th style="text-align: center;">Yes</th>
+                            <th style="text-align: center;">No</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-warning">
+                        <?php while ($row = mysqli_fetch_array($result)) {?>
+                        <tr>
+                            <td><?=$count?>. <?=$row['table1']?></td>
+                            <fieldset id="Q<?=$count?>">
+                                <td style="text-align: center;"><input type="radio" value="Yes" name="Q<?=$count?>" required></td>
+                                <td style="text-align: center;"><input type="radio" value="No" name="Q<?=$count?>"></td>
+                            </fieldset>   
+                        </tr>
+                        <?php $count++;?>
+                        <?php }?>
+						<input type="hidden" value="<?=$count?>" name="post-count">
+                    </tbody>
+                </table>
+                <table class="table table-hover table-bordered">
+                    <thead class="table-info">
+                        <tr>
+                            <th>Have experienced symptoms such as:</th>
+                            <th style="text-align: center;">NONE</th>
+                            <th style="text-align: center;">MILD</th>
+                            <th style="text-align: center;">MODERATE</th>
+                            <th style="text-align: center;">SEVERE</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-warning">
+                        <?php while ($row2 = mysqli_fetch_array($result2)) {?>
+                        <tr>
+                            <td><?=$count2?>. <?=$row2['table2']?></td>
+                            <fieldset id="scale_10">
+                                <td style="text-align: center;"><input type="radio" value="NONE" name="scale_<?=$count2?>" required></td>
+                                <td style="text-align: center;"><input type="radio" value="MILD" name="scale_<?=$count2?>"></td>
+                                <td style="text-align: center;"><input type="radio" value="MODERATE" name="scale_<?=$count2?>"></td>
+                                <td style="text-align: center;"><input type="radio" value="SEVERE" name="scale_<?=$count2?>"></td>
+                            </fieldset>
+                        </tr>
+                        <?php $count2++;?>
+                        <?php }?>
+
+						<input type="hidden" value="<?=$count2?>" name="post-count2">
+                    </tbody>
+                </table>
+                <div style="text-align: right;">
+                    <button type="submit" class="btn btn-success">Proceed</button>
+                </div>
+            </form>            
+        </div>
+        
+
+
+
+
+        <script src="js/bootstrap.min.js"></script>
+    </body>
+    <br><br><br><br>
+    <footer style="background-color: lightcyan;">
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="https://batstate-u.edu.ph/"> Batangas State University</a>
+        </div>
+    </footer>
+</html>

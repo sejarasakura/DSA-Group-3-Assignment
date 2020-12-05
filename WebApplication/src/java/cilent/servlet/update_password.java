@@ -72,9 +72,17 @@ public class update_password extends HttpServlet {
         }
         XArrayList login = (XArrayList) users.searchByField("user_id", id, _class);
         User current = (User) login.get(0);
-        if (current.login(user)) {
-            response.sendRedirect(WebConfig.WEB_URL + "pages/account.jsp#change_password");
+        boolean is_login = current.login(id, opassword);
+        if (!is_login) {
+            response.sendRedirect(WebConfig.WEB_URL + "pages/account.jsp?I=I-0018");
+            return;
         }
+        if (!password.equals(cpassword)) {
+            response.sendRedirect(WebConfig.WEB_URL + "pages/account.jsp?I=I-0019");
+            return;
+        }
+        current.setPassword(password);
+        response.sendRedirect(WebConfig.WEB_URL + "pages/account.jsp?I=I-0020");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -149,8 +149,7 @@
                 const searchBox_form = new google.maps.places.SearchBox(input_form);
                 const searchBox_to = new google.maps.places.SearchBox(input_to);
                 const polylineOptionsActual = new google.maps.Polyline({strokeColor: '#ff1a4b', strokeOpacity: 0.8, strokeWeight: 6});
-                const directionsRenderer = new google.maps.DirectionsRenderer
-                        ({suppressMarkers: true, polylineOptions: polylineOptionsActual});
+                const directionsRenderer = new google.maps.DirectionsRenderer({suppressMarkers: true, polylineOptions: polylineOptionsActual});
                 const directionsService = new google.maps.DirectionsService();
                 const service = new google.maps.DistanceMatrixService();
                 const outputDiv = document.getElementById("map-note");

@@ -282,9 +282,11 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
         size = 0;
 
     }
+
     /**
      * Change dictionary to string
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
@@ -297,7 +299,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
                             .append(e.getKey()).append(' ')
                             .append(e.getValue());
                     if (e.next != null) {
-                        outputStr.append("\n\t >> ");
+                        outputStr.append("\n>> ");
                     }
                 }
                 outputStr.append("\n");
@@ -443,8 +445,10 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
     static int indexFor(int h, int length) {
         return h & (length - 1);
     }
+
     /**
      * Allow user to type null key
+     *
      * @return value
      */
     private V getForNullKey() {

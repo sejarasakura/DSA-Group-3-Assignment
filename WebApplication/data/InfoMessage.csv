@@ -14,3 +14,6 @@ I-0013,alert-danger,Your taxi license is currently registed by other user please
 I-0014,alert-danger,Your taxi id is currently registed by other user please check back your input,Taxi ID is duplicated
 I-0015,alert-danger,Your plate number is currently registed by other user please check back your input,Plate Alpha is duplicated
 I-0016,alert-danger,The record you try to find or update is not found in the data set. please try agian!!,No such record
+I-0018,alert-danger,The password you enter is not correct please try agian,Incorrect Password
+I-0019,alert-danger,Your password is not match to confrim password please try agian!,Password not match!!
+I-0020,alert-success,Congratulations your password has been changes successful!!,Password changes successful

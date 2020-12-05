@@ -74,7 +74,7 @@ public class StartBookingNow extends HttpServlet {
                 response.sendRedirect(WebConfig.WEB_URL + "pages/index.jsp?I=I-0011");
                 return;
             }
-            if (form == null || to == null ? false : form.isEmpty() || to.isEmpty()) {
+            if (form == null || to == null ? true : form.isEmpty() || to.isEmpty()) {
                 response.sendRedirect(WebConfig.WEB_URL + "pages/login.jsp");
                 return;
             }

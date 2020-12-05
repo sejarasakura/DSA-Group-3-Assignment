@@ -146,7 +146,7 @@ public class Functions {
         ErrorDetails er = ErrorDetails.getValue(e);
         return new StringBuilder()
                 .append("<div class=\"container\">")
-                .append("<div class=\"alert ")
+                .append("<div style=\"margin-top: 10px\" class=\"alert ")
                 .append(c)
                 .append(" alert-dismissible fade in\">")
                 .append("<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>")
@@ -168,8 +168,8 @@ public class Functions {
             return "<div class=\"alert alert-danger alert-dismissible fade in\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a> <strong>Error code not found!</strong> This alert code <a href='#" + e + "'><b>" + e + "</b></a> is dose not excite </div>";
         }
         return new StringBuilder()
-                .append("<div class=\"container\">")
-                .append("<div class=\"alert ")
+                .append("<div class=\"container\" >")
+                .append("<div style=\"margin-top: 10px\" class=\"alert ")
                 .append(result.getCssClass())
                 .append(" alert-dismissible fade in\">")
                 .append("<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>")

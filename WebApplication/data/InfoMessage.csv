@@ -10,6 +10,6 @@ I-0009,alert-danger,The record is not sucessful delete to the csv file please tr
 I-0010,alert-success,The record is sucessful delete to the csv file !,Sucessful delete record	
 I-0011,alert-danger,You are no a customer please login to a customer account and try again,Not customer error
 I-0012,alert-danger,Hello user you must login before following process!!,Not user login
-I-0013,alert-danger,Your taxi license is currently registed by other user please check back your input,Taxi License is deplicated
-I-0014,alert-danger,Your taxi id is currently registed by other user please check back your input,Taxi ID is deplicated
-I-0015,alert-danger,Your plate number is currently registed by other user please check back your input,Plate Alpha is deplicated
+I-0013,alert-danger,Your taxi license is currently registed by other user please check back your input,Taxi License is duplicated
+I-0014,alert-danger,Your taxi id is currently registed by other user please check back your input,Taxi ID is duplicated
+I-0015,alert-danger,Your plate number is currently registed by other user please check back your input,Plate Alpha is duplicated

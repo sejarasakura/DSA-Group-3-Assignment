@@ -131,4 +131,8 @@ public enum CarType implements AbstractEnum {
     public int compare(AbstractEnum x) {
         return this.code.compareTo(((CarType) x).code);
     }
+
+    public boolean isTaxi() {
+        return this.code.charAt(0) == 'T';
+    }
 }

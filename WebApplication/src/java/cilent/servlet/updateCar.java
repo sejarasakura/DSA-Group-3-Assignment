@@ -6,10 +6,12 @@
 package cilent.servlet;
 
 import adt.*;
+import cilent.IDManager;
 import entity.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -27,6 +29,7 @@ import xenum.CarType;
 @WebServlet(name = "updateCar", urlPatterns = {"/updateCar"})
 public class updateCar extends HttpServlet {
 
+    private User user;
     private Car car = null;
     private Plate plate = null;
     private XArrayList record;
@@ -70,13 +73,27 @@ public class updateCar extends HttpServlet {
                 if (!check_deplicate(response, false)) {
                     return; // assign taxi value and check duplicate
                 }
-                assign_values();
+                assign_values(false);
                 car.updateThisToCsv();
                 plate.updateThisToCsv();
                 response.sendRedirect(WebConfig.WEB_URL + "pages/account.jsp#" + car.getPlate_id());
                 break;
             case "add":
-
+                if (!read_record()) {
+                    break; // No record;
+                }
+                if (!check_deplicate(response, false)) {
+                    return; // assign taxi value and check duplicate
+                }
+                car = is_taxi ? new Taxi() : new Car();
+                plate = new Plate();
+                user = main.Functions.getUserSession(request);
+                main.Functions.checkLogin(response, user);
+                assign_values(true);
+                car.addThisToCsv();
+                plate.addThisToCsv();
+                String callback = request.getParameter("callback");
+                response.sendRedirect(WebConfig.WEB_URL + callback == null ? "pages/new_car.jsp" : callback + "#" + car.getPlate_id());
                 break;
         }
     }
@@ -133,8 +150,8 @@ public class updateCar extends HttpServlet {
         }
         String full_alpha = String.join(plate_alpha, " ", plate_num);
         if (plate == null ? true : !plate.getFullPlateNumber().equals(full_alpha)) {
-            XArrayList data = new XArrayList(p_record.searchByField("plateAlpha", plate_alpha, Plate.class));
-            if (data.searchByField("plateNumber", plate_num, Plate.class).size() > 9) {
+            XArrayList data = (XArrayList) p_record.searchByField("getFullPlateNumber", full_alpha, Plate.class);
+            if (data.size() > 0) {
                 response.sendRedirect(WebConfig.WEB_URL + "pages/account.jsp?I=I-0015");
                 return false;
             }
@@ -142,17 +159,28 @@ public class updateCar extends HttpServlet {
         return true;
     }
 
-    private void assign_values() throws ParseException {
+    private void assign_values(boolean add) throws ParseException {
         if (is_taxi) {
             ((Taxi) car).setTaxiLicense(taxi_license);
             ((Taxi) car).setTaxiCompany(taxi_company);
             ((Taxi) car).setTaxiId(taxi_id);
         }
         car.setLicense(plate_lic);
-        car.setRegDate(WebConfig.LOCAL_DATETIME_FORMAT.parse(reg_date));
+        if (add) {
+            car.setRegDate(new Date());
+        }
         car.setCarType(CarType.getValue(cartype));
         plate.setPlateNumber(plate_num);
         plate.setPlateAlpha(plate_alpha);
+
+        if (!add) {
+            return;
+        }
+
+        id = (String) IDManager.generateId(new Plate(), true);
+        car.setPlate_id(id);
+        plate.setPlate_id(id);
+        car.setDriver_id(user.getId());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

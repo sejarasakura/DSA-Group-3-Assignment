@@ -16,7 +16,7 @@
     // get user login session 
     response.encodeURL("/store/catalog");
     User user = main.Functions.getUserSession(request);
-    if(!response.isCommitted()){
+    if (!response.isCommitted()) {
         if (!main.Functions.checkLogin(response, user)) {
             return;
         }
@@ -151,6 +151,7 @@
                             </div>
                         </li>
                         <%}%>
+                        <input type="submit" class="btn btn-success pull-right" style="margin-top: 10px" value="Update" />
                     </ul>
                 </form>
                 <br>

@@ -118,7 +118,7 @@ public class EditElementOther extends HttpServlet {
         base_map.put(t, new_detias_map.toArray());
         map.put(base, base_map);
 
-        // write new json string into jsonfile1.json file
+        // write new json string into jsonfile1.json file my_cars
         try (OutputStream outputStream = new FileOutputStream(jsonFile)) {
             outputStream.write(gson.toJson(map).getBytes());
             outputStream.flush();

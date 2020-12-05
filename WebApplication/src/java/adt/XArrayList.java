@@ -412,6 +412,23 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         return result;
     }
 
+    public InterList<T> searchByMethod(String method_n, Object element, Class<?> _class) {
+        XArrayList<T> result = new XArrayList<T>();
+        try {
+            for (T d : data) {
+                Method method = _class.getDeclaredMethod(method_n, _class);
+                if (method.invoke(d).equals(element)) {
+                    result.add(d);
+                }
+            }
+        } catch (SecurityException
+                | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | NoSuchMethodException ex) {
+            Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
     /**
      * search methods
      *

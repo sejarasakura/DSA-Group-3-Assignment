@@ -17,25 +17,24 @@
 <%@page import="xenum.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
-    // get user login session 
-    User user = main.Functions.getUserSession(request);
-    main.Functions.checkLogin(response, user);
-
     // List of cars, and plate
     StringBuilder sb_cartype = new StringBuilder();
 
     // get edit
     String id = (String) IDManager.generateId(new Car());
 
-    // Driver special
-    if (!user.isDriver()) {
-        return;
-    }
-
     String bool_data = request.getParameter("type");
-    String callback = request.getParameter("callback");
+    String _callback = request.getParameter("callback");
     boolean is_taxi = bool_data == null ? false : bool_data.equals("taxi");
-    callback = callback == null ? "widget/my_cars_add.jsp" : callback;
+    _callback = _callback == null
+            ? WebConfig.WEB_URL + "widget/my_cars_add.jsp"
+            : WebConfig.WEB_URL + _callback;
+
+    for (CarType mb : CarType.values()) {
+        if (is_taxi ? mb.isTaxi() : !mb.isTaxi()) {
+            sb_cartype.append("<option value='").append(mb.getCode()).append("' >").append(mb.getName()).append("</option>");
+        }
+    }
 %>
 
 <div class="row">
@@ -50,82 +49,78 @@
         <div class="panel panel-default">
 
             <div class="panel-heading">
-                <div class="panel-heading">
-
-                </div>
+                <h2><%= is_taxi ? "Add your taxi now" : "Add your car now"%></h2>
             </div>
-            <form method="post" action="/WebApplication/updateCar?id=<%= id%>&action=update" >
+            <form method="post" action="/WebApplication/updateCar?callback=<%=_callback%>&action=add" >
                 <div class="panel-body">
-                    <blockquote style="border-color: #00000000">
+                    <ul class="list-group">
                         <%if (is_taxi) {%>
-                        <div class="row">
-                            <div class="col-sm-6">Registered taxi identity</div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="taxi_id" name="taxi_id" >
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">Registered taxi identity</div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="taxi_id" name="taxi_id" >
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">Official taxi license</div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="taxi_license" name="taxi_license"  >
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">Official taxi license</div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="taxi_license" name="taxi_license"  >
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">Industry and company</div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="taxi_company" name="taxi_company"  >
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">Industry and company</div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="taxi_company" name="taxi_company"  >
+                                </div>
                             </div>
-                        </div>
+                        </li>
                         <%}%>      
-                        <div class="row">
-                            <div class="col-sm-6">License of plates</div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="plate_lic" name="plate_lic"  >
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">License of plates</div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="plate_lic" name="plate_lic"  >
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">Transport registered date</div>
-                            <div class="col-sm-6">
-                                <input type="datetime-local" class="form-control" id="reg_date" name="reg_date" >
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">Service type provide</div>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="cartype" name="cartype"  >
+                                        <%= sb_cartype.toString()%>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">Service type provide</div>
-                            <div class="col-sm-6">
-                                <select class="form-control" id="cartype" name="cartype"  >
-                                    <%= sb_cartype.toString()%>
-                                </select>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="plate_alpha" name="plate_alpha" placeholder="Plate alpha: eg. WMB">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="plate_num" name="plate_num" placeholder="Plate mumber: eg. 2232">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="plate_alpha" name="plate_alpha" placeholder="Plate alpha: eg. WMB">
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="plate_num" name="plate_num" placeholder="Plate mumber: eg. 2232">
-                            </div>
-                        </div>
-                    </blockquote>
+                        </li>
+                    </ul>
+                    <b>
+                        <%if (is_taxi) {%>
+                        Want to register as a car ? <a href="<%= _callback%>?type=car" class="">Register as car</a>
+                        <%} else {%>
+                        Want to register as a taxi ?<a href="<%= _callback%>?type=taxi" class="">Register as taxi</a>
+                        <%}%>
+                    </b>
                 </div>
                 <div class="panel-footer">
-                    <input type="submit" class="btn btn-warning" value="Update" />
-                    <%if (is_taxi) {%>
-                    <a class="btn btn-defualt">Register as taxi</a>
-                    <%} else {%>
-                    <%}%>
+                    <input type="submit" class="btn btn-success" value="Add ${param.type}" />
                 </div>
-                <%}%>
             </form>
-        </div>
-    </li>
-    <li class="list-group-item">
-        <div class="row">
-            <div class="col-sm-6">
-                Add a new Taxi or Car to your current account.
-            </div>
-            <div class="col-sm-6">
-                <a href="" class="btn btn-success pull-right">Add now</a>
-            </div>
         </div>
     </li>
 </ul>

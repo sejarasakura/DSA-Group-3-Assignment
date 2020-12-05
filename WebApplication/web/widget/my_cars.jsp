@@ -61,7 +61,7 @@
     }
 %>
 
-<div class="row">
+<div class="row" id="my_cars">
     <div class="col-sm-6">
         <h4><b>My Cars</b></h4>
     </div>
@@ -164,10 +164,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">Transport registered date</div>
-                            <div class="col-sm-6">
-                                <input type="datetime-local" class="form-control" id="reg_date" name="reg_date"
-                                       value="<%= WebConfig.LOCAL_DATETIME_FORMAT.format(cars.get(i).getRegDate())%>">
-                            </div>
+                            <div class="col-sm-6"><%= WebConfig.LOCAL_DATETIME_FORMAT.format(cars.get(i).getRegDate()).replace("T", " ")%></div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">Service type provide</div>
@@ -197,7 +194,8 @@
                     </blockquote>
                 </div>
                 <div class="panel-footer">
-                    <input type="submit" class="btn btn-warning" value="Update" />
+                    <input type="submit" class="btn btn-success" value="Update" />
+                    <a href="account.jsp#<%= cars.get(i).getPlate_id()%>" class="btn btn-danger">Cancel</a>
                 </div>
                 <%}%>
             </form>
@@ -210,7 +208,7 @@
                 Add a new Taxi or Car to your current account.
             </div>
             <div class="col-sm-6">
-                <a href="" class="btn btn-success pull-right">Add now</a>
+                <a href="new_car.jsp" class="btn btn-success pull-right">Add now</a>
             </div>
         </div>
     </li>

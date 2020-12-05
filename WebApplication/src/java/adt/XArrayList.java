@@ -267,29 +267,6 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     /**
-     * to string method
-     *
-     * @return string
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        String prefix = ", ";
-        if (index <= 0) {
-            sb.append("Empty");
-            return sb.toString();
-        }
-        if (data[0].toString().length() > 10) {
-            prefix += "\n";
-        }
-        for (int i = 0; i < (index - 1); i++) {
-            sb.append(data[i]).append(prefix);
-        }
-        sb.append(data[index - 1]);
-        return sb.toString();
-    }
-
-    /**
      * check is empty or not
      *
      * @return Boolean
@@ -300,23 +277,39 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     /**
+     * to string method
+     *
+     * @return string
+     */
+    @Override
+    public String toString() {
+        return private_toString("\n");
+    }
+
+    /**
      * display in html format
      *
      * @return String
      */
     @Override
     public String toHtml() {
+        return private_toString("<br/>");
+    }
+
+    private String private_toString(String line_break) {
         StringBuilder sb = new StringBuilder();
         String prefix = ", ";
-        System.out.println(this);
         if (index <= 0) {
             return sb.toString();
         }
         if (data[0].toString().length() > 10) {
-            prefix += "<br />";
+            prefix += line_break;
         }
         for (int i = 0; i < (index - 1); i++) {
             sb.append(data[i]).append(prefix);
+            if (i > 1 ? i % 10 == 0 : false) {
+                sb.append(line_break);
+            }
         }
         sb.append(data[index - 1]);
         return sb.toString();
@@ -482,7 +475,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     /**
-     * find a abstract entity that is id match one
+     * find a abstract entity that is id match purpose
      *
      * @param x
      * @return Boolean
@@ -543,6 +536,26 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     public InterList<String> concateField(String field1, String field2, Class<?> _class) {
         try {
             return notsecure_concateField(field1, field2, _class, "%");
+        } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException
+                | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    /**
+     * get the string list that had concat two field in class with custom
+     * separator
+     *
+     * @param field1
+     * @param separator
+     * @param field2
+     * @param _class
+     * @return
+     */
+    public InterList<String> concateField(String field1, String separator, String field2, Class<?> _class) {
+        try {
+            return notsecure_concateField(field1, field2, _class, separator);
         } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException
                 | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);

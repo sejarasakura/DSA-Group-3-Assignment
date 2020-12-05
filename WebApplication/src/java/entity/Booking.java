@@ -7,6 +7,7 @@ package entity;
 
 import com.opencsv.bean.*;
 import csv.converter.BookingStatusConverter;
+import csv.converter.CarTypeConverter;
 import java.util.Date;
 import java.util.Objects;
 import xenum.BookingStatus;
@@ -82,16 +83,19 @@ public class Booking extends AbstractEntity<Booking> {
     @CsvCustomBindByName(converter = BookingStatusConverter.class, column = "booking_status_code")
     private BookingStatus bookingStatus;
 
+    @CsvCustomBindByName(converter = CarTypeConverter.class)
+    private CarType car_type;
+
     public Booking() {
     }
 
     public Booking(String booking_id, String booking_description,
-            String booking_type, Date booking_date, String driver_id,
+            CarType booking_type, Date booking_date, String driver_id,
             String customer_id, String chats_id, String mapping_id,
             String paymentNumber, BookingStatus bookingStatus) {
         this.booking_id = booking_id;
         this.booking_description = booking_description;
-        this.car_id = booking_type;
+        this.car_type = booking_type;
         this.booking_date = booking_date;
         this.driver_id = driver_id;
         this.customer_id = customer_id;
@@ -99,6 +103,14 @@ public class Booking extends AbstractEntity<Booking> {
         this.mapping_id = mapping_id;
         this.paymentNumber = paymentNumber;
         this.bookingStatus = bookingStatus;
+    }
+
+    public CarType getCar_type() {
+        return car_type;
+    }
+
+    public void setCar_type(CarType car_type) {
+        this.car_type = car_type;
     }
 
     /**

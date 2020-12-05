@@ -204,9 +204,16 @@
             "display": true,
             "update": true,
             "auto_inc": false
+          },
+          {
+            "type": "xenum.CarType",
+            "name": "car_type",
+            "display": true,
+            "update": true,
+            "auto_inc": false
           }
         ],
-        "index": 10
+        "index": 11
       }
     },
     {

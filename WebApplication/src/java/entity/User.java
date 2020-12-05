@@ -100,6 +100,13 @@ public abstract class User<T> extends AbstractEntity<User> {
      */
     public abstract User login(User data);
 
+    public boolean login(String username, String password) {
+        boolean username_c, email_c, pass_c;
+        username_c = this.username == null ? username == null : this.username.equals(username);
+        email_c = this.email == null ? username == null : this.email.equals(username);
+
+    }
+
     /**
      * User registration function that success will return user and null for
      * fail

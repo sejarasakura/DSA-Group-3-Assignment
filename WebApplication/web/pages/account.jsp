@@ -151,7 +151,11 @@
                             </div>
                         </li>
                         <%}%>
-                        <input type="submit" class="btn btn-success pull-right" style="margin-top: 10px" value="Update" />
+                        <div class="row">
+                        <div class="col-sm-12">
+                            <input type="submit" class="btn btn-success pull-right" style="margin-top: 10px;margin-bottom: 10px" value="Update" />
+                        </div>
+                        </div>
                     </ul>
                 </form>
                 <br>
@@ -163,6 +167,8 @@
                 <%} else {%>
                 <jsp:include page='../widget/my_cars.jsp'/>
                 <%}%>
+                <jsp:include page='../widget/change_password.jsp'/>
+
             </div>
         </div>
         <jsp:include page="<%= main.WebConfig.FOOTER_URL%>"/>

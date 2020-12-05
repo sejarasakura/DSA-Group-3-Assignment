@@ -13,9 +13,9 @@ import java.util.Arrays;
  */
 public enum CarType implements AbstractEnum {
 
-    JUSTRENT("JQ", "Just Rent", 4, 2.0F, 5.0F, 0.95F, 0.3f, "Find a nerest QuicKar now !!"),
+    JUSTRENT("JR", "Just Rent", 4, 2.0F, 5.0F, 0.95F, 0.3f, "Find a nerest QuicKar now !!"),
     TAXI_rent("TR", "Taxi Rent", 4, 3.0F, 10.0F, 1.45F, 0.45f, "FInd a nearest taxi now !!"),
-    PREMRENT("PQ", "Premium Rent", 4, 4.0F, 15.0F, 1.95F, 0.55f, "Premium car drivers all are top rate driver !!"),
+    PREMRENT("PR", "Premium Rent", 4, 4.0F, 15.0F, 1.95F, 0.55f, "Premium car drivers all are top rate driver !!"),
     RENT_6SEAT("SS", "Just Rent (6-Seat)", 6, 3.00f, 12.00f, 1.75f, 0.55f, "It is larger venicles that can fit up to 6 passengers !!"),
     TAXI_RENT_6SEAT("TS", "Six seat taxi", 6, 4.00f, 15.00f, 2.15f, 0.65f, "It is larger taxi that can fit up to 6 passengers !!");
 

@@ -41,30 +41,31 @@
         </jsp:include>
 
         <div class="container">
-            <%for(int i = 0; i < 1;i++){%>
+            <%for (int i = 0; i < 1; i++) {%>
             <%%><div class="row"><%%>
                 <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="well well-sm">
-                        <div class="row">
-                            <div class="col-sm-6 col-md-4">
-                                <img src="http://placehold.it/380x500" alt="" class="img-rounded" height="170" width="170"/>
-                            </div>
-                            <div class="col-sm-6 col-md-8">
-                                <h4>
-                                    Customer name</h4>
-                                <small><i class="glyphicon glyphicon-map-marker map-marker-form"></i><cite title="San Francisco, USA">Form address</cite></small>
-                                <small><i class="glyphicon glyphicon-map-marker map-marker-to"></i><cite title="San Francisco, USA">To address</cite></small>
-                                <p>
-                                    <i class="glyphicon glyphicon glyphicon-earphone"></i>phone number
-                                    <br />
-                                    <i class="glyphicon glyphicon-time"></i>June 02, 1988</p>
-                                <button type="button" class="btn btn-success pull-right">Fetch Now</button>
+                    <a href="#" class="deco-none">
+                        <div class="well well-sm">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <img src="http://placehold.it/380x500" alt="" class="img-rounded" height="170" width="170"/>
+                                </div>
+                                <div class="col-sm-6 col-md-8">
+                                    <h4>
+                                        Customer name</h4>
+                                    <small><i class="glyphicon glyphicon-map-marker map-marker-form"></i><cite title="San Francisco, USA">Form address</cite></small>
+                                    <small><i class="glyphicon glyphicon-map-marker map-marker-to"></i><cite title="San Francisco, USA">To address</cite></small>
+                                    <p>
+                                        <i class="glyphicon glyphicon glyphicon-earphone"></i>phone number<br />
+                                        <i class="glyphicon glyphicon-time"></i>June 02, 1988<br />
+                                        <i class="glyphicon glyphicon-yen"></i><span class="text-success"><b>RM 100.00 - 200.00</b></span></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-            <%%></div><%%>
-            <%}%>
+                <%%></div><%%>
+                <%}%>
         </div>
 
         <jsp:include page="<%= WebConfig.FOOTER_URL%>"/>

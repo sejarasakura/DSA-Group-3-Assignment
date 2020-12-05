@@ -4,6 +4,7 @@
     Author     : ITSUKA KOTORI
 --%>
 
+<%@page import="adt.XArrayList"%>
 <%@page import="main.*"%>
 <%@page import="cilent.*"%>
 <%@page import="cilent.filter.*"%>
@@ -15,6 +16,16 @@
 <%@page import="csv.converter.*"%>
 <%@page import="xenum.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%
+    XArrayList arr_list = AbstractEntity.readDataFormCsv(new Booking());
+    response.encodeURL("/store/catalog");
+    User user = main.Functions.getUserSession(request);
+    if (!response.isCommitted()) {
+        if (!main.Functions.checkLogin(response, user)) {
+            return;
+        }
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,7 +41,8 @@
         </jsp:include>
 
         <div class="container">
-            <div class="row">
+            <%for(int i = 0; i < 1;i++){%>
+            <%%><div class="row"><%%>
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="well well-sm">
                         <div class="row">
@@ -51,7 +63,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <%%></div><%%>
+            <%}%>
         </div>
 
         <jsp:include page="<%= WebConfig.FOOTER_URL%>"/>

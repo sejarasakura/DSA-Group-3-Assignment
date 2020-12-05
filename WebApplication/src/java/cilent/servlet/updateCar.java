@@ -106,19 +106,19 @@ public class updateCar extends HttpServlet {
     private boolean read_record() {
 
         if (is_taxi) {
-            record = new XArrayList(AbstractEntity.readDataFormCsv(new Taxi()));
+            record = AbstractEntity.readDataFormCsv(new Taxi());
             if (record == null) {
                 return false;
             }
             car = (Taxi) record.searchByField("plate_id", id, Taxi.class).get(0);
         } else {
-            record = new XArrayList(AbstractEntity.readDataFormCsv(new Car()));
+            record = AbstractEntity.readDataFormCsv(new Car());
             if (record == null) {
                 return false;
             }
             car = (Car) record.searchByField("plate_id", id, Car.class).get(0);
         }
-        p_record = new XArrayList(AbstractEntity.readDataFormCsv(new Plate()));
+        p_record = AbstractEntity.readDataFormCsv(new Plate());
         if (p_record == null) {
             return false;
         }

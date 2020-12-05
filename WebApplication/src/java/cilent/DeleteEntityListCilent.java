@@ -73,7 +73,7 @@ public class DeleteEntityListCilent {
         StringBuilder sb = new StringBuilder();
 
         // read data form file
-        datas = new XArrayList(AbstractEntity.readDataFormCsv(entity));
+        datas = (XArrayList) AbstractEntity.readDataFormCsv(entity);
 
         // get class information
         classSaving = main.Functions.getSavingClass(entity.getClass());

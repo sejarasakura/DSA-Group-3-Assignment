@@ -112,7 +112,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
         /* read data from file */
         Object obj = AbstractEntity.privateReadDataFormCsv(datas.get(0), false);
-        XArrayList<AbstractEntity> data = (obj == null) ? new XArrayList() : new XArrayList((Iterator) obj);
+        XArrayList<AbstractEntity> data = (obj == null) ? new XArrayList() : (XArrayList) obj;
 
         boolean depucate_record, all_d_r = true;
         /* add new data to array list */
@@ -167,12 +167,12 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @param reference
      * @return
      */
-    public static Iterator<? extends AbstractEntity> readDataFormCsv(AbstractEntity reference) {
+    public static XArrayList<? extends AbstractEntity> readDataFormCsv(AbstractEntity reference) {
         //<editor-fold defaultstate="collapsed" desc="read record">
         return privateReadDataFormCsv(reference, true);
     }
 
-    private static Iterator<? extends AbstractEntity> privateReadDataFormCsv(AbstractEntity c, boolean show_e) {
+    private static XArrayList<? extends AbstractEntity> privateReadDataFormCsv(AbstractEntity c, boolean show_e) {
         try {
 
             XArrayList<AbstractEntity> entity;
@@ -188,7 +188,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
                         + OutputColor.TEXT_RESET);
             }
 
-            return entity.iterator();
+            return entity;
 
         } catch (FileNotFoundException ex) {
 
@@ -270,10 +270,9 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
         /* read data from file */
         Object obj = AbstractEntity.privateReadDataFormCsv(datas.get(0), false);
-        XArrayList<AbstractEntity> allrecord
-                = obj == null
-                        ? new XArrayList()
-                        : new XArrayList((Iterator) obj);
+        XArrayList<AbstractEntity> allrecord = obj == null
+                ? new XArrayList()
+                : (XArrayList<AbstractEntity>) obj;
 
         boolean updated, allUpdate = true;
         for (AbstractEntity data : datas) {
@@ -316,7 +315,7 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
         /* read data from file */
         Object obj = AbstractEntity.privateReadDataFormCsv(datas.get(0), false);
-        XArrayList<AbstractEntity> allrecord = obj == null ? new XArrayList() : new XArrayList((Iterator) obj);
+        XArrayList<AbstractEntity> allrecord = obj == null ? new XArrayList() : (XArrayList<AbstractEntity>) obj;
         boolean deleted, alldelete = true;
         for (AbstractEntity data : datas) {
             deleted = false;

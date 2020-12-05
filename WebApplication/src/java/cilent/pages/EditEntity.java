@@ -69,8 +69,8 @@ public class EditEntity extends AbstractPage {
         generateHeader(refence);
         stringBuilder.append("<tbody>");
         generateFooter(refence);
-        Iterator obj = AbstractEntity.readDataFormCsv(refence);
-        datas = (obj == null) ? new XArrayList() : new XArrayList(obj);
+        XArrayList obj = AbstractEntity.readDataFormCsv(refence);
+        datas = (obj == null) ? new XArrayList() : obj;
         for (int i = 0; i < datas.size(); i++) {
             generateBody(datas.get(i));
         }

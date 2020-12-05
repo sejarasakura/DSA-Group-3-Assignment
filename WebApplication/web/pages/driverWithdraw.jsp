@@ -1,6 +1,6 @@
 <%-- 
-    Document   : search_function
-    Created on : Dec 2, 2020, 10:10:18 PM
+    Document   : driverWithdraw
+    Created on : Dec 5, 2020, 11:27:40 PM
     Author     : ITSUKA KOTORI
 --%>
 
@@ -20,25 +20,18 @@
 <html>
     <head>
         <jsp:include page="<%= WebConfig.META_URL%>">
-            <jsp:param name="title" value="search_function"/>
+            <jsp:param name="title" value="driverWithdraw"/>
         </jsp:include>
         <style>
         </style>
     </head>
     <body>
         <jsp:include page="<%= WebConfig.HEADER_URL%>">
-            <jsp:param name="menu_bar" value="search_function"/>
+            <jsp:param name="menu_bar" value="driverWithdraw"/>
         </jsp:include>
 
-        <%
-            XArrayList list = AbstractEntity.readDataFormCsv(new Customer());
-            InterList list2 = list.searchByField("memberType", MemberShip.NORMAL, Customer.class);
-            XArraySortList slist = new XArraySortList(list);
-            slist.sort("phoneNumber", Customer.class);
-        %>
-        <%= list2.toHtml()%>
-        <hr>
-        <%= slist.toHtml()%>
+        <h1>Change Here!</h1>
+
         <jsp:include page="<%= WebConfig.FOOTER_URL%>"/>
     </body>
     <script>

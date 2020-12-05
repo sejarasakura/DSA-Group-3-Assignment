@@ -17,13 +17,13 @@
     String x_sep = request.getParameter("x_sep");
     String x_class = request.getParameter("x_class");
     AbstractEntity data;
-    XArrayList<AbstractEntity> raw_data;
+    XArrayList raw_data;
     InterList<String> col_data = null;
     if (x_class != null && x_field != null) {
         if (!x_class.isEmpty() && !x_field.isEmpty()) {
             Class<?> _class = Class.forName(x_class);
             data = (AbstractEntity)_class.getConstructor(null).newInstance();
-            raw_data = new XArrayList(AbstractEntity.readDataFormCsv(data));
+            raw_data = AbstractEntity.readDataFormCsv(data);
             if(raw_data.size() > 0){
                 col_data = raw_data.getField(x_field, x_class);
             }

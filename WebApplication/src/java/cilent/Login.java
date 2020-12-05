@@ -44,9 +44,9 @@ public class Login {
             return;
         }
         XArrayList u;
-        main.Datas.admins = new XArrayList(AbstractEntity.readDataFormCsv(new Admin()));
-        main.Datas.drivers = new XArrayList(AbstractEntity.readDataFormCsv(new Driver()));
-        main.Datas.customers = new XArrayList(AbstractEntity.readDataFormCsv(new Customer()));
+        main.Datas.admins = (XArrayList<Admin>) AbstractEntity.readDataFormCsv(new Admin());
+        main.Datas.drivers = (XArrayList<Driver>) AbstractEntity.readDataFormCsv(new Driver());
+        main.Datas.customers = (XArrayList<Customer>) AbstractEntity.readDataFormCsv(new Customer());
         user = checkUserLogin(main.Datas.customers);
         if (user == null) {
             user = checkUserLogin(main.Datas.drivers);

@@ -120,7 +120,7 @@ public class IDManager extends AbstractEntity {
 
     public static Object generateId(AbstractEntity ref, boolean update) {
         String str;
-        Iterator obj = AbstractEntity.readDataFormCsv(new IDManager());
+        XArrayList obj = AbstractEntity.readDataFormCsv(new IDManager());
         XArrayList<IDManager> datas = (obj == null) ? new XArrayList() : new XArrayList(obj);
         boolean job = false;
         for (int i = 0; i < datas.size(); i++) {

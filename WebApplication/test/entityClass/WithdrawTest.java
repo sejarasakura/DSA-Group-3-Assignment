@@ -332,7 +332,7 @@ public class WithdrawTest {
 
         Withdraw x = new Withdraw();
 
-        XArrayList<Withdraw> employees = new XArrayList(AbstractEntity.readDataFormCsv(x));
+        XArrayList<Withdraw> employees = (XArrayList<Withdraw>) AbstractEntity.readDataFormCsv(x);
 
     }
 

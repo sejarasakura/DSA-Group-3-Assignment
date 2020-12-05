@@ -45,7 +45,7 @@ public class RegisterAction extends HttpServlet {
         String email = request.getParameter("email");
         String registerAsDriver = request.getParameter("registerAsDriver");
         XArrayList users;
-        Iterator reader;
+        XArrayList reader;
         User current_user;
         boolean usernameUsed, driver = false;
 
@@ -62,7 +62,7 @@ public class RegisterAction extends HttpServlet {
         if (reader == null) {
             users = new XArrayList();
         } else {
-            users = new XArrayList(reader);
+            users = reader;
         }
 
         /* Find username is it excite or not */

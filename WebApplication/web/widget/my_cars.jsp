@@ -38,11 +38,11 @@
         return;
     }
 
-    XArrayList<Car> all_car = new XArrayList(AbstractEntity.readDataFormCsv(new Car()));
-    XArrayList all_taxi = new XArrayList(AbstractEntity.readDataFormCsv(new Taxi()));
+    XArrayList all_car = AbstractEntity.readDataFormCsv(new Car());
+    XArrayList all_taxi = AbstractEntity.readDataFormCsv(new Taxi());
     all_car.addAll(all_taxi);
     cars = all_car.searchByField("driver_id", user.getUser_id(), Car.class);
-    XArrayList<Plate> all_plate = new XArrayList(AbstractEntity.readDataFormCsv(new Plate()));
+    XArrayList all_plate = AbstractEntity.readDataFormCsv(new Plate());
     plates = new XTreeDictionary();
     for (Car car : cars) {
         tempPlate = null;

@@ -41,7 +41,7 @@ public class Functions {
         Datas.settings.add("pages/register", WebConfig.WEB_URL + "pages/register.jsp");
         Datas.settings.add("pages/account", WebConfig.WEB_URL + "pages/account.jsp");
         Datas.settings.add("widget/cartype-select", "../widget/carousel_feeinfo.jsp");
-        Datas.allMessage = new XArrayList(AbstractEntity.readDataFormCsv(new InfoMessage()));
+        Datas.allMessage = (XArrayList<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage());
         return 1;
     }
 
@@ -161,7 +161,7 @@ public class Functions {
 
     private static String displayErrorMessage(String e) {
         if (main.WebConfig.DEBUG_MODE) {
-            Datas.allMessage = new XArrayList<InfoMessage>((Iterator<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage()));
+            Datas.allMessage = (XArrayList<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage());
         }
         InfoMessage result = Datas.allMessage.searchByField("code", e, InfoMessage.class).get(0);
         if (result == null) {

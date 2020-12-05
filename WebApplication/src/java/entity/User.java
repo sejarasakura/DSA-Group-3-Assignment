@@ -101,10 +101,12 @@ public abstract class User<T> extends AbstractEntity<User> {
     public abstract User login(User data);
 
     public boolean login(String username, String password) {
-        boolean username_c, email_c, pass_c;
+        boolean username_c, email_c, pass_c, id_c;
         username_c = this.username == null ? username == null : this.username.equals(username);
         email_c = this.email == null ? username == null : this.email.equals(username);
-
+        id_c = this.user_id == null ? username == null : this.user_id.equals(username);
+        pass_c = this.password == null ? password == null : this.password.equals(password);
+        return (email_c || username_c || id_c) && pass_c;
     }
 
     /**

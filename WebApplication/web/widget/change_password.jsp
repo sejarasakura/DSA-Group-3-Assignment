@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <% User u = Functions.getUserSession(request);%>
 
-<form submit="<%= WebConfig.WEB_URL%>update_password" id="update_password_form" method="post">
+<form action="/WebApplication/update_password" id="update_password_form" method="post">
     <div class="row" id="change_password">
         <div class="col-sm-6">
             <h4><b>Change my password</b></h4>

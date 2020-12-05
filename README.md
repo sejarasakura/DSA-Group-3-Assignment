@@ -14,7 +14,7 @@ In driver module is include the function of request to register as a driver. Aft
 In customer module has exclusive the function allow choose from and to locations function. and customer able to view available car or taxi type along with fare details, driver detials, car details and other. Customer also able to view their booking history, favourite drivers, review's and the best driver they meet.
 
 ### Administrative module
-Administrative module habe offer admin to update menubar items, footer and admin module. Admin also have full data adminstration to edit the data/record in csv file. They can edit the global variable that store in setting (Map) and configure global variable of the web pages. Admin must also fill in the google map API key to enable the system function.
+Administrative module habe offer admin to update menubar items, footer and admin module. Admin also have full data adminstration to edit the data/record in csv file. They can edit the global variable that store in setting (Map) and configure global variable of the web pages. Admin must  fill in the google map API key to enable the system function. In administrative module also in charge register, login, and account manage module
 
 ### Booking module
 Booking module is the core module of this system with sub-module of payment. booking module should offer customer to having a booking to choose pick and drop location and show price estimation. Driver able to accept the booking and the price estimation range will prompt out to driver to choose the price range. the Booking is first come first serve base, in booking time they able to chating and payment will be maked instantly.

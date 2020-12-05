@@ -53,6 +53,13 @@
             </div>
             <form method="post" action="/WebApplication/updateCar?callback=<%=_callback%>&action=add" >
                 <div class="panel-body">
+                    <p>
+                    <%if (is_taxi) {%>
+                    You are not a taxi driver ? <a href="<%= _callback%>?type=car" class="">Register as car</a>
+                    <%} else {%>
+                    Do you is a taxi driver ? <a href="<%= _callback%>?type=taxi" class="">Register as taxi</a>
+                    <%}%>
+                    </p>
                     <ul class="list-group">
                         <%if (is_taxi) {%>
                         <li class="list-group-item">
@@ -109,13 +116,6 @@
                             </div>
                         </li>
                     </ul>
-                    <b>
-                        <%if (is_taxi) {%>
-                        Want to register as a car ? <a href="<%= _callback%>?type=car" class="">Register as car</a>
-                        <%} else {%>
-                        Want to register as a taxi ?<a href="<%= _callback%>?type=taxi" class="">Register as taxi</a>
-                        <%}%>
-                    </b>
                 </div>
                 <div class="panel-footer">
                     <input type="submit" class="btn btn-success" value="Add ${param.type}" />

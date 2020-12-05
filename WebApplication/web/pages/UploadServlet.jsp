@@ -99,4 +99,5 @@
         out.println("</body>");
         out.println("</html>");
     }
+    response.sendRedirect("account.jsp");
 %>

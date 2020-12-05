@@ -16,7 +16,11 @@
     // get user login session 
     response.encodeURL("/store/catalog");
     User user = main.Functions.getUserSession(request);
-    main.Functions.checkLogin(response, user);
+    if(!response.isCommitted()){
+        if (!main.Functions.checkLogin(response, user)) {
+            return;
+        }
+    }
 
     // get the select option list
     StringBuilder sb_role = new StringBuilder();
@@ -35,7 +39,6 @@
     </head>
     <body>
         <jsp:include page="<%= main.WebConfig.HEADER_URL%>"/>
-
         <style>
             .img-control{height:200px;width:200px;margin-top:-60px; margin-bottom:20px;}
             .border-dark{border:5px solid #333;}
@@ -152,12 +155,12 @@
                 </form>
                 <br>
                 <%if (edit == null ? false : edit.equals("car") && user.isDriver()) {%>
-                    <jsp:include page='../widget/my_cars.jsp'>
-                        <jsp:param name='id' value="${param.id}"/>
-                        <jsp:param name='edit' value="${param.edit}"/>
-                    </jsp:include>
+                <jsp:include page='../widget/my_cars.jsp'>
+                    <jsp:param name='id' value="${param.id}"/>
+                    <jsp:param name='edit' value="${param.edit}"/>
+                </jsp:include>
                 <%} else {%>
-                    <jsp:include page='../widget/my_cars.jsp'/>
+                <jsp:include page='../widget/my_cars.jsp'/>
                 <%}%>
             </div>
         </div>

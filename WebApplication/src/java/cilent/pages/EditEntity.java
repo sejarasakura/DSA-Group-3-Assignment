@@ -121,23 +121,23 @@ public class EditEntity extends AbstractPage {
         try {
             if (feilds.get(identifier_index).invoke(entity).equals(this.parameter_id)) {
                 stringBuilder.append("<tr>");
-                stringBuilder.append("<td>");
+                stringBuilder.append("<td><span id='").append(entity.getId()).append("'>");
                 if (this.classSaving.isDelete()) {
                     submitIcon("glyphicon-trash", " data-id='" + entity.getId() + "' ");
                 }
                 displayIcon(entity.getClass().getSimpleName(), "glyphicon-remove");
                 submitIcon("glyphicon-circle-arrow-up", "");
-                stringBuilder.append("</td>");
+                stringBuilder.append("</span></td>");
                 generateInput(entity);
                 stringBuilder.append("</tr>");
             } else {
                 stringBuilder.append("<tr>");
-                stringBuilder.append("<td>");
+                stringBuilder.append("<td><span id='").append(entity.getId()).append("'>");
                 if (this.classSaving.isDelete()) {
                     submitIcon("glyphicon-trash", " data-id='" + entity.getId() + "' ");
                 }
                 displayIcon(entity.getClass().getSimpleName(), (String) feilds.get(identifier_index).invoke(entity), "glyphicon-pencil", "");
-                stringBuilder.append("</td>");
+                stringBuilder.append("</span></td>");
                 printDisplayBody(entity);
                 stringBuilder.append("</tr>");
             }
@@ -157,7 +157,7 @@ public class EditEntity extends AbstractPage {
         stringBuilder
                 .append("<a href=\"")
                 .append("/WebApplication/admin/edit/").append(_edit)
-                .append("?id=").append(_id)
+                .append("?id=").append(_id).append("#").append(_id)
                 .append("\"> <span class=\"glyphicon ")
                 .append(_class)
                 .append("\" ").append(_atribute).append("></span> </a>");

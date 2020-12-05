@@ -54,6 +54,11 @@
             }
         }
     }
+    if (cars.size() > 0) {
+        for (CarType mb : CarType.values()) {
+            sb_cartype.append("<option value='").append(mb.getCode()).append("' >").append(mb.getName()).append("</option>");
+        }
+    }
 %>
 
 <div class="row">
@@ -114,7 +119,7 @@
                 </blockquote>
             </div>
             <div class="panel-footer">
-                <a class="btn btn-warning" href="account.jsp?edit=car&id=<%= cars.get(i).getPlate_id()%>">Edit</a>
+                <a class="btn btn-warning" href="account.jsp?edit=car&id=<%= cars.get(i).getPlate_id()%>#<%= cars.get(i).getPlate_id()%>">Edit</a>
             </div>
             <%} else {%>
             <div class="panel-heading">
@@ -124,65 +129,78 @@
                     <%= plates.getValue(cars.get(i).getPlate_id()).getPlateNumber()%>
                 </div>
             </div>
-            <div class="panel-body">
-                <blockquote style="border-color: #00000000">
-                    <%if (cars.get(i).isTaxi()) {%>
-                    <div class="row">
-                        <div class="col-sm-6">Registered taxi identity</div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="taxi_id" name="taxi_id" 
-                                   value="<%= ((Taxi) cars.get(i)).getTaxiId()%>">
+            <form method="post" action="/WebApplication/updateCar?id=<%= cars.get(i).getPlate_id()%>&action=update" >
+                <div class="panel-body">
+                    <blockquote style="border-color: #00000000">
+                        <%if (cars.get(i).isTaxi()) {%>
+                        <div class="row">
+                            <div class="col-sm-6">Registered taxi identity</div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="taxi_id" name="taxi_id" 
+                                       value="<%= ((Taxi) cars.get(i)).getTaxiId()%>">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">Official taxi license</div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="taxi_license" name="taxi_license" 
-                                   value="<%= ((Taxi) cars.get(i)).getTaxiLicense()%>">
+                        <div class="row">
+                            <div class="col-sm-6">Official taxi license</div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="taxi_license" name="taxi_license" 
+                                       value="<%= ((Taxi) cars.get(i)).getTaxiLicense()%>">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">Industry and company</div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="taxi_company" name="taxi_company" 
-                                   value="<%= ((Taxi) cars.get(i)).getTaxiCompany()%>">
+                        <div class="row">
+                            <div class="col-sm-6">Industry and company</div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="taxi_company" name="taxi_company" 
+                                       value="<%= ((Taxi) cars.get(i)).getTaxiCompany()%>">
+                            </div>
                         </div>
-                    </div>
-                    <%}%>      
-                    <div class="row">
-                        <div class="col-sm-6">License of plates</div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="plate_lic" name="plate_lic" 
-                                   value="<%= cars.get(i).getLicense()%>">
+                        <%}%>      
+                        <div class="row">
+                            <div class="col-sm-6">License of plates</div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="plate_lic" name="plate_lic" 
+                                       value="<%= cars.get(i).getLicense()%>">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">Transport registered date</div>
-                        <div class="col-sm-6">
-                            <input type="datetime-local" class="form-control" id="reg_date" name="reg_date"
-                                   value="<%= WebConfig.LOCAL_DATETIME_FORMAT.format(cars.get(i).getRegDate())%>">
+                        <div class="row">
+                            <div class="col-sm-6">Transport registered date</div>
+                            <div class="col-sm-6">
+                                <input type="datetime-local" class="form-control" id="reg_date" name="reg_date"
+                                       value="<%= WebConfig.LOCAL_DATETIME_FORMAT.format(cars.get(i).getRegDate())%>">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">Service type provide</div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="plate_lic" name="plate_lic" 
-                                   value="<%= cars.get(i).getCarType().getName()%>">
+                        <div class="row">
+                            <div class="col-sm-6">Service type provide</div>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="cartype" name="cartype" 
+                                        value="<%= cars.get(i).getCarType().getCode()%>">
+                                    <%= sb_cartype.toString()%>
+                                </select>
+                            </div>
+                            <script>
+                                $(document).ready(function () {
+                                    $(`#cartype  option[value='<%= cars.get(i).getCarType().getCode()%>']`)
+                                            .prop('selected', true);
+                                });
+                            </script>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">Car plate</div>
-                        <div class="col-sm-6">
-                            <i><%= plates.getValue(cars.get(i).getPlate_id()).getPlateAlpha()%></i> 
-                            <%= plates.getValue(cars.get(i).getPlate_id()).getPlateNumber()%>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="plate_alpha" name="plate_alpha" placeholder="Plate alpha: eg. WMB"
+                                       value="<%= plates.getValue(cars.get(i).getPlate_id()).getPlateAlpha()%>">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="plate_num" name="plate_num" placeholder="Plate mumber: eg. 2232"
+                                       value="<%= plates.getValue(cars.get(i).getPlate_id()).getPlateNumber()%>">
+                            </div>
                         </div>
-                    </div>
-                </blockquote>
-            </div>
-            <div class="panel-footer">
-                <a class="btn btn-warning" href="account.jsp?edit=car&id=<%= cars.get(i).getPlate_id()%>#<%= cars.get(i).getPlate_id()%>">Edit</a>
-            </div>
-            <%}%>
+                    </blockquote>
+                </div>
+                <div class="panel-footer">
+                    <input type="submit" class="btn btn-warning" value="Update" />
+                </div>
+                <%}%>
+            </form>
         </div>
     </li>
     <%}%>

@@ -101,4 +101,11 @@ public class Datas {
      */
     public static XArrayList<String> admin_header;
 
+    /**
+     * Prevent to many reload of array list
+     *
+     * @author Lim sai keat admin header is fixed
+     */
+    public static XHashedDictionary<String, XArrayList> updateparam;
+
 }

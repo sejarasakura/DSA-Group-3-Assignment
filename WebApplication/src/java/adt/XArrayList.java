@@ -447,15 +447,18 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     public InterList<T> searchByField(String field, Object element, Class<?> _class) {
         XArrayList<T> result = new XArrayList<T>();
         try {
-            Field f = _class.getDeclaredField(field);
-            if (f.isAccessible()) {
+            Field f = null;
+            try {
+                f = _class.getDeclaredField(field);
+            } catch (NoSuchFieldException | SecurityException noSuchFieldException) {
+            }
+            if (f == null ? false : f.isAccessible()) {
                 return searchByField(f, element);
             } else {
-                Method m = _class.getDeclaredMethod(Functions.fieldToGetter(field));
+                Method m = _class.getMethod(Functions.fieldToGetter(field));
                 return searchByMethod(m, element);
             }
-        } catch (NoSuchMethodException | SecurityException | IllegalArgumentException
-                | NoSuchFieldException ex) {
+        } catch (NoSuchMethodException | SecurityException | IllegalArgumentException ex) {
             Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;

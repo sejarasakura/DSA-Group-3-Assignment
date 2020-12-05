@@ -45,6 +45,10 @@ public class Functions {
         return 1;
     }
 
+    public static void add_update_para() {
+        Datas.updateparam.add("car", new XArrayList());
+    }
+
     public static CsvWriterSettings basic_setting() {
         CsvWriterSettings settings = new CsvWriterSettings();
         settings.setNullValue("?");

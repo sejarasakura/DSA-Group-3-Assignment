@@ -270,7 +270,11 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
         /* read data from file */
         Object obj = AbstractEntity.privateReadDataFormCsv(datas.get(0), false);
-        XArrayList<AbstractEntity> allrecord = obj == null ? new XArrayList() : new XArrayList((Iterator) obj);
+        XArrayList<AbstractEntity> allrecord
+                = obj == null
+                        ? new XArrayList()
+                        : new XArrayList((Iterator) obj);
+
         boolean updated, allUpdate = true;
         for (AbstractEntity data : datas) {
             updated = false;

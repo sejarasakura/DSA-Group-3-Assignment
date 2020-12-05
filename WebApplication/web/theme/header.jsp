@@ -33,7 +33,7 @@
         </ul>
 
         <div class="navbar-header pull-right">
-            <a class="" href="">
+            <a class="" href="<%= WebConfig.WEB_URL + "pages/account.jsp"%>">
                 <img src="<%= main.Functions.getProfileUrl(request)%>" alt="Users"
                      width="50"
                      height="50"

@@ -32,7 +32,7 @@ public class LatLng {
 
     /**
      * To convert latitude and Longitude saving format format
-     * [Latitude]%[Longitude]
+     * [Latitude]_[Longitude]
      */
     private String latlng;
 
@@ -81,19 +81,19 @@ public class LatLng {
 
     @Override
     public String toString() {
-        return this.lat + "%" + this.lng;
+        return this.lat + "_" + this.lng;
     }
 
-    public static String DOUBLE_PATTERN = "^[\\+\\-]{0,1}[0-9]+[\\.]{1}[0-9]+[%]{1}[\\+\\-]{0,1}[0-9]+[\\.]{1}[0-9]+$";
+    public static String DOUBLE_PATTERN = "^[\\+\\-]{0,1}[0-9]+[\\.]{1}[0-9]+[_]{1}[\\+\\-]{0,1}[0-9]+[\\.]{1}[0-9]+$";
 
     public boolean extract(String latlng) {
-        if (!latlng.contains("%")) {
+        if (!latlng.contains("_")) {
             return false;
         }
         if (!latlng.matches(DOUBLE_PATTERN)) {
             return false;
         }
-        String[] x = latlng.split("%");
+        String[] x = latlng.split("_");
         this.latlng = latlng;
         this.lat = Double.parseDouble(x[0]);
         this.lng = Double.parseDouble(x[1]);
@@ -111,7 +111,7 @@ public class LatLng {
 
             this.lat = (double) result.getValue("lat");
             this.lng = (double) result.getValue("lng");
-            this.latlng = lat + "%" + lng;
+            this.latlng = lat + "_" + lng;
 
             return true;
 

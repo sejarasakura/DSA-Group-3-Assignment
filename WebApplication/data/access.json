@@ -804,7 +804,33 @@
         ],
         "index": 4
       }
+    },
+    {
+      "classname": "entity.MapAddress",
+      "extension": ".csv",
+      "identifier": "address_id",
+      "add": true,
+      "delete": true,
+      "fields": {
+        "data": [
+          {
+            "type": "java.lang.String",
+            "name": "address_id",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "java.lang.String",
+            "name": "full_address",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          }
+        ],
+        "index": 2
+      }
     }
   ],
-  "index": 14
+  "index": 15
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <file url="file://$PROJECT_DIR$/src/java/com/test/adt/exe/HashTest.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/adt/speed/TestArrListsAddingSpeeds.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/adt/speed/TestArrListsSetSpeeds.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/adt/speed/TestSortListSlotAlgorithmSpeedsMyAdt.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/adt/speed/TestSortListSlotAlgorithmSpeeds.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/adt/speed/TestSortListAddingSpeeds.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/adt/speed/TestLoopsSpeed.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/adt/speed/TestFiboSpeeds.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/adt/speed/TestSortListSlotAlgorithmSpeedsSmall.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/string/TestStringAddingSpeedMultiSmall.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/string/TestStringAddingSpeedTwoSmall.java" />
+      <file url="file://$PROJECT_DIR$/src/java/com/test/string/TestStringAddingSpeed.java" />
+      <file url="file://$PROJECT_DIR$/test/Class_temp.java" />
+      <file url="file://$PROJECT_DIR$/test/Enum_temp.java" />
+      <file url="file://$PROJECT_DIR$/test/Filter_temp.java" />
+      <file url="file://$PROJECT_DIR$/test/Interface_temp.java" />
+      <file url="file://$PROJECT_DIR$/test/Main_temp.java" />
+      <file url="file://$PROJECT_DIR$/test/Servlet_temp.java" />
+    </excludeFromCompile>
+  </component>
+</project>

@@ -302,7 +302,9 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         if (index <= 0) {
             return sb.toString();
         }
-        if (data[0].toString().length() > 10) {
+        if (data[0] == null) {
+
+        } else if (data[0].toString().length() > 10) {
             prefix += line_break;
         }
         for (int i = 0; i < (index - 1); i++) {
@@ -354,16 +356,15 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      */
     @Override
     public InterList<Integer> search(T element) {
+        return private_search(element, false);
+    }
 
-        InterList<Integer> result = new XArrayList<Integer>();
-
-        for (int i = 0; i < index - 1; i++) {
-            if (data[i].equals(data[i + 1])) {
-                result.add(i);
-            }
+    public int search_once(T element) {
+        InterList<Integer> r = private_search(element, true);
+        if (r.isEmpty()) {
+            return -1;
         }
-
-        return result;
+        return r.get(0);
     }
 
     /**
@@ -374,7 +375,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      */
     @Override
     public T searchItem(T element) {
-        InterList<Integer> r = search(element);
+        InterList<Integer> r = private_search(element, true);
         if (r.isEmpty()) {
             return null;
         }
@@ -751,5 +752,27 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
             ar.add(sb.append(s1).append(seperator).append(s2).toString());
         }
         return ar;
+    }
+
+    /**
+     *
+     * @param element
+     * @param once
+     * @return
+     */
+    private InterList<Integer> private_search(T element, boolean once) {
+
+        InterList<Integer> result = new XArrayList<Integer>();
+
+        for (int i = 0; i < index - 1; i++) {
+            if (data[i].equals(data[i + 1])) {
+                result.add(i);
+                if (once) {
+                    break;
+                }
+            }
+        }
+
+        return result;
     }
 }

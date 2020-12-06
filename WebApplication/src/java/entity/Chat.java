@@ -9,6 +9,7 @@ import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import java.util.Date;
 import java.util.Objects;
+import main.Functions;
 
 /**
  *
@@ -62,7 +63,7 @@ public class Chat extends AbstractEntity {
      */
     public Chat(String chat_details_id, String message, Date send_date, boolean read) {
         this.chat_details_id = chat_details_id;
-        this.message = message;
+        setMessage(message);
         this.send_date = send_date;
         this.read = read;
     }
@@ -84,11 +85,15 @@ public class Chat extends AbstractEntity {
     }
 
     public String getMessage() {
-        return message;
+        return (message);
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String get_display_Message() {
+        return Functions.unhash_csv_record(message);
+    }
+
+    public final void setMessage(String message) {
+        this.message = Functions.hash_csv_record(message);
     }
 
     public Date getSend_date() {

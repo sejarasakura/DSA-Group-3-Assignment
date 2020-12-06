@@ -295,11 +295,11 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
         for (int index = 0; index < table.length; index++) {
             if (tab[index] != null) {
                 for (TableEntry e = tab[index]; e != null; e = e.next) {
-                    outputStr.append("index: ").append(index).append(" value: ")
-                            .append(e.getKey()).append(' ')
+                    outputStr.append("index: ").append(index).append(" value: [")
+                            .append(e.getKey()).append("] ")
                             .append(e.getValue());
                     if (e.next != null) {
-                        outputStr.append("\n>> ");
+                        outputStr.append("\n>>");
                     }
                 }
                 outputStr.append("\n");

@@ -29,7 +29,45 @@
             <jsp:param name="menu_bar" value="customer-booking-history"/>
         </jsp:include>
 
-        <h1>Change Here!</h1>
+
+        <div class="container">
+            <div class="container mt-5 mb-5">
+                <div class="row">
+                    <div class="col-md-8 offset-md-3">
+                        <h4>Booking History</h4>
+                        <ul class="timeline">
+                            <li>
+                                <a href="#" class="pull-right">Booking Date</a>
+                                <a href="#">From Location</a>: Jalan 28, Taman Putra, Ampang<br>
+                                <a href="#">To Location</a>: 39, Jalan Temenggung 9/9,
+                                <p>
+                                    Booking date: 11-11-2020<br>
+                                    Driver: [driver-name][driver-id][rent-type]<br>
+                                    Status: [booking-status]<br>
+                                    View Chat: <a>[to-chat]</a><br>
+                                    Note to driver: [description]
+                                </p>
+                            </li>
+                            <li>
+                                <a href="#" class="pull-right">Booking Date</a>
+                                <a href="#">From Location</a>: Jalan 28, Taman Putra, Ampang<br>
+                                <a href="#">To Location</a>: 39, Jalan Temenggung 9/9,
+                                <p>
+                                    Booking date: 11-11-2020<br>
+                                    Driver: [driver-name][driver-id][rent-type]<br>
+                                    Status: [booking-status]<br>
+                                    View Chat: <a>[to-chat]</a><br>
+                                    Note to driver: [description]
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-muted mt-5 mb-5 text-center small">Powered by RentCar.com</div>
+
+        </div>
 
         <jsp:include page="<%= WebConfig.FOOTER_URL%>"/>
     </body>

@@ -41,6 +41,11 @@
 
         <link rel="stylesheet" href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/chat.css">
         <link href="../theme/lib/full-page.css" rel="stylesheet" type="text/css"/>
+        <style>
+            .messaging, .inbox_people{
+                height: 80vh;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="<%= WebConfig.HEADER_URL%>">

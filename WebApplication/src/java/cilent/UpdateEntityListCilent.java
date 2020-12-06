@@ -138,7 +138,7 @@ public class UpdateEntityListCilent {
                     case "java.util.Date":
                         input = LOCAL_DATETIME_FORMAT.parse(parameter_data.getValue(pragma));
                         break;
-                    case "adt.ArrList":
+                    case "adt.XArrayList":
                         input = new XArrayList(parameter_data.getValue(pragma).split(","));
                         break;
                     case "double":

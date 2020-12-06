@@ -77,7 +77,7 @@
             "auto_inc": false
           },
           {
-            "type": "adt.ArrList",
+            "type": "adt.XArrayList",
             "name": "chats_details_id",
             "display": true,
             "update": true,
@@ -300,7 +300,7 @@
             "auto_inc": false
           },
           {
-            "type": "adt.ArrList",
+            "type": "adt.XArrayList",
             "name": "comments",
             "display": true,
             "update": true,

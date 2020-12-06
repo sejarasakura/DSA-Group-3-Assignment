@@ -19,6 +19,7 @@ import adt.node.*;
 import adt.interfaces.*;
 import csv.converter.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +64,8 @@ public final class MessagePages extends AbstractPage {
 
     HttpServletResponse response;
 
+    public static final SimpleDateFormat chat_format = new SimpleDateFormat("MMM dd");
+
     public MessagePages(HttpServletRequest request, HttpServletResponse response, String target) {
         super(request);
         this.response = response;
@@ -100,7 +103,7 @@ public final class MessagePages extends AbstractPage {
     }
 
     private void search_message(Class<?> _user, User _reference) {
-        boolean is_customer = _user == Customer.class;
+        boolean is_customer = _user != Customer.class;
         String field = getField(_user);
         // read user data eg. user is customer read driver data
         XArrayList<User> users = (XArrayList<User>) AbstractEntity.readDataFormCsv(_reference);
@@ -136,9 +139,6 @@ public final class MessagePages extends AbstractPage {
                 );
             }
         }
-        System.out.println(sort_booking);
-        System.out.println(temp_users);
-        System.out.println(used_chat);
         saveThisToSession();
     }
 
@@ -204,19 +204,19 @@ public final class MessagePages extends AbstractPage {
         if (target == null) {
             target = this.used_chat.get(0).getChats_id();
         }
-
+        all_chat = null;
         // Start write message
         chatListSB = new StringBuilder();
         chatListSB.append("<div class=\"inbox_chat\">");
         for (int i = 0; i < this.used_users.size(); i++) {
             if (used_users.get(i) != null) {
-                oneChatList(i);
+                getSinggleChat(i);
             }
         }
         chatListSB.append("</div>");
     }
 
-    private void oneChatList(int i) {
+    private void getSinggleChat(int i) {
         if (all_chat == null) {
             all_chat = (XArrayList<Chat>) AbstractEntity.readDataFormCsv(new Chat());
         }
@@ -224,6 +224,14 @@ public final class MessagePages extends AbstractPage {
         String last_chat = (String) ref.get(ref.size() - 1);
         XArrayList temp_list = (XArrayList) all_chat.searchByField("chat_details_id", last_chat, Chat.class);
         Chat temp = temp_list == null ? null : (Chat) temp_list.get(0);
+        System.out.println(i + " : " + last_chat);
+
+        //<a href="">
+        chatListSB.append("<a href=\"");
+        chatListSB.append(WebConfig.WEB_URL);
+        chatListSB.append("pages/chat.jsp?target=");
+        chatListSB.append(used_chat.get(i).getChats_id());
+        chatListSB.append("\" class=\"deco-none\">");
 
         //<div class="chat_list active_chat">
         chatListSB.append("<div class=\"chat_list ");
@@ -235,11 +243,11 @@ public final class MessagePages extends AbstractPage {
 
         //       <div class="chat_img"> <img src="{image}" alt="{user_name}">
         chatListSB.append("<div class=\"chat_img\"> ");
-        chatListSB.append("<img src=\"");
+        chatListSB.append("<img class=\"img-circle\" src=\"");
         chatListSB.append(Functions.getProfilePic_byid(used_users.get(i).getId()));
         chatListSB.append("\" alt=\"");
         chatListSB.append(used_users.get(i).getName());
-        chatListSB.append("\">");
+        chatListSB.append("\" width=\"40\" height=\"40\" >");
 
         //      </div>
         //      <div class="chat_ib">
@@ -249,16 +257,19 @@ public final class MessagePages extends AbstractPage {
         chatListSB.append("<h5>");
         chatListSB.append(used_users.get(i).getName());
         chatListSB.append("<span class=\"chat_date\">");
-        chatListSB.append(temp == null ? "" : temp.getSend_date());
+        chatListSB.append(temp == null ? "" : chat_format.format(temp.getSend_date()));
         chatListSB.append("</span></h5>");
 
         //          <p>{last message}</p>
+        chatListSB.append("<p>");
         chatListSB.append(temp == null ? "" : temp.getMessage());
+        chatListSB.append("</p>");
 
         //      </div>
         //  </div>
         //</div>
-        chatListSB.append("</div></div></div>");
+        //</a>
+        chatListSB.append("</div></div></div></a>");
     }
 
 }

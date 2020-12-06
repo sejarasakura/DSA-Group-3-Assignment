@@ -55,7 +55,7 @@
             <center>
                 <div class="img-control">
                     <button type="button" class="btn btn-default change-img" data-toggle="modal" data-target="#pic_upload">
-                        <i class="fa fa-camera" style="font-size:24px"></i>
+                        <span class="glyphicon glyphicon-camera" style="color:#fff;font-size:24px;margin-top:5px;line-height: 24px;"></span>
                     </button>
                     <jsp:include page='../widget/pic_upload_modal.jsp'/>
                     <img src="<%= main.Functions.getProfileUrl(request)%>" class="img-circle border-dark" alt="Cinque Terre" height="100%" width="100%" >

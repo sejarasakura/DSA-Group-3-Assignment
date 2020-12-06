@@ -65,7 +65,7 @@ public class Datas {
 
     /**
      *
-     * @author Lim Sai Keat all the current request booking
+     * @author all the current request booking
      */
     public static XQueue<Booking> currentBooking;
 

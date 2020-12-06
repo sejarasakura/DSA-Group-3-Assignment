@@ -9,6 +9,7 @@ import adt.XArrayList;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import csv.converter.ArrListConverter;
+import java.util.Objects;
 
 /**
  *
@@ -72,12 +73,32 @@ public class Chats extends AbstractEntity {
 
     @Override
     public boolean isNotNull() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this != null ? this.chats_id.length() > 2 : false;
     }
 
     @Override
     public boolean equals(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Chats other = (Chats) obj;
+        if (!Objects.equals(this.chats_id, other.chats_id)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.chats_id);
+        return hash;
     }
 
     @Override

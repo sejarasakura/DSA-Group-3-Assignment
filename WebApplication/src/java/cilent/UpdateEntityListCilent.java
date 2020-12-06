@@ -37,7 +37,7 @@ public class UpdateEntityListCilent {
     protected HttpServletRequest request;
     protected HttpServletResponse response;
     protected AbstractEntity acture_entity;
-    protected int j, identifier_index = -99;
+    protected int j, identifier_index = -1;
     protected XArrayList<AbstractEntity> datas;
     protected XArrayList<Method> setter = new XArrayList<Method>();
     protected adt.XHashedDictionary<String, String> parameter_data

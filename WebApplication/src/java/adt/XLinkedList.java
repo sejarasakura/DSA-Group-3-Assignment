@@ -206,7 +206,7 @@ public class XLinkedList<E> implements InterList<E> {
     }
 
     public static void main(String args[]) {
-        InterList<Integer> list = new XLinkedList<Integer>();
+        XArrayList<Integer> list = new XArrayList<Integer>();
         Object[] data;
         list.add(1);
         list.add(12);
@@ -215,7 +215,9 @@ public class XLinkedList<E> implements InterList<E> {
         list.add(12);
         list.add(20);
         list.add(9);
-        data = list.toArray();
+        XArraySortList<Integer> list2 = new XArraySortList(list);
+        list2.sort();
+        list = new XArrayList<Integer>(list2);
         System.out.print(list);
     }
 

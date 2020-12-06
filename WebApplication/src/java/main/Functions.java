@@ -142,6 +142,14 @@ public class Functions {
         return (String) Datas.settings.getValue("image/user");
     }
 
+    public static String getProfilePic_byid(String id) {
+        if (id != null) {
+            return (String) WebConfig.WEB_URL + "/imageRetrive?type=profile&id=" + id + "&default=upload";
+        } else {
+            return (String) Datas.settings.getValue("image/user");
+        }
+    }
+
     private static String displayErrorMessage(String e, String c) {
         ErrorDetails er = ErrorDetails.getValue(e);
         return new StringBuilder()
@@ -281,6 +289,20 @@ public class Functions {
                 + "(([a-z0-9-])*([a-z0-9]))+(.([a-z0-9])([-a-z0-9_-])?"
                 + "([a-z0-9])+)+$";
         return Pattern.matches(reg_exp, email);
+    }
+
+    public static String hash_csv_record(String str) {
+        if (str == null) {
+            return null;
+        }
+        return str.replace(",", "<comal>");
+    }
+
+    public static String unhash_csv_record(String str) {
+        if (str == null) {
+            return null;
+        }
+        return str.replace("<comal>", ",");
     }
 
 }

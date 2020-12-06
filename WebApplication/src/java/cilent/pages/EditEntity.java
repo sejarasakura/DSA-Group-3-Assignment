@@ -224,7 +224,7 @@ public class EditEntity extends AbstractPage {
                 write_type = "datetime-local";
                 value = main.WebConfig.LOCAL_DATETIME_FORMAT.format(data == null ? new Date() : data);
                 break;
-            case "adt.ArrList":
+            case "adt.XArrayList":
                 write_type = "text";
                 value = data == null ? "" : ((XArrayList) data).toInput();
                 break;

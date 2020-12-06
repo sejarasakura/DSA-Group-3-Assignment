@@ -299,12 +299,11 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     private String private_toString(String line_break) {
         StringBuilder sb = new StringBuilder();
         String prefix = ", ";
+        boolean check = data[0] == null ? false : data[0].toString().length() > 10;
         if (index <= 0) {
             return sb.toString();
         }
-        if (data[0] == null) {
-
-        } else if (data[0].toString().length() > 10) {
+        if (check) {
             prefix += line_break;
         }
         for (int i = 0; i < (index - 1); i++) {
@@ -314,6 +313,9 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
             }
         }
         sb.append(data[index - 1]);
+        if (check) {
+            sb.append(line_break);
+        }
         return sb.toString();
     }
 

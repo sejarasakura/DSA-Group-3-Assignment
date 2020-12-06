@@ -26,11 +26,10 @@
         return;
     }
 
-    MessagePages mp;
+    MessagePages mp = null;
     String target = request.getParameter("target");
-    mp = MessagePages.retiveFormSession(request, response, target);
     if (mp == null) {
-        mp = new MessagePages(request, response, null);
+        mp = new MessagePages(request, response, target);
     }
 %>
 <!DOCTYPE html>

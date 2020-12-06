@@ -97,7 +97,7 @@ public class Footer extends AbstractPage {
             x = new XTreeDictionary(data.pop());
             show = Integer.parseInt(x.getValue("show").toString());
             if (show == 1) {
-                sb.append(String.format("<a href=\"%s\" class=\"fa %s pull-right fa-master\"></a>", x.getValue("l"), x.getValue("c")));
+                sb.append(String.format("<a href=\"%s\" class=\"fa %s f_a_link pull-right fa-master\"></a>", x.getValue("l"), x.getValue("c")));
             }
         }
         sb.append("</div>");

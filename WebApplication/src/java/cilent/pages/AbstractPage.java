@@ -23,7 +23,7 @@ public abstract class AbstractPage {
     /**
      * Must have servlet
      */
-    protected final HttpServletRequest request;
+    protected HttpServletRequest request;
 
     /**
      * Generate HTML

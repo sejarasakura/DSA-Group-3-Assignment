@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static main.Datas.TYPE_SWITCH;
+import xenum.BookingStatus;
 import xenum.ErrorDetails;
 
 /**
@@ -47,10 +48,11 @@ public class Functions {
         Datas.settings.add("widget/cartype-select", "../widget/carousel_feeinfo.jsp");
         Datas.allMessage = (XArrayList<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage());
         XArrayList booking_list = AbstractEntity.readDataFormCsv(new Booking());
-        booking_list = (XArrayList) booking_list.searchByField("bookingStatus", "B1", Booking.class);
-        for (int i = 0; i < booking_list.size(); i++) {
-
-        }
+        booking_list.sort("bookingStatus", Booking.class);
+        booking_list = booking_list.binarySearch("bookingStatus", BookingStatus.WATING_ACCEPTED, Booking.class);
+        booking_list.sortDesc("booking_date", Booking.class);
+        Datas.currentBooking = new XQueue(booking_list);
+        System.out.println(Datas.currentBooking);
         return 1;
     }
 

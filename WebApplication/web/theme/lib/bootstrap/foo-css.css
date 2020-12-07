@@ -177,3 +177,35 @@ button.bg-dark:focus {
 .bg-transparent {
   background-color: transparent !important;
 }
+
+
+ .light-bg-default{
+    color: #333333 !important;
+    background-color: #f5f5f5 !important;
+    border-color: #ddd !important;
+  }
+  .light-bg-primary{
+    color: #fff !important;
+    background-color: #337ab7 !important;
+    border-color: #337ab7 !important;
+  }
+  .light-bg-success{
+    color: #3c763d !important;
+    background-color: #dff0d8 !important;
+    border-color: #d6e9c6 !important;
+  }
+  .light-bg-info{
+    color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
+  }
+  .light-bg-warning{
+    color: #8a6d3b !important;
+    background-color: #fcf8e3 !important;
+    border-color: #faebcc !important;
+  }
+  .light-bg-danger{
+    color: #a94442 !important;
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important;
+  }

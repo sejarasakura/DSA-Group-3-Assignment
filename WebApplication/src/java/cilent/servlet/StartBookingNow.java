@@ -11,6 +11,8 @@ import entity.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -135,9 +137,11 @@ public class StartBookingNow extends HttpServlet {
             out.print(payment);
 
             Datas.currentBooking.enqueue(booking);
-            //response.sendRedirect(WebConfig.WEB_URL + "pages/viewBooking.jsp");
+            Thread.sleep(3000);
+            response.sendRedirect(WebConfig.WEB_URL + "pages/viewBooking.jsp?" + booking.getBooking_id());
+        } catch (InterruptedException ex) {
+            Logger.getLogger(StartBookingNow.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override

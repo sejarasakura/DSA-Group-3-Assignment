@@ -1,0 +1,22 @@
+Where is my git branch
+
+Jira account
+
+bitbucket
+
+Company der g-suite
+
+Drop down list
+-----------------------------------
+https://youtu.be/DvvnhRo0kHQ
+https://stackoverflow.com/questions/49273157/how-to-implement-drop-down-list-in-flutter
+
+new DropdownButton<String>(
+  items: <String>['A', 'B', 'C', 'D'].map((String value) {
+    return new DropdownMenuItem<String>(
+      value: value,
+      child: new Text(value),
+    );
+  }).toList(),
+  onChanged: (_) {},
+)

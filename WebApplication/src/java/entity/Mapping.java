@@ -199,6 +199,11 @@ public class Mapping extends AbstractEntity<Mapping> {
         System.out.print(m.destination_id);
     }
 
+    public Range getPriceRange(CarType cartype) {
+        return getPriceRange(this.dest_int, this.time_int, cartype.getPrice_per_km(),
+                cartype.getPrice_per_min(), cartype.getBase_fair_price(), cartype.getMinimum_price());
+    }
+
     public Range getPriceRange(int dist_map_value, int time_map_value, CarType cartype) {
         return getPriceRange(dist_map_value, time_map_value, cartype.getPrice_per_km(),
                 cartype.getPrice_per_min(), cartype.getBase_fair_price(), cartype.getMinimum_price());
@@ -224,26 +229,17 @@ public class Mapping extends AbstractEntity<Mapping> {
     }
 
     public static double roundToMultipleOfFive(double x) {
-        String str = String.valueOf(x);
-        int pos = 0;
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == '.') {
-                pos = i;
-                break;
-            }
+        return round(x, 2);
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) {
+            throw new IllegalArgumentException();
         }
-        int after = Integer.parseInt(str.substring(pos + 1, str.length()));
-        int Q = after / 5;
-        int R = after % 5;
-        if ((Q % 2) == 0) {
-            after = after - R;
-        } else {
-            if (5 - R == 5) {
-                after = after;
-            } else {
-                after = after + (5 - R);
-            }
-        }
-        return Double.parseDouble(str.substring(0, pos + 1).concat(String.valueOf(after)));
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 }

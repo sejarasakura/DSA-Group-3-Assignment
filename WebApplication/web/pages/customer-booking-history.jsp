@@ -16,6 +16,16 @@
 <%@page import="xenum.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<%
+    // get user login session 
+    User user = main.Functions.getUserSession(request);
+    main.Functions.checkLogin(response, user);
+
+    if (user == null) {
+        return;
+    }
+    BookingHistory bh = new BookingHistory(request, user);
+%>
 <html>
     <head>
         <jsp:include page="<%= WebConfig.META_URL%>">
@@ -36,18 +46,7 @@
                     <div class="col-md-8 offset-md-3">
                         <h4>Booking History</h4>
                         <ul class="timeline">
-                            <li>
-                                <a href="#" class="pull-right">Booking Date</a>
-                                <a href="#">From Location</a>: Jalan 28, Taman Putra, Ampang<br>
-                                <a href="#">To Location</a>: 39, Jalan Temenggung 9/9,
-                                <p>
-                                    Booking date: 11-11-2020<br>
-                                    Driver: [driver-name][driver-id][rent-type]<br>
-                                    Status: [booking-status]<br>
-                                    View Chat: <a>[to-chat]</a><br>
-                                    Note to driver: [description]
-                                </p>
-                            </li>
+                            <%= bh.getHtml()%>
                         </ul>
                     </div>
                 </div>

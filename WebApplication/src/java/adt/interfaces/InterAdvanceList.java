@@ -5,6 +5,7 @@
  */
 package adt.interfaces;
 
+import adt.XArrayList;
 import entity.AbstractEntity;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -132,5 +133,48 @@ public interface InterAdvanceList<T> extends InterList<T> {
      * @return
      */
     public abstract InterList<String> getField(Field f, Class<?> _class);
+
+    /**
+     *
+     * @param field
+     * @param _class
+     * @return
+     */
+    public abstract boolean sort(String field, Class _class);
+
+    /**
+     *
+     * @param field
+     * @param _class
+     * @return
+     */
+    public abstract boolean sortDesc(String field, Class _class);
+
+    /**
+     *
+     * @param field
+     * @param value
+     * @param _class
+     * @return
+     */
+    public abstract XArrayList<T> binarySearch(String field, Comparable value, Class<?> _class);
+
+    /**
+     *
+     * @param field
+     * @param value
+     * @param _class
+     * @return
+     */
+    public abstract T binarySearchOnce(String field, Comparable value, Class<?> _class);
+
+    /**
+     *
+     * @param field
+     * @param value
+     * @param _class
+     * @return
+     */
+    public abstract XArrayList<T> binarySearchAndSort(String field, Comparable value, Class<?> _class);
 
 }

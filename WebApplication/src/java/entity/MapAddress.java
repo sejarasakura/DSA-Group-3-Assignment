@@ -41,6 +41,13 @@ public final class MapAddress extends AbstractEntity {
         return full_address;
     }
 
+    public String getFull_address_hide_extra() {
+        if (full_address.length() < 55) {
+            return get_display_address();
+        }
+        return get_display_address().substring(0, 50) + "...";
+    }
+
     public String get_display_address() {
         return Functions.unhash_csv_record(full_address);
     }
@@ -100,7 +107,6 @@ public final class MapAddress extends AbstractEntity {
     }
 
     public boolean updateAddressUsing_API() {
-
         return true;
     }
 }

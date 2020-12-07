@@ -17,55 +17,39 @@
 <%@page import="xenum.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
-    XArrayList arr_list = AbstractEntity.readDataFormCsv(new Booking());
-    response.encodeURL("/store/catalog");
     User user = main.Functions.getUserSession(request);
     if (!response.isCommitted()) {
         if (!main.Functions.checkLogin(response, user)) {
             return;
         }
     }
+    if (!user.isDriver()) {
+        response.sendRedirect(WebConfig.WEB_URL + "pages/index.jsp?I=I-0021");
+        return;
+    }
+    DriverFetch df = new DriverFetch(request, user);
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <jsp:include page="<%= WebConfig.META_URL%>">
-            <jsp:param name="title" value="driverFetch"/>
+            <jsp:param name="title" value="Booking Request"/>
         </jsp:include>
         <style>
         </style>
+        <link href="../theme/lib/full-page.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <jsp:include page="<%= WebConfig.HEADER_URL%>">
-            <jsp:param name="menu_bar" value="driverFetch"/>
+            <jsp:param name="menu_bar" value="Booking Request"/>
         </jsp:include>
 
+        <div class="jumbotron light-bg-success">
+            <h1 class="text-center">Booking Request</h1>
+        </div>
+
         <div class="container">
-            <%for (int i = 0; i < 1; i++) {%>
-            <%%><div class="row"><%%>
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <a href="#" class="deco-none">
-                        <div class="well well-sm">
-                            <div class="row">
-                                <div class="col-sm-6 col-md-4">
-                                    <img src="http://placehold.it/380x500" alt="" class="img-rounded" height="170" width="170"/>
-                                </div>
-                                <div class="col-sm-6 col-md-8">
-                                    <h4>
-                                        Customer name</h4>
-                                    <small><i class="glyphicon glyphicon-map-marker map-marker-form"></i><cite title="San Francisco, USA">Form address</cite></small>
-                                    <small><i class="glyphicon glyphicon-map-marker map-marker-to"></i><cite title="San Francisco, USA">To address</cite></small>
-                                    <p>
-                                        <i class="glyphicon glyphicon glyphicon-earphone"></i>phone number<br />
-                                        <i class="glyphicon glyphicon-time"></i>June 02, 1988<br />
-                                        <i class="glyphicon glyphicon-yen"></i><span class="text-success"><b>RM 100.00 - 200.00</b></span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <%%></div><%%>
-                <%}%>
+            <%= df.getHtml()%>
         </div>
 
         <jsp:include page="<%= WebConfig.FOOTER_URL%>"/>

@@ -17,3 +17,4 @@ I-0016,alert-danger,The record you try to find or update is not found in the dat
 I-0018,alert-danger,The password you enter is not correct please try agian,Incorrect Password
 I-0019,alert-danger,Your password is not match to confrim password please try agian!,Password not match!!
 I-0020,alert-success,Congratulations your password has been changes successful!!,Password changes successful
+I-0021,alert-danger,You are no a driver please login to a driver account and try again,Not Driver Error

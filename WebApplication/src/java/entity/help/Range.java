@@ -40,6 +40,10 @@ public class Range<T> {
         this.higher = higher;
     }
 
+    public boolean isSame() {
+        return this.higher == this.lower;
+    }
+
     public Object delta() {
         try {
             return (Object) ((Double) this.higher - (Double) this.lower);

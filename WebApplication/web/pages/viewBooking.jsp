@@ -18,7 +18,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
     // get user login session 
-    response.encodeURL("/store/catalog");
     User user = main.Functions.getUserSession(request);
     main.Functions.checkLogin(response, user);
 

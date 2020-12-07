@@ -16,7 +16,7 @@ import adt.interfaces.InterQuene;
  * @author Lai Hong Wah
  * @param <T>
  */
-public class XQueue<T> implements InterQuene<T> {
+public class XQueue<T> implements InterQuene<T>, Cloneable {
 
     private final DoubleNode<T> head;
     private final DoubleNode<T> tail;
@@ -158,6 +158,11 @@ public class XQueue<T> implements InterQuene<T> {
             s.append("\n");
         }
         return s.toString();
+    }
+
+    @Override
+    public XQueue clone() {
+        return new XQueue(this);
     }
 
     /**

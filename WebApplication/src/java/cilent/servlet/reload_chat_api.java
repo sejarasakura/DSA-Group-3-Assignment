@@ -39,7 +39,7 @@ public class reload_chat_api extends HttpServlet {
     User user;
     Chats chats;
     XQueue<Chat> chat;
-    XArraySortList temp;
+    XArrayList temp;
     private String target;
     private StringBuilder sb;
 
@@ -55,11 +55,13 @@ public class reload_chat_api extends HttpServlet {
             return;
         }
         target = request.getParameter("target");
-        MessagePages mp = (MessagePages) request.getSession().getAttribute("MESSAGE_PAGE");
+        if (target == null ? true : target.isEmpty()) {
+            return;
+        }
         XArrayList<Chat> details_record = (XArrayList<Chat>) AbstractEntity.readDataFormCsv(new Chat());
         XArrayList<Chats> chat_record = (XArrayList<Chats>) AbstractEntity.readDataFormCsv(new Chats());
-
-        chat_record = (XArrayList<Chats>) chat_record.searchByField("chats_id", target == null ? mp.getTarget() : target, Chats.class);
+        details_record.sort("chat_details_id", Chat.class);
+        chat_record = (XArrayList<Chats>) chat_record.searchByField("chats_id", target, Chats.class);
 
         if (chat_record == null ? true : chat_record.isEmpty()) {
             return;
@@ -67,26 +69,25 @@ public class reload_chat_api extends HttpServlet {
         chats = chat_record.get(0);
         XArrayList details = chats.getChats_details_id();
         XArrayList temp_result;
-        temp = new XArraySortList();
+        temp = new XArrayList();
         for (int i = 0; i < details.size(); i++) {
-            temp_result = (XArrayList) details_record.searchByField("chat_details_id", details.get(i), Chat.class);
+            temp_result = (XArrayList) details_record.binarySearch("chat_details_id", (Comparable) details.get(i), Chat.class);
             if (temp_result != null) {
                 if (!temp_result.isEmpty()) {
                     temp.add((Chat) temp_result.get(0));
                 }
             }
         }
-        temp.sortDesc();
+        temp.sort("send_date", Chat.class);
         chat = new XQueue(temp);
         start_write_mesage();
-        System.out.print(chat.toString());
         System.out.print(temp.toString());
         response.getWriter().write(sb.toString());
     }
 
     private void start_write_mesage() {
         boolean is_u1 = user.getUser_id().equals(chats.getUser_id_1()), send;
-        for (Comparable x : temp.toArray()) {
+        for (Object x : temp.toArray()) {
             Chat temp_chat = (Chat) x;
             if (is_u1 ? temp_chat.getSend_by_u1() : !temp_chat.getSend_by_u1()) {
                 outgoing_message(temp_chat);

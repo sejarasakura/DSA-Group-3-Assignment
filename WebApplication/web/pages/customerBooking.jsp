@@ -76,6 +76,8 @@
             <input type="hidden" id="to-latlng" name="to-latlng" value=""/>
             <input type="hidden" id="form-address" name="form-address" value=""/>
             <input type="hidden" id="to-address" name="to-address" value=""/>
+            <input type="hidden" id="dist_value" name="dist_value" value=""/>
+            <input type="hidden" id="time_value" name="time_value" value=""/>
 
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
@@ -248,6 +250,8 @@
             function calculateAll() {
                 const dist_map = document.getElementById("map-distance");
                 const time_map = document.getElementById("map-time");
+                document.getElementById("dist_value").value = dist_map.value;
+                document.getElementById("time_value").value = time_map.value;
             <%for (int i = 0; i < types.size(); i++) {%>
                 calculatePrice(
                         'price_<%=i%>',

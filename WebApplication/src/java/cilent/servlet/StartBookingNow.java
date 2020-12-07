@@ -53,10 +53,16 @@ public class StartBookingNow extends HttpServlet {
             Chats chats = new Chats();
             Mapping mapping = new Mapping();
             Payment payment = new Payment();
+            MapAddress map_address_1 = new MapAddress();
+            MapAddress map_address_2 = new MapAddress();
 
             /*Get all hte input*/
             String form = request.getParameter("form-latlng");
             String to = request.getParameter("to-latlng");
+            String form_address = request.getParameter("form-address");
+            String to_address = request.getParameter("to-address");
+            String dist_value = request.getParameter("dist_value");
+            String time_value = request.getParameter("time_value");
             String booking_type = request.getParameter("ride-type");
             String ride_note = request.getParameter("ride-note");
 
@@ -88,19 +94,26 @@ public class StartBookingNow extends HttpServlet {
             booking = new Booking(booking_id, ride_note, CarType.getValue(booking_type), new Date(), "",
                     user.getId(), chats_id, mapping_id, payment_id, BookingStatus.WATING_ACCEPTED);
 
-            chats = new Chats(chats_id, null, null, new XArrayList());
+            chats = new Chats(chats_id, user.getId(), null, new XArrayList());
 
             mapping = new Mapping();
             mapping.extractDestinationJson(to);
             mapping.extractSourceJson(form);
             mapping.setMap_id(mapping_id);
             mapping.setFetch_date(new Date());
+            mapping.setTime_int(Integer.parseInt(time_value));
+            mapping.setDest_int(Integer.parseInt(dist_value));
 
             long date = System.currentTimeMillis() + 14 * 24 * 3600 * 1000;
 
             payment = new Payment(payment_id, PaymentStatus.Created,
                     PaymentMethodType.NOT_YET_PAID,
                     new Date(), new Date(date), 0.00);
+
+            map_address_1.setAddress_id(mapping.getDestination_id());
+            map_address_1.setFull_address(to_address);
+            map_address_2.setAddress_id(mapping.getSource_id());
+            map_address_2.setFull_address(form_address);
 
             mapping.addThisToCsv();
             chats.addThisToCsv();

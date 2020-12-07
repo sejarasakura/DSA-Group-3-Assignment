@@ -122,9 +122,23 @@
             "display": true,
             "update": true,
             "auto_inc": false
+          },
+          {
+            "type": "int",
+            "name": "time_int",
+            "display": true,
+            "update": true,
+            "auto_inc": false
+          },
+          {
+            "type": "int",
+            "name": "dest_int",
+            "display": true,
+            "update": true,
+            "auto_inc": false
           }
         ],
-        "index": 4
+        "index": 6
       }
     },
     {

@@ -10,6 +10,7 @@ import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import java.util.*;
 import org.apache.commons.lang3.StringEscapeUtils;
+import xenum.CarType;
 
 /**
  * Mapping class to store mapping details include booking destination and source
@@ -32,6 +33,18 @@ public class Mapping extends AbstractEntity<Mapping> {
      */
     @CsvBindByName
     private String source_id;
+
+    /**
+     * Primary key of the map
+     */
+    @CsvBindByName
+    private int time_int;
+
+    /**
+     * Form position id format follow by Google map API
+     */
+    @CsvBindByName
+    private int dest_int;
 
     /**
      * To position id format follow by qq map API
@@ -57,14 +70,34 @@ public class Mapping extends AbstractEntity<Mapping> {
      *
      * @param map_id
      * @param source_id
+     * @param time_int
+     * @param dest_int
      * @param destination_id
      * @param fetch_date
      */
-    public Mapping(String map_id, String source_id, String destination_id, Date fetch_date) {
+    public Mapping(String map_id, String source_id, int time_int, int dest_int, String destination_id, Date fetch_date) {
         this.map_id = map_id;
         this.source_id = source_id;
+        this.time_int = time_int;
+        this.dest_int = dest_int;
         this.destination_id = destination_id;
         this.fetch_date = fetch_date;
+    }
+
+    public int getTime_int() {
+        return time_int;
+    }
+
+    public void setTime_int(int time_int) {
+        this.time_int = time_int;
+    }
+
+    public int getDest_int() {
+        return dest_int;
+    }
+
+    public void setDest_int(int dest_int) {
+        this.dest_int = dest_int;
     }
 
     public String getMap_id() {
@@ -165,8 +198,51 @@ public class Mapping extends AbstractEntity<Mapping> {
         System.out.print(m.destination_id);
     }
 
-    public XHashedDictionary getPriceRange() {
+    public XHashedDictionary getPriceRange(int dist_map_value, int time_map_value, CarType cartype) {
+        return getPriceRange(dist_map_value, time_map_value, cartype.getPrice_per_km(),
+                cartype.getPrice_per_min(), cartype.getBase_fair_price(), cartype.getMinimum_price());
+    }
+
+    public static XHashedDictionary getPriceRange(int dist_map_value, int time_map_value,
+            double per_km, double per_min, double base_fare, double min_fare) {
         XHashedDictionary<String, Double> hm = new XHashedDictionary();
 
+        double price_no_base = (dist_map_value * per_km / 1000) + (time_map_value * per_min / 60);
+        double price = (dist_map_value * per_km / 1000) + (time_map_value * per_min / 60) + base_fare;
+        price = roundToMultipleOfFive(price >= min_fare ? price : min_fare);
+        price_no_base = roundToMultipleOfFive(price_no_base >= min_fare ? price_no_base : min_fare);
+
+        if (Math.round(price_no_base) == Math.round(price)) {
+            hm.add("low", price);
+            hm.add("high", price);
+        } else {
+            hm.add("low", price);
+            hm.add("high", price_no_base);
+        }
+        return hm;
+    }
+
+    public static double roundToMultipleOfFive(double x) {
+        String str = String.valueOf(x);
+        int pos = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '.') {
+                pos = i;
+                break;
+            }
+        }
+        int after = Integer.parseInt(str.substring(pos + 1, str.length()));
+        int Q = after / 5;
+        int R = after % 5;
+        if ((Q % 2) == 0) {
+            after = after - R;
+        } else {
+            if (5 - R == 5) {
+                after = after;
+            } else {
+                after = after + (5 - R);
+            }
+        }
+        return Double.parseDouble(str.substring(0, pos + 1).concat(String.valueOf(after)));
     }
 }

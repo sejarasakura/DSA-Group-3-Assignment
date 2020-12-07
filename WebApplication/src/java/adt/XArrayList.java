@@ -17,6 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.Functions;
 import adt.interfaces.InterList;
+import entity.help.Range;
+import xenum.AbstractEnum;
 
 /**
  *
@@ -46,6 +48,8 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      * Index
      */
     protected int index = -1;
+
+    boolean sorted = false;
 
     /**
      * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -128,6 +132,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     @Override
     public final void add(T e) {
         add(index, e);
+        sorted = false;
     }
 
     /**
@@ -148,6 +153,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         }
         data[_index] = e;
         index++;
+        sorted = false;
     }
 
     /**
@@ -160,6 +166,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         for (T x : c) {
             add(index, x);
         }
+        sorted = false;
     }
 
     /**
@@ -175,6 +182,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
             add(_index + count, x);
             count++;
         }
+        sorted = false;
     }
 
     /**
@@ -202,6 +210,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
             data[i] = data[i + 1];
         }
         index--;
+        sorted = false;
         return (T) x;
     }
 
@@ -215,6 +224,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     public void set(int _index, T element) {
         CheckRange(_index);
         data[_index] = element;
+        sorted = false;
     }
 
     /**
@@ -263,6 +273,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         T[] x = data.clone();
         data = (T[]) new Object[INITIAL_CAPACITY];
         index = 0;
+        sorted = false;
         return x;
     }
 
@@ -347,6 +358,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         }
         data[j++] = data[index - 1];
         index = j;
+        sorted = true;
         return true;
     }
 
@@ -614,6 +626,67 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     /**
+     * sort the element in the List according to the field name
+     *
+     * @param field
+     * @param _class
+     * @return success sort or not
+     */
+    public boolean sort(String field, Class _class) {
+        try {
+            Method f = _class.getMethod(Functions.fieldToGetter(field));
+            boolean r = sort(f);
+            XStack s = new XStack(this);
+            int i = this.index;
+            while (!s.isEmpty()) {
+                i--;
+                data[i] = (T) s.pop();
+            }
+            sorted = true;
+            return r;
+        } catch (SecurityException | NoSuchMethodException ex) {
+            Logger.getLogger(XArraySortList.class.getName()).log(Level.SEVERE, null, ex);
+            sorted = false;
+            return false;
+        }
+    }
+
+    /**
+     * sort the element in the List descending to the field name
+     *
+     * @param field
+     * @param _class
+     * @return
+     */
+    public boolean sortDesc(String field, Class _class) {
+        try {
+            Method f = _class.getMethod(Functions.fieldToGetter(field));
+            return sort(f);
+        } catch (SecurityException | NoSuchMethodException ex) {
+            Logger.getLogger(XArraySortList.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public XArrayList<T> binarySearch(String field, Comparable value, Class<?> _class) {
+        try {
+            return this.notsecure_binarySearch(field, value, _class, false);
+        } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new XArrayList();
+    }
+
+    public XArrayList<T> binarySearchAndSort(String field, Comparable value, Class<?> _class) {
+        try {
+            return this.notsecure_binarySearch(field, value, _class, true);
+        } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new XArrayList();
+    }
+
+    /**
      * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      *
      * ============================= Iterator Class ============================
@@ -696,6 +769,77 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         }
     }
 
+    private void sort_no_rec2(T arr[], int l, int h, Method sort_method, Method getter) {
+
+        // Create an auxiliary stack
+        int[] stack = new int[h - l + 1];
+
+        // initialize top of stack
+        int top = -1;
+
+        // push initial values of l and h to stack
+        stack[++top] = l;
+        stack[++top] = h;
+
+        // Keep popping from stack while is not empty
+        while (top >= 0) {
+            // Pop h and l
+            h = stack[top--];
+            l = stack[top--];
+
+            // Set pivot element at its correct position
+            // in sorted array
+            int p = partition_m(arr, l, h, sort_method, getter);
+
+            // If there are elements on left side of pivot,
+            // then push left side to stack
+            if (p - 1 > l) {
+                stack[++top] = l;
+                stack[++top] = p - 1;
+            }
+
+            // If there are elements on right side of pivot,
+            // then push right side to stack
+            if (p + 1 < h) {
+                stack[++top] = p + 1;
+                stack[++top] = h;
+            }
+        }
+    }
+
+    /**
+     * @param getter reflection methods to call getter dynamic
+     * @param sort_method to get the default sorting methods Object
+     * compareTo(Object) | null for int
+     */
+    private int partition_m(T[] arr, int low, int high, Method sort_method, Method getter) {
+        T pivot = arr[high];
+        int i = (low - 1); // index of smaller element
+        int result;
+        for (int j = low; j < high; j++) {
+            try {
+                // If current element is smaller than the pivot
+                result = this.compare(arr[j], (Comparable) getter.invoke(pivot), sort_method, getter);
+                if (result > 0) {
+                    i++;
+                    // swap arr[i] and arr[j]
+                    T temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                Logger.getLogger(XArraySortList.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        // swap arr[i+1] and arr[high] (or pivot)
+        T temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
+    }
+
     /**
      *
      * @param m
@@ -776,5 +920,124 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         }
 
         return result;
+    }
+
+    private XArrayList<T> notsecure_binarySearch(String field, Comparable value, Class<?> _class, boolean sort_for_me) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        XArrayList r;
+        Method getter = _class.getDeclaredMethod(Functions.fieldToGetter(field));
+        Method sort_m = getClassType(getter.getReturnType());
+        Integer delta;
+        if (sort_m == null ? true : sort_m.getReturnType() == int.class) {
+            Range<Integer> range = binary_search_range(data, value, sort_m, getter, sort_for_me);
+            delta = range.getHigher() - range.getLower();
+            r = new XArrayList(delta + 1);
+            System.arraycopy(this.data, range.getLower(), r.data, 0, delta + 1);
+            r.index = delta + 1;
+            return r;
+        }
+        return new XArrayList();
+    }
+
+    private Method getClassType(Class<?> cls) throws NoSuchMethodException {
+        if (cls.getName().contains("xenum.")) {
+            return cls.getMethod("compare", AbstractEnum.class);
+        } else if (cls != int.class) {
+            return cls.getMethod("compareTo", cls);
+        } else {
+            return null;
+        }
+    }
+
+    private Range binary_search_range(T arr[], Comparable value, Method sort_method, Method getter, boolean sort_for_me) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        int r = this.simple_BinarySearch(arr, value, sort_method, getter, sort_for_me);
+        int first = r;
+        int last = r;
+        int result_l, result_f;
+        if (r >= 0) {
+            while (first > 0 && compare(data[first - 1], value, sort_method, getter) == 0) {
+                first--;
+            }
+            while (last < data.length - 1 && compare(data[last + 1], value, sort_method, getter) == 0) {
+                last++;
+            }
+        }
+        return new Range<Integer>(first, last);
+    }
+
+    private int compare(T this_value, Comparable value, Method sort_method, Method getter) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
+        if (sort_method != null) {
+            return (int) sort_method.invoke(getter.invoke(this_value), value);
+        } else {
+            return Integer.compare((int) getter.invoke(this_value), (Integer) value);
+        }
+    }
+
+    // -1 null value, -2 not sorted
+    private int simple_BinarySearch(T arr[], Comparable value, Method sort_method, Method getter, boolean sort_for_me) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        // block using empty object
+        if ((value == null || arr == null ? true : arr.length == 0)) {
+            return -1;
+        }
+        // only one element
+        if (arr.length == 1 || index == 1) {
+            return 0;
+        }
+
+        if (!sorted ? !sort_for_me : false) { // not sort
+            return -2;
+        } else if (sort_for_me && !sorted) {  // sort for me
+            this.sort_no_rec2(arr, 0, index - 1, sort_method, getter);
+        }
+        int l = 0, r = arr.length - 1, result;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+
+            // invoke compareto result
+            result = this.compare(arr[m], value, sort_method, getter);
+            // Check if x is present at mid
+            if (result == 0) {
+                return m;
+            }
+
+            // If x greater, ignore left half comparetTo():1
+            if (result < 0) {
+                l = m + 1;
+            } // If x is smaller, ignore right half comparetTo():-1
+            else {
+                r = m - 1;
+            }
+        }
+
+        // if we reach here, then element was
+        // not present
+        return -1;
+    }
+
+    private boolean sort(Method methods) {
+        Class<?> cls = methods.getReturnType();
+        try {
+            if (cls.getName().contains("xenum.")) {
+                Method m = cls.getMethod("compare", AbstractEnum.class);
+                if (m.getReturnType() != int.class) {
+                    return false;
+                }
+                this.sort_no_rec2(data, 0, this.index - 1, m, methods);
+            } else if (cls != int.class) {
+                Method m = cls.getMethod("compareTo", cls);
+                if (m.getReturnType() != int.class) {
+                    return false;
+                }
+                this.sort_no_rec2(data, 0, this.index - 1, m, methods);
+            } else {
+                this.sort_no_rec2(data, 0, this.index - 1, null, methods);
+            }
+            sorted = true;
+            return true;
+        } catch (NoSuchMethodException | SecurityException ex) {
+            Logger.getLogger(XArraySortList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        sorted = false;
+        return false;
     }
 }

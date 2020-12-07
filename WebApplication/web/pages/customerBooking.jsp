@@ -74,6 +74,8 @@
         <form method="post" action="<%= WebConfig.WEB_URL%>start/booking/now">
             <input type="hidden" id="form-latlng" name="form-latlng" value=""/>
             <input type="hidden" id="to-latlng" name="to-latlng" value=""/>
+            <input type="hidden" id="form-address" name="form-address" value=""/>
+            <input type="hidden" id="to-address" name="to-address" value=""/>
 
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
@@ -148,6 +150,8 @@
                 const input_form = document.getElementById("pac-input-form");
                 const input_to = document.getElementById("pac-input-to");
                 const input_form_lat = document.getElementById("form-latlng");
+                const input_to_address = document.getElementById("to-address");
+                const input_form_address = document.getElementById("form-address");
                 const input_to_lat = document.getElementById("to-latlng");
                 const btn_ft = document.getElementById("form-to");
                 const logo_map = document.getElementById("logo-map");
@@ -176,6 +180,8 @@
                         };
                         marker_form.setPosition(pos);
                         map.setCenter(pos);
+                        reverseLatLng(geocoder, input_form, marker_form, map, input_form_address);
+                        writeToInput(marker_form.getPosition(), input_form_lat);
                     },
                             () => {
                         handleLocationError(true, infoWindow, map.getCenter(), map);
@@ -192,7 +198,7 @@
                 map.addListener("click", (mapsMouseEvent) => {
                     if (focus_form) {
                         marker_form.setPosition(mapsMouseEvent.latLng);
-                        reverseLatLng(geocoder, input_form, marker_form, map);
+                        reverseLatLng(geocoder, input_form, marker_form, map, input_form_address);
                         fitCurrentBound(marker_form.getPosition(), marker_to.getPosition(), map);
                         writeToInput(marker_form.getPosition(), input_form_lat);
                         calculateAndDisplayRoute(directionsService, directionsRenderer,
@@ -200,7 +206,7 @@
                     } else {
                         booking.disabled = false;
                         marker_to.setPosition(mapsMouseEvent.latLng);
-                        reverseLatLng(geocoder, input_to, marker_to, map);
+                        reverseLatLng(geocoder, input_to, marker_to, map, input_to_address);
                         fitCurrentBound(marker_form.getPosition(), marker_to.getPosition(), map);
                         writeToInput(marker_to.getPosition(), input_to_lat);
                         calculateAndDisplayRoute(directionsService, directionsRenderer,
@@ -236,8 +242,6 @@
                     setFocusBtn(focus_form);
                     fitCurrentBound(marker_form.getPosition(), marker_to.getPosition(), map);
                 });
-                reverseLatLng(geocoder, input_to, marker_to, map);
-                writeToInput(marker_form.getPosition(), input_form_lat);
                 setFocusBtn(focus_form);
             }
 
@@ -271,7 +275,6 @@
             }
 
             function distanceMatricApix(origin, destination, service, dist_map, time_map, outputDiv) {
-
                 service.getDistanceMatrix({
                     origins: [origin.getPosition()],
                     destinations: [destination.getPosition()],
@@ -354,12 +357,13 @@
                 input_latlng.value = JSON.stringify(position.toJSON(), null, 2);
             }
 
-            function reverseLatLng(geocoder, input, marker, map) {
+            function reverseLatLng(geocoder, input, marker, map, input_address) {
                 const position = marker.getPosition();
                 geocoder.geocode({location: position}, (results, status) => {
                     if (status === "OK") {
                         if (results[0]) {
                             input.value = results[0].formatted_address;
+                            input_address.value = results[0].formatted_address;
                         } else {
                             window.alert("No results found");
                         }

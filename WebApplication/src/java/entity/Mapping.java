@@ -5,6 +5,7 @@
  */
 package entity;
 
+import adt.XHashedDictionary;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import java.util.*;
@@ -162,5 +163,10 @@ public class Mapping extends AbstractEntity<Mapping> {
         Mapping m = new Mapping();
         m.extractDestinationJson("{ \"lat\": 3.114335808269884, &quot;lng&quot;: 101.68461846037636 }");
         System.out.print(m.destination_id);
+    }
+
+    public XHashedDictionary getPriceRange() {
+        XHashedDictionary<String, Double> hm = new XHashedDictionary();
+
     }
 }

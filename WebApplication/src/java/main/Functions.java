@@ -7,8 +7,10 @@ package main;
 
 import adt.XArrayList;
 import adt.XHashedDictionary;
+import adt.XQueue;
 import com.univocity.parsers.csv.CsvWriterSettings;
 import entity.AbstractEntity;
+import entity.Booking;
 import entity.InfoMessage;
 import entity.User;
 import entity.json.ClassSaving;
@@ -44,6 +46,11 @@ public class Functions {
         Datas.settings.add("pages/account", WebConfig.WEB_URL + "pages/account.jsp");
         Datas.settings.add("widget/cartype-select", "../widget/carousel_feeinfo.jsp");
         Datas.allMessage = (XArrayList<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage());
+        XArrayList booking_list = AbstractEntity.readDataFormCsv(new Booking());
+        booking_list = (XArrayList) booking_list.searchByField("bookingStatus", "B1", Booking.class);
+        for (int i = 0; i < booking_list.size(); i++) {
+
+        }
         return 1;
     }
 

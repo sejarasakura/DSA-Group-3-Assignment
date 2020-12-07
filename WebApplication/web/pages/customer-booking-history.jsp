@@ -48,18 +48,6 @@
                                     Note to driver: [description]
                                 </p>
                             </li>
-                            <li>
-                                <a href="#" class="pull-right">Booking Date</a>
-                                <a href="#">From Location</a>: Jalan 28, Taman Putra, Ampang<br>
-                                <a href="#">To Location</a>: 39, Jalan Temenggung 9/9,
-                                <p>
-                                    Booking date: 11-11-2020<br>
-                                    Driver: [driver-name][driver-id][rent-type]<br>
-                                    Status: [booking-status]<br>
-                                    View Chat: <a>[to-chat]</a><br>
-                                    Note to driver: [description]
-                                </p>
-                            </li>
                         </ul>
                     </div>
                 </div>

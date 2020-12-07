@@ -29,12 +29,6 @@ public class TestSortListSlotAlgorithmSpeeds {
     int[] unsortedArray;
     int[] r;
 
-    public static void main2(String[] args) throws RunnerException {
-        Blackhole bh = null;
-        TestSortListSlotAlgorithmSpeeds gg = new TestSortListSlotAlgorithmSpeeds();
-        gg.BubberSloting(bh);
-    }
-
     public static void main(String[] args) throws RunnerException {
 
         Options opt = new OptionsBuilder()
@@ -46,7 +40,7 @@ public class TestSortListSlotAlgorithmSpeeds {
     }
 
     public TestSortListSlotAlgorithmSpeeds() {
-        unsortedArray = createArrayWithRandomInts(100);
+        unsortedArray = createArrayWithRandomInts(100000);
     }
 
     @Setup
@@ -56,27 +50,27 @@ public class TestSortListSlotAlgorithmSpeeds {
 
     @Benchmark
     public void CountSloting(Blackhole bh) {
-        countSort(unsortedArray.clone());
+        bh.consume(countSort(unsortedArray.clone()));
     }
 
     @Benchmark
     public void CountSloting_1ms(Blackhole bh) {
-        countSort2_1ms(unsortedArray.clone());
+        bh.consume(countSort2_1ms(unsortedArray.clone()));
     }
 
     @Benchmark
     public void BubberSloting(Blackhole bh) {
-        bubbleSort(unsortedArray.clone());
+        bh.consume(bubbleSort(unsortedArray.clone()));
     }
 
     @Benchmark
     public void SelectionSloting(Blackhole bh) {
-        selectionSort(unsortedArray.clone());
+        bh.consume(selectionSort(unsortedArray.clone()));
     }
 
     @Benchmark
     public void InsertSloting(Blackhole bh) {
-        insertionSort(unsortedArray.clone());
+        bh.consume(insertionSort(unsortedArray.clone()));
     }
 
     @Benchmark
@@ -413,6 +407,44 @@ public class TestSortListSlotAlgorithmSpeeds {
             // partition and after partition
             sort_rec(arr, low, pi - 1);
             sort_rec(arr, pi + 1, high);
+        }
+    }
+
+    void sort_no_rec2(int arr[], int l, int h) {
+
+        // Create an auxiliary stack
+        int[] stack = new int[h - l + 1];
+
+        // initialize top of stack
+        int top = -1;
+
+        // push initial values of l and h to stack
+        stack[++top] = l;
+        stack[++top] = h;
+
+        // Keep popping from stack while is not empty
+        while (top >= 0) {
+            // Pop h and l
+            h = stack[top--];
+            l = stack[top--];
+
+            // Set pivot element at its correct position
+            // in sorted array
+            int p = partition(arr, l, h);
+
+            // If there are elements on left side of pivot,
+            // then push left side to stack
+            if (p - 1 > l) {
+                stack[++top] = l;
+                stack[++top] = p - 1;
+            }
+
+            // If there are elements on right side of pivot,
+            // then push right side to stack
+            if (p + 1 < h) {
+                stack[++top] = p + 1;
+                stack[++top] = h;
+            }
         }
     }
 

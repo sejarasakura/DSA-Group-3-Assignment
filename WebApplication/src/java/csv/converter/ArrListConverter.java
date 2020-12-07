@@ -24,7 +24,9 @@ public class ArrListConverter extends AbstractBeanField {
         for (int i = 0; i < (o.size() - 1); i++) {
             sb.append(o.get(i)).append("%");
         }
-        sb.append(o.get(o.size() - 1));
+        if (!o.isEmpty()) {
+            sb.append(o.get(o.size() - 1));
+        }
         return sb.toString();
     }
 

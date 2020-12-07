@@ -8,6 +8,7 @@ package entity;
 import adt.XHashedDictionary;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
+import entity.help.Range;
 import java.util.*;
 import org.apache.commons.lang3.StringEscapeUtils;
 import xenum.CarType;
@@ -198,14 +199,14 @@ public class Mapping extends AbstractEntity<Mapping> {
         System.out.print(m.destination_id);
     }
 
-    public XHashedDictionary getPriceRange(int dist_map_value, int time_map_value, CarType cartype) {
+    public Range getPriceRange(int dist_map_value, int time_map_value, CarType cartype) {
         return getPriceRange(dist_map_value, time_map_value, cartype.getPrice_per_km(),
                 cartype.getPrice_per_min(), cartype.getBase_fair_price(), cartype.getMinimum_price());
     }
 
-    public static XHashedDictionary getPriceRange(int dist_map_value, int time_map_value,
+    public static Range getPriceRange(int dist_map_value, int time_map_value,
             double per_km, double per_min, double base_fare, double min_fare) {
-        XHashedDictionary<String, Double> hm = new XHashedDictionary();
+        Range<Double> hm = new Range<Double>();
 
         double price_no_base = (dist_map_value * per_km / 1000) + (time_map_value * per_min / 60);
         double price = (dist_map_value * per_km / 1000) + (time_map_value * per_min / 60) + base_fare;
@@ -213,11 +214,11 @@ public class Mapping extends AbstractEntity<Mapping> {
         price_no_base = roundToMultipleOfFive(price_no_base >= min_fare ? price_no_base : min_fare);
 
         if (Math.round(price_no_base) == Math.round(price)) {
-            hm.add("low", price);
-            hm.add("high", price);
+            hm.setLower(price);
+            hm.setHigher(price);
         } else {
-            hm.add("low", price);
-            hm.add("high", price_no_base);
+            hm.setLower(price);
+            hm.setHigher(price_no_base);
         }
         return hm;
     }

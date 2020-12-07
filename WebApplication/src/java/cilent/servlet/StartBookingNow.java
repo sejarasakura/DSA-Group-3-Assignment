@@ -86,7 +86,7 @@ public class StartBookingNow extends HttpServlet {
             }
 
             /*generate ID*/
-            String booking_id = (String) IDManager.generateId(booking, true);
+            String booking_id = ((int) IDManager.generateId(booking, true)) + "";
             String chats_id = (String) IDManager.generateId(chats, true);
             String mapping_id = (String) IDManager.generateId(mapping, true);
             String payment_id = (String) IDManager.generateId(payment, true);
@@ -115,13 +115,27 @@ public class StartBookingNow extends HttpServlet {
             map_address_2.setAddress_id(mapping.getSource_id());
             map_address_2.setFull_address(form_address);
 
+            map_address_1.addThisToCsv();
+            map_address_2.addThisToCsv();
             mapping.addThisToCsv();
             chats.addThisToCsv();
             booking.addThisToCsv();
             payment.addThisToCsv();
 
+            out.print(map_address_1);
+            out.print("<br>");
+            out.print(map_address_2);
+            out.print("<br>");
+            out.print(mapping);
+            out.print("<br>");
+            out.print(chats);
+            out.print("<br>");
+            out.print(booking);
+            out.print("<br>");
+            out.print(payment);
+
             Datas.currentBooking.enqueue(booking);
-            response.sendRedirect(WebConfig.WEB_URL + "pages/viewBooking.jsp");
+            //response.sendRedirect(WebConfig.WEB_URL + "pages/viewBooking.jsp");
         }
 
     }

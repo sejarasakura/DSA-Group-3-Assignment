@@ -26,22 +26,22 @@ public class TestSortList {
      * @param args
      */
     public static void main(String args[]) {
-        text_one();
-        System.out.println();
-        text_two();
-        System.out.println();
-        text_three();
-        System.out.println();
+//        text_one();
+//        System.out.println();
+//        text_two();
+//        System.out.println();
+//        text_three();
+//        System.out.println();
         text_four();
-        System.out.println();
-        try {
-            text_five();
-            System.out.println();
-            text_six();
-        } catch (ParseException ex) {
-            Logger.getLogger(TestSortList.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println();
+//        System.out.println();
+//        try {
+//            text_five();
+//            System.out.println();
+//            text_six();
+//        } catch (ParseException ex) {
+//            Logger.getLogger(TestSortList.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        System.out.println();
     }
 
     /**
@@ -110,24 +110,23 @@ public class TestSortList {
      * Example of sorting Comparable
      */
     public static void text_four() {
-        XArraySortList list = new XArraySortList();
+        XArrayList list = new XArrayList();
         list.add(new Haha(-1, "H"));
         list.add(new Haha(-7, "M"));
         list.add(new Haha(20, "G"));
-        list.add(new Haha(-20, "G"));
+        list.add(new Haha(-20, "K"));
         list.add(new Haha(-30, "Z"));
-        list.add(new Haha(-30, "A"));
+        list.add(new Haha(-20, "G"));
+        list.add(new Haha(-30, "G"));
         list.add(new Haha(10, "A"));
+        list.add(new Haha(-20, "M"));
+        list.add(new Haha(-30, "A"));
+        list.add(new Haha(-10, "G"));
         System.out.println("Slot Comparable to is call the method compareTo in the class\n=================");
         System.out.println("Before slot : " + list);
-        list.sort("field", Haha.class);
         System.out.println("After slot(field, Haha.class) : " + list);
-        list.sort("field2", Haha.class);
-        System.out.println("After slot(field2, Haha.class) : " + list);
-        list.sortDesc("field", Haha.class);
-        System.out.println("After desc slot(field, Haha.class) : " + list);
-        list.sortDesc("field2", Haha.class);
-        System.out.println("After desc slot(field2, Haha.class) : " + list);
+        list = list.binarySearchAndSort("field", -20, Haha.class);
+        System.out.println("After binary search : " + list);
     }
 
     public static void text_five() throws ParseException {
@@ -219,41 +218,4 @@ public class TestSortList {
         }
     }
 
-    public static class Haha implements Comparable {
-
-        private int field;
-        private String field2;
-
-        public Haha(int field, String field2) {
-            this.field = field;
-            this.field2 = field2;
-        }
-
-        public int getField() {
-            return field;
-        }
-
-        public void setField(int field) {
-            this.field = field;
-        }
-
-        public String getField2() {
-            return field2;
-        }
-
-        public void setField2(String field2) {
-            this.field2 = field2;
-        }
-
-        @Override
-        public int compareTo(Object t) {
-            return Integer.compare(field, ((Haha) t).field);
-        }
-
-        @Override
-        public String toString() {
-            return "Haha{" + field + "," + field2 + '}';
-        }
-
-    }
 }

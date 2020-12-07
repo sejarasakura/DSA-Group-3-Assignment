@@ -29,6 +29,12 @@ import main.WebConfig;
 @WebServlet(name = "send_chat_api", urlPatterns = {"/send_chat_api"})
 public class send_chat_api extends HttpServlet {
 
+    private User user;
+    private String target;
+    private Chats chats;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,12 +44,6 @@ public class send_chat_api extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private User user;
-    private String target;
-    private Chats chats;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

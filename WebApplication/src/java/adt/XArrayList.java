@@ -767,7 +767,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         InterList<Integer> result = new XArrayList<Integer>();
 
         for (int i = 0; i < index - 1; i++) {
-            if (data[i].equals(data[i + 1])) {
+            if (data[i].equals(element)) {
                 result.add(i);
                 if (once) {
                     break;

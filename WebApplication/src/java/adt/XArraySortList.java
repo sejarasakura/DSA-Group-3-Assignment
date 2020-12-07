@@ -21,7 +21,7 @@ import xenum.AbstractEnum;
  * @param <T>
  *
  */
-public class XArraySortList<T extends Comparable<? super T>> implements InterSortingElements<T> {
+public class XArraySortList<T extends Comparable> implements InterSortingElements<T> {
 
     /**
      * Initial capacity of the list
@@ -308,7 +308,7 @@ public class XArraySortList<T extends Comparable<? super T>> implements InterSor
     public String toString() {
         String r = "";
         for (T d : (data)) {
-            r += "" + d + ",";
+            r += "" + d + "\n";
         }
         return r;
     }

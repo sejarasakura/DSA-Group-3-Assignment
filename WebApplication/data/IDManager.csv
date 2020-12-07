@@ -8,6 +8,6 @@ entity.Admin,java.lang.String,A%05d,user_id,10021
 entity.Payment,java.lang.String,P%09d,paymentNumber,100000051
 entity.Booking,java.lang.Integer,%d,booking_id,1000000051
 entity.Chats,java.lang.String,CS-%09d,chats_id,100000066
-entity.Chat,java.lang.String,CD-%09d,chat_details_id,35
+entity.Chat,java.lang.String,CD-%09d,chat_details_id,92
 entity.Taxi,java.lang.String,T-%05d,taxiId,10031
 entity.InfoMessage,java.lang.String,I-%04d,code,21

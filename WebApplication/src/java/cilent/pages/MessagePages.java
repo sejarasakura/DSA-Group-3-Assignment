@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static main.WebConfig.CHAT_FORMAT;
 import xenum.*;
 
 /**
@@ -36,10 +37,6 @@ public final class MessagePages extends AbstractPage {
      * Current login user
      */
     User user;
-    /**
-     * Current open chat queue
-     */
-    XQueue<Chat> chat;
     /**
      * All chat
      */
@@ -63,8 +60,6 @@ public final class MessagePages extends AbstractPage {
     StringBuilder chatListSB;
 
     HttpServletResponse response;
-
-    public static final SimpleDateFormat chat_format = new SimpleDateFormat("MMM dd");
 
     public MessagePages(HttpServletRequest request, HttpServletResponse response, String target) {
         super(request);
@@ -152,7 +147,6 @@ public final class MessagePages extends AbstractPage {
             this.used_chat = mp.used_chat;
             this.used_users = mp.used_users;
             this.user = mp.user;
-            this.chat = mp.chat;
         }
     }
 
@@ -224,7 +218,6 @@ public final class MessagePages extends AbstractPage {
         String last_chat = (String) ref.get(ref.size() - 1);
         XArrayList temp_list = (XArrayList) all_chat.searchByField("chat_details_id", last_chat, Chat.class);
         Chat temp = temp_list == null ? null : (Chat) temp_list.get(0);
-        System.out.println(i + " : " + last_chat);
 
         //<a href="">
         chatListSB.append("<a href=\"");
@@ -257,7 +250,7 @@ public final class MessagePages extends AbstractPage {
         chatListSB.append("<h5>");
         chatListSB.append(used_users.get(i).getName());
         chatListSB.append("<span class=\"chat_date\">");
-        chatListSB.append(temp == null ? "" : chat_format.format(temp.getSend_date()));
+        chatListSB.append(temp == null ? "" : CHAT_FORMAT.format(temp.getSend_date()));
         chatListSB.append("</span></h5>");
 
         //          <p>{last message}</p>

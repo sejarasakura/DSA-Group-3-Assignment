@@ -61,7 +61,7 @@ public class Chat extends AbstractEntity {
     * @param send_date
     * @param chat_details_id
      */
-    public Chat(String chat_details_id, String message, Date send_date, boolean read) {
+    public Chat(String chat_details_id, String message, Date send_date, boolean read, boolean send_by_u1) {
         this.chat_details_id = chat_details_id;
         setMessage(message);
         this.send_date = send_date;
@@ -124,12 +124,18 @@ public class Chat extends AbstractEntity {
 
     @Override
     public int compareTo(Object t) {
-        return ((Chat) t).chat_details_id.compareTo(this.chat_details_id);
+        return Long.compare(((Chat) t).send_date.getTime(), this.send_date.getTime());
     }
 
     @Override
     public String toString() {
         return "Chat{" + "chat_details_id=" + chat_details_id + ", message=" + message + ", send_date=" + send_date + ", read=" + read + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
     }
 
     @Override
@@ -147,10 +153,7 @@ public class Chat extends AbstractEntity {
         if (!Objects.equals(this.chat_details_id, other.chat_details_id)) {
             return false;
         }
-        if (!Objects.equals(this.message, other.message)) {
-            return false;
-        }
-        return Objects.equals(this.send_date, other.send_date);
+        return true;
     }
 
     @Override

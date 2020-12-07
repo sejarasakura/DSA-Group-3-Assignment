@@ -155,7 +155,7 @@ public class XQueue<T> implements InterQuene<T> {
         StringBuilder s = new StringBuilder();
         for (T item : this) {
             s.append(item);
-            s.append(", ");
+            s.append("\n");
         }
         return s.toString();
     }

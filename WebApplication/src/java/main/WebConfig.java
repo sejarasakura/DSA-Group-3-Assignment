@@ -121,4 +121,8 @@ public class WebConfig {
      * Image Byte of the file
      */
     public static byte[] default_image = Functions.getDefaultImage();
+
+    public static final SimpleDateFormat CHAT_FORMAT = new SimpleDateFormat("MMM dd");
+
+    public static final SimpleDateFormat CHAT_FORMAT_LONG = new SimpleDateFormat("MMMM dd hh:mm a");
 }

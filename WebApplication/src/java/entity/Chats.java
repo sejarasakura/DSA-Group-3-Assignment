@@ -71,6 +71,10 @@ public class Chats extends AbstractEntity {
         this.chats_details_id = chats_details_id;
     }
 
+    public void addChats_details_id(String chats_details_id) {
+        this.chats_details_id.add(chats_details_id);
+    }
+
     @Override
     public boolean isNotNull() {
         return this != null ? this.chats_id.length() > 2 : false;

@@ -84,7 +84,11 @@ public class DriverFetch extends AbstractPage {
 
         //    <a href="#" class="deco-none"> <!--URL to fetch-->
         stringBuilder.append("<a href=\"");
-        stringBuilder.append(WebConfig.WEB_URL).append("/start-fetch-now");
+        stringBuilder.append(WebConfig.WEB_URL);
+        stringBuilder.append("start-fetch-now?uid=");
+        stringBuilder.append(login_user.getId());
+        stringBuilder.append("&id=");
+        stringBuilder.append(b.getBooking_id());
         stringBuilder.append("\" class=\"deco-none\">");
 
         //        <div class="well well-sm">

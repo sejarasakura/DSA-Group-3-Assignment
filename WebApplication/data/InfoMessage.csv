@@ -18,3 +18,5 @@ I-0018,alert-danger,The password you enter is not correct please try agian,Incor
 I-0019,alert-danger,Your password is not match to confrim password please try agian!,Password not match!!
 I-0020,alert-success,Congratulations your password has been changes successful!!,Password changes successful
 I-0021,alert-danger,You are no a driver please login to a driver account and try again,Not Driver Error
+I-0022,alert-danger,We are not found the user,No user found
+I-0023,alert-danger,The required car type to fetch the customer,Car type not match

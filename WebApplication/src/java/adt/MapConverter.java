@@ -5,6 +5,7 @@
  */
 package adt;
 
+import adt.interfaces.InterDictionary;
 import java.util.*;
 
 /**
@@ -17,13 +18,17 @@ import java.util.*;
  */
 public class MapConverter<K, V> implements Map<K, V>, Cloneable, java.io.Serializable {
 
-    XTreeDictionary refences;
+    InterDictionary refences;
 
     public MapConverter() {
         refences = new XTreeDictionary();
     }
 
     public MapConverter(XTreeDictionary dic) {
+        refences = dic;
+    }
+
+    public MapConverter(XHashedDictionary dic) {
         refences = dic;
     }
 

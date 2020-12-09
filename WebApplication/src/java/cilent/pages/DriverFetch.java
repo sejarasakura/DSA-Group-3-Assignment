@@ -40,6 +40,8 @@ public class DriverFetch extends AbstractPage {
     Mapping _mapping;
     Customer _customer;
 
+    private boolean is_fetching;
+
     public DriverFetch(HttpServletRequest request, User user) {
         super(request);
         // read data
@@ -54,6 +56,7 @@ public class DriverFetch extends AbstractPage {
 
         login_user = user;
         booking = main.Datas.currentBooking.clone();
+
     }
 
     private void displayFetchList() {
@@ -61,7 +64,7 @@ public class DriverFetch extends AbstractPage {
         boolean display_row;
         while (!booking.isEmpty()) {
             // prevent 0 % 2
-            display_row = (count + 2) % 2 == 0;
+            display_row = (count + 1) % 2 == 0;
             if (display_row) {
                 stringBuilder.append("<div class=\"row\">");
             }
@@ -69,6 +72,7 @@ public class DriverFetch extends AbstractPage {
             if (display_row) {
                 stringBuilder.append("</div>");
             }
+            count++;
         }
     }
 

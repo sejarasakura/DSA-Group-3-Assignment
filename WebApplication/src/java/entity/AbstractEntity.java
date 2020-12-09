@@ -102,7 +102,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @return
      */
     public static boolean addDataToCsv(XArrayList<? extends AbstractEntity> datas) {
-        //<editor-fold defaultstate="collapsed" desc="add record">
         boolean result = true;
 
         /* block lenght less than equal zero */
@@ -156,7 +155,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
     }
 
-    //</editor-fold>
     public static boolean addDataToCsv(Iterable<? extends AbstractEntity> datas) {
         return addDataToCsv(new XArrayList(datas));
     }
@@ -168,7 +166,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @return
      */
     public static XArrayList<? extends AbstractEntity> readDataFormCsv(AbstractEntity reference) {
-        //<editor-fold defaultstate="collapsed" desc="read record">
         return privateReadDataFormCsv(reference, true);
     }
 
@@ -182,10 +179,12 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
             entity = new XArrayList<AbstractEntity>(new CsvToBeanBuilder(fr).withType(c.getClass()).build().parse());
 
             if (show_e) {
-                System.out.println(OutputColor.TEXT_GREEN
+                System.out.println(
+                        OutputColor.TEXT_GREEN
                         + "readed record : " + c.getStorageFile()
                         + " [ " + entity.size() + " Record found]"
-                        + OutputColor.TEXT_RESET);
+                        + OutputColor.TEXT_RESET
+                );
             }
 
             return entity;
@@ -195,14 +194,15 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         }
 
         if (show_e) {
-            System.out.println(OutputColor.TEXT_RED
+            System.out.println(
+                    OutputColor.TEXT_RED
                     + "noting readed in directory : " + c.getStorageFile()
-                    + OutputColor.TEXT_RESET);
+                    + OutputColor.TEXT_RESET
+            );
         }
         return null;
     }
 
-    //</editor-fold>
     /**
      * Rewrite all record to CSV file.
      *
@@ -210,7 +210,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @return
      */
     public static boolean reWriteAllDataToCsv(XArrayList<? extends AbstractEntity> datas) {
-        //<editor-fold defaultstate="collapsed" desc="write record">
         return privateReWriteAllDataToCsv(datas, true);
     }
 
@@ -228,7 +227,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
                                 .withEscapechar(CSVWriter.DEFAULT_ESCAPE_CHARACTER)
                                 .withLineEnd(CSVWriter.DEFAULT_LINE_END)
                                 .build();
-
                 csvWriter.write((Iterator<AbstractEntity>) it.iterator());
                 if (show_e) {
                     System.out.println(OutputColor.TEXT_GREEN
@@ -249,7 +247,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
     }
 
-    //</editor-fold>
     public static boolean reWriteAllDataToCsv(Iterable<? extends AbstractEntity> datas) {
         return reWriteAllDataToCsv(new XArrayList(datas));
     }
@@ -261,7 +258,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @return
      */
     public static boolean updateDataToCsv(XArrayList<? extends AbstractEntity> datas) {
-        //<editor-fold defaultstate="collapsed" desc="update record">
 
         /* block error */
         if (datas.size() <= 0) {
@@ -294,7 +290,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         return allUpdate;
     }
 
-    //</editor-fold>
     public static boolean updateDataToCsv(Iterable<? extends AbstractEntity> datas) {
         return updateDataToCsv(new XArrayList(datas));
     }
@@ -306,7 +301,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
      * @return
      */
     public static boolean deleteDataToCsv(XArrayList<? extends AbstractEntity> datas) {
-        //<editor-fold defaultstate="collapsed" desc="delete record">
 
         /* block error */
         if (datas.size() <= 0) {
@@ -336,7 +330,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
         return alldelete;
     }
 
-    //</editor-fold>
     public static boolean deleteDataToCsv(Iterable<? extends AbstractEntity> datas) {
         return deleteDataToCsv(new XArrayList(datas));
     }

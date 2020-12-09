@@ -23,6 +23,7 @@ import main.Functions;
 import main.WebConfig;
 import xenum.BookingStatus;
 import xenum.CarType;
+import xenum.OutputColor;
 import xenum.PaymentMethodType;
 import xenum.PaymentStatus;
 
@@ -137,6 +138,13 @@ public class StartBookingNow extends HttpServlet {
             out.print(payment);
 
             Datas.currentBooking.enqueue(booking);
+            System.out.println(
+                    OutputColor.TEXT_YELLOW
+                    + "Datas.currentBooking.enqueue :"
+                    + OutputColor.TEXT_GREEN
+                    + booking
+                    + OutputColor.TEXT_RESET
+            );
             Thread.sleep(3000);
             response.sendRedirect(WebConfig.WEB_URL + "pages/viewBooking.jsp?" + booking.getBooking_id());
         } catch (InterruptedException ex) {

@@ -18,6 +18,7 @@ import csv.converter.*;
 import entity.help.Range;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,41 +45,93 @@ public class StartFetchNow extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String booking_id = request.getParameter("id");
-        String user_id = request.getParameter("uid");
-
-        XArrayList<Booking> booking = (XArrayList<Booking>) AbstractEntity.readDataFormCsv(new Booking());
-        booking = booking.binarySearchAndSort("booking_id", booking_id, Booking.class);
-
-        if (booking == null ? true : booking.isEmpty()) {
-            // wrong booking id
-            return;
-        }
-
-        Booking b = booking.get(0);
-        XArrayList<Car> cars;
-        if (b.getCar_type().isTaxi()) {
-            cars = (XArrayList<Car>) AbstractEntity.readDataFormCsv(new Taxi());
-            cars = cars.binarySearchAndSort("driver_id", user_id, Taxi.class);
-        } else {
-            cars = (XArrayList<Car>) AbstractEntity.readDataFormCsv(new Car());
-            cars = cars.binarySearchAndSort("driver_id", user_id, Car.class);
-        }
-
-        // find the have you registed the car type
-        cars = cars.binarySearchAndSort("carType", b.getCar_type(), Car.class);
-
-        // cannot fetch
-        if (cars.size() <= 0) {
-            response.sendRedirect(WebConfig.WEB_URL + "pages/driverFetch.jsp?I=I-0023");
-        }
-
-        b.setBookingStatus(BookingStatus.PENDING_RENTING);
-        b.setDriver_id(user_id);
-        b.updateThisToCsv();
 
         try (PrintWriter out = response.getWriter()) {
-            out.print(cars.get(0).toString());
+            String booking_id = request.getParameter("id");
+            String user_id = request.getParameter("uid");
+
+            XArrayList<Booking> booking = (XArrayList<Booking>) AbstractEntity.readDataFormCsv(new Booking());
+            booking = booking.binarySearchAndSort("booking_id", booking_id, Booking.class);
+            if (booking == null ? true : booking.isEmpty()) {
+                // wrong booking id
+                return;
+            }
+
+            Booking b = booking.get(0);
+            XArrayList<Car> cars;
+            if (b.getCar_type().isTaxi()) {
+                cars = (XArrayList<Car>) AbstractEntity.readDataFormCsv(new Taxi());
+                cars = cars.binarySearchAndSort("driver_id", user_id, Taxi.class);
+            } else {
+                cars = (XArrayList<Car>) AbstractEntity.readDataFormCsv(new Car());
+                cars = cars.binarySearchAndSort("driver_id", user_id, Car.class);
+            }
+
+            System.out.print(cars.toHtml());
+            // find the have you registed the car type
+            Car found = null;
+            for (Car c : cars) {
+                if (c.getCarType().equals(b.getCar_type())) {
+                    found = c;
+                }
+            }
+
+            // cannot fetch
+            if (found == null) {
+                response.sendRedirect(WebConfig.WEB_URL + "pages/driverFetch.jsp?I=I-0023"
+                        + "&eq=Customer request car type is <b>" + b.getCar_type().getName() + "</b>");
+                return;
+            }
+
+            b.setBookingStatus(BookingStatus.PENDING_RENTING);
+            b.setDriver_id(user_id);
+            b.setCar_id(found.getPlate_id());
+            b.updateThisToCsv();
+
+            out.print(found.toString());
+            out.print("<br>");
+            out.print("Booking Updated : ");
+            out.print("<br>");
+            out.print(b.toString());
+            out.print("<a href=\"");
+            out.print(WebConfig.WEB_URL + "pages/driverFetch.jsp");
+            out.print("\">");
+            out.print("Return back");
+            out.print("</a>");
+
+            Datas.waitingDriver.enqueue(b);
+            System.out.println(
+                    OutputColor.TEXT_YELLOW
+                    + "Datas.waitingDriver.enqueue :"
+                    + OutputColor.TEXT_GREEN
+                    + b
+                    + OutputColor.TEXT_RESET
+            );
+            XArrayList<Booking> ar = new XArrayList(Datas.currentBooking);
+            Booking r = ar.remove(ar.indexOf(b));
+            Mapping m = (Mapping) AbstractEntity.readDataFormCsv(
+                    new Mapping()
+            ).binarySearchAndSort(
+                    "map_id", b.getMapping_id(), Mapping.class
+            ).get(0);
+            System.out.println(
+                    OutputColor.TEXT_YELLOW
+                    + "Datas.waitingDriver.denqueue :"
+                    + OutputColor.TEXT_GREEN
+                    + r
+                    + OutputColor.TEXT_RESET
+            );
+            Datas.currentBooking = new XQueue(ar);
+
+            Payment p = new Payment();
+            p.setPayment_id((String) IDManager.generateId(p, true));
+            p.setPayment_method(PaymentMethodType.NOT_YET_PAID);
+            p.setPayment_status(PaymentStatus.Created);
+            p.setPayment_due_date(new Date(System.currentTimeMillis() + 14 * 24 * 3600 * 1000));
+            p.setPayment_date(new Date());
+            double amount = (double) m.getPriceRange(b.getCar_type()).getHigher();
+            p.setPayment_amount(amount);
+            p.addThisToCsv();
         }
     }
 

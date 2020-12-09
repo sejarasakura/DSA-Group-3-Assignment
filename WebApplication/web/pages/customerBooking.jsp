@@ -17,7 +17,9 @@
     // get user login session 
     response.encodeURL("/store/catalog");
     User user = main.Functions.getUserSession(request);
-    main.Functions.checkLogin(response, user);
+    if(!main.Functions.checkLogin(response, user)){
+        return;
+    }
 %>
 <!DOCTYPE html>
 

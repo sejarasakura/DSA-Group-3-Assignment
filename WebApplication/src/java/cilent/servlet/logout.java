@@ -5,6 +5,7 @@
  */
 package cilent.servlet;
 
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import main.Functions;
 import main.WebConfig;
+import xenum.OutputColor;
 
 /**
  *
@@ -35,8 +37,15 @@ public class logout extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String callback = request.getParameter("callback");
+        User user = Functions.getUserSession(request);
         Functions.setUserSession(request, null);
         response.sendRedirect(WebConfig.WEB_URL + callback);
+        System.out.println(
+                OutputColor.TEXT_YELLOW
+                + ">> Alter user logout :"
+                + user
+                + OutputColor.TEXT_RESET
+        );
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

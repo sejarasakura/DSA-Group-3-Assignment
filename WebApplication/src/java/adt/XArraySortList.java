@@ -346,7 +346,6 @@ public class XArraySortList<T extends Comparable> implements InterSortingElement
         if (_index < 0 || _index >= index) {
             throw new IndexOutOfBoundsException();
         }
-
     }
 
     private String fieldToGetter(String name) {
@@ -476,23 +475,23 @@ public class XArraySortList<T extends Comparable> implements InterSortingElement
         }
     }
 
-    private boolean sort(Method methods) {
-        Class<?> cls = methods.getReturnType();
+    private boolean sort(Method getter) {
+        Class<?> cls = getter.getReturnType();
         try {
             if (cls.getName().contains("xenum.")) {
-                Method m = cls.getMethod("compare", AbstractEnum.class);
-                if (m.getReturnType() != int.class) {
+                Method compare_function = cls.getMethod("compare", AbstractEnum.class);
+                if (compare_function.getReturnType() != int.class) {
                     return false;
                 }
-                this.sort_m(data, 0, this.index - 1, m, methods);
+                this.sort_m(data, 0, this.index - 1, compare_function, getter);
             } else if (cls != int.class) {
-                Method m = cls.getMethod("compareTo", cls);
-                if (m.getReturnType() != int.class) {
+                Method compare_function = cls.getMethod("compareTo", cls);
+                if (compare_function.getReturnType() != int.class) {
                     return false;
                 }
-                this.sort_m(data, 0, this.index - 1, m, methods);
+                this.sort_m(data, 0, this.index - 1, compare_function, getter);
             } else {
-                this.sort_m(data, 0, this.index - 1, null, methods);
+                this.sort_m(data, 0, this.index - 1, null, getter);
             }
             return true;
         } catch (NoSuchMethodException | SecurityException ex) {

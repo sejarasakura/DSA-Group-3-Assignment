@@ -19,6 +19,7 @@ import main.Functions;
 import adt.interfaces.InterList;
 import entity.help.Range;
 import xenum.AbstractEnum;
+import xenum.OutputColor;
 
 /**
  *
@@ -643,6 +644,10 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
                 i--;
                 data[i] = (T) s.pop();
             }
+            System.out.println(OutputColor.TEXT_PURPLE
+                    + "Sorting element by : " + _class.getSimpleName() + "." + field
+                    + (r ? (OutputColor.TEXT_GREEN + " successful sort ") : (OutputColor.TEXT_GREEN + " Failed  sort "))
+                    + OutputColor.TEXT_RESET);
             sorted = true;
             return r;
         } catch (SecurityException | NoSuchMethodException ex) {
@@ -663,7 +668,12 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     public boolean sortDesc(String field, Class _class) {
         try {
             Method f = _class.getMethod(Functions.fieldToGetter(field));
-            return sort(f);
+            boolean r = sort(f);
+            System.out.println(OutputColor.TEXT_PURPLE
+                    + "Sorting desc element by : " + _class.getSimpleName() + "." + field
+                    + (r ? (OutputColor.TEXT_GREEN + " successful sort ") : (OutputColor.TEXT_GREEN + " Failed  sort "))
+                    + OutputColor.TEXT_RESET);
+            return r;
         } catch (SecurityException | NoSuchMethodException ex) {
             Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -693,6 +703,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     @Override
     public XArrayList<T> binarySearchAndSort(String field, Comparable value, Class<?> _class) {
         try {
+            this.sort(field, _class);
             return this.notsecure_binarySearch(field, value, _class, true);
         } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
@@ -869,6 +880,9 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
             r.add((m != null ? m.invoke(data[i]).toString() : f.get(data[i]).toString()));
         }
 
+        System.out.println(OutputColor.TEXT_PURPLE
+                + "Linear get field " + _class.getSimpleName() + "." + f.getName() + " : {Result : " + r.size() + "}"
+                + OutputColor.TEXT_RESET);
         return r;
     }
 
@@ -927,6 +941,9 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
                 }
             }
         }
+        System.out.println(OutputColor.TEXT_PURPLE
+                + "Linear Search " + element.getClass().getSimpleName() + "(" + element + ") : {Result : " + result.size() + "}"
+                + OutputColor.TEXT_RESET);
 
         return result;
     }
@@ -939,9 +956,10 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         if (sort_m == null ? true : sort_m.getReturnType() == int.class) {
             Range<Integer> range = binary_search_range(data, value, sort_m, getter, sort_for_me);
             delta = range.getHigher() - range.getLower();
-            System.out.print(delta + ",");
-            System.out.print(range.getHigher() + ",");
-            System.out.println(range.getLower() + ",");
+            System.out.print(OutputColor.TEXT_PURPLE + "Binary Search " + _class.getSimpleName() + "." + field + "(" + value + ") : ");
+            System.out.print(OutputColor.TEXT_PURPLE + "{Delta : " + delta + ",");
+            System.out.print(OutputColor.TEXT_PURPLE + "Higher index : " + range.getHigher() + ",");
+            System.out.println(OutputColor.TEXT_PURPLE + "Lower index : " + range.getLower() + "}" + OutputColor.TEXT_RESET);
             if (range.getLower() >= 0) {
                 r = new XArrayList(delta + 1);
                 System.arraycopy(this.data, range.getLower(), r.data, 0, delta + 1);
@@ -958,6 +976,9 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         Method sort_m = getClassType(getter.getReturnType());
         if (sort_m == null ? true : sort_m.getReturnType() == int.class) {
             Integer x = this.simple_BinarySearch(data, value, sort_m, getter, sort_for_me);
+            System.out.println(OutputColor.TEXT_PURPLE
+                    + "Binary Search Once " + _class.getSimpleName() + "." + field + "(" + value + ") : {Result : " + x + "}"
+                    + OutputColor.TEXT_RESET);
             if (x > 0) {
                 return data[x];
             }
@@ -1013,8 +1034,6 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
 
         if (!sorted ? !sort_for_me : false) { // not sort
             return -2;
-        } else if (sort_for_me && !sorted) {  // sort for me
-            this.no_rec_quicksort(arr, 0, index - 1, sort_method, getter);
         }
         int l = 0, r = arr.length - 1, result;
         while (l <= r) {
@@ -1035,10 +1054,9 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
                 r = m - 1;
             }
         }
-
         // if we reach here, then element was
         // not present
-        return -1;
+        return -3;
     }
 
     private boolean sort(Method methods) {

@@ -60,6 +60,14 @@ public class BookingHistory extends AbstractPage {
         for (int i = 0; i < x.size(); i++) {
             displayWidget(x.get(i), mapping.binarySearchOnce("map_id", x.get(i).getMapping_id(), Mapping.class));
         }
+        System.out.println(
+                xenum.OutputColor.TEXT_PURPLE
+                + "Found History of user "
+                + login_user.getId()
+                + " : in total "
+                + x
+                + " record found"
+                + xenum.OutputColor.TEXT_RESET);
 
     }
 

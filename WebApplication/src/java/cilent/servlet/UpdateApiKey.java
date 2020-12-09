@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import main.WebConfig;
+import xenum.OutputColor;
 
 /**
  *
@@ -38,6 +39,16 @@ public class UpdateApiKey extends HttpServlet {
         str.append(WebConfig.WEB_URL).append("admin/map_api.jsp");
         main.Functions.setApiKey(api_key);
         response.sendRedirect(str.toString());
+        int l = api_key.length() - 1;
+        System.out.println(
+                OutputColor.TEXT_RED
+                + ">>Alter updated API KEY :"
+                + OutputColor.TEXT_GREEN
+                + api_key.substring(0, Math.min(l, 6))
+                + "*******"
+                + api_key.substring(l - Math.min(l, 6), l)
+                + OutputColor.TEXT_RESET
+        );
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

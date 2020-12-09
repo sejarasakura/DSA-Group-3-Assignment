@@ -1,7 +1,7 @@
-            <%-- 
-    Document   : UploadServlet
-    Created on : Dec 4, 2020, 8:26:26 AM
-    Author     : ITSUKA KOTORI
+<%-- 
+Document   : UploadServlet
+Created on : Dec 4, 2020, 8:26:26 AM
+Author     : ITSUKA KOTORI
 --%>
 
 <%@ page import="main.*"%>
@@ -69,7 +69,7 @@
                     boolean isInMemory = fi.isInMemory();
                     long sizeInBytes = fi.getSize();
 
-                    file = new File(path_store + fileName+".png");
+                    file = new File(path_store + fileName + ".png");
                     fi.write(file);
                     out.println("Uploaded Filename: " + path_store
                             + fileName + "<br>");
@@ -77,6 +77,7 @@
             }
             out.println("</body>");
             out.println("</html>");
+            response.sendRedirect("account.jsp");
         } catch (Exception ex) {
             out.println("<html>");
             out.println("<head>");
@@ -85,6 +86,7 @@
             out.println("<body>");
             out.println("<p>Error</p>");
             ex.printStackTrace(response.getWriter());
+            out.println("<p><a href='account.jsp'>Back to account page</a></p>");
             out.println("</body>");
             out.println("</html>");
             System.out.println(ex);
@@ -96,8 +98,8 @@
         out.println("</head>");
         out.println("<body>");
         out.println("<p>No file uploaded</p>");
+        out.println("<p><a href='account.jsp'>Back to account page</a></p>");
         out.println("</body>");
         out.println("</html>");
     }
-    response.sendRedirect("account.jsp");
 %>

@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/bootstrap/css/toogle-switch.css">
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.7.94/css/materialdesignicons.css" type="text/css" charset="utf-8">
 <link rel="stylesheet" href=?https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css?/>
+<link href="<%= getServletContext().getInitParameter("DomainName")%>font-awesome.min.css" rel="stylesheet"/>
 <%-- CSS --%>
 <link href="<%= getServletContext().getInitParameter("DomainName")%>theme/lib/Master.css" rel="stylesheet"/>
 

@@ -47,12 +47,25 @@ public class Functions {
         Datas.settings.add("pages/account", WebConfig.WEB_URL + "pages/account.jsp");
         Datas.settings.add("widget/cartype-select", "../widget/carousel_feeinfo.jsp");
         Datas.allMessage = (XArrayList<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage());
-        XArrayList booking_list = AbstractEntity.readDataFormCsv(new Booking());
+        XArrayList booking_list = AbstractEntity.readDataFormCsv(new Booking()), temp;
         booking_list.sort("bookingStatus", Booking.class);
-        booking_list = booking_list.binarySearch("bookingStatus", BookingStatus.WATING_ACCEPTED, Booking.class);
-        booking_list.sortDesc("booking_date", Booking.class);
-        Datas.currentBooking = new XQueue(booking_list);
+        temp = booking_list.binarySearch("bookingStatus", BookingStatus.WATING_ACCEPTED, Booking.class);
+        temp.sortDesc("booking_date", Booking.class);
+        Datas.currentBooking = new XQueue(temp);
+        temp = booking_list.binarySearch("bookingStatus", BookingStatus.PENDING_RENTING, Booking.class);
+        temp.sortDesc("booking_date", Booking.class);
+        Datas.waitingDriver = new XQueue(temp);
+
+        System.out.println();
+        System.out.println("Currrent Request Booking Loaded to queue");
+        System.out.println("===========================================================");
         System.out.println(Datas.currentBooking);
+        System.out.println("===========================================================");
+        System.out.println();
+        System.out.println("Currrent Waiting Driver Loaded to queue");
+        System.out.println("===========================================================");
+        System.out.println(Datas.waitingDriver);
+        System.out.println("===========================================================");
         return 1;
     }
 
@@ -161,7 +174,8 @@ public class Functions {
         }
     }
 
-    private static String displayErrorMessage(String e, String c) {
+    private static String displayErrorMessage(String e, String c, String errorQuery) {
+        errorQuery = errorQuery == null ? "" : "<br>" + errorQuery;
         ErrorDetails er = ErrorDetails.getValue(e);
         return new StringBuilder()
                 .append("<div class=\"container\">")
@@ -175,10 +189,12 @@ public class Functions {
                 .append(er.getName())
                 .append("!!</strong> ")
                 .append(er.getDecription())
+                .append(errorQuery)
                 .append(". </div> </div>").toString();
     }
 
-    private static String displayErrorMessage(String e) {
+    private static String displayErrorMessage(String e, String errorQuery) {
+        errorQuery = errorQuery == null ? "" : "<br>" + errorQuery;
         if (main.WebConfig.DEBUG_MODE) {
             Datas.allMessage = (XArrayList<InfoMessage>) AbstractEntity.readDataFormCsv(new InfoMessage());
         }
@@ -198,21 +214,23 @@ public class Functions {
                 .append(result.getName())
                 .append("!!</strong> ")
                 .append(result.getDecription())
+                .append(errorQuery)
                 .append(". </div> </div>").toString();
     }
 
     public static String displayErrorMessage(HttpServletRequest request) {
         String e = request.getParameter("E");
+        String eq = request.getParameter("eq");
         if (e != null) {
-            return displayErrorMessage(e, "alert-danger");
+            return displayErrorMessage(e, "alert-danger", eq);
         }
         e = request.getParameter("W");
         if (e != null) {
-            return displayErrorMessage(e, "alert-warning");
+            return displayErrorMessage(e, "alert-warning", eq);
         }
         e = request.getParameter("I");
         if (e != null) {
-            return displayErrorMessage(e);
+            return displayErrorMessage(e, eq);
         }
         return "";
     }

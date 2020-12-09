@@ -70,6 +70,11 @@ public class Datas {
     public static XQueue<Booking> currentBooking;
 
     /**
+     * Waiting Driver
+     */
+    public static XQueue<Booking> waitingDriver;
+
+    /**
      *
      * @author Lim Sai Keat all the current request booking
      */

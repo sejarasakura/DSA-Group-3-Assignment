@@ -17,7 +17,7 @@ import xenum.OutputColor;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "UpdateApiKey", urlPatterns = {"/admin/UpdateApiKey"})
 public class UpdateApiKey extends HttpServlet {

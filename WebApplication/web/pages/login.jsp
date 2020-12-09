@@ -1,7 +1,7 @@
 <%-- 
     Document   : login.jsp
     Created on : Nov 7, 2020, 3:54:02 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="entity.User"%>

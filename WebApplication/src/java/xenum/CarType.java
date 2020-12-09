@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public enum CarType implements AbstractEnum {
 

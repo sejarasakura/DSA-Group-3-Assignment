@@ -29,7 +29,7 @@ import xenum.PaymentStatus;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "StartBookingNow", urlPatterns = {"/start/booking/now"})
 public class StartBookingNow extends HttpServlet {

@@ -15,7 +15,7 @@ import java.awt.Point;
 /**
  * Main class of this program useless now for testing only
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class JavaApplicationDSA {
 

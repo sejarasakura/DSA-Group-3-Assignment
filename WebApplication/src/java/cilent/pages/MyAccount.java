@@ -7,7 +7,7 @@ package cilent.pages;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class MyAccount {
 

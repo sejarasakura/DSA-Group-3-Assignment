@@ -14,7 +14,7 @@ import xenum.PaymentStatus;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class Withdraw extends AbstractEntity<Withdraw> {
 

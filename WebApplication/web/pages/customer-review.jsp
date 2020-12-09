@@ -1,7 +1,7 @@
 <%-- 
     Document   : customer-review
     Created on : Dec 5, 2020, 11:52:09 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="main.*"%>

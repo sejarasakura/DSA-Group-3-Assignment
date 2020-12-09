@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public enum MemberShip implements AbstractEnum, Comparable<MemberShip> {
     /*Example  (code, seq_code/power, name, decription)*/

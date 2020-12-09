@@ -16,7 +16,7 @@ import xenum.OutputColor;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class Login {
 

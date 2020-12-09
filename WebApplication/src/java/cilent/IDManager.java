@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class IDManager extends AbstractEntity {
 

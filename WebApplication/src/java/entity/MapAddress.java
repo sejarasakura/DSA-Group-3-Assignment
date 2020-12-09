@@ -11,7 +11,7 @@ import main.Functions;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public final class MapAddress extends AbstractEntity {
 

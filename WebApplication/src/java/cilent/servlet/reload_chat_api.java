@@ -28,7 +28,7 @@ import xenum.*;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "reload_chat_api", urlPatterns = {"/reload_chat_api"})
 public class reload_chat_api extends HttpServlet {

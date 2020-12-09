@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public abstract class AbstractPage {
 

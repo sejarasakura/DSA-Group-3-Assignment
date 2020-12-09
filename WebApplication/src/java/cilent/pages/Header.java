@@ -20,7 +20,7 @@ import main.WebConfig;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class Header extends AbstractPage {
 

@@ -25,7 +25,7 @@ import static main.WebConfig.LOCAL_DATETIME_FORMAT;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class AddEntityListCilent {
 

@@ -1,7 +1,7 @@
 <%-- 
     Document   : review
     Created on : Dec 9, 2020, 11:29:13 AM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="adt.*"%>

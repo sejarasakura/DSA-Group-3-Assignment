@@ -14,7 +14,7 @@ import xenum.CarType;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class Car extends AbstractEntity<Car> {
 

@@ -7,7 +7,7 @@ package xenum;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public interface AbstractEnum {
 

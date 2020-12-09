@@ -24,7 +24,7 @@ import xenum.CarType;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "updateCar", urlPatterns = {"/updateCar"})
 public class updateCar extends HttpServlet {

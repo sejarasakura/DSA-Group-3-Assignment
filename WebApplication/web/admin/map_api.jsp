@@ -1,7 +1,7 @@
 <%-- 
     Document   : map_api
     Created on : Nov 14, 2020, 4:50:04 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>

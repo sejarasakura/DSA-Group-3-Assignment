@@ -28,7 +28,7 @@ import xenum.ErrorDetails;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class Functions {
 

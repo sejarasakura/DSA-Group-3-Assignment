@@ -1,7 +1,7 @@
 <%-- 
     Document   : pic_upload_modal
     Created on : Dec 4, 2020, 7:28:25 AM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="main.*"%>

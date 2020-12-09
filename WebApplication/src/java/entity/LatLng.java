@@ -26,7 +26,7 @@ import xenum.*;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class LatLng {
 

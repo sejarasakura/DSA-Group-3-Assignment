@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  * @param <T>
  */
 public class FieldSeperator<T extends AbstractEntity> {

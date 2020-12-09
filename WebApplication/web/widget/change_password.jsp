@@ -1,7 +1,7 @@
 <%-- 
     Document   : change_password
     Created on : Dec 6, 2020, 1:23:46 AM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="main.*"%>

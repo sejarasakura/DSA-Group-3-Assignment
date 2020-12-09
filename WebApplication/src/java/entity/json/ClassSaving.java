@@ -9,7 +9,7 @@ import adt.XArrayList;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class ClassSaving {
     

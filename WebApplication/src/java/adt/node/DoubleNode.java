@@ -7,7 +7,7 @@ package adt.node;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  * @param <T>
  */
 public class DoubleNode<T> {

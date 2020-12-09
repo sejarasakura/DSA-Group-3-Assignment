@@ -28,7 +28,7 @@ import xenum.*;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "StartFetchNow", urlPatterns = {"/start-fetch-now"})
 public class StartFetchNow extends HttpServlet {

@@ -12,7 +12,7 @@ import java.util.Random;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class AdminCreateGraph {
 

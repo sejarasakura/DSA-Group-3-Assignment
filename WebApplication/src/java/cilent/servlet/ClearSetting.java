@@ -15,7 +15,7 @@ import main.Datas;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "ClearSetting", urlPatterns = {"/ClearSetting"})
 public class ClearSetting extends HttpServlet {

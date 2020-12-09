@@ -29,7 +29,7 @@ import xenum.*;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public final class MessagePages extends AbstractPage {
 

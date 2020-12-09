@@ -1,7 +1,7 @@
 <%-- 
     Document   : my_cars
     Created on : Dec 4, 2020, 5:29:33 AM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="main.*"%>

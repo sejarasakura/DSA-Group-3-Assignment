@@ -9,7 +9,7 @@ import com.opencsv.bean.CsvBindByName;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public enum ErrorDetails implements AbstractEnum {
     E000(0, "Unknow Error", "The error is not define, unknow error found."),

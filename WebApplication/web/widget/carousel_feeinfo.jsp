@@ -1,7 +1,7 @@
 <%-- 
     Document   : carousel_feeinfo
     Created on : Nov 20, 2020, 9:36:10 AM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="xenum.CarType"%>

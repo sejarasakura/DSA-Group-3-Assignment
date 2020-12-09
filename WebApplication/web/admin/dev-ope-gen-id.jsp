@@ -1,7 +1,7 @@
 <%-- 
     Document   : dev-ope-gen-id
     Created on : Nov 23, 2020, 2:07:30 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="adt.interfaces.InterList"%>

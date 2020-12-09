@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 /**
  * To store the environment configuration variable
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class WebConfig {
 

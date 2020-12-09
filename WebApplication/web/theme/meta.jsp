@@ -1,7 +1,7 @@
 <%-- 
     Document   : meta
     Created on : Nov 7, 2020, 3:47:26 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>

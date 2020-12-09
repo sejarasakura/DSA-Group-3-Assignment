@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "updateEntity", urlPatterns = {"/admin/updateEntity"})
 public class updateEntity extends HttpServlet {

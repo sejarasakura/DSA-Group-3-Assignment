@@ -1,7 +1,7 @@
 <%-- 
     Document   : register.jsp
     Created on : Nov 17, 2020, 12:11:39 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="main.WebConfig"%>

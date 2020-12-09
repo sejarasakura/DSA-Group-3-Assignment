@@ -18,7 +18,7 @@ import main.WebConfig;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "update_password", urlPatterns = {"/update_password"})
 public class update_password extends HttpServlet {

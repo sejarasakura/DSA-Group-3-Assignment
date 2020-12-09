@@ -1,7 +1,7 @@
 <%-- 
     Document   : search_function
     Created on : Dec 2, 2020, 10:10:18 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="main.*"%>

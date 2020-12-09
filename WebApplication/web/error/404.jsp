@@ -1,7 +1,7 @@
 <%-- 
     Document   : 404
     Created on : Nov 15, 2020, 5:23:09 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>

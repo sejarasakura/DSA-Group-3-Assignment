@@ -18,7 +18,7 @@ import main.WebConfig;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class Footer extends AbstractPage {
 

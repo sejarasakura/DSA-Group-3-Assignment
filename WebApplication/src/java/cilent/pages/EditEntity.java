@@ -21,7 +21,7 @@ import xenum.AbstractEnum;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class EditEntity extends AbstractPage {
 

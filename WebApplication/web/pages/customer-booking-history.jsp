@@ -1,7 +1,7 @@
 <%-- 
     Document   : customer-booking-history
     Created on : Dec 5, 2020, 11:31:02 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="main.*"%>

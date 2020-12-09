@@ -7,7 +7,7 @@ package entity.json;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class FeildAccessbility {
     

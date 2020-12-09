@@ -1,7 +1,7 @@
 <%-- 
     Document   : chat
     Created on : Dec 6, 2020, 4:17:42 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="main.*"%>

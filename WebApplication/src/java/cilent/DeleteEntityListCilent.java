@@ -23,7 +23,7 @@ import main.Functions;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class DeleteEntityListCilent {
 

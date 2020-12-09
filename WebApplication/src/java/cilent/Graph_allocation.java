@@ -7,7 +7,7 @@ package cilent;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class Graph_allocation {
     private int x;

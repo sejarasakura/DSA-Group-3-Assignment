@@ -25,7 +25,7 @@ import xenum.BookingStatus;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "reload_fetch", urlPatterns = {"/reload_fetch"})
 public class reload_fetch extends HttpServlet {

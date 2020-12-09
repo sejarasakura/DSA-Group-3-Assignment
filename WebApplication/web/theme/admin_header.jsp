@@ -1,7 +1,7 @@
 <%-- 
     Document   : admin_header
     Created on : Nov 11, 2020, 5:27:01 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="cilent.pages.AdminHeader" %>

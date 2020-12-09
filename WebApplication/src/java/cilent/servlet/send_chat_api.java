@@ -24,7 +24,7 @@ import main.WebConfig;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "send_chat_api", urlPatterns = {"/send_chat_api"})
 public class send_chat_api extends HttpServlet {

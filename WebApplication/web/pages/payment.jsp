@@ -1,7 +1,7 @@
 <%-- 
     Document   : payment
     Created on : Dec 9, 2020, 7:58:15 AM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="entity.help.Range"%>

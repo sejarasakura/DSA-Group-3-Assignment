@@ -1,7 +1,7 @@
 <%-- 
     Document   : viewBooking
     Created on : Dec 2, 2020, 12:46:18 AM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="main.*"%>

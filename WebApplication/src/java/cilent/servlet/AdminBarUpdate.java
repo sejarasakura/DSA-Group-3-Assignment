@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "AdminBarUpdate", urlPatterns = {"/AdminBarUpdate"})
 public class AdminBarUpdate extends HttpServlet {

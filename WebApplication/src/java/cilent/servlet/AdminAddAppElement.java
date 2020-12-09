@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "AdminAddAppElement", urlPatterns = {"/admin/add-new-ele"})
 public class AdminAddAppElement extends HttpServlet {

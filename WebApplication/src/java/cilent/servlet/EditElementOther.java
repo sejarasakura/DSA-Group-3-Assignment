@@ -24,7 +24,7 @@ import main.WebConfig;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author  KOTORI
  */
 @WebServlet(name = "EditElementOther", urlPatterns = {"/admin/EditElement"})
 public class EditElementOther extends HttpServlet {

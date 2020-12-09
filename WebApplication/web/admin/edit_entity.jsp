@@ -1,7 +1,7 @@
 <%-- 
     Document   : edit_entity
     Created on : Nov 16, 2020, 7:56:26 AM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="cilent.pages.EditEntity" %>

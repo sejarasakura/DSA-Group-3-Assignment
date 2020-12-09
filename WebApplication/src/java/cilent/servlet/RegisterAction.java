@@ -18,7 +18,7 @@ import xenum.MemberShip;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 @WebServlet(name = "RegisterAction", urlPatterns = {"/RegisterAction"})
 public class RegisterAction extends HttpServlet {

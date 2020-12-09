@@ -13,7 +13,7 @@ import java.io.IOException;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class AutoGenerateEnumConverter {
 

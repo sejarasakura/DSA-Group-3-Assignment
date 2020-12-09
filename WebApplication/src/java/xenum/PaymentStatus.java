@@ -9,7 +9,7 @@ import com.opencsv.bean.CsvBindByName;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public enum PaymentStatus implements AbstractEnum {
 

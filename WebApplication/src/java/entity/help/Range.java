@@ -7,7 +7,7 @@ package entity.help;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  * @param <T>
  */
 public class Range<T> {

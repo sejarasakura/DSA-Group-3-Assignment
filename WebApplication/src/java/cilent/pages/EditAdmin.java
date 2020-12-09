@@ -19,7 +19,7 @@ import main.WebConfig;
 
 /**
  *
- * @author ITSUKA KOTORI
+ * @author Lim Sai Keat
  */
 public class EditAdmin extends AbstractPage {
 

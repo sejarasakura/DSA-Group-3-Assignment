@@ -1,7 +1,7 @@
 <%-- 
     Document   : footer
     Created on : Nov 7, 2020, 3:47:43 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 <%@page import="main.Datas"%>
 <%@page import="cilent.pages.Footer" %>

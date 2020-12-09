@@ -1,7 +1,7 @@
 <%-- 
 Document   : UploadServlet
 Created on : Dec 4, 2020, 8:26:26 AM
-Author     : ITSUKA KOTORI
+Author     : Lim Sai Keat
 --%>
 
 <%@ page import="main.*"%>

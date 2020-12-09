@@ -1,7 +1,7 @@
 <%-- 
     Document   : edit_app
     Created on : Nov 12, 2020, 4:33:48 PM
-    Author     : ITSUKA KOTORI
+    Author     : Lim Sai Keat
 --%>
 
 <%@page import="adt.XArrayList" %>

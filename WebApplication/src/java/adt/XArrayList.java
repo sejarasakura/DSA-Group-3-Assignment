@@ -194,7 +194,10 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      */
     @Override
     public T get(int _index) {
-        return data[_index];
+        if (this != null ? true : data != null) {
+            return data[_index];
+        }
+        return null;
     }
 
     /**
@@ -957,9 +960,9 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
             Range<Integer> range = binary_search_range(data, value, sort_m, getter, sort_for_me);
             delta = range.getHigher() - range.getLower();
             System.out.print(OutputColor.TEXT_PURPLE + "Binary Search " + _class.getSimpleName() + "." + field + "(" + value + ") : ");
-            System.out.print(OutputColor.TEXT_PURPLE + "{Delta : " + delta + ",");
-            System.out.print(OutputColor.TEXT_PURPLE + "Higher index : " + range.getHigher() + ",");
-            System.out.println(OutputColor.TEXT_PURPLE + "Lower index : " + range.getLower() + "}" + OutputColor.TEXT_RESET);
+            System.out.print(OutputColor.TEXT_PURPLE + " {Delta:" + delta + ", ");
+            System.out.print(OutputColor.TEXT_PURPLE + "Higher index:" + range.getHigher() + ", ");
+            System.out.println(OutputColor.TEXT_PURPLE + "Lower index:" + range.getLower() + "} " + OutputColor.TEXT_RESET);
             if (range.getLower() >= 0) {
                 r = new XArrayList(delta + 1);
                 System.arraycopy(this.data, range.getLower(), r.data, 0, delta + 1);

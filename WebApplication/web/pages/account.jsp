@@ -27,7 +27,9 @@
     String edit = request.getParameter("edit");
 
     for (MemberShip mb : MemberShip.values()) {
-        sb_role.append("<option value='").append(mb.getDatabaseCode()).append("' >").append(mb.getName()).append("</option>");
+        sb_role.append("<option value='").
+                append(mb.getDatabaseCode()).append("' >").
+                append(mb.getName()).append(" - ").append(mb.getDiscount()).append("</option>");
     }
 %>
 <html>
@@ -63,7 +65,7 @@
             </center>
             <div class="well well-lg">
                 <br>
-                <form>
+                <form action="<%= WebConfig.WEB_URL%>updateUser" method="post">
                     <div class="row">
                         <div class="col-sm-6">
                             <h4><b>Personal Information</b></h4>
@@ -89,7 +91,8 @@
                                     Public display name
                                 </div>
                                 <div class="col-sm-6">
-                                    <input id="name" type="text" class="form-control" value="<%= user.getName()%>" name="name" placeholder="Display Name">
+                                    <input id="name" type="text" class="form-control" 
+                                           value="<%= user.getName()%>" name="name" placeholder="Display Name">
                                 </div>
                             </div>
                         </li>
@@ -100,7 +103,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <input id="ic" type="text" class="form-control" name="ic" placeholder="IC Number format eg. xxxxxx-xx-xxxx" 
-                                           <%= user.getIc().length() > 12 ? "disabled" : "value=\"" + user.getIc() + "\""%>>
+                                           <%= user.getIc().length() > 12 ? "disabled value=\"" + user.getIc() + "\"" : ""%>>
                                 </div>
                             </div>
                         </li>
@@ -120,7 +123,8 @@
                                     Mobile phone-number
                                 </div>
                                 <div class="col-sm-6">
-                                    <input id="phonenumber" type="text" value="<%= user.getPhoneNumber()%>" class="form-control" name="phonenumber" placeholder="Phone number">
+                                    <input id="phonenumber" type="text" value="<%= user.getPhoneNumber()%>" class="form-control" name="phonenumber" 
+                                           placeholder="Phone number eg +60 18 392 7135">
                                 </div>
                             </div>
                         </li>
@@ -145,8 +149,8 @@
                                     Driving license
                                 </div>
                                 <div class="col-sm-6">
-                                    <input id="license" type="text" class="form-control" name="license" placeholder="License"
-                                           <%= ((Driver) user).getDriver_license().length() > 12 ? "disabled" : "value=\"" + ((Driver) user).getDriver_license() + "\""%>>
+                                    <input id="license" type="text" class="form-control" name="license" placeholder="License eg XXXXXXXXXX"
+                                           <%= ((Driver) user).getDriver_license().length() > 9 ? "disabled value=\"" + ((Driver) user).getDriver_license() + "\"" : ""%>>
                                 </div>
                             </div>
                         </li>

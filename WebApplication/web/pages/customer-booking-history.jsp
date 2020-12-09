@@ -52,7 +52,6 @@
                 </div>
             </div>
 
-            <div class="text-muted mt-5 mb-5 text-center small">Powered by RentCar.com</div>
 
         </div>
 

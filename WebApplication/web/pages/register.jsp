@@ -88,6 +88,14 @@
                 <p>Already have an account ? <a href="<%= main.Datas.settings.getValue("pages/login")%>">Sign in</a>.</p>
             </div>
         </div>
+        <style>
+            .fa-eye::after {
+                content: 'Show password';
+            }
+            .fa-eye-slash::after {
+                content: 'Hide password';
+            }
+        </style>
         <script>
             $(".toggle-password").click(function () {
                 $(this).toggleClass("fa-eye fa-eye-slash");

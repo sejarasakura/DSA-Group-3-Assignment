@@ -29,7 +29,10 @@
     for (MemberShip mb : MemberShip.values()) {
         sb_role.append("<option value='").
                 append(mb.getDatabaseCode()).append("' >").
-                append(mb.getName()).append(" - ").append(mb.getDiscount()).append("</option>");
+                append(mb.getName()).append(" - ")
+                .append(Math.round(mb.getDiscount() * 100))
+                .append("% discount")
+                .append("</option>");
     }
 %>
 <html>
@@ -132,13 +135,16 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    Selected membership plan
+                                    Selected membership plan (Current - <%= ((Customer) user).getMemberType().getName()%>)
                                 </div>
                                 <div class="col-sm-6">
-                                    <Select class="form-control" name="role" value="<%= ((Customer) user).getMemberType().getDatabaseCode()%>" >
+                                    <Select class="form-control" id="role" name="role" value="<%= ((Customer) user).getMemberType().getDatabaseCode()%>" >
                                         <%=sb_role.toString()%>
                                     </Select>
                                 </div>
+                                <script>
+                                    $("select#role").val("<%= ((Customer) user).getMemberType().getDatabaseCode()%>");
+                                </script>
                             </div>
                         </li>
                         <%}%>
@@ -156,9 +162,9 @@
                         </li>
                         <%}%>
                         <div class="row">
-                        <div class="col-sm-12">
-                            <input type="submit" class="btn btn-success pull-right" style="margin-top: 10px;margin-bottom: 10px" value="Update" />
-                        </div>
+                            <div class="col-sm-12">
+                                <input type="submit" class="btn btn-success pull-right" style="margin-top: 10px;margin-bottom: 10px" value="Update" />
+                            </div>
                         </div>
                     </ul>
                 </form>

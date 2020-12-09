@@ -54,28 +54,28 @@ public class updateUser extends HttpServlet {
             String role = request.getParameter("role");
             String license = request.getParameter("license");
 
-            if (email != null ? true : email.length() > 0) {
+            if (email != null ? email.length() > 0 : false) {
                 user.setEmail(email);
             }
             user.setEmail(email);
-            if (name != null ? true : name.length() > 0) {
+            if (name != null ? name.length() > 0 : false) {
                 user.setName(name);
             }
-            if (ic != null ? true : ic.length() == 14) {
+            if (ic != null ? ic.length() == 14 : false) {
                 user.setIc(ic);
             }
-            if (phonenumber != null ? true : !phonenumber.isEmpty()) {
+            if (phonenumber != null ? !phonenumber.isEmpty() : false) {
                 user.setPhoneNumber(phonenumber);
             }
 
             if (user.isDriver()) {
-                if (license != null ? true : !license.isEmpty()) {
+                if (license != null ? !license.isEmpty() : false) {
                     ((Driver) user).setDriver_license(license);
                 }
             }
 
             if (user.isCustomer()) {
-                if (role != null ? true : !role.isEmpty()) {
+                if (role != null ? !role.isEmpty() : false) {
                     ((Customer) user).setMemberType(xenum.MemberShip.getValue(role));
                 }
             }

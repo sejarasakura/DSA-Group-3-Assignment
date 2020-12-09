@@ -59,7 +59,7 @@
         </jsp:include>
 
         <div class="container">
-            <h1 class="text-center">Review Sorted List[Booking Date]</h1>
+            <h1 class="text-center">Review Sorted List[Booking Date]</h1><br>
             <%
                 for (int i = 0; i < bookings.size(); i++) {
                     review_que = con_review_que;
@@ -69,9 +69,9 @@
                         r = reviews.binarySearchOnce("paymentNumber", b.getPaymentNumber(), Review.class);
             %>Booking ID:<a href="viewBooking.jsp?id=<%
                 out.print(b.getBooking_id());
-                out.print("\">");
-                out.print(b.getBooking_id());
-                          %></a><%
+                          %>"><%
+                    out.print(b.getBooking_id());
+                %></a><%
                                       out.print("|Customer");
                                       out.print(u == null ? "No customer" : u.getName());
                                       out.print("[ id = ");
@@ -93,14 +93,17 @@
                                           out.print("</blockquote>");
                                           review_que = "<i>edit!!<i>";
                                       }
-                                      out.print("<hr><br><br>");
+
+                                      if (i != (bookings.size() - 1)) {
+                                          out.print("<hr><br>");
+                                      }
                                   }
                               }
-                          %>
-                          </div>
+                %>
+        </div>
 
-                          <jsp:include page="<%= WebConfig.FOOTER_URL%>"/>
-                          </body>
-                          <script>
-                          </script>
-                          </html>
+        <jsp:include page="<%= WebConfig.FOOTER_URL%>"/>
+    </body>
+    <script>
+    </script>
+</html>

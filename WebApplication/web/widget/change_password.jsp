@@ -29,7 +29,7 @@
     <ul class="list-group">
         <li class="list-group-item">
             <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password pull-right" style="margin-bottom:10px;"></span>
-                    
+
             <div class="form-group row">
                 <div class="col-sm-12">
                     <input placeholder="Old Password" type="password" class="form-control" id="opassword" name="opassword">
@@ -63,6 +63,14 @@
 
 
 </form>
+<style>
+    .fa-eye::after {
+        content: 'Show password';
+    }
+    .fa-eye-slash::after {
+        content: 'Hide password';
+    }
+</style>
 <script>
     $(".toggle-password").click(function () {
         $(this).toggleClass("fa-eye fa-eye-slash");

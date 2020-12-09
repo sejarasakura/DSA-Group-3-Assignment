@@ -1,5 +1,5 @@
 CURRENT_BOOKING_ID,EMAIL,IC,MEMBERTYPE_ID,NAME,PASSWORD,PHONENUMBER,ROLE,USERNAME,USER_ID
-,cfellon0@dmoz.org,298928-13-2102,NO,Carlye Fellon,z0hRmvgOuc,+351 298 606 3246,c,cfellon0,C10001
+,cfellon0@dmoz.org,298928-13-2102,NO,Pokai,z0hRmvgOuc,+351 298 606 3246,c,cfellon0,C10001
 ,bdugmore1@fc2.com,257957-91-8511,NO,Brock Dugmore,Klw0xbC,+7 403 863 2170,c,bdugmore1,C10002
 ,jrisbridger2@state.gov,309788-28-9616,PE,Jud Risbridger,Cv8w8WH,+7 711 809 7867,c,jrisbridger2,C10003
 ,sgeggus3@sakura.ne.jp,359494-84-9162,AU,Shell Geggus,BVR4wa6S,+57 733 450 0684,c,sgeggus3,C10004
@@ -49,5 +49,8 @@ CURRENT_BOOKING_ID,EMAIL,IC,MEMBERTYPE_ID,NAME,PASSWORD,PHONENUMBER,ROLE,USERNAM
 ,wketcher1b@cnet.com,455338-84-1891,PE,Weston Ketcher,wOHRMW3V96y,+86 107 940 4712,c,wketcher1b,C10048
 ,rpierce1c@addthis.com,148750-70-1852,AU,Rolf Pierce,vPkJloGBg1,+86 719 138 2497,c,rpierce1c,C10049
 ,,299765-67-1454,PE,,RRSjoWHtS0,+86 680 842 5678,c,dianni1d,C10050
-,bkng19@gmail.com,,NO,Lim Sai Keat2,Aa73218324,,c,yamakichisakura,C10052
+,bkng19@gmail.com,999999-99-9999,AU,Lim Sai Keat2,Aa73218324,+90 19 999 9999,c,yamakichisakura,C10052
 ,laihongwah@gmail.com,,NO,Laii Hong Wah,Lai12345,,c,hongwah99,C10053
+,gg@gmail.com,845455-34-3523,PE,Customer Pang,123456Kevin,+53 34 325 5235,c,cust_chew,C10054
+,hongwahlai@gmail.com,597566-56-4555,NO,Lai Hong Wah,Abcd1234,+50 19 244 5323,c,hongwahlai,C10055
+,hafizah@gmail.com,346346 44 3455,NO,hafizah hafizah,AaXx55467,+53 43 235 2355,c,hafizah,C10056

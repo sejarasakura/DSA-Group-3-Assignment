@@ -66,6 +66,14 @@
                     </div>
                 </form>
                 <p>Don't not have an account ? <a href="<%= main.Datas.settings.getValue("pages/register")%>">Register Now</a>.</p>
+                <style>
+                    .fa-eye::after {
+                        content: 'Show password';
+                    }
+                    .fa-eye-slash::after {
+                        content: 'Hide password';
+                    }
+                </style>
                 <script>
                     $(".toggle-password").click(function () {
                         $(this).toggleClass("fa-eye fa-eye-slash");

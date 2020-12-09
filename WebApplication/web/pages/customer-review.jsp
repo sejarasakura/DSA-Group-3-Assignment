@@ -59,7 +59,7 @@
         </jsp:include>
 
         <div class="container">
-            <h1 class="text-center">Review Sorted List [Sort by Booking Date]</h1>
+            <h1 class="text-center">Review Sorted List [Sort by Booking Date]</h1><br>
             <%
                 for (int i = 0; i < bookings.size(); i++) {
                     review_que = con_review_que;
@@ -68,10 +68,10 @@
                         u = users.binarySearchOnce("user_id", b.getDriver_id(), Driver.class);
                         r = reviews.binarySearchOnce("paymentNumber", b.getPaymentNumber(), Review.class);
             %>Booking ID:<a href="viewBooking.jsp?id=<%
-                            out.print(b.getBooking_id());
-                            out.print("\">");
-                            out.print(b.getBooking_id());
-                          %></a><%
+                out.print(b.getBooking_id());
+                          %>"><%
+                    out.print(b.getBooking_id());
+                %></a><%
                                       out.print("|Driver:");
                                       out.print(u == null ? "No driver" : u.getName());
                                       out.print("[ id = ");
@@ -93,23 +93,25 @@
                                           out.print("</blockquote>");
                                           review_que = "<i>edit!!<i>";
                                       }
-                                      out.print("<a href=\"");
-                                      out.print("review.jsp?id=");
-                                      out.print(b.getPaymentNumber());
-                                      out.print("&oid=");
-                                      out.print(b.getDriver_id());
-                                      out.print("\">");
-                                      out.print(review_que);
-                                      out.print("</a>");
-
-                                      out.print("<hr><br><br>");
+                                      if (b.getDriver_id() != null ? !b.getDriver_id().isEmpty() : false) {
+                                          out.print("<a href=\"");
+                                          out.print("review.jsp?id=");
+                                          out.print(b.getPaymentNumber());
+                                          out.print("&oid=");
+                                          out.print(b.getDriver_id());
+                                          out.print("\">");
+                                          out.print(review_que);
+                                          out.print("</a>");
+                                      } else {
+                                          out.print("<p class=\"text-success\"><b>You booking had not yet accept by any driver !!</b></p>");
+                                      }
+                                      out.print("<hr><br>");
                                   }
                               }
-                          %>
-                          </div>
-
-                          <jsp:include page="<%= WebConfig.FOOTER_URL%>"/>
-                          </body>
-                          <script>
-                          </script>
-                          </html>
+                %>
+        </div>
+        <jsp:include page="<%= WebConfig.FOOTER_URL%>"/>
+    </body>
+    <script>
+    </script>
+</html>

@@ -36,7 +36,9 @@ public class AdminUpdateElement extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(
+            HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
@@ -46,7 +48,6 @@ public class AdminUpdateElement extends HttpServlet {
         String dir = System.getProperty("user.dir") + "/data/" + edit + ".json";
         JsonReader reader = new JsonReader(new FileReader(dir));
         Gson gson = new Gson();
-        // <editor-fold defaultstate="collapsed" desc="Read json data">
         MapConverter map = new MapConverter(new XTreeDictionary(
                 gson.fromJson(reader, WebConfig.WRITING_CLASS)
         ));
@@ -55,7 +56,6 @@ public class AdminUpdateElement extends HttpServlet {
                 .append(base).append(".").append(t).append(".").toString();
         MapConverter base_map = new MapConverter(new XTreeDictionary(map.get(base)));
         MapConverter details_map = new MapConverter(new XTreeDictionary(base_map.get(t)));
-        // </editor-fold>
         XArrayList child = new XArrayList();
         File jsonFile = new File(dir);
         StringBuilder str = new StringBuilder();

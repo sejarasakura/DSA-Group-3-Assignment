@@ -19,7 +19,7 @@ import xenum.CarType;
  *
  * Mapping
  *
- * @author lIM SAI KEAT
+ * @author Lim Sai Keat
  */
 public class Mapping extends AbstractEntity<Mapping> {
 

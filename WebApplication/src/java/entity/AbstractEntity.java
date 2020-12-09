@@ -152,7 +152,6 @@ public abstract class AbstractEntity<T extends AbstractEntity> implements Compar
 
         /* rewrite data to csv */
         return result;
-
     }
 
     public static boolean addDataToCsv(Iterable<? extends AbstractEntity> datas) {

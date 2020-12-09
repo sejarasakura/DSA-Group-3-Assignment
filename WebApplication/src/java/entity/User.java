@@ -10,7 +10,7 @@ import com.opencsv.bean.CsvBindByName;
 
 /**
  *
- * @author Chew Chun Pang
+ * @author Lim Sai Keat
  * @param <T>
  */
 public abstract class User<T> extends AbstractEntity<User> {

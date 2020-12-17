@@ -158,7 +158,6 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
         hashModCount++;
         addEntry(hash, key, value, i);
         return null;
-
     }
 
     /**
@@ -292,6 +291,9 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
     public String toString() {
         StringBuilder outputStr = new StringBuilder();
         TableEntry[] tab = table;
+        outputStr.append("Table size : ");
+        outputStr.append(table.length);
+        outputStr.append("\n");
         for (int index = 0; index < table.length; index++) {
             if (tab[index] != null) {
                 for (TableEntry e = tab[index]; e != null; e = e.next) {
@@ -299,7 +301,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
                             .append(e.getKey()).append("] ")
                             .append(e.getValue());
                     if (e.next != null) {
-                        outputStr.append("\n>>");
+                        outputStr.append("->");
                     }
                 }
                 outputStr.append("\n");
@@ -507,13 +509,11 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
 
         for (TableEntry<K, V> e = table[i]; e != null; e = e.next) {
             Object k;
-            if (e.hash == hash
-                    && ((k = e.key) == key || (key != null && key.equals(k)))) {
+            if (e.hash == hash && ((k = e.key) == key || (key != null && key.equals(k)))) {
                 e.value = value;
                 return;
             }
         }
-
         createEntry(hash, key, value, i);
     }
 

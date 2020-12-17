@@ -1,28 +1,35 @@
 /*
- * To change this license startNode, choose License Headers in Project Properties.
+ * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package adt;
+package exam;
 
-import adt.interfaces.InterDictionary;
-import adt.interfaces.InterList;
-import adt.node.Entry;
+/**
+ * Local project import
+ */
+import adt.XArrayList;
+import adt.XTreeDictionary;
+import main.*;
+import cilent.*;
+import cilent.filter.*;
+import cilent.pages.*;
+import cilent.servlet.*;
+import entity.*;
+import adt.node.*;
+import adt.interfaces.*;
+import csv.converter.*;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import xenum.*;
 
 /**
- * This dictionary will arrange the entry by the insertion order<br>
- * Unlike hashed dictionary is no ordered <br>
- * For writing, storing and reading data in JSON file purpose
  *
- * @author Lim sai keat
- * @param <K>
- * @param <V>
+ * @author ITSUKA KOTORI
  */
-public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, java.io.Serializable {
+public class BinarySearchTree<K, V> implements InterDictionary<K, V>, Cloneable, java.io.Serializable {
 
     /**
      * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -76,7 +83,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
     /**
      * No argument constructor
      */
-    public XTreeDictionary() {
+    public BinarySearchTree() {
         this((Comparator<? super K>) NATURAL_ORDER_NUM, true);
     }
 
@@ -86,7 +93,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
      * @param comparator
      * @param convert
      */
-    public XTreeDictionary(Comparator<? super K> comparator, boolean convert) {
+    public BinarySearchTree(Comparator<? super K> comparator, boolean convert) {
         this.compare = comparator != null
                 ? comparator
                 : (Comparator) NATURAL_ORDER_NUM;
@@ -97,7 +104,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
      *
      * @param map
      */
-    public XTreeDictionary(Object map) {
+    public BinarySearchTree(Object map) {
         this((java.util.Map) map);
     }
 
@@ -106,7 +113,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
      *
      * @param map
      */
-    public XTreeDictionary(java.util.Map<K, V> map) {
+    public BinarySearchTree(java.util.Map<K, V> map) {
         this();
         map.keySet().forEach((s) -> {
             add((K) s, (V) map.get(s));
@@ -255,10 +262,10 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
      * @return
      */
     @Override
-    public Iterator<XTreeDictionary.Node<K, V>> newEntryIterator() {
-        return new XTreeDictionaryIterator<XTreeDictionary.Node<K, V>>() {
+    public Iterator<Node<K, V>> newEntryIterator() {
+        return new XTreeDictionaryIterator<Node<K, V>>() {
             @Override
-            public XTreeDictionary.Node<K, V> next() {
+            public Node<K, V> next() {
                 return nextNode();
             }
         };
@@ -662,7 +669,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
         Node<K, V> right;
         Node<K, V> next;
         Node<K, V> prev;
-        final K key;
+        K key;
         V value;
         int height;
 
@@ -685,6 +692,14 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
             this.prev = prev;
             prev.next = this;
             next.prev = this;
+        }
+
+        /**
+         * Create a regular entry
+         */
+        Node(K key) {
+            this.key = key;
+            this.height = 1;
         }
 
         @Override
@@ -789,5 +804,99 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
             lastReturned = null;
             expectedModCount = xModCount;
         }
+    }
+
+    /* Given a binary tree, print its nodes according to the
+      "bottom-up" postorder traversal. */
+    void printPostorder(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        // first recur on left subtree
+        printPostorder(node.left);
+
+        // then recur on right subtree
+        printPostorder(node.right);
+
+        // now deal with the node
+        System.out.print(node.key + ", ");
+    }
+
+    /* Given a binary tree, print its nodes in inorder*/
+    void printInorder(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        /* first recur on left child */
+        printInorder(node.left);
+
+        /* then print the data of node */
+        System.out.print(node.key + ", ");
+
+        /* now recur on right child */
+        printInorder(node.right);
+    }
+
+    /* Given a binary tree, print its nodes in preorder*/
+    void printPreorder(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        /* first print data of node */
+        System.out.print(node.key + ", ");
+
+        /* then recur on left sutree */
+        printPreorder(node.left);
+
+        /* now recur on right subtree */
+        printPreorder(node.right);
+    }
+
+    // Wrappers over above recursive functions
+    void printPostorder() {
+        System.out.print("Post Order -> ");
+        printPostorder(rootNode);
+        System.out.println();
+    }
+
+    void printInorder() {
+        System.out.print("In Order -> ");
+        printInorder(rootNode);
+        System.out.println();
+    }
+
+    void printPreorder() {
+        System.out.print("Pre Order -> ");
+        printPreorder(rootNode);
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        BinarySearchTree t = new BinarySearchTree();
+        //                           rootNode
+        //                       /                  \
+        //                  /                          \
+        //             Left                             Right
+        //          /        \                        /       \
+        //    Left.Left    Left.Right          Left.Left    Left.Right
+        //               /            \
+        //     Left.Right.Left    Left.Right.Right
+        t.rootNode = new Node(25);
+        t.rootNode.left = new Node(15);
+        t.rootNode.left.left = new Node(10);
+        t.rootNode.left.right = new Node(22);
+        t.rootNode.left.right.left = new Node(18);
+        t.rootNode.left.right.right = new Node(24);
+        t.rootNode.right = new Node(50);
+        t.rootNode.right.right = new Node(70);
+
+        t.printInorder();
+        t.printPreorder();
+        t.printPostorder();
+
+        System.out.println(t.toString());
     }
 }

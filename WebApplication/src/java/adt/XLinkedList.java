@@ -353,6 +353,26 @@ public class XLinkedList<E> implements InterList<E> {
     /**
      * Unlinks non-null last node l.
      */
+    public E removeLast(DoubleNode<E> l) {
+        // assert l == last && l != null;
+        final E element = l.value;
+        final DoubleNode<E> prev = l.prev;
+        l.value = null;
+        l.prev = null; // help GC
+        last = prev;
+        if (prev == null) {
+            first = null;
+        } else {
+            prev.next = null;
+        }
+        size--;
+        modCount++;
+        return element;
+    }
+
+    /**
+     * Unlinks non-null last node l.
+     */
     private E unlinkLast(DoubleNode<E> l) {
         // assert l == last && l != null;
         final E element = l.value;

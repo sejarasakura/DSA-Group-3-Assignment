@@ -18,7 +18,7 @@ import xenum.CarType;
  * @author Lai Hong Wah
  * @author Chun Chew Pang
  * @author Lim Sai Keat
- * @author Woo Qian Hui
+ * @author Woo Wei Qian
  */
 public class Booking extends AbstractEntity<Booking> {
 

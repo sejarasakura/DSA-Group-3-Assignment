@@ -79,7 +79,7 @@ public class InsertionSort {
 
     /* A utility function to print array of size n*/
     void printArray(int arr[]) {
-        if (arr.length >= 1) {
+        if (arr.length > 0) {
             int n = arr.length;
             for (int i = 0; i < (n - 1); ++i) {
                 System.out.print(arr[i] + ", ");

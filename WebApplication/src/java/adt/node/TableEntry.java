@@ -6,6 +6,7 @@
 package adt.node;
 
 import adt.XHashedDictionary;
+import adt.interfaces.InterDictionary;
 import java.util.Map;
 
 /**
@@ -104,7 +105,7 @@ public class TableEntry<K, V> implements Entry<K, V>, Map.Entry<K, V> {
      *
      * @param m
      */
-    public void recordAccess(XHashedDictionary<K, V> m) {
+    public void recordAccess(InterDictionary<K, V> m) {
     }
 
     /**
@@ -112,6 +113,6 @@ public class TableEntry<K, V> implements Entry<K, V>, Map.Entry<K, V> {
      *
      * @param m
      */
-    public void recordRemoval(XHashedDictionary<K, V> m) {
+    public void recordRemoval(InterDictionary<K, V> m) {
     }
 }

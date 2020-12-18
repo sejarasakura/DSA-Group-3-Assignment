@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Stack;
 import xenum.*;
 
 /**
@@ -31,6 +32,88 @@ import xenum.*;
  */
 public class BinarySearchTree<K, V> implements InterDictionary<K, V>, Cloneable, java.io.Serializable {
 
+    /*
+     * ...........................rootNode
+     * ....................../....................\
+     * ..................../.......................\
+     * ................../..........................\
+     * .............Left.............................Right
+     * ............/.....\.........................../....\
+     * ........../........\......................../.......\
+     * ....Left.Left....Left.Right..........Left.Left....Left.Right
+     * ................./.........\
+     * .............../............\
+     * .....Left.Right.Left....Left.Right.Right
+     */
+    public static void main(String[] args) {
+
+        BinarySearchTree t = new BinarySearchTree();
+        Node p = t.rootNode = new Node(1);
+        p = t.rootNode.right = new Node(p, 2, p, null);
+        p = t.rootNode.right.right = new Node(p, 3, p, null);
+        t.rebalance(t.rootNode.right.right, true);
+        p = t.rootNode.right.right.right = new Node(p, 4, p, null);
+        t.rootNode.right.right.right.right = new Node(p, 5, p, null);
+
+        t.displayBSTree();
+        t.printInorder();
+        t.printPreorder();
+        t.printPostorder();
+        t.printRightNode();
+        t.printLeftNode();
+        t.printLeaveNode();
+        System.out.println(t.toString());
+    }
+
+    public static void main_x(String[] args) {
+
+        BinarySearchTree t = new BinarySearchTree();
+        t.rootNode = new Node('F');
+
+        t.rootNode.left = new Node('D');
+        t.rootNode.right = new Node('G');
+
+        t.rootNode.left.left = new Node('B');
+        t.rootNode.left.right = new Node('C');
+        t.rootNode.right.left = new Node('I');
+        t.rootNode.right.right = new Node('J');
+
+        t.rootNode.left.left.left = new Node('A');
+        t.rootNode.left.right.right = new Node('E');
+
+        t.rootNode.right.right.right = new Node('H');
+
+        t.displayBSTree();
+        t.printInorder();
+        t.printPreorder();
+        t.printPostorder();
+        t.printRightNode();
+        t.printLeftNode();
+        t.printLeaveNode();
+        System.out.println(t.toString());
+    }
+
+    public static void main_old(String[] args) {
+
+        BinarySearchTree t = new BinarySearchTree();
+        t.rootNode = new Node(25);
+        t.rootNode.left = new Node(15);
+        t.rootNode.left.left = new Node(10);
+        t.rootNode.left.right = new Node(22);
+        t.rootNode.left.right.left = new Node(18);
+        t.rootNode.left.right.right = new Node(24);
+        t.rootNode.right = new Node(50);
+        t.rootNode.right.right = new Node(70);
+
+        t.displayBSTree();
+        t.printInorder();
+        t.printPreorder();
+        t.printPostorder();
+        t.printRightNode();
+        t.printLeftNode();
+        t.printLeaveNode();
+        System.out.println(t.toString());
+    }
     /**
      * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      *
@@ -537,6 +620,7 @@ public class BinarySearchTree<K, V> implements InterDictionary<K, V>, Cloneable,
             int leftHeight = left != null ? left.height : 0;
             int rightHeight = right != null ? right.height : 0;
             int delta = leftHeight - rightHeight;
+            System.out.print(delta + ",");
             switch (delta) {
                 case -2:
                     Node<K, V> rightLeft = right.left;
@@ -702,6 +786,10 @@ public class BinarySearchTree<K, V> implements InterDictionary<K, V>, Cloneable,
             this.height = 1;
         }
 
+        boolean isLeaf() {
+            return left == null ? right == null : false;
+        }
+
         @Override
         public K getKey() {
             return key;
@@ -855,6 +943,53 @@ public class BinarySearchTree<K, V> implements InterDictionary<K, V>, Cloneable,
         printPreorder(node.right);
     }
 
+    /* Given a binary tree, print its nodes in preorder*/
+    void printRightNode(Node node, boolean right) {
+        if (node == null) {
+            return;
+        }
+
+        /* first print data of node */
+        if (right) {
+            System.out.print(node.key + ", ");
+        }
+
+        /* then recur on left sutree */
+        printRightNode(node.left, false);
+
+        /* now recur on right subtree */
+        printRightNode(node.right, true);
+    }
+
+    void printLeaveNode(Node node) {
+        if (node == null) {
+            return;
+        }
+        if (node.isLeaf()) {
+            System.out.print(node.key + ", ");
+        }
+        printLeaveNode(node.left);
+        printLeaveNode(node.right);
+    }
+
+    /* Given a binary tree, print its nodes in preorder*/
+    void printLeftNode(Node node, boolean left) {
+        if (node == null) {
+            return;
+        }
+
+        /* first print data of node */
+        if (left) {
+            System.out.print(node.key + ", ");
+        }
+
+        /* then recur on left sutree */
+        printLeftNode(node.left, true);
+
+        /* now recur on right subtree */
+        printLeftNode(node.right, false);
+    }
+
     // Wrappers over above recursive functions
     void printPostorder() {
         System.out.print("Post Order -> ");
@@ -874,29 +1009,68 @@ public class BinarySearchTree<K, V> implements InterDictionary<K, V>, Cloneable,
         System.out.println();
     }
 
-    public static void main(String[] args) {
-        BinarySearchTree t = new BinarySearchTree();
-        //                           rootNode
-        //                       /                  \
-        //                  /                          \
-        //             Left                             Right
-        //          /        \                        /       \
-        //    Left.Left    Left.Right          Left.Left    Left.Right
-        //               /            \
-        //     Left.Right.Left    Left.Right.Right
-        t.rootNode = new Node(25);
-        t.rootNode.left = new Node(15);
-        t.rootNode.left.left = new Node(10);
-        t.rootNode.left.right = new Node(22);
-        t.rootNode.left.right.left = new Node(18);
-        t.rootNode.left.right.right = new Node(24);
-        t.rootNode.right = new Node(50);
-        t.rootNode.right.right = new Node(70);
+    void printRightNode() {
+        System.out.print("All right node -> ");
+        printRightNode(rootNode, true);
+        System.out.println();
+    }
 
-        t.printInorder();
-        t.printPreorder();
-        t.printPostorder();
+    void printLeftNode() {
+        System.out.print("All left node -> ");
+        printLeftNode(rootNode, true);
+        System.out.println();
+    }
 
-        System.out.println(t.toString());
+    void printLeaveNode() {
+        System.out.print("All leave node -> ");
+        printLeaveNode(rootNode);
+        System.out.println();
+    }
+
+    public void displayBSTree() // display search tree
+    {
+        Stack<Node> treeStack = new Stack<Node>();
+        treeStack.push(rootNode);
+        int numOfBlanks = 64;
+        boolean isRowEmpty = false;
+        System.out.println("\n");
+
+        while (isRowEmpty == false) {
+            Stack<Node> localStack = new Stack<Node>();
+            isRowEmpty = true;
+
+            for (int x = 0; x < numOfBlanks; x++) {
+                System.out.print(" ");
+            }
+
+            while (treeStack.isEmpty() == false) {
+                Node temp = (Node) treeStack.pop();
+                if (temp != null) {
+                    System.out.print(temp.key);
+                    localStack.push(temp.left);
+                    localStack.push(temp.right);
+
+                    if (temp.left != null || temp.right != null) {
+                        isRowEmpty = false;
+                    }
+                } else {
+                    System.out.print("--");
+                    localStack.push(null);
+                    localStack.push(null);
+                }
+
+                for (int y = 0; y < numOfBlanks * 2 - 2; y++) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+            System.out.println();
+            numOfBlanks /= 2;
+            while (localStack.isEmpty() == false) {
+                treeStack.push(localStack.pop());
+            }
+
+        }
+        System.out.println();
     }
 }

@@ -32,7 +32,7 @@ public interface InterSortingElements<T> extends InterList<T> {
      * @param _class
      * @return
      */
-    boolean sort(String field, Class _class);
+    boolean sort(String field, Class<?> _class);
 
     /**
      * The Sorting Method Only If need Array method pls implement ArrayList
@@ -42,6 +42,6 @@ public interface InterSortingElements<T> extends InterList<T> {
      * @param _class
      * @return
      */
-    boolean sortDesc(String field, Class _class);
+    boolean sortDesc(String field, Class<?> _class);
 
 }

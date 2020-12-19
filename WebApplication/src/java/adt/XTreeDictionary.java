@@ -25,6 +25,11 @@ import java.util.NoSuchElementException;
 public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, java.io.Serializable {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = -7037211180708574610L;
+
+    /**
      * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      *
      * =========================== Field declaration ===========================
@@ -59,6 +64,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
     /**
      * To prevent nested comparator
      */
+    @SuppressWarnings("all")
     private static final Comparator<Comparable> NATURAL_ORDER_NUM = new Comparator<Comparable>() {
         @Override
         public int compare(Comparable a, Comparable b) {
@@ -76,6 +82,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
     /**
      * No argument constructor
      */
+    @SuppressWarnings("all")
     public XTreeDictionary() {
         this((Comparator<? super K>) NATURAL_ORDER_NUM, true);
     }
@@ -86,6 +93,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
      * @param comparator
      * @param convert
      */
+    @SuppressWarnings("all")
     public XTreeDictionary(Comparator<? super K> comparator, boolean convert) {
         this.compare = comparator != null
                 ? comparator
@@ -97,6 +105,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
      *
      * @param map
      */
+    @SuppressWarnings("all")
     public XTreeDictionary(Object map) {
         this((java.util.Map) map);
     }
@@ -483,6 +492,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
      * @param key
      * @return
      */
+    @SuppressWarnings("all")
     private Node<K, V> findByObject(Object key) {
         try {
             return key != null ? find((K) key, false) : null;
@@ -642,7 +652,7 @@ public class XTreeDictionary<K, V> implements InterDictionary<K, V>, Cloneable, 
 
     private String toString(String seperator) {
         StringBuilder sb = new StringBuilder();
-        for (Iterator i = newEntryIterator(); i.hasNext();) {
+        for (Iterator<Node<K,V>> i = newEntryIterator(); i.hasNext();) {
             sb.append(i.next()).append(seperator);
         }
         return sb.toString();

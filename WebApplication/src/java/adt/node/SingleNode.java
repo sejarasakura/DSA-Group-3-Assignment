@@ -20,6 +20,6 @@ public class SingleNode<T> {
     /**
      * next pointer
      */
-    public SingleNode next;
+    public SingleNode<T> next;
 
 }

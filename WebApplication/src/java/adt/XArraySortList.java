@@ -21,7 +21,7 @@ import xenum.AbstractEnum;
  * @param <T>
  *
  */
-public class XArraySortList<T extends Comparable> implements InterSortingElements<T> {
+public class XArraySortList<T extends Comparable<?>> implements InterSortingElements<T> {
 
     /**
      * Initial capacity of the list
@@ -41,6 +41,7 @@ public class XArraySortList<T extends Comparable> implements InterSortingElement
     /**
      * Constructor
      */
+    @SuppressWarnings("unchecked")
     public XArraySortList() {
         this((T[]) new Comparable[INITIAL_CAPACITY]);
     }
@@ -245,11 +246,11 @@ public class XArraySortList<T extends Comparable> implements InterSortingElement
     @Override
     public void sort() {
         this.sort(data, 0, this.index - 1);
-        XStack s = new XStack(this);
+        XStack<T> s = new XStack<T>(this);
         int i = this.index;
         while (!s.isEmpty()) {
             i--;
-            data[i] = (T) s.pop();
+            data[i] = s.pop();
         }
     }
 
@@ -269,15 +270,15 @@ public class XArraySortList<T extends Comparable> implements InterSortingElement
      * @return success sort or not
      */
     @Override
-    public boolean sort(String field, Class _class) {
+    public boolean sort(String field, Class<?> _class) {
         try {
             Method f = _class.getMethod(fieldToGetter(field));
             boolean r = sort(f);
-            XStack s = new XStack(this);
+            XStack<T> s = new XStack<T>(this);
             int i = this.index;
             while (!s.isEmpty()) {
                 i--;
-                data[i] = (T) s.pop();
+                data[i] = s.pop();
             }
             return r;
         } catch (SecurityException | NoSuchMethodException ex) {
@@ -294,7 +295,7 @@ public class XArraySortList<T extends Comparable> implements InterSortingElement
      * @return
      */
     @Override
-    public boolean sortDesc(String field, Class _class) {
+    public boolean sortDesc(String field, Class<?> _class) {
         try {
             Method f = _class.getMethod(fieldToGetter(field));
             return sort(f);
@@ -323,6 +324,7 @@ public class XArraySortList<T extends Comparable> implements InterSortingElement
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public T[] clear() {
         T[] x = data.clone();
         data = (T[]) new Object[INITIAL_CAPACITY];
@@ -386,17 +388,18 @@ public class XArraySortList<T extends Comparable> implements InterSortingElement
 
     }
 
-    private int partition(T[] arr, int low, int high) {
-        T pivot = arr[high];
+    @SuppressWarnings("all")
+    private int partition(Comparable[] arr, int low, int high) {
+        Comparable pivot = arr[high];
         int i = (low - 1); // index of smaller element
         for (int j = low; j < high; j++) {
             try {
                 // If current element is smaller than the pivot
-                if (arr[j].compareTo(pivot) > 0) {
+                if (pivot.compareTo(arr[j]) > 0) {
                     i++;
 
                     // swap arr[i] and arr[j]
-                    T temp = arr[i];
+                    Comparable temp = arr[i];
                     arr[i] = arr[j];
                     arr[j] = temp;
                 }
@@ -405,7 +408,7 @@ public class XArraySortList<T extends Comparable> implements InterSortingElement
         }
 
         // swap arr[i+1] and arr[high] (or pivot)
-        T temp = arr[i + 1];
+        Comparable temp = arr[i + 1];
         arr[i + 1] = arr[high];
         arr[high] = temp;
 

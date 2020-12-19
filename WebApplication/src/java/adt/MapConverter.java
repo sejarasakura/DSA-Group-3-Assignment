@@ -18,17 +18,22 @@ import java.util.*;
  */
 public class MapConverter<K, V> implements Map<K, V>, Cloneable, java.io.Serializable {
 
-    InterDictionary refences;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1836890223069008680L;
+
+    InterDictionary<K, V> refences;
 
     public MapConverter() {
-        refences = new XTreeDictionary();
+        refences = new XTreeDictionary<K, V>();
     }
 
-    public MapConverter(XTreeDictionary dic) {
+    public MapConverter(XTreeDictionary<K, V> dic) {
         refences = dic;
     }
 
-    public MapConverter(XHashedDictionary dic) {
+    public MapConverter(XHashedDictionary<K, V> dic) {
         refences = dic;
     }
 
@@ -43,35 +48,41 @@ public class MapConverter<K, V> implements Map<K, V>, Cloneable, java.io.Seriali
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean containsKey(Object o) {
         return refences.contains((K) o);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean containsValue(Object o) {
-        return refences.getValue(o) != null;
+        return refences.getValue((K) o) != null;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public V get(Object o) {
         return (V) refences.getValue((K) o);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Object put(Object k, Object v) {
-        return refences.add(k, v);
+        return refences.add((K)k, (V)v);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public V remove(Object o) {
         return (V) refences.remove((K) o);
     }
 
     @Override
-    public void putAll(Map map) {
-        for (Iterator it = map.keySet().iterator(); it.hasNext();) {
+    @SuppressWarnings("unchecked")
+    public void putAll(Map<? extends K,? extends V> map) {
+        for (Iterator<? extends K> it = map.keySet().iterator(); it.hasNext();) {
             Object k = it.next();
-            refences.add(k, map.get(k));
+            refences.add((K)k, map.get(k));
         }
     }
 
@@ -82,12 +93,12 @@ public class MapConverter<K, V> implements Map<K, V>, Cloneable, java.io.Seriali
 
     //<editor-fold defaultstate="collapsed" desc="useless Functions">
     @Override
-    public Set keySet() {
+    public Set<K> keySet() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Collection values() {
+    public Collection<V> values() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -103,13 +114,15 @@ public class MapConverter<K, V> implements Map<K, V>, Cloneable, java.io.Seriali
     private final class EntrySet extends AbstractSet<Map.Entry<K, V>> {
 
         @Override
+        @SuppressWarnings("all")
         public Iterator iterator() {
             return refences.newEntryIterator();
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public boolean contains(Object o) {
-            return refences.contains(o);
+            return refences.contains((K)o);
         }
 
         @Override

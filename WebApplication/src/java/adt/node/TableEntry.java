@@ -5,7 +5,6 @@
  */
 package adt.node;
 
-import adt.XHashedDictionary;
 import adt.interfaces.InterDictionary;
 import java.util.Map;
 
@@ -70,11 +69,12 @@ public class TableEntry<K, V> implements Entry<K, V>, Map.Entry<K, V> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public final boolean equals(Object o) {
         if (!(o instanceof TableEntry)) {
             return false;
         }
-        TableEntry e = (TableEntry) o;
+        TableEntry<K,V> e = (TableEntry<K,V>) o;
         Object k1 = getKey();
         Object k2 = e.getKey();
         if (k1 == k2 || (k1 != null && k1.equals(k2))) {

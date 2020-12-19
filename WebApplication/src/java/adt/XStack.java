@@ -43,7 +43,7 @@ public final class XStack<T> implements InterStack<T> {
      */
     public XStack(Iterator<T> is) {
         this();
-        XStack s = new XStack();
+        XStack<T> s = new XStack<T>();
         while (is.hasNext()) {
             try {
                 s.push(is.next());
@@ -58,8 +58,8 @@ public final class XStack<T> implements InterStack<T> {
 
     @Override
     public void push(T item) {
-        SingleNode oldfirst = first;
-        first = new SingleNode();
+        SingleNode<T> oldfirst = first;
+        first = new SingleNode<T>();
         first.item = item;
         first.next = oldfirst;
         n++;

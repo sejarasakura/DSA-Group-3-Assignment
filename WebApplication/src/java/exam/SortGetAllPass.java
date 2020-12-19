@@ -29,6 +29,7 @@ import xenum.*;
  */
 public class SortGetAllPass {
 //type=String&order=asc:RSD2,RIT2,RSF2,REI2,RST2,RIS2,RMM2
+// editor fold
 
     static Scanner s = new Scanner(System.in);
 

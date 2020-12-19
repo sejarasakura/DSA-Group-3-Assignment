@@ -89,7 +89,7 @@ public interface InterAdvanceList<T> extends InterList<T> {
      * @param x
      * @return Boolean
      */
-    public abstract boolean find_AbstractEntity(AbstractEntity x);
+    public abstract boolean find_AbstractEntity(AbstractEntity<?> x);
 
     /**
      * For support reading CSV to array list
@@ -140,7 +140,7 @@ public interface InterAdvanceList<T> extends InterList<T> {
      * @param _class
      * @return
      */
-    public abstract boolean sort(String field, Class _class);
+    public abstract boolean sort(String field, Class<?> _class);
 
     /**
      *
@@ -148,16 +148,7 @@ public interface InterAdvanceList<T> extends InterList<T> {
      * @param _class
      * @return
      */
-    public abstract boolean sortDesc(String field, Class _class);
-
-    /**
-     *
-     * @param field
-     * @param value
-     * @param _class
-     * @return
-     */
-    public abstract XArrayList<T> binarySearch(String field, Comparable value, Class<?> _class);
+    public abstract boolean sortDesc(String field, Class<?> _class);
 
     /**
      *
@@ -166,7 +157,7 @@ public interface InterAdvanceList<T> extends InterList<T> {
      * @param _class
      * @return
      */
-    public abstract T binarySearchOnce(String field, Comparable value, Class<?> _class);
+    public abstract XArrayList<T> binarySearch(String field, Comparable<T> value, Class<?> _class);
 
     /**
      *
@@ -175,6 +166,15 @@ public interface InterAdvanceList<T> extends InterList<T> {
      * @param _class
      * @return
      */
-    public abstract XArrayList<T> binarySearchAndSort(String field, Comparable value, Class<?> _class);
+    public abstract T binarySearchOnce(String field, Comparable<T> value, Class<?> _class);
+
+    /**
+     *
+     * @param field
+     * @param value
+     * @param _class
+     * @return
+     */
+    public abstract XArrayList<T> binarySearchAndSort(String field, Comparable<T> value, Class<?> _class);
 
 }

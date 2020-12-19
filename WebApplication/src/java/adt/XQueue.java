@@ -49,7 +49,7 @@ public class XQueue<T> implements InterQuene<T>, Cloneable {
      */
     public XQueue(Iterator<T> is) {
         this();
-        XStack s = new XStack();
+        XStack<T> s = new XStack<T>();
         while (is.hasNext()) {
             try {
                 s.push(is.next());
@@ -161,8 +161,8 @@ public class XQueue<T> implements InterQuene<T>, Cloneable {
     }
 
     @Override
-    public XQueue clone() {
-        return new XQueue(this);
+    public XQueue<T> clone() {
+        return new XQueue<T>(this);
     }
 
     /**

@@ -5,12 +5,6 @@
  */
 package adt;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.Random;
-import java.util.stream.IntStream;
 
 /**
  *
@@ -23,7 +17,7 @@ interface List<T> {
 class Node<T> {
 
     T data;
-    Node next;
+    Node<T> next;
 
     public Node(T data) {
         this.data = data;

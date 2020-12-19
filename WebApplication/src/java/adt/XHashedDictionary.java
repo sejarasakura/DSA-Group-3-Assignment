@@ -75,6 +75,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
      * @param initCapacity
      * @param load
      */
+    @SuppressWarnings("all")
     public XHashedDictionary(int initCapacity, float load) {
 
         if (initCapacity < 0) {
@@ -106,7 +107,6 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
      */
     public XHashedDictionary(Map<K, V> data) {
         this(Math.max((int) (data.size() / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_SIZE), DEFAULT_LOAD_FACTOR);
-        TableEntry<K, V> current = null;
         data.entrySet().forEach((x) -> {
             this.add(x.getKey(), x.getValue());
         });
@@ -127,6 +127,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
      *
      * @param data
      */
+    @SuppressWarnings("all")
     public XHashedDictionary(Object data) {
         this((Map) data);
     }
@@ -202,28 +203,14 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
      *
      * @return
      */
-    public MapConverter getMap() {
-        MapConverter x = new MapConverter();
+    public MapConverter<K,V> getMap() {
+        MapConverter<K,V> x = new MapConverter<K,V>();
         for (TableEntry<K, V> table1 : table) {
             if (table1 != null) {
                 x.put(table1.key, table1.value);
             }
         }
         return x;
-    }
-
-    /**
-     *
-     * @param index
-     * @param key
-     * @return
-     */
-    private int locate(int index, K key) {
-        if (table[index] == null || !key.equals(table[index].getKey())) {
-            return -1;
-        } else {
-            return index;
-        }
     }
 
     /**
@@ -274,7 +261,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
     @Override
     public void clear() {
         hashModCount++;
-        TableEntry[] tab = table;
+        TableEntry<K,V>[] tab = table;
         for (int i = 0; i < tab.length; i++) {
             tab[i] = null;
         }
@@ -290,13 +277,13 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
     @Override
     public String toString() {
         StringBuilder outputStr = new StringBuilder();
-        TableEntry[] tab = table;
+        TableEntry<K,V>[] tab = table;
         outputStr.append("Table size : ");
         outputStr.append(table.length);
         outputStr.append("\n");
         for (int index = 0; index < table.length; index++) {
             if (tab[index] != null) {
-                for (TableEntry e = tab[index]; e != null; e = e.next) {
+                for (TableEntry<K,V> e = tab[index]; e != null; e = e.next) {
                     outputStr.append("index: ").append(index).append(" value: [")
                             .append(e.getKey()).append("] ")
                             .append(e.getValue());
@@ -312,12 +299,13 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
     }
 
     @Override
+    @SuppressWarnings("all")
     public boolean contains(Object value) {
         if (value == null) {
             return containsNullValue();
         }
 
-        return this.getValue((K) value) != null;
+        return this.getValue((K)value) != null;
     }
 
     @Override
@@ -381,15 +369,16 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
      *
      * @param newCapacity
      */
+    @SuppressWarnings("all")
     private void resize(int newCapacity) {
-        TableEntry[] oldTable = table;
+        TableEntry<K,V>[] oldTable = table;
         int oldCapacity = oldTable.length;
         if (oldCapacity == MAXIMUM_CAPACITY) {
             threshold = Integer.MAX_VALUE;
             return;
         }
 
-        TableEntry[] newTable = new TableEntry[newCapacity];
+        TableEntry<K,V>[] newTable = new TableEntry[newCapacity];
         transfer(newTable);
         table = newTable;
         threshold = (int) (newCapacity * loadFactor);
@@ -415,8 +404,8 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
     /**
      * Transfers all entries from current table to newTable.
      */
-    private void transfer(TableEntry[] newTable) {
-        TableEntry[] src = table;
+    private void transfer(TableEntry<K,V>[] newTable) {
+        TableEntry<K,V>[] src = table;
         int newCapacity = newTable.length;
         for (int j = 0; j < src.length; j++) {
             TableEntry<K, V> e = src[j];
@@ -486,9 +475,9 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
      * Special-case code for containsValue with null argument
      */
     private boolean containsNullValue() {
-        TableEntry[] tab = table;
-        for (TableEntry tab1 : tab) {
-            for (TableEntry e = tab1; e != null; e = e.next) {
+        TableEntry<K,V>[] tab = table;
+        for (TableEntry<K,V> tab1 : tab) {
+            for (TableEntry<K,V> e = tab1; e != null; e = e.next) {
                 if (e.value == null) {
                     return true;
                 }
@@ -610,7 +599,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
         HashedIterator() {
             expectedModCount = hashModCount;
             if (size > 0) { // advance to first entry
-                TableEntry[] t = table;
+                TableEntry<K,V>[] t = table;
                 while (index < t.length && (next = t[index++]) == null)
                     ;
             }
@@ -642,7 +631,7 @@ public class XHashedDictionary<K, V> implements InterDictionary<K, V> {
             }
 
             if ((next = e.next) == null) {
-                TableEntry[] t = table;
+                TableEntry<K,V>[] t = table;
                 while (index < t.length && (next = t[index++]) == null)
                     ;
             }

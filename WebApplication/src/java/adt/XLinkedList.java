@@ -46,8 +46,8 @@ public class XLinkedList<E> implements InterList<E> {
      */
     public XLinkedList(Iterable<E> datas) {
         this();
-        for (Object x : datas) {
-            add((E) x);
+        for (E x : datas) {
+            add(x);
         }
     }
 
@@ -154,7 +154,6 @@ public class XLinkedList<E> implements InterList<E> {
 
         checkElementIndex(index);
         DoubleNode<E> x = node(index);
-        E oldVal = x.value;
         x.value = element;
 
     }
@@ -207,7 +206,6 @@ public class XLinkedList<E> implements InterList<E> {
 
     public static void main(String args[]) {
         XArrayList<Integer> list = new XArrayList<Integer>();
-        Object[] data;
         list.add(1);
         list.add(12);
         list.add(3);
@@ -215,7 +213,7 @@ public class XLinkedList<E> implements InterList<E> {
         list.add(12);
         list.add(20);
         list.add(9);
-        XArraySortList<Integer> list2 = new XArraySortList(list);
+        XArraySortList<Integer> list2 = new XArraySortList<Integer>(list);
         list2.sort();
         list = new XArrayList<Integer>(list2);
         System.out.print(list);
@@ -261,22 +259,6 @@ public class XLinkedList<E> implements InterList<E> {
             x = x.next;
             return r;
         }
-    }
-
-    /**
-     * Links e as first element.
-     */
-    private void linkFirst(E e) {
-        final DoubleNode<E> f = first;
-        final DoubleNode<E> newNode = new DoubleNode<E>(null, e, f);
-        first = newNode;
-        if (f == null) {
-            last = newNode;
-        } else {
-            f.prev = newNode;
-        }
-        size++;
-        modCount++;
     }
 
     /**
@@ -331,49 +313,9 @@ public class XLinkedList<E> implements InterList<E> {
     }
 
     /**
-     * Unlinks non-null first node f.
-     */
-    private E unlinkFirst(DoubleNode<E> f) {
-        // assert f == first && f != null;
-        final E element = f.value;
-        final DoubleNode<E> next = f.next;
-        f.value = null;
-        f.next = null; // help GC
-        first = next;
-        if (next == null) {
-            last = null;
-        } else {
-            next.prev = null;
-        }
-        size--;
-        modCount++;
-        return element;
-    }
-
-    /**
      * Unlinks non-null last node l.
      */
     public E removeLast(DoubleNode<E> l) {
-        // assert l == last && l != null;
-        final E element = l.value;
-        final DoubleNode<E> prev = l.prev;
-        l.value = null;
-        l.prev = null; // help GC
-        last = prev;
-        if (prev == null) {
-            first = null;
-        } else {
-            prev.next = null;
-        }
-        size--;
-        modCount++;
-        return element;
-    }
-
-    /**
-     * Unlinks non-null last node l.
-     */
-    private E unlinkLast(DoubleNode<E> l) {
         // assert l == last && l != null;
         final E element = l.value;
         final DoubleNode<E> prev = l.prev;

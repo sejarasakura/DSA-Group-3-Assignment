@@ -28,6 +28,11 @@ import xenum.AbstractEnum;
 public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Serializable {
 
     /**
+     * Serializable version ids
+     */
+    private static final long serialVersionUID = -4481180579250750351L;
+
+    /**
      * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      *
      * =========================== Field declaration ===========================
@@ -78,6 +83,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      *
      * @param initialCapacity
      */
+    @SuppressWarnings("unchecked")
     public XArrayList(int initialCapacity) {
         index = 0;
         data = (T[]) new Object[initialCapacity];
@@ -211,6 +217,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      * @return elements
      */
     @Override
+    @SuppressWarnings("unchecked")
     public T remove(int _index) {
         CheckRange(_index);
         Object x = data[_index];
@@ -277,6 +284,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      * @return array data back
      */
     @Override
+    @SuppressWarnings("unchecked")
     public T[] clear() {
         T[] x = data.clone();
         data = (T[]) new Object[INITIAL_CAPACITY];
@@ -350,11 +358,12 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      * @return ture that if list no same element
      */
     @Override
+    @SuppressWarnings("all")
     public boolean removeSameElement() {
         if (index <= 1) {
             return true;
         }
-        XArraySortList a = new XArraySortList(this);
+        XArraySortList<?> a = new XArraySortList(this);
         a.sort();
         data = (T[]) a.toArray();
         int j = 0;
@@ -485,7 +494,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
                 f = _class.getDeclaredField(field);
             } catch (NoSuchFieldException | SecurityException noSuchFieldException) {
             }
-            if (f == null ? false : f.isAccessible()) {
+            if (f == null ? false : f.canAccess(element)) {
                 return searchByField(f, element);
             } else {
                 Method m = _class.getMethod(Functions.fieldToGetter(field));
@@ -504,10 +513,10 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      * @return Boolean
      */
     @Override
-    public boolean find_AbstractEntity(AbstractEntity x) {
+    public boolean find_AbstractEntity(AbstractEntity<?> x) {
 
         for (int i = 0; i < index; i++) {
-            if (((AbstractEntity) data[i]).id_equals(x)) {
+            if (((AbstractEntity<?>) data[i]).id_equals(x)) {
                 return true;
             }
         }
@@ -538,6 +547,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      * @param input
      */
     @Override
+    @SuppressWarnings("unchecked")
     public void formInput(String input) {
         this.clear();
         if (!input.contains("%")) {
@@ -642,11 +652,11 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      * @return success sort or not
      */
     @Override
-    public boolean sort(String field, Class _class) {
+    public boolean sort(String field, Class<?> _class) {
         try {
             Method f = _class.getMethod(Functions.fieldToGetter(field));
             boolean r = sort(f);
-            XStack s = new XStack(this);
+            XStack<T> s = new XStack<T>(this);
             int i = this.index;
             while (!s.isEmpty()) {
                 i--;
@@ -670,7 +680,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      * @return
      */
     @Override
-    public boolean sortDesc(String field, Class _class) {
+    public boolean sortDesc(String field, Class<?> _class) {
         try {
             Method f = _class.getMethod(Functions.fieldToGetter(field));
             this.sorted = sort(f);
@@ -684,17 +694,17 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     @Override
-    public XArrayList<T> binarySearch(String field, Comparable value, Class<?> _class) {
+    public XArrayList<T> binarySearch(String field, Comparable<T> value, Class<?> _class) {
         try {
             return this.notsecure_binarySearch(field, value, _class, false);
         } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new XArrayList();
+        return new XArrayList<T>();
     }
 
     @Override
-    public T binarySearchOnce(String field, Comparable value, Class<?> _class) {
+    public T binarySearchOnce(String field, Comparable<T> value, Class<?> _class) {
         try {
             return this.notsecure_binarySearch_once(field, value, _class, false);
         } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
@@ -704,7 +714,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     @Override
-    public XArrayList<T> binarySearchAndSort(String field, Comparable value, Class<?> _class) {
+    public XArrayList<T> binarySearchAndSort(String field, Comparable<T> value, Class<?> _class) {
         try {
             this.sort_by = field;
             return this.notsecure_binarySearch(field, value, _class, true);
@@ -712,7 +722,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
             Logger.getLogger(XArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.sorted = false;
-        return new XArrayList();
+        return new XArrayList<T>();
     }
 
     public boolean isSorted() {
@@ -847,6 +857,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
      * @param sort_method to get the default sorting methods Object
      * compareTo(Object) | null for int
      */
+    @SuppressWarnings("unchecked")
     private int partition_m(T[] arr, int low, int high, Method sort_method, Method getter) {
         T pivot = arr[high];
         int i = (low - 1); // index of smaller element
@@ -854,7 +865,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         for (int j = low; j < high; j++) {
             try {
                 // If current element is smaller than the pivot
-                result = this.compare(arr[j], (Comparable) getter.invoke(pivot), sort_method, getter);
+                result = this.compare(arr[j], (Comparable<T>) getter.invoke(pivot), sort_method, getter);
                 if (result > 0) {
                     i++;
                     // swap arr[i] and arr[j]
@@ -920,10 +931,10 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         String s1, s2;
         StringBuilder sb = new StringBuilder();
         XArrayList<String> ar = new XArrayList<String>();
-        if (!f1.isAccessible()) {
+        if (!f1.canAccess(field1)) {
             m1 = _class.getDeclaredMethod(main.Functions.fieldToGetter(field1));
         }
-        if (!f2.isAccessible()) {
+        if (!f2.canAccess(field2)) {
             m2 = _class.getDeclaredMethod(main.Functions.fieldToGetter(field2));
         }
         for (int i = 0; i < this.index; i++) {
@@ -957,8 +968,8 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         return result;
     }
 
-    private XArrayList<T> notsecure_binarySearch(String field, Comparable value, Class<?> _class, boolean sort_for_me) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        XArrayList r;
+    private XArrayList<T> notsecure_binarySearch(String field, Comparable<T> value, Class<?> _class, boolean sort_for_me) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        XArrayList<T> r;
         Method getter = _class.getMethod(Functions.fieldToGetter(field));
         Method sort_m = getClassType(getter.getReturnType());
         Integer delta;
@@ -969,17 +980,16 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
             System.out.print(range.getHigher() + ",");
             System.out.println(range.getLower() + ",");
             if (range.getLower() >= 0) {
-                r = new XArrayList(delta + 1);
+                r = new XArrayList<T>(delta + 1);
                 System.arraycopy(this.data, range.getLower(), r.data, 0, delta + 1);
                 r.index = delta + 1;
                 return r;
             }
         }
-        return new XArrayList();
+        return new XArrayList<T>();
     }
 
-    private T notsecure_binarySearch_once(String field, Comparable value, Class<?> _class, boolean sort_for_me) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        XArrayList r;
+    private T notsecure_binarySearch_once(String field, Comparable<T> value, Class<?> _class, boolean sort_for_me) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Method getter = _class.getMethod(Functions.fieldToGetter(field));
         Method sort_m = getClassType(getter.getReturnType());
         if (sort_m == null ? true : sort_m.getReturnType() == int.class) {
@@ -1001,11 +1011,10 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         }
     }
 
-    private Range binary_search_range(T arr[], Comparable value, Method sort_method, Method getter, boolean sort_for_me) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    private Range<Integer> binary_search_range(T arr[], Comparable<T> value, Method sort_method, Method getter, boolean sort_for_me) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         int r = this.simple_BinarySearch(arr, value, sort_method, getter, sort_for_me);
         int first = r;
         int last = r;
-        int result_l, result_f;
         if (r >= 0) {
             while (first > 0 && compare(data[first - 1], value, sort_method, getter) == 0) {
                 first--;
@@ -1017,7 +1026,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         return new Range<Integer>(first, last);
     }
 
-    private int compare(T this_value, Comparable value, Method sort_method, Method getter) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    private int compare(T this_value, Comparable<T> value, Method sort_method, Method getter) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
         if (sort_method != null) {
             return (int) sort_method.invoke(getter.invoke(this_value), value);
@@ -1027,7 +1036,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     // -1 null value, -2 not sorted, -3 not found
-    private int simple_BinarySearch(T arr[], Comparable value, Method sort_method, Method getter, boolean sort_for_me)
+    private int simple_BinarySearch(T arr[], Comparable<T> value, Method sort_method, Method getter, boolean sort_for_me)
             throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         // block using empty object
         if ((value == null || arr == null ? true : arr.length == 0)) {

@@ -29,6 +29,8 @@ import xenum.*;
 /**
  *
  * @author ITSUKA KOTORI
+ * @param <K>
+ * @param <V>
  */
 public class BinarySearchTree<K, V> implements InterDictionary<K, V>, Cloneable, java.io.Serializable {
 
@@ -48,12 +50,21 @@ public class BinarySearchTree<K, V> implements InterDictionary<K, V>, Cloneable,
     public static void main(String[] args) {
 
         BinarySearchTree t = new BinarySearchTree();
-        Node p = t.rootNode = new Node(1);
-        p = t.rootNode.right = new Node(p, 2, p, null);
-        p = t.rootNode.right.right = new Node(p, 3, p, null);
-        t.rebalance(t.rootNode.right.right, true);
-        p = t.rootNode.right.right.right = new Node(p, 4, p, null);
-        t.rootNode.right.right.right.right = new Node(p, 5, p, null);
+        t.add(1, null);
+        t.displayBSTree();
+        t.add(4, null);
+        t.displayBSTree();
+        t.add(5, null);
+        t.displayBSTree();
+        t.add(10, null);
+        t.displayBSTree();
+        t.add(-2, null);
+        t.displayBSTree();
+        t.add(99, null);
+        t.displayBSTree();
+        t.add(-10, null);
+        t.displayBSTree();
+        t.add(11, null);
 
         t.displayBSTree();
         t.printInorder();
@@ -1031,7 +1042,7 @@ public class BinarySearchTree<K, V> implements InterDictionary<K, V>, Cloneable,
     {
         Stack<Node> treeStack = new Stack<Node>();
         treeStack.push(rootNode);
-        int numOfBlanks = 64;
+        int numOfBlanks = 32;
         boolean isRowEmpty = false;
         System.out.println("\n");
 

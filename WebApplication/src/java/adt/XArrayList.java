@@ -494,7 +494,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
                 f = _class.getDeclaredField(field);
             } catch (NoSuchFieldException | SecurityException noSuchFieldException) {
             }
-            if (f == null ? false : f.canAccess(element)) {
+            if (f == null ? false : f.isAccessible()) {
                 return searchByField(f, element);
             } else {
                 Method m = _class.getMethod(Functions.fieldToGetter(field));
@@ -931,10 +931,10 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         String s1, s2;
         StringBuilder sb = new StringBuilder();
         XArrayList<String> ar = new XArrayList<String>();
-        if (!f1.canAccess(field1)) {
+        if (!f1.isAccessible()) {
             m1 = _class.getDeclaredMethod(main.Functions.fieldToGetter(field1));
         }
-        if (!f2.canAccess(field2)) {
+        if (!f2.isAccessible()) {
             m2 = _class.getDeclaredMethod(main.Functions.fieldToGetter(field2));
         }
         for (int i = 0; i < this.index; i++) {

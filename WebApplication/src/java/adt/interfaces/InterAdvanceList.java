@@ -157,7 +157,7 @@ public interface InterAdvanceList<T> extends InterList<T> {
      * @param _class
      * @return
      */
-    public abstract XArrayList<T> binarySearch(String field, Comparable<T> value, Class<?> _class);
+    public abstract XArrayList<T> binarySearch(String field, Comparable<?> value, Class<?> _class);
 
     /**
      *
@@ -166,7 +166,7 @@ public interface InterAdvanceList<T> extends InterList<T> {
      * @param _class
      * @return
      */
-    public abstract T binarySearchOnce(String field, Comparable<T> value, Class<?> _class);
+    public abstract T binarySearchOnce(String field, Comparable<?> value, Class<?> _class);
 
     /**
      *
@@ -175,6 +175,6 @@ public interface InterAdvanceList<T> extends InterList<T> {
      * @param _class
      * @return
      */
-    public abstract XArrayList<T> binarySearchAndSort(String field, Comparable<T> value, Class<?> _class);
+    public abstract XArrayList<T> binarySearchAndSort(String field, Comparable<?> value, Class<?> _class);
 
 }

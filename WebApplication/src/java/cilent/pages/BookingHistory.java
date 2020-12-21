@@ -55,10 +55,11 @@ public class BookingHistory extends AbstractPage {
     private void displayBookingHistory() {
 
         booking = booking.binarySearch("customer_id", login_user.getUser_id(), Booking.class);
-        XArraySortList<Booking> x = new XArraySortList<Booking>(booking);
+        XArraySortList x = new XArraySortList(booking);
         x.sortDesc("booking_date", Booking.class);
         for (int i = 0; i < x.size(); i++) {
-            displayWidget(x.get(i), mapping.binarySearchOnce("map_id", x.get(i).getMapping_id(), Mapping.class));
+            Booking b = (Booking) x.get(i);
+            displayWidget(b, mapping.binarySearchOnce("map_id", b.getMapping_id(), Mapping.class));
         }
         System.out.println(
                 xenum.OutputColor.TEXT_PURPLE

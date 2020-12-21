@@ -694,7 +694,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     @Override
-    public XArrayList<T> binarySearch(String field, Comparable<T> value, Class<?> _class) {
+    public XArrayList<T> binarySearch(String field, Comparable<?> value, Class<?> _class) {
         try {
             return this.notsecure_binarySearch(field, value, _class, false);
         } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
@@ -704,7 +704,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     @Override
-    public T binarySearchOnce(String field, Comparable<T> value, Class<?> _class) {
+    public T binarySearchOnce(String field, Comparable<?> value, Class<?> _class) {
         try {
             return this.notsecure_binarySearch_once(field, value, _class, false);
         } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
@@ -714,7 +714,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     @Override
-    public XArrayList<T> binarySearchAndSort(String field, Comparable<T> value, Class<?> _class) {
+    public XArrayList<T> binarySearchAndSort(String field, Comparable<?> value, Class<?> _class) {
         try {
             this.sort_by = field;
             return this.notsecure_binarySearch(field, value, _class, true);
@@ -968,7 +968,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         return result;
     }
 
-    private XArrayList<T> notsecure_binarySearch(String field, Comparable<T> value, Class<?> _class, boolean sort_for_me) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    private XArrayList<T> notsecure_binarySearch(String field, Comparable<?> value, Class<?> _class, boolean sort_for_me) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         XArrayList<T> r;
         Method getter = _class.getMethod(Functions.fieldToGetter(field));
         Method sort_m = getClassType(getter.getReturnType());
@@ -989,7 +989,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         return new XArrayList<T>();
     }
 
-    private T notsecure_binarySearch_once(String field, Comparable<T> value, Class<?> _class, boolean sort_for_me) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    private T notsecure_binarySearch_once(String field, Comparable<?> value, Class<?> _class, boolean sort_for_me) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Method getter = _class.getMethod(Functions.fieldToGetter(field));
         Method sort_m = getClassType(getter.getReturnType());
         if (sort_m == null ? true : sort_m.getReturnType() == int.class) {
@@ -1011,7 +1011,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         }
     }
 
-    private Range<Integer> binary_search_range(T arr[], Comparable<T> value, Method sort_method, Method getter, boolean sort_for_me) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    private Range<Integer> binary_search_range(T arr[], Comparable<?> value, Method sort_method, Method getter, boolean sort_for_me) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         int r = this.simple_BinarySearch(arr, value, sort_method, getter, sort_for_me);
         int first = r;
         int last = r;
@@ -1026,7 +1026,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
         return new Range<Integer>(first, last);
     }
 
-    private int compare(T this_value, Comparable<T> value, Method sort_method, Method getter) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    private int compare(T this_value, Comparable<?> value, Method sort_method, Method getter) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
         if (sort_method != null) {
             return (int) sort_method.invoke(getter.invoke(this_value), value);
@@ -1036,7 +1036,7 @@ public class XArrayList<T> implements InterAdvanceList<T>, Cloneable, java.io.Se
     }
 
     // -1 null value, -2 not sorted, -3 not found
-    private int simple_BinarySearch(T arr[], Comparable<T> value, Method sort_method, Method getter, boolean sort_for_me)
+    private int simple_BinarySearch(T arr[], Comparable<?> value, Method sort_method, Method getter, boolean sort_for_me)
             throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         // block using empty object
         if ((value == null || arr == null ? true : arr.length == 0)) {
